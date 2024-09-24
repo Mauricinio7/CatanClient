@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="CatanClient.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatanClient.Views"
+             xmlns:controls="clr-namespace:CatanClient.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Viewbox Stretch="Uniform">
+
+        <Grid x:Name="animatedGrid" Background="#808511ba" Margin="522,88,522,88" RenderTransformOrigin="0.5,0.5" >
+
+            <Image Source="pack://application:,,,/Resources/Images/login_frame.png"  Margin="-53,-43,-258,-93" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.094"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.498"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+            <Label Content="Iniciar sesión" HorizontalAlignment="Center" Margin="0,83,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P" />
+            <Label Content="Correo o teléfono: " HorizontalAlignment="Left" Margin="76,191,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="DemiBold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
+            <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
+            PlaceholderText="Correo o teléfono"
+            Margin="76,245,27,466"
+            Height="44" Width="449"   
+            NormalForegroundColorValue="White"
+            PlaceholderForegroundColorValue="LightGray"
+            BackgroundColorValue="#3f015c"
+            PlaceholderTag="Correo o teléfono"                             
+            />
+            <Label Content="Contraseña: " HorizontalAlignment="Left" Margin="76,315,0,0" VerticalAlignment ="Top" FontSize="20" FontWeight="DemiBold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
+            <TextBox HorizontalAlignment="Left" Margin="76,360,0,0" VerticalAlignment="Top" Height="44" Width="449" Text="Contraseña" FontSize="15" Background="#3f015c" Foreground="LightGray" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P" Padding="15" BorderThickness="0" 
+                  Tag="Contraseña"
+                  GotFocus="TextBox_GotFocus"
+                  LostFocus="TextBox_LostFocus"
+                 Name="PasswordTextBox"/>
+            <PasswordBox x:Name="PasswordBox"
+                     HorizontalAlignment="Left" Margin="76,360,0,0" VerticalAlignment="Top" Height="44" Width="449"
+                     FontSize="15" Background="#3f015c" Foreground="White"
+                     FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
+                     Padding="15" BorderThickness="0"
+                     Visibility="Collapsed"
+                     LostFocus="PasswordBox_LostFocus"
+                     />
+            <CheckBox Content="Mostrar contraseña"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="76,428,0,0" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
+                  Checked="ShowPasswordCheckBox_Checked"
+                  Unchecked="ShowPasswordCheckBox_Unchecked"
+                  Name="ShowPasswordCheckBox"
+                  />
+            <Button Content="Continuar" HorizontalAlignment="Left" Margin="76,617,0,0" VerticalAlignment="Top" Height="56" Width="162"
+                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
+                Foreground="White"
+                Background="#3f015c"
+                FontSize="14"
+                BorderThickness="1" Click="Button_Click_2"/>
+            <Button Content="¿Necesitas ayuda?" HorizontalAlignment="Left" Margin="381,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
+                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
+                Foreground="White"
+                Background="#3f015c"
+                FontSize="7"
+                BorderThickness="1" Click="Button_Click_3"/>
+            <Button Content="Jugar como invitado" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254" Click="Button_Click"
+                FontSize="11"
+                FontWeight="ExtraLight"
+                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
+                Foreground="White"
+                Background="#3f015c"
+                BorderThickness="1"/>
+            <Button Content="Registrarse" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" Click="Button_Click_1"
+                FontSize="11"
+                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
+                Foreground="White"
+                Background="#3f015c"
+                BorderThickness="1"/>
+
+            <Grid.RenderTransform>
+                <TranslateTransform Y="-1200" />
+            </Grid.RenderTransform>
+
+        </Grid>
+
+    </Viewbox>
+</UserControl>
