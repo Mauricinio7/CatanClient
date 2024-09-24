@@ -37,17 +37,28 @@
             <Label Content="Iniciar sesión" HorizontalAlignment="Center" Margin="0,83,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P" />
             <Label Content="Correo o teléfono: " HorizontalAlignment="Left" Margin="76,191,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="DemiBold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
-            PlaceholderText="Correo o teléfono"
-            Margin="76,245,27,466"
-            Height="44" Width="449"   
-            NormalForegroundColorValue="White"
-            PlaceholderForegroundColorValue="LightGray"
-            BackgroundColorValue="#3f015c"
-            PlaceholderTag="Correo o teléfono"                             
-            />
+                PlaceholderText="Correo o teléfono"
+                Margin="76,240,27,510"
+                Height="44" Width="449"   
+                NormalForegroundColorValue="White"
+                PlaceholderForegroundColorValue="LightGray"
+                BackgroundColorValue="#3f015c"
+                PlaceholderTag="Correo o teléfono"                             
+                />
             <Label Content="Contraseña: " HorizontalAlignment="Left" Margin="76,315,0,0" VerticalAlignment ="Top" FontSize="20" FontWeight="DemiBold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
-            <controls:ShowPasswordPlaceholderControl Margin="76,363,27,337"/>
-
+            <controls:ShowPasswordPlaceholderControl
+                Margin="76,334,23,365"
+                TextBoxWidth="449"
+                TextBoxHeight="44"
+                ControlBackground="#3F015C"
+                PromptForeground="LightGray"
+                WritingForeground="White"
+                ControlFontSize="15"
+                ControlPadding="15"
+                ControlBorderThickness="0"
+                PlaceholderText="Contraseña"
+                TagText="Contraseña"
+                CheckBoxMargin="5,90,0,0" />
             <Button Content="Continuar" HorizontalAlignment="Left" Margin="76,617,0,0" VerticalAlignment="Top" Height="56" Width="162"
                 FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
                 Foreground="White"
