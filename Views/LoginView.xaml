@@ -7,8 +7,20 @@
              xmlns:controls="clr-namespace:CatanClient.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Viewbox Stretch="Uniform">
 
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="animatedGrid"
+                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                     From="-1200" To="0" Duration="0:0:2" BeginTime="0:0:1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Viewbox Stretch="Uniform">
         <Grid x:Name="animatedGrid" Background="#808511ba" Margin="522,88,522,88" RenderTransformOrigin="0.5,0.5" >
 
             <Image Source="pack://application:,,,/Resources/Images/login_frame.png"  Margin="-53,-43,-258,-93" RenderTransformOrigin="0.5,0.5">
@@ -34,46 +46,28 @@
             PlaceholderTag="Correo o teléfono"                             
             />
             <Label Content="Contraseña: " HorizontalAlignment="Left" Margin="76,315,0,0" VerticalAlignment ="Top" FontSize="20" FontWeight="DemiBold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
-            <TextBox HorizontalAlignment="Left" Margin="76,360,0,0" VerticalAlignment="Top" Height="44" Width="449" Text="Contraseña" FontSize="15" Background="#3f015c" Foreground="LightGray" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P" Padding="15" BorderThickness="0" 
-                  Tag="Contraseña"
-                  GotFocus="TextBox_GotFocus"
-                  LostFocus="TextBox_LostFocus"
-                 Name="PasswordTextBox"/>
-            <PasswordBox x:Name="PasswordBox"
-                     HorizontalAlignment="Left" Margin="76,360,0,0" VerticalAlignment="Top" Height="44" Width="449"
-                     FontSize="15" Background="#3f015c" Foreground="White"
-                     FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
-                     Padding="15" BorderThickness="0"
-                     Visibility="Collapsed"
-                     LostFocus="PasswordBox_LostFocus"
-                     />
-            <CheckBox Content="Mostrar contraseña"
-                  HorizontalAlignment="Left" VerticalAlignment="Top"
-                  Margin="76,428,0,0" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
-                  Checked="ShowPasswordCheckBox_Checked"
-                  Unchecked="ShowPasswordCheckBox_Unchecked"
-                  Name="ShowPasswordCheckBox"
-                  />
+            <controls:ShowPasswordPlaceholderControl Margin="76,363,27,337"/>
+
             <Button Content="Continuar" HorizontalAlignment="Left" Margin="76,617,0,0" VerticalAlignment="Top" Height="56" Width="162"
                 FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
                 Foreground="White"
                 Background="#3f015c"
                 FontSize="14"
-                BorderThickness="1" Click="Button_Click_2"/>
+                BorderThickness="1"/>
             <Button Content="¿Necesitas ayuda?" HorizontalAlignment="Left" Margin="381,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
                 FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
                 Foreground="White"
                 Background="#3f015c"
                 FontSize="7"
-                BorderThickness="1" Click="Button_Click_3"/>
-            <Button Content="Jugar como invitado" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254" Click="Button_Click"
+                BorderThickness="1" />
+            <Button Content="Jugar como invitado" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254"
                 FontSize="11"
                 FontWeight="ExtraLight"
                 FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
                 Foreground="White"
                 Background="#3f015c"
                 BorderThickness="1"/>
-            <Button Content="Registrarse" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" Click="Button_Click_1"
+            <Button Content="Registrarse" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" 
                 FontSize="11"
                 FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
                 Foreground="White"

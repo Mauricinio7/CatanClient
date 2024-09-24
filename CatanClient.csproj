@@ -62,6 +62,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ShowPasswordPlaceholderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +84,9 @@
     </Compile>
     <Compile Include="Controls\PlaceholderTextBoxControl.xaml.cs">
       <DependentUpon>PlaceholderTextBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShowPasswordPlaceholderControl.xaml.cs">
+      <DependentUpon>ShowPasswordPlaceholderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
