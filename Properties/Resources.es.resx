@@ -118,363 +118,369 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="global_log_in" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Iniciar sesión</value>
   </data>
   <data name="global_register" xml:space="preserve">
-    <value>Register</value>
+    <value>Registrarse</value>
   </data>
   <data name="global_username" xml:space="preserve">
-    <value>Username</value>
+    <value>Nombre de usuario</value>
   </data>
   <data name="global_password" xml:space="preserve">
-    <value>Password</value>
+    <value>Contraseña</value>
   </data>
   <data name="label_new_username" xml:space="preserve">
-    <value>New Username</value>
+    <value>Nuevo Nombre de Usuario</value>
   </data>
   <data name="button_play_as_gest" xml:space="preserve">
-    <value>Play as a gest</value>
+    <value>Jugar como invitado</value>
   </data>
   <data name="button_continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Continuar</value>
   </data>
   <data name="button_help" xml:space="preserve">
-    <value>Need help?</value>
+    <value>¿Necesitas ayuda?</value>
   </data>
   <data name="dialog_welcome" xml:space="preserve">
-    <value>Welcome, User!</value>
+    <value>¡Bienvenido, Usuario!</value>
   </data>
   <data name="button_exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>Salir</value>
   </data>
   <data name="window_main_menu" xml:space="preserve">
-    <value>Main Menu</value>
+    <value>Menú Principal</value>
   </data>
   <data name="label_waiting_players" xml:space="preserve">
-    <value>Waiting for players</value>
+    <value>Esperando jugadores</value>
   </data>
   <data name="label_catan_spacen" xml:space="preserve">
-    <value>CATAN SPACE</value>
+    <value>CATAN ESPACIAL</value>
   </data>
   <data name="global_friends" xml:space="preserve">
-    <value>Friends</value>
+    <value>Amigos</value>
   </data>
   <data name="button_create_game" xml:space="preserve">
-    <value>Create Game</value>
+    <value>Crear Juego</value>
   </data>
   <data name="button_join_game" xml:space="preserve">
-    <value>Join Game</value>
+    <value>Unirse a un Juego</value>
   </data>
   <data name="global_ready" xml:space="preserve">
-    <value>Ready</value>
+    <value>Listo</value>
   </data>
   <data name="label_no_ready" xml:space="preserve">
-    <value>Not ready</value>
+    <value>No listo</value>
   </data>
   <data name="button_view_profile" xml:space="preserve">
-    <value>View Profile</value>
+    <value>Ver Perfil</value>
   </data>
   <data name="button_log_out" xml:space="preserve">
-    <value>Log Out</value>
+    <value>Cerrar sesión</value>
   </data>
   <data name="label_connected" xml:space="preserve">
-    <value>Connected</value>
+    <value>Conectado</value>
   </data>
   <data name="label_starting" xml:space="preserve">
-    <value>Starting in</value>
+    <value>Iniciando en</value>
   </data>
   <data name="label_seconds" xml:space="preserve">
-    <value>Seconds</value>
+    <value>Segundos</value>
   </data>
   <data name="button_scoreboard" xml:space="preserve">
-    <value>Scoreboard</value>
+    <value>Tabla de puntuaciones</value>
   </data>
   <data name="button_invite" xml:space="preserve">
-    <value>Invite</value>
+    <value>Invitar</value>
   </data>
   <data name="global_friend_request" xml:space="preserve">
-    <value>Friend Request</value>
+    <value>Solicitud de amistad</value>
   </data>
   <data name="button_send" xml:space="preserve">
-    <value>Send</value>
+    <value>Enviar</value>
   </data>
   <data name="button_close" xml:space="preserve">
-    <value>Close</value>
+    <value>Cerrar</value>
   </data>
   <data name="dialog_success" xml:space="preserve">
-    <value>Success</value>
+    <value>Éxito</value>
   </data>
   <data name="button_accept" xml:space="preserve">
-    <value>Accept</value>
+    <value>Aceptar</value>
   </data>
   <data name="dialog_invitation_message" xml:space="preserve">
-    <value>Your friend has been successfully invited to the game</value>
+    <value>Tu amigo ha sido invitado exitosamente al juego</value>
   </data>
   <data name="dialog_invalid_username_password_message" xml:space="preserve">
-    <value>An incorrect username or password has been entered</value>
+    <value>Se ha introducido un nombre de usuario o contraseña incorrectos</value>
   </data>
   <data name="dialog_exception_service" xml:space="preserve">
-    <value>Invalid characters</value>
+    <value>Error al enviar el mensaje</value>
+  </data>
+  <data name="dialog_exception_service_message" xml:space="preserve">
+    <value>Hubo un error al enviar el mensaje, intentelo nuevamente</value>
+  </data>
+  <data name="dialog_invalid_characters" xml:space="preserve">
+    <value>Caracteres inválidos</value>
   </data>
   <data name="dialog_empty_fields" xml:space="preserve">
-    <value>Empty fields</value>
+    <value>Campos vacíos</value>
   </data>
   <data name="dialog_invalid_characters_message" xml:space="preserve">
-    <value>Invalid characters have been entered</value>
+    <value>Se han introducido caracteres inválidos</value>
   </data>
   <data name="button_delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Eliminar</value>
   </data>
   <data name="global_add_friend" xml:space="preserve">
-    <value>Add friend</value>
+    <value>Añadir amigo</value>
   </data>
   <data name="dialog_empty_fields_message" xml:space="preserve">
-    <value>Required fields have been left empty</value>
+    <value>Los campos obligatorios se han dejado vacíos</value>
   </data>
   <data name="buttton_cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="dialog_database_load_exception_message" xml:space="preserve">
-    <value>Unable to save data</value>
+    <value>Hubo un error al recuperar la información, por favor intentelo más tarde.</value>
   </data>
   <data name="dialog_database_save_exception_message" xml:space="preserve">
-    <value>An error occurred while saving the data, please try again</value>
+    <value>Hubo un error al guardar la información, por favor intentelo nuevamente.</value>
   </data>
   <data name="dialog_connection_server_exception_message" xml:space="preserve">
-    <value>The connection was lost, please try again later</value>
+    <value>Se ha perdido la conexión, intentelo nuevamente más tarde.</value>
   </data>
   <data name="dialog_connection_server_exception" xml:space="preserve">
-    <value>The connection was lost.</value>
+    <value>Se ha perdido la conexión</value>
   </data>
   <data name="dialog_database_load_exception" xml:space="preserve">
-    <value>Unable to load data.</value>
+    <value>Imposible cargar información</value>
   </data>
   <data name="dialog_database_save_exception" xml:space="preserve">
-    <value>Unable to save data</value>
+    <value>Imposible guardar información</value>
   </data>
   <data name="dialog_add_new_friend" xml:space="preserve">
-    <value>Enter the name of the player you wish to add as a friend</value>
+    <value>Introduce el nombre del jugador que deseas añadir como amigo</value>
   </data>
   <data name="dialog_send_friend_request_message" xml:space="preserve">
-    <value>Friend request has been sent successfully</value>
+    <value>La solicitud de amistad ha sido enviada exitosamente</value>
   </data>
   <data name="dialog_remove_friend" xml:space="preserve">
-    <value>Remove friend</value>
+    <value>Eliminar amigo</value>
   </data>
   <data name="dialog_confirm_remove_friend_message" xml:space="preserve">
-    <value>Are you sure you want to remove this user from your friends list?</value>
+    <value>¿Estás seguro de que deseas eliminar a este usuario de tu lista de amigos?</value>
   </data>
   <data name="dialog_succes_remove_friend_message" xml:space="preserve">
-    <value>Your friend has been removed successfully</value>
+    <value>Tu amigo ha sido eliminado exitosamente</value>
   </data>
   <data name="dialog_name_not_found_message" xml:space="preserve">
-    <value>That name was not found registered as an account, please check it and try again</value>
+    <value>El nombre ingresado no se encuentra registrado como cuenta, por favor revísalo e inténtalo de nuevo</value>
   </data>
   <data name="global_register_user" xml:space="preserve">
-    <value>Register New User</value>
+    <value>Registrar nuevo usuario</value>
   </data>
   <data name="label_invalid_email_message" xml:space="preserve">
-    <value>Please provide a valid email address.</value>
+    <value>Por favor ingresa una dirección de correo válida.</value>
   </data>
   <data name="button_back" xml:space="preserve">
-    <value>Back</value>
+    <value>Regresar</value>
   </data>
   <data name="label_user_required_fields" xml:space="preserve">
-    <value>Please fill in the required ACCOUNT fields</value>
+    <value>Por favor rellena los campos de USUARIO obligatorios</value>
   </data>
   <data name="dialog_registration_cancelled_message" xml:space="preserve">
-    <value>Registration has been cancelled.</value>
+    <value>El registro ha sido cancelado.</value>
   </data>
   <data name="dialog_verification_account_message" xml:space="preserve">
-    <value>A verification code has been sent to your email or phone number. Please confirm your account by entering the access code.</value>
+    <value>Se ha enviado un código de verificación a tu correo electrónico o número de teléfono. Por favor confirma tu cuenta introduciendo el código de acceso.</value>
   </data>
   <data name="label_access_code" xml:space="preserve">
-    <value>Access Code</value>
+    <value>Código de Acceso</value>
   </data>
   <data name="dialog_invalid_username_characters" xml:space="preserve">
-    <value>Invalid characters have been entered, please include only numbers and letters</value>
+    <value>Se han introducido caracteres no válidos, por favor incluye solo números y letras</value>
   </data>
   <data name="dialog_invalid_password_characters" xml:space="preserve">
-    <value>Invalid characters have been entered, please include only numbers, letters, and the symbols '.', '-', and '_'.</value>
+    <value>Se han introducido caracteres no válidos, por favor incluye solo números, letras, y los símbolos ‘.’, ‘-’, y ‘_’.</value>
   </data>
   <data name="label_email_already_registered" xml:space="preserve">
-    <value>The email is already registered.</value>
+    <value>El correo electrónico ya está registrado.</value>
   </data>
   <data name="dialog_incorrect_code_message" xml:space="preserve">
-    <value>Incorrect code. Please check that it is entered correctly and try again</value>
+    <value>Código incorrecto. Por favor, revísalo e inténtalo de nuevo</value>
   </data>
   <data name="window_edit_profile" xml:space="preserve">
-    <value>Edit Profile</value>
+    <value>Editar Perfil</value>
   </data>
   <data name="label_new_email" xml:space="preserve">
-    <value>New Email</value>
+    <value>Nuevo Correo Electrónico</value>
   </data>
   <data name="label_new_phone_number" xml:space="preserve">
-    <value>New Phone Number</value>
+    <value>Nuevo Número de Teléfono</value>
   </data>
   <data name="label_new_password" xml:space="preserve">
-    <value>New Password</value>
+    <value>Nueva Contraseña</value>
   </data>
   <data name="button_save" xml:space="preserve">
-    <value>Save</value>
+    <value>Guardar</value>
   </data>
   <data name="button_save_photo" xml:space="preserve">
-    <value>Save Photo</value>
+    <value>Guardar Foto</value>
   </data>
   <data name="dialog_code_sent_message" xml:space="preserve">
-    <value>A message with a code has been sent to your email or phone number. Please enter the code to save the changes.</value>
+    <value>Se ha enviado un mensaje con un código a tu correo electrónico o número de teléfono. Por favor introduce el código para guardar los cambios.</value>
   </data>
   <data name="button_decline" xml:space="preserve">
-    <value>Decline</value>
+    <value>Rechazar</value>
   </data>
   <data name="label_enter_lobby_code" xml:space="preserve">
-    <value>Enter the room code to join</value>
+    <value>Introduce el código de la sala para unirte</value>
   </data>
   <data name="message_join_room" xml:space="preserve">
-    <value>has joined the room.</value>
+    <value>se ha unido a la sala.</value>
   </data>
   <data name="button_join_room" xml:space="preserve">
-    <value>Join Room!</value>
+    <value>¡Unirse a la Sala!</value>
   </data>
   <data name="dialog_game_not_found_message" xml:space="preserve">
-    <value>The room was not found.</value>
+    <value>No se encontró la sala.</value>
   </data>
   <data name="dialog_full_game_message" xml:space="preserve">
-    <value>Unable to join the room, the maximum number of members has been reached.</value>
+    <value>No se puede unir a la sala, se ha alcanzado el número máximo de miembros.</value>
   </data>
   <data name="dialog_friend_added_message" xml:space="preserve">
-    <value>This player has been added to your friends list</value>
+    <value>El jugador ha sido añadido a tu lista de amigos</value>
   </data>
   <data name="dialog_not_friend_request_message" xml:space="preserve">
-    <value>No friend requests have been received yet</value>
+    <value>Aún no se han recibido solicitudes de amistad</value>
   </data>
   <data name="global_create_new_game" xml:space="preserve">
-    <value>Create New Game</value>
+    <value>Crear Nuevo Juego</value>
   </data>
   <data name="global_start_game" xml:space="preserve">
-    <value>Start Game</value>
+    <value>Iniciar Juego</value>
   </data>
   <data name="label_chat" xml:space="preserve">
     <value>Chat</value>
   </data>
   <data name="label_message_field" xml:space="preserve">
-    <value>Message Field</value>
+    <value>Campo de Mensaje</value>
   </data>
   <data name="button_ready" xml:space="preserve">
-    <value>Ready</value>
+    <value>Listo</value>
   </data>
   <data name="global_kick_player" xml:space="preserve">
-    <value>Kick Player</value>
+    <value>Expulsar Jugador</value>
   </data>
   <data name="dialog_reject_friend_request_message" xml:space="preserve">
-    <value>Friend request has been rejected</value>
+    <value>Solicitud de amistad rechazada</value>
   </data>
   <data name="label_world" xml:space="preserve">
-    <value>World</value>
+    <value>Mundial</value>
   </data>
   <data name="label_weekly" xml:space="preserve">
-    <value>Weekly</value>
+    <value>Semanal</value>
   </data>
   <data name="label_player" xml:space="preserve">
-    <value>Player</value>
+    <value>Jugador</value>
   </data>
   <data name="label_games_won" xml:space="preserve">
-    <value>Games won</value>
+    <value>Juegos ganados</value>
   </data>
   <data name="label_total_points" xml:space="preserve">
-    <value>Total points</value>
+    <value>Puntos totales</value>
   </data>
   <data name="dialog_kick_player_message" xml:space="preserve">
-    <value>Are you sure you want to kick the player?</value>
+    <value>¿Estás seguro de que deseas expulsar al jugador?</value>
   </data>
   <data name="option_bad_behavior" xml:space="preserve">
-    <value>Bad behavior</value>
+    <value>Mal comportamiento</value>
   </data>
   <data name="option_misuse_game" xml:space="preserve">
-    <value>Misuse of the game</value>
+    <value>Uso inadecuado del juego</value>
   </data>
   <data name="option_undefined" xml:space="preserve">
-    <value>Undefined</value>
+    <value>Indefinido</value>
   </data>
   <data name="button_confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Confirmar</value>
   </data>
   <data name="buttton_abort" xml:space="preserve">
-    <value>Abort</value>
+    <value>Abortar</value>
   </data>
   <data name="dialog_succes_kick_player_message" xml:space="preserve">
-    <value>The player has been successfully kicked</value>
+    <value>El jugador ha sido expulsado exitosamente</value>
   </data>
   <data name="dialog_kicked_player_message" xml:space="preserve">
-    <value>You have been kicked from the room for reason:</value>
+    <value>Has sido expulsado de la sala por la razón:</value>
   </data>
   <data name="window_kick" xml:space="preserve">
-    <value>Kick Player</value>
+    <value>Expulsar Jugador</value>
   </data>
   <data name="label_votes" xml:space="preserve">
-    <value>Votes</value>
+    <value>Votos</value>
   </data>
   <data name="dialog_confirm_vote_kick_player_message" xml:space="preserve">
-    <value>Are you sure you want to vote to expel the player?</value>
+    <value>¿Estás seguro de que deseas votar para expulsar al jugador?</value>
   </data>
   <data name="label_the_player" xml:space="preserve">
-    <value>The player</value>
+    <value>El jugador</value>
   </data>
   <data name="label_has_been_kicked" xml:space="preserve">
-    <value>has been kicked from the room.</value>
+    <value>ha sido expulsado de la sala.</value>
   </data>
   <data name="dialog_you_have_been_kicked_message" xml:space="preserve">
-    <value>You have been kicked out of the game.</value>
+    <value>Has sido expulsado del juego.</value>
   </data>
   <data name="label_recover_password" xml:space="preserve">
-    <value>Recover password</value>
+    <value>Recuperar contraseña</value>
   </data>
   <data name="label_enter_verification_code" xml:space="preserve">
-    <value>Enter your verification code</value>
+    <value>Ingrese su código de recuperación</value>
   </data>
   <data name="btn_resend" xml:space="preserve">
-    <value>Resend</value>
+    <value>Enviar de nuevo</value>
   </data>
   <data name="window_recover_account" xml:space="preserve">
-    <value>Recover account</value>
+    <value>Recuperar cuenta</value>
   </data>
   <data name="windows_change_password" xml:space="preserve">
-    <value>Change password</value>
+    <value>Cambiar contraseña</value>
   </data>
   <data name="label_confirm_password" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>Confirmar contraseña</value>
   </data>
   <data name="dialog_password_changed_message" xml:space="preserve">
-    <value>The password has been changed successfully</value>
+    <value>Se ha cambiado la contraseña correctamente</value>
   </data>
   <data name="dialog_password_changed" xml:space="preserve">
-    <value>Password updated successfully</value>
+    <value>Contraseña actualizada correctamente</value>
   </data>
   <data name="global_cancel_change" xml:space="preserve">
-    <value>Cancel change</value>
+    <value>Cancelar cambio</value>
   </data>
   <data name="dialog_cancel_change_password_message" xml:space="preserve">
-    <value>Are you sure you want to cancel the password change?</value>
+    <value>¿Está seguro que desea cancelar el cambio de su contraseña?</value>
   </data>
   <data name="dialog_password_not_match" xml:space="preserve">
-    <value>The passwords do not match</value>
+    <value>Las contraseñas no coinciden</value>
   </data>
   <data name="dialog_unregistered_email" xml:space="preserve">
-    <value>Unregistered email</value>
+    <value>Correo no registrado</value>
   </data>
   <data name="dialog_unregistered_email_message" xml:space="preserve">
-    <value>The email you entered is not registered.</value>
+    <value>Se ha introducido un correo electrónico que no se ha registrado</value>
   </data>
   <data name="dialog_resent_code" xml:space="preserve">
-    <value>Resent code</value>
+    <value>Código enviado nuevamente</value>
   </data>
   <data name="dialog_resent_code_message" xml:space="preserve">
-    <value>The code has been resent.</value>
+    <value>Se ha enviado el código nuevamente</value>
   </data>
   <data name="check_box_show_password" xml:space="preserve">
-    <value>Show Password</value>
+    <value>Mostrar contraseña</value>
   </data>
   <data name="global_email_phone_number" xml:space="preserve">
-    <value>Email or Phone Number</value>
+    <value>Correo o teléfono</value>
   </data>
 </root>

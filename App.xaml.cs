@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Globalization;
+using System.Threading;
 
 namespace CatanClient
 {
@@ -13,5 +15,9 @@ namespace CatanClient
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
+        }
     }
 }

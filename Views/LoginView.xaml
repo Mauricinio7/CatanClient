@@ -5,23 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatanClient.Views"
              xmlns:controls="clr-namespace:CatanClient.Controls"
+             xmlns:properties="clr-namespace:CatanClient.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Triggers>
-        <EventTrigger RoutedEvent="UserControl.Loaded">
-            <BeginStoryboard>
-                <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="animatedGrid"
-                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                     From="-1200" To="0" Duration="0:0:2" BeginTime="0:0:1"/>
-                </Storyboard>
-            </BeginStoryboard>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource SlideInFromTopAnimation}" />
         </EventTrigger>
     </UserControl.Triggers>
 
     <Viewbox Stretch="Uniform">
-        <Grid x:Name="animatedGrid" Background="#808511ba" Margin="522,88,522,88" RenderTransformOrigin="0.5,0.5" >
+        <Grid x:Name="animatedGrid" Background="{StaticResource SecondaryColor}" Margin="522,88,522,88" RenderTransformOrigin="0.5,0.5" >
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <StaticResource ResourceKey="SlideInFromTopAnimation"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
 
             <Image Source="pack://application:,,,/Resources/Images/login_frame.png"  Margin="-53,-43,-258,-93" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
@@ -34,56 +38,42 @@
                 </Image.RenderTransform>
             </Image>
 
-            <Label Content="Iniciar sesión" HorizontalAlignment="Center" Margin="0,83,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P" />
-            <Label Content="Correo o teléfono: " HorizontalAlignment="Left" Margin="76,191,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="DemiBold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
+            <Label Content="{x:Static properties:Resources.global_log_in}"  HorizontalAlignment="Center" Margin="0,83,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="White" FontFamily="{StaticResource PrimaryFontFamily}" />
+            <TextBlock HorizontalAlignment="Left" 
+           Margin="76,191,0,0" 
+           VerticalAlignment="Top" 
+           Style="{StaticResource PrimaryTextBlockStyle}"
+           Text="{Binding Source={x:Static properties:Resources.global_email_phone_number}, StringFormat='{}{0}:'}" />
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
-                PlaceholderText="Correo o teléfono"
+                PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
                 Margin="76,240,27,510"
-                Height="44" Width="449"   
-                NormalForegroundColorValue="White"
-                PlaceholderForegroundColorValue="LightGray"
-                BackgroundColorValue="#3f015c"
-                PlaceholderTag="Correo o teléfono"                             
+                Height="44" Width="449"  
+                Style="{StaticResource PrimaryPlaceHolderTextBox}"
+                PlaceholderTag="{x:Static properties:Resources.global_email_phone_number}"                           
                 />
-            <Label Content="Contraseña: " HorizontalAlignment="Left" Margin="76,315,0,0" VerticalAlignment ="Top" FontSize="20" FontWeight="DemiBold" Foreground="White" FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
+            <TextBlock HorizontalAlignment="Left" 
+                Margin="76,315,0,0" 
+                VerticalAlignment="Top" 
+                Style="{StaticResource PrimaryTextBlockStyle}"
+                Text="{Binding Source={x:Static properties:Resources.global_password}, StringFormat='{}{0}:'}" />
             <controls:ShowPasswordPlaceholderControl
                 Margin="76,334,23,365"
                 TextBoxWidth="449"
                 TextBoxHeight="44"
-                ControlBackground="#3F015C"
-                PromptForeground="LightGray"
-                WritingForeground="White"
-                ControlFontSize="15"
-                ControlPadding="15"
-                ControlBorderThickness="0"
-                PlaceholderText="Contraseña"
-                TagText="Contraseña"
-                CheckBoxMargin="5,90,0,0" />
-            <Button Content="Continuar" HorizontalAlignment="Left" Margin="76,617,0,0" VerticalAlignment="Top" Height="56" Width="162"
-                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
-                Foreground="White"
-                Background="#3f015c"
-                FontSize="14"
-                BorderThickness="1"/>
-            <Button Content="¿Necesitas ayuda?" HorizontalAlignment="Left" Margin="381,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
-                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
-                Foreground="White"
-                Background="#3f015c"
-                FontSize="7"
-                BorderThickness="1" />
-            <Button Content="Jugar como invitado" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254"
-                FontSize="11"
-                FontWeight="ExtraLight"
-                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
-                Foreground="White"
-                Background="#3f015c"
-                BorderThickness="1"/>
-            <Button Content="Registrarse" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" 
-                FontSize="11"
-                FontFamily="pack://application:,,,/Resources/Fonts/#Press Start 2P"
-                Foreground="White"
-                Background="#3f015c"
-                BorderThickness="1"/>
+                Style="{StaticResource PrimaryShowPasswordPlaceholder}"
+                PlaceholderText="{x:Static properties:Resources.global_password}"
+                TagText="{x:Static properties:Resources.global_password}"
+                />
+            <Button Content="{x:Static properties:Resources.button_continue}" HorizontalAlignment="Left" Margin="76,617,0,0" VerticalAlignment="Top" Height="56" Width="162"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    />
+            <Button Content="{x:Static properties:Resources.button_help}" HorizontalAlignment="Left" Margin="381,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
+                Style="{StaticResource PrimaryButtonStyle}"
+                    FontSize="7"/>
+            <Button Content="{x:Static properties:Resources.button_play_as_gest}" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254"
+                Style="{StaticResource PrimaryButtonStyle}"/>
+            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" 
+                Style="{StaticResource PrimaryButtonStyle}"/>
 
             <Grid.RenderTransform>
                 <TranslateTransform Y="-1200" />

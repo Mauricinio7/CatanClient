@@ -74,7 +74,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderTextProperty =
-            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata("Contraseña"));
+            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata("Password"));
 
         public string PlaceholderText
         {
@@ -83,7 +83,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty TagTextProperty =
-            DependencyProperty.Register("TagText", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata("Contraseña"));
+            DependencyProperty.Register("TagText", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata("Password"));
 
         public string TagText
         {

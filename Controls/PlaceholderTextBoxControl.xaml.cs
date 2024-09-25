@@ -31,7 +31,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderTextProperty =
-            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(PlaceholderTextBoxControl), new PropertyMetadata("Escribe aquí..."));
+            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(PlaceholderTextBoxControl), new PropertyMetadata("Write here..."));
 
         public string PlaceholderText
         {
@@ -40,7 +40,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderTagProperty =
-            DependencyProperty.Register("PlaceholderTag", typeof(string), typeof(PlaceholderTextBoxControl), new PropertyMetadata(null));
+            DependencyProperty.Register("PlaceholderTag", typeof(string), typeof(PlaceholderTextBoxControl), new PropertyMetadata("Write here..."));
 
         public string PlaceholderTag
         {
@@ -67,7 +67,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderForegroundColorValueProperty =
-            DependencyProperty.Register("ForegroundColorValue", typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register("PlaceholderForegroundColorValue", typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.LightGray));
 
         public Brush PlaceholderForegroundColorValue
         {
