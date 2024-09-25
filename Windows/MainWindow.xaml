@@ -4,11 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatanClient"
-        xmlns:views="clr-namespace:CatanClient.Views"
+        xmlns:views="clr-namespace:CatanClient.Views" 
+        xmlns:viewModels="clr-namespace:CatanClient.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1700"
-        WindowStartupLocation="CenterScreen">
-
+        WindowStartupLocation="CenterScreen"
+        >
+    <Window.DataContext>
+        <viewModels:MainWindowsViewModel />
+    </Window.DataContext>
+    
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}" />
@@ -18,8 +23,8 @@
 
 
     <Grid>
-        <views:StartupBackground/>
-        <views:LoginView/>
+        <views:StartupBackground />
+        <ContentControl Content="{Binding CurrentView}" />
     </Grid>
 
 </Window>

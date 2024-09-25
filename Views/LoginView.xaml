@@ -68,7 +68,9 @@
             <Button Content="{x:Static properties:Resources.button_play_as_gest}" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254"
                 Style="{StaticResource PrimaryButtonStyle}"/>
             <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" 
-                Style="{StaticResource PrimaryButtonStyle}"/>
+                Style="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding ShowRegisterViewCommand}" 
+                />
 
             <Grid.RenderTransform>
                 <TranslateTransform Y="-1200" />

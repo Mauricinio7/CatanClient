@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Controls\PlaceholderTextBoxControl.xaml.cs">
       <DependentUpon>PlaceholderTextBoxControl.xaml</DependentUpon>
     </Compile>
@@ -105,6 +106,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\MainWindowsViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -156,7 +159,6 @@
   <ItemGroup>
     <Folder Include="Resources\Sounds\" />
     <Folder Include="UIHelpers\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Gifs\AnimatedBackground1.gif" />
