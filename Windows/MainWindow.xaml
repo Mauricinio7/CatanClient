@@ -19,7 +19,7 @@
 
     <Grid>
         <views:StartupBackground/>
-        <views:RegisterView/>
+        <views:LoginView/>
     </Grid>
 
 </Window>
