@@ -6,9 +6,19 @@
                          From="0" To="1" Duration="0:0:4" />
     </Storyboard>
 
+    <Storyboard x:Key="FadeOutAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                     From="1" To="0" Duration="0:0:4" />
+    </Storyboard>
+
     <Storyboard x:Key="SlideInFromTopAnimation">
         <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                          From="-1200" To="0" Duration="0:0:2" BeginTime="0:0:1"/>
+    </Storyboard>
+
+    <Storyboard x:Key="SlideOutFromTopAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                     From="0" To="-1200" Duration="0:0:2" BeginTime="0:0:1"/>
     </Storyboard>
 
 </ResourceDictionary>
