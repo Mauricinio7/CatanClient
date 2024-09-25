@@ -9,11 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource SlideInFromTopAnimation}" />
-        </EventTrigger>
-    </UserControl.Triggers>
 
     <Viewbox Stretch="Uniform">
         <Grid x:Name="animatedGrid" Background="{StaticResource SecondaryColor}" Margin="522,88,522,88" RenderTransformOrigin="0.5,0.5" >
