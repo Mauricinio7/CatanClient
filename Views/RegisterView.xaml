@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatanClient.Views"
              xmlns:controls="clr-namespace:CatanClient.Controls"
-             xmlns:properties="clr-namespace:CatanClient.Properties"
+             xmlns:properties="clr-namespace:CatanClient.Properties" xmlns:viewmodels="clr-namespace:CatanClient.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -54,7 +54,7 @@
             PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
             Margin="78,196,88,483" 
             Style="{StaticResource PrimaryPlaceHolderTextBox}"
-            PlaceholderTag="{x:Static properties:Resources.global_email_phone_number}"                           
+            Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
             />
             <TextBlock HorizontalAlignment="Left" 
             Margin="82,295,0,0" 
@@ -67,8 +67,8 @@
             TextBoxHeight="55"
             Style="{StaticResource PrimaryShowPasswordPlaceholder}"
             PlaceholderText="{x:Static properties:Resources.global_password}"
-            TagText="{x:Static properties:Resources.global_password}"
             CheckBoxMargin="5,100,0,0"
+            Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
             />
 
             <TextBlock HorizontalAlignment="Left"
@@ -80,7 +80,8 @@
                                                 PlaceholderText="{x:Static properties:Resources.global_username}"
                                                 Margin="78,512,88,167"
                                                 Style="{StaticResource PrimaryPlaceHolderTextBox}"
-                                                PlaceholderTag="{x:Static properties:Resources.global_username}" />
+                                                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                                                />
 
             <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="32,636,0,0" VerticalAlignment="Top" Height="43" Width="167"
                 Style="{StaticResource PrimaryButtonStyle}"

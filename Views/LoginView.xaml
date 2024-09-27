@@ -6,9 +6,13 @@
              xmlns:local="clr-namespace:CatanClient.Views"
              xmlns:controls="clr-namespace:CatanClient.Controls"
              xmlns:properties="clr-namespace:CatanClient.Properties"
+             xmlns:viewModels="clr-namespace:CatanClient.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.DataContext>
+        <viewModels:LoginViewModel />
+    </UserControl.DataContext>
 
     <Viewbox Stretch="Uniform" Margin="20">
         <Grid x:Name="animatedGrid" Background="{StaticResource SecondaryColor}" Margin="522,88,522,88" RenderTransformOrigin="0.5,0.5" >
@@ -41,10 +45,9 @@
            Text="{Binding Source={x:Static properties:Resources.global_email_phone_number}, StringFormat='{}{0}:'}" />
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                 PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
-                Margin="76,240,27,510"
-                Height="44" Width="449"  
-                Style="{StaticResource PrimaryPlaceHolderTextBox}"
-                PlaceholderTag="{x:Static properties:Resources.global_email_phone_number}"                           
+                Margin="76,245,27,517" Width="449"  
+                Style="{StaticResource PrimaryPlaceHolderTextBox}"                          
+                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                 />
             <TextBlock HorizontalAlignment="Left" 
                 Margin="76,315,0,0" 
@@ -57,26 +60,33 @@
                 TextBoxHeight="44"
                 Style="{StaticResource PrimaryShowPasswordPlaceholder}"
                 PlaceholderText="{x:Static properties:Resources.global_password}"
-                TagText="{x:Static properties:Resources.global_password}"
+                Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                 />
-            <Button Content="{x:Static properties:Resources.button_continue}" HorizontalAlignment="Left" Margin="76,617,0,0" VerticalAlignment="Top" Height="56" Width="162"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    />
+            <Button Content="{x:Static properties:Resources.button_continue}" 
+                HorizontalAlignment="Left" 
+                Margin="76,617,0,0" 
+                VerticalAlignment="Top" 
+                Height="56" 
+                Width="162"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding LoginCommand}"
+                />
             <Button Content="{x:Static properties:Resources.button_help}" HorizontalAlignment="Left" Margin="381,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
                 Style="{StaticResource PrimaryButtonStyle}"
                     FontSize="7"/>
             <Button Content="{x:Static properties:Resources.button_play_as_gest}" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254"
                 Style="{StaticResource PrimaryButtonStyle}"/>
             <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" 
-                Style="{StaticResource PrimaryButtonStyle}"
-                Command="{Binding ShowRegisterViewCommand}" 
-                />
+            Style="{StaticResource PrimaryButtonStyle}"
+            Command="{Binding DataContext.ShowRegisterViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                    />
 
             <Grid.RenderTransform>
                 <TranslateTransform Y="-1200" />
             </Grid.RenderTransform>
 
         </Grid>
+
 
     </Viewbox>
 </UserControl>

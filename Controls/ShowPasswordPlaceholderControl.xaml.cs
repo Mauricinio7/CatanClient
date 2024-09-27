@@ -7,6 +7,8 @@ namespace CatanClient.Controls
 {
     public partial class ShowPasswordPlaceholderControl : UserControl
     {
+
+
         public ShowPasswordPlaceholderControl()
         {
             InitializeComponent();
@@ -26,6 +28,15 @@ namespace CatanClient.Controls
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
             PasswordBox.SetBinding(HeightProperty, heightBinding);
+        }
+
+     public static readonly DependencyProperty PasswordProperty =
+            DependencyProperty.Register("Password", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(string.Empty));
+
+        public string Password
+        {
+            get { return (string)GetValue(PasswordProperty); }
+            set { SetValue(PasswordProperty, value); }
         }
 
         public static readonly DependencyProperty TextBoxWidthProperty =
@@ -64,13 +75,13 @@ namespace CatanClient.Controls
             set { SetValue(PromptForegroundProperty, value); }
         }
 
-        public static readonly DependencyProperty WritingForegroundProperty =
-            DependencyProperty.Register("WritingForeground", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
+        public static readonly DependencyProperty WritingForegroundColorValueProperty =
+            DependencyProperty.Register("WritingForegroundColorValue", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
 
-        public Brush WritingForeground
+        public Brush WritingForegroundColorValue
         {
-            get { return (Brush)GetValue(WritingForegroundProperty); }
-            set { SetValue(WritingForegroundProperty, value); }
+            get { return (Brush)GetValue(WritingForegroundColorValueProperty); }
+            set { SetValue(WritingForegroundColorValueProperty, value); }
         }
 
         public static readonly DependencyProperty PlaceholderTextProperty =
@@ -80,15 +91,6 @@ namespace CatanClient.Controls
         {
             get { return (string)GetValue(PlaceholderTextProperty); }
             set { SetValue(PlaceholderTextProperty, value); }
-        }
-
-        public static readonly DependencyProperty TagTextProperty =
-            DependencyProperty.Register("TagText", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata("Password"));
-
-        public string TagText
-        {
-            get { return (string)GetValue(TagTextProperty); }
-            set { SetValue(TagTextProperty, value); }
         }
 
         public static readonly DependencyProperty ControlFontSizeProperty =
@@ -129,83 +131,45 @@ namespace CatanClient.Controls
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
 
-            string placeholderText = textBox.Tag as string;
-
-            if (textBox.Text == placeholderText)
+            if (string.IsNullOrWhiteSpace(PasswordTextBox.Text))
             {
-                textBox.Text = string.Empty;
-                textBox.Foreground = WritingForeground;
-
-                if (ShowPasswordCheckBox.IsChecked == false)
-                {
-                    textBox.Visibility = Visibility.Collapsed;
-                    PasswordBox.Visibility = Visibility.Visible;
-                    PasswordBox.Focus();
-                }
-
+                PasswordTextBox.Text = string.Empty;
+                PlaceholderLabel.Content = string.Empty;
             }
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
 
-            string placeholderText = textBox.Tag as string;
-
-            if (string.IsNullOrWhiteSpace(textBox.Text))
+            if (string.IsNullOrWhiteSpace(PasswordTextBox.Text))
             {
-                textBox.Text = placeholderText;
-                textBox.Foreground = PromptForeground;
-
+                PlaceholderLabel.Content = PlaceholderText;
             }
         }
 
-        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(PasswordBox.Password))
+            if (PasswordTextBox.Text != PasswordBox.Password)
             {
-                PasswordBox.Visibility = Visibility.Collapsed;
-                PasswordTextBox.Text = PasswordTextBox.Tag as string;
-                PasswordTextBox.Foreground = PromptForeground;
-                PasswordTextBox.Visibility = Visibility.Visible;
+                PasswordTextBox.Text = PasswordBox.Password; 
             }
         }
-
 
         private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(PasswordBox.Password))
-            {
-                PasswordTextBox.Text = PasswordBox.Password;
-                PasswordTextBox.Foreground = WritingForeground;
-            }
-            else
-            {
-                PasswordTextBox.Text = PasswordTextBox.Tag as string;
-                PasswordTextBox.Foreground = PromptForeground;
-            }
-
             PasswordTextBox.Visibility = Visibility.Visible;
             PasswordBox.Visibility = Visibility.Collapsed;
         }
 
         private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (PasswordTextBox.Text != PasswordTextBox.Tag as string)
-            {
-                PasswordBox.Password = PasswordTextBox.Text;
-            }
-            else
-            {
-                PasswordBox.Password = string.Empty;
-            }
+            PasswordTextBox.Visibility = Visibility.Collapsed;
+            PasswordBox.Visibility = Visibility.Visible;
 
-            if (PasswordTextBox.Text != PasswordTextBox.Tag as string)
+            if (PasswordBox.Password != PasswordTextBox.Text)
             {
-                PasswordTextBox.Visibility = Visibility.Collapsed;
-                PasswordBox.Visibility = Visibility.Visible;
+                PasswordBox.Password = PasswordTextBox.Text; 
             }
         }
     }

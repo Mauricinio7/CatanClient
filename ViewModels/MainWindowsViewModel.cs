@@ -23,7 +23,7 @@ namespace CatanClient.ViewModels
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
-
+        
         public ICommand ShowRegisterViewCommand { get; }
         public ICommand ShowLoginViewCommand { get; }
 

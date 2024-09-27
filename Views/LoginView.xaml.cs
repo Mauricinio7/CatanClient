@@ -26,5 +26,6 @@ namespace CatanClient.Views
             InitializeComponent();
         }
 
+
     }
 }

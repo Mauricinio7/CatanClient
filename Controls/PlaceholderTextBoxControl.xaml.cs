@@ -25,9 +25,14 @@ namespace CatanClient.Controls
             InitializeComponent();
         }
 
+        public static readonly DependencyProperty TextProperty =
+        DependencyProperty.Register("Text", typeof(string), typeof(PlaceholderTextBoxControl),
+        new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public string Text
         {
-            get { return (PlaceholderText); }
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
 
         public static readonly DependencyProperty PlaceholderTextProperty =
@@ -39,14 +44,6 @@ namespace CatanClient.Controls
             set { SetValue(PlaceholderTextProperty, value); }
         }
 
-        public static readonly DependencyProperty PlaceholderTagProperty =
-            DependencyProperty.Register("PlaceholderTag", typeof(string), typeof(PlaceholderTextBoxControl), new PropertyMetadata("Write here..."));
-
-        public string PlaceholderTag
-        {
-            get { return (string)GetValue(PlaceholderTagProperty); }
-            set { SetValue(PlaceholderTagProperty, value); }
-        }
 
         public static readonly DependencyProperty FontSizeValueProperty =
             DependencyProperty.Register("FontSizeValue", typeof(double), typeof(PlaceholderTextBoxControl), new PropertyMetadata(15.0));
@@ -75,13 +72,13 @@ namespace CatanClient.Controls
             set { SetValue(PlaceholderForegroundColorValueProperty, value); }
         }
 
-        public static readonly DependencyProperty NormalForegroundColorValueProperty =
-            DependencyProperty.Register("NormalForegroundColorValue", typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.White));
+        public static readonly DependencyProperty WritingForegroundColorValueProperty =
+            DependencyProperty.Register("WritingForegroundColorValue", typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.White));
 
-        public Brush NormalForegroundColorValue
+        public Brush WritingForegroundColorValue
         {
-            get { return (Brush)(GetValue(NormalForegroundColorValueProperty)); }
-            set { SetValue(NormalForegroundColorValueProperty, value); }
+            get { return (Brush)(GetValue(WritingForegroundColorValueProperty)); }
+            set { SetValue(WritingForegroundColorValueProperty, value); }
         }
 
         public static readonly DependencyProperty PaddingValueProperty =
@@ -102,16 +99,15 @@ namespace CatanClient.Controls
             set { SetValue(BorderThicknessValueProperty, value); }
         }
 
+
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
 
-            string placeholderText = textBox.Tag as string;
-
-            if (textBox.Text == placeholderText)
+            if (string.IsNullOrWhiteSpace(textBox.Text))
             {
                 textBox.Text = string.Empty;
-                textBox.Foreground = NormalForegroundColorValue;
+                PlaceholderLabel.Content = string.Empty;
             }
         }
 
@@ -120,13 +116,9 @@ namespace CatanClient.Controls
         {
             TextBox textBox = sender as TextBox;
 
-            string placeholderText = textBox.Tag as string;
-
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                textBox.Text = placeholderText;
-                textBox.Foreground = PlaceholderForegroundColorValue;
-
+                PlaceholderLabel.Content = PlaceholderText;
             }
         }
     }
