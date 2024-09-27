@@ -5,22 +5,18 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CatanClient.ViewModels
 {
-    internal class RegisterViewModel
+    internal class RegisterViewModel : ViewModelBase
     {
         private string _email;
         private string _password;
         private string _username;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // Propiedad para Email
         public string Email
@@ -65,8 +61,7 @@ namespace CatanClient.ViewModels
 
         private void RegisterUser()
         {
-            // Lógica de registro
-            // Aquí puedes manejar el proceso de registro del usuario con las propiedades Email, Password y Username.
+            MessageBox.Show($"Bienvenido, {Username}!\nContraseña: {Password} \nCorreo: {Email}", "Login Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
