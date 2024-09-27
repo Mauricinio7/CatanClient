@@ -36,7 +36,7 @@
                    RenderTransformOrigin="0.5,0.5"
                    RenderOptions.BitmapScalingMode="NearestNeighbor"
                    SnapsToDevicePixels="True"
-                   UseLayoutRounding="True">    
+                   UseLayoutRounding="True">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="0.93"/>
@@ -88,14 +88,14 @@
                                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                                                 />
 
-            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="32,636,0,0" VerticalAlignment="Top" Height="43" Width="167"
+            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="44,632,0,0" VerticalAlignment="Top" Height="47" Width="167"
                 Style="{StaticResource PrimaryButtonStyle}"
                 Command="{Binding RegisterCommand}"
                 />
 
-            <Button Content="{x:Static properties:Resources.button_back}" HorizontalAlignment="Left" Margin="588,636,0,0" VerticalAlignment="Top" Height="43" Width="167"
+            <Button Content="{x:Static properties:Resources.button_back}" HorizontalAlignment="Left" Margin="588,632,0,0" VerticalAlignment="Top" Height="47" Width="167"
                     Style="{StaticResource PrimaryButtonStyle}"
-                    Command="{Binding ShowLoginViewCommand}"
+                    Command="{Binding DataContext.ShowLoginViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                 />
 
 

@@ -17,8 +17,6 @@ namespace CatanClient.ViewModels
         private string _username;
 
 
-
-        // Propiedad para Email
         public string Email
         {
             get { return _email; }
@@ -29,7 +27,6 @@ namespace CatanClient.ViewModels
             }
         }
 
-        // Propiedad para Password
         public string Password
         {
             get { return _password; }
@@ -40,7 +37,6 @@ namespace CatanClient.ViewModels
             }
         }
 
-        // Propiedad para Username
         public string Username
         {
             get { return _username; }
@@ -51,7 +47,6 @@ namespace CatanClient.ViewModels
             }
         }
 
-        // Comando para el botón de registro
         public ICommand RegisterCommand { get; set; }
 
         public RegisterViewModel()
@@ -61,7 +56,51 @@ namespace CatanClient.ViewModels
 
         private void RegisterUser()
         {
-            MessageBox.Show($"Bienvenido, {Username}!\nContraseña: {Password} \nCorreo: {Email}", "Login Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+            //TODO Validate data and enter it into the database
+
+            // Validar si algún campo está vacío
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(Email))
+            {
+                MessageBox.Show("Todos los campos deben estar llenos.", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Validar el correo
+            if (!Email.Contains("@") || !Email.Contains("."))
+            {
+                MessageBox.Show("El correo debe contener una arroba (@) y un punto (.)", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Validar la contraseña (al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial)
+            if (Password.Length < 8)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 8 caracteres.", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            bool hasUpperChar = Password.Any(char.IsUpper);
+            bool hasLowerChar = Password.Any(char.IsLower);
+            bool hasDigit = Password.Any(char.IsDigit);
+            bool hasSpecialChar = Password.Any(ch => !char.IsLetterOrDigit(ch));
+
+            if (!hasUpperChar || !hasLowerChar || !hasDigit || !hasSpecialChar)
+            {
+                MessageBox.Show("La contraseña debe tener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (serverConexion())
+            {
+                // Si todo es correcto, muestra el mensaje de bienvenida
+                MessageBox.Show($"Bienvenido, {Username}!\nContraseña: {Password} \nCorreo: {Email}", "Registro Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        
+        public bool serverConexion()
+        {
+            //TODO server conexion
+            return true;
         }
     }
 }
