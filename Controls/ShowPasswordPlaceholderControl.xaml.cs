@@ -57,22 +57,22 @@ namespace CatanClient.Controls
             set { SetValue(TextBoxHeightProperty, value); }
         }
 
-        public static readonly DependencyProperty ControlBackgroundProperty =
-            DependencyProperty.Register("ControlBackground", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
+        public static readonly DependencyProperty BackgroundColorValueProperty =
+            DependencyProperty.Register("BackgroundColorValue", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
 
-        public Brush ControlBackground
+        public Brush BackgroundColorValue
         {
-            get { return (Brush)GetValue(ControlBackgroundProperty); }
-            set { SetValue(ControlBackgroundProperty, value); }
+            get { return (Brush)GetValue(BackgroundColorValueProperty); }
+            set { SetValue(BackgroundColorValueProperty, value); }
         }
 
-        public static readonly DependencyProperty PromptForegroundProperty =
-            DependencyProperty.Register("PromptForeground", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.LightGray));
+        public static readonly DependencyProperty PlaceholderForegroundColorValueProperty =
+            DependencyProperty.Register("PlaceholderForegroundColorValue", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.LightGray));
 
-        public Brush PromptForeground
+        public Brush PlaceholderForegroundColorValue
         {
-            get { return (Brush)GetValue(PromptForegroundProperty); }
-            set { SetValue(PromptForegroundProperty, value); }
+            get { return (Brush)GetValue(PlaceholderForegroundColorValueProperty); }
+            set { SetValue(PlaceholderForegroundColorValueProperty, value); }
         }
 
         public static readonly DependencyProperty WritingForegroundColorValueProperty =
@@ -93,31 +93,31 @@ namespace CatanClient.Controls
             set { SetValue(PlaceholderTextProperty, value); }
         }
 
-        public static readonly DependencyProperty ControlFontSizeProperty =
-            DependencyProperty.Register("ControlFontSize", typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(15.0));
+        public static readonly DependencyProperty FontSizeValueProperty =
+            DependencyProperty.Register("FontSizeValue", typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(15.0));
 
-        public double ControlFontSize
+        public double FontSizeValue
         {
-            get { return (double)GetValue(ControlFontSizeProperty); }
-            set { SetValue(ControlFontSizeProperty, value); }
+            get { return (double)GetValue(FontSizeValueProperty); }
+            set { SetValue(FontSizeValueProperty, value); }
         }
 
-        public static readonly DependencyProperty ControlPaddingProperty =
-            DependencyProperty.Register("ControlPadding", typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(15)));
+        public static readonly DependencyProperty PaddingValueProperty =
+            DependencyProperty.Register("PaddingValue", typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(15)));
 
-        public Thickness ControlPadding
+        public Thickness PaddingValue
         {
-            get { return (Thickness)GetValue(ControlPaddingProperty); }
-            set { SetValue(ControlPaddingProperty, value); }
+            get { return (Thickness)GetValue(PaddingValueProperty); }
+            set { SetValue(PaddingValueProperty, value); }
         }
 
-        public static readonly DependencyProperty ControlBorderThicknessProperty =
-            DependencyProperty.Register("ControlBorderThickness", typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(0)));
+        public static readonly DependencyProperty BorderThicknessValueProperty =
+            DependencyProperty.Register("BorderThicknessValue", typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(0)));
 
-        public Thickness ControlBorderThickness
+        public Thickness BorderThicknessValue
         {
-            get { return (Thickness)GetValue(ControlBorderThicknessProperty); }
-            set { SetValue(ControlBorderThicknessProperty, value); }
+            get { return (Thickness)GetValue(BorderThicknessValueProperty); }
+            set { SetValue(BorderThicknessValueProperty, value); }
         }
 
         public static readonly DependencyProperty CheckBoxMarginProperty =

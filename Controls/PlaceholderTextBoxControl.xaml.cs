@@ -25,6 +25,15 @@ namespace CatanClient.Controls
             InitializeComponent();
         }
 
+        public static readonly DependencyProperty LabelStyleProperty =
+            DependencyProperty.Register("LabelStyle", typeof(Style), typeof(PlaceholderTextBoxControl), new PropertyMetadata(null));
+
+        public Style LabelStyle
+        {
+            get { return (Style)GetValue(LabelStyleProperty); }
+            set { SetValue(LabelStyleProperty, value); }
+        }
+
         public static readonly DependencyProperty TextProperty =
         DependencyProperty.Register("Text", typeof(string), typeof(PlaceholderTextBoxControl),
         new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));

@@ -17,6 +17,7 @@
                Background="{Binding BackgroundColorValue, RelativeSource={RelativeSource AncestorType={x:Type local:PlaceholderTextBoxControl}}}"
                Panel.ZIndex="0"
                VerticalContentAlignment="Center"
+               Style="{Binding LabelStyle, RelativeSource={RelativeSource AncestorType={x:Type local:PlaceholderTextBoxControl}}}"
                 />
 
 
@@ -32,6 +33,7 @@
                  VerticalAlignment="Center"
                  GotFocus="TextBox_GotFocus"
                  LostFocus="TextBox_LostFocus"
+                 
                  Panel.ZIndex="1"/>
     </Grid>
 

@@ -45,8 +45,8 @@
            Text="{Binding Source={x:Static properties:Resources.global_email_phone_number}, StringFormat='{}{0}:'}" />
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                 PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
-                Margin="76,245,27,517" Width="449"  
-                Style="{StaticResource PrimaryPlaceHolderTextBox}"                          
+                Margin="76,238,27,509" Width="449"  
+                Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                 />
             <TextBlock HorizontalAlignment="Left" 

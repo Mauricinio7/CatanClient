@@ -32,7 +32,7 @@ namespace CatanClient.ViewModels
 
         public MainWindowsViewModel()
         {
-            CurrentView = new Views.VerifyAccountView();
+            CurrentView = new Views.LoginView();
 
             ShowRegisterViewCommand = new RelayCommand(async () => await ShowRegisterView());
             ShowLoginViewCommand = new RelayCommand(async () => await ShowLoginView());

@@ -2,12 +2,70 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:CatanClient.Controls">
 
-    <SolidColorBrush x:Key="PrimaryColor" Color="#3f015c"/>
-    <SolidColorBrush x:Key="SecondaryColor" Color="#808511ba"/>
+    <SolidColorBrush x:Key="PrimaryColor" Color="#ff8511ba"/>
+    <SolidColorBrush x:Key="SecondaryColor" Color="#cc3f015c"/> 
     <FontFamily x:Key="PrimaryFontFamily">pack://application:,,,/Resources/Fonts/#Press Start 2P</FontFamily>
 
+    <Style x:Key="NeonLabelStyle" TargetType="Label">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border x:Name="BorderElement"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="20" 
+                        Padding="{TemplateBinding Padding}">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Magenta" BlurRadius="25" ShadowDepth="5"/>
+                        </Border.Effect>
+
+                        <ContentPresenter HorizontalAlignment="Left"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BorderElement"
+                                                                  Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[0].Color">
+                                        <EasingColorKeyFrame KeyTime="0:0:0" Value="Magenta"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="Gold"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:6" Value="Cyan"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:9" Value="Magenta"/>
+                                    </ColorAnimationUsingKeyFrames>
+                                    
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BorderElement"
+                                                                  Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[1].Color">
+                                        <EasingColorKeyFrame KeyTime="0:0:0" Value="Gold"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="Cyan"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:6" Value="Magenta"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:9" Value="Gold"/>
+                                    </ColorAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="Magenta" Offset="0.0"/>
+                    <GradientStop Color="Cyan" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#3f015c" />
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="FontFamily" Value="{StaticResource PrimaryFontFamily}" />
@@ -21,8 +79,8 @@
     </Style>
 
     <Style x:Key="PrimaryShowPasswordPlaceholder" TargetType="{x:Type controls:ShowPasswordPlaceholderControl}">
-        <Setter Property="ControlBackground" Value="{StaticResource PrimaryColor}" />
-        <Setter Property="PromptForeground" Value="LightGray" />
+        <Setter Property="BackgroundColorValue" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="PlaceholderForegroundColorValue" Value="LightGray" />
         <Setter Property="WritingForegroundColorValue" Value="White" />
         <Setter Property="CheckBoxMargin" Value="5,90,0,0" />
     </Style>
@@ -32,6 +90,40 @@
         <Setter Property="FontWeight" Value="DemiBold" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontFamily" Value="{StaticResource PrimaryFontFamily}" />
+    </Style>
+
+    <Style x:Key="SynthwaveTextBoxStyle" TargetType="{x:Type controls:PlaceholderTextBoxControl}">
+        <Setter Property="WritingForegroundColorValue" Value="White" />
+        <Setter Property="PlaceholderForegroundColorValue" Value="LightGray" />
+        <Setter Property="PaddingValue" Value="10,5,10,5" />
+        <Setter Property="FontSizeValue" Value="16" />
+        <Setter Property="BorderThicknessValue" Value="0" />
+        <Setter Property="LabelStyle" Value="{StaticResource NeonLabelStyle}" />
+        <Setter Property="BackgroundColorValue">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#A200A1" Offset="0.0"/>
+                    <GradientStop Color="#32c9c9" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SynthwavePasswordBoxStyle" TargetType="{x:Type controls:ShowPasswordPlaceholderControl}">
+        <Setter Property="WritingForegroundColorValue" Value="White" />
+        <Setter Property="PlaceholderForegroundColorValue" Value="LightGray" />
+        <Setter Property="PaddingValue" Value="10,5,10,5" />
+        <Setter Property="FontSizeValue" Value="16" />
+        <Setter Property="BorderThicknessValue" Value="0" />
+        <Setter Property="LabelStyle" Value="{StaticResource NeonLabelStyle}" />
+        <Setter Property="BackgroundColorValue">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#A200A1" Offset="0.0"/>
+                    <GradientStop Color="#32c9c9" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 
