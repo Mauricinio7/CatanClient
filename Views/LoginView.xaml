@@ -68,7 +68,7 @@
                 VerticalAlignment="Top" 
                 Height="56" 
                 Width="162"
-                Style="{StaticResource PrimaryButtonStyle}"
+                Style="{StaticResource NeonButtonStyle}"
                 Command="{Binding LoginCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 />

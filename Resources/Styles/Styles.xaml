@@ -127,6 +127,91 @@
         </Setter>
     </Style>
 
+    <Style x:Key="NeonButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#1A0A0A"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/Resources/Fonts/#Press Start 2P"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="BorderThickness" Value="5"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="BorderElement"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="20"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}">
+
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="Magenta" Offset="0.0"/>
+                                    <GradientStop Color="Cyan" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5" />
+                            </Border.Effect>
+
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard Name="ColorAnimationStoryboard">
+                                <Storyboard RepeatBehavior="Forever">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BorderElement"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[0].Color">
+                                        <EasingColorKeyFrame KeyTime="0:0:0" Value="Magenta"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="#6A0DAD"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:6" Value="Cyan"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:9" Value="Magenta"/>
+                                    </ColorAnimationUsingKeyFrames>
+
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BorderElement"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[1].Color">
+                                        <EasingColorKeyFrame KeyTime="0:0:0" Value="#6A0DAD"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="Cyan"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:6" Value="Magenta"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:9" Value="#6A0DAD" />
+                                    </ColorAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <PauseStoryboard BeginStoryboardName="ColorAnimationStoryboard"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <ResumeStoryboard BeginStoryboardName="ColorAnimationStoryboard"/>
+                            </Trigger.ExitActions>
+                            <Setter TargetName="BorderElement" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Cyan" BlurRadius="25" ShadowDepth="0" Opacity="0.8" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="Magenta" Offset="0.0"/>
+                    <GradientStop Color="Cyan" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 </ResourceDictionary>
