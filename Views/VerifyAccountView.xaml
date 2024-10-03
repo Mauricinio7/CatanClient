@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="CatanClient.Views.VerifyAccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatanClient.Views"
+             xmlns:controls="clr-namespace:CatanClient.Controls"
+             xmlns:properties="clr-namespace:CatanClient.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="900">
+
+    <Viewbox Stretch="Uniform" Margin="128,70,128,70">
+        <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0.5,0.5" Width="1440" Height="900" x:Name="animatedGrid">
+
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <StaticResource ResourceKey="SlideInFromRightAnimation"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <Grid.RenderTransform>
+                <TranslateTransform X="2000" />
+            </Grid.RenderTransform>
+
+            <Image Source="pack://application:,,,/Resources/Images/register_frame.png"  
+       Margin="-29,-53,-29,-68" 
+       RenderTransformOrigin="0.5,0.5"
+       RenderOptions.BitmapScalingMode="NearestNeighbor"
+       SnapsToDevicePixels="True"
+       UseLayoutRounding="True">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="0.93"/>
+                        <ScaleTransform ScaleX="1.52"/>
+                        <SkewTransform AngleY="0.362" AngleX="-0.13"/>
+                        <RotateTransform Angle="-0.57"/>
+                        <TranslateTransform Y="-1.632" X="-2.664"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+            <TextBlock
+              Style="{StaticResource PrimaryTextBlockStyle}"  
+              Text="{x:Static properties:Resources.dialog_code_sent_message}" 
+              TextWrapping="Wrap"
+              Margin="99,148,0,0"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left"
+              LineHeight="50"
+              FontSize="28"
+              LineStackingStrategy="BlockLineHeight" Width="1232" Height="214"
+            />
+
+
+            <controls:PlaceholderTextBoxControl 
+                PlaceholderText="Ingrese su código"
+                Style="{StaticResource PrimaryPlaceHolderTextBox}"                          
+                HorizontalAlignment="Left" Height="111" 
+                VerticalAlignment="Top" Width="1232" Margin="99,460,0,0" 
+                FontSizeValue="28"
+                />
+
+            <Button
+                
+                Content="{x:Static properties:Resources.button_confirm}"
+                Style="{StaticResource PrimaryButtonStyle}"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="208" Height="80" 
+                Margin="834,743,0,0"
+                FontSize="20"
+                FontWeight="Bold"
+                
+                
+                />
+            <Button
+                
+                Content="{x:Static properties:Resources.button_cancel}"
+                Style="{StaticResource PrimaryButtonStyle}"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="208" Height="80" 
+                Margin="1123,743,0,0"
+                FontSize="18"
+                Command="{Binding DataContext.OcultVerifyAccountViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                />
+            <Button
+                Content="{x:Static properties:Resources.button_resend}"
+                Style="{StaticResource PrimaryButtonStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="99,734,0,0"                  
+                FontSize="18"
+                FontWeight="Bold"
+                Padding="20,30"              
+                MinWidth="100"
+                MinHeight="80" Height="79"
+                />
+
+
+        </Grid>
+
+
+    </Viewbox>
+
+</UserControl>

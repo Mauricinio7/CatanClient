@@ -1,4 +1,5 @@
 ﻿using CatanClient.Commands;
+using CatanClient.UIHelpers;
 using CatanClient.Views;
 using System;
 using System.Collections.Generic;
@@ -26,13 +27,19 @@ namespace CatanClient.ViewModels
         
         public ICommand ShowRegisterViewCommand { get; }
         public ICommand ShowLoginViewCommand { get; }
+        public ICommand ShowVerifyAccountViewCommand { get; }
+        public ICommand OcultVerifyAccountViewCommand { get; }
 
         public MainWindowsViewModel()
         {
-            CurrentView = new Views.LoginView();
+            CurrentView = new Views.VerifyAccountView();
 
             ShowRegisterViewCommand = new RelayCommand(async () => await ShowRegisterView());
             ShowLoginViewCommand = new RelayCommand(async () => await ShowLoginView());
+            ShowVerifyAccountViewCommand = new RelayCommand(async () => await ShowVerifyAccountView());
+            OcultVerifyAccountViewCommand = new RelayCommand(async () => await OcultVerifyAccountView());
+
+            Mediator.Register("ShowVerifyAccountView", args => ShowVerifyAccountViewCommand.Execute(null));
         }
 
 
@@ -66,6 +73,40 @@ namespace CatanClient.ViewModels
                   
             }
             CurrentView = new Views.LoginView();
+        }
+
+        private async Task OcultVerifyAccountView()
+        {
+            if (_currentView is Views.VerifyAccountView verifyAccountView)
+            {
+                var animatedGrid = verifyAccountView.FindName("animatedGrid") as Grid;
+                if (animatedGrid != null)
+                {
+                    var storyboard = (Storyboard)verifyAccountView.FindResource("SlideOutFromRightAnimation");
+                    storyboard.Begin(animatedGrid);
+                    await Task.Delay(820);
+                }
+
+
+            }
+            CurrentView = new Views.RegisterView();
+        }
+
+        private async Task ShowVerifyAccountView()
+        {
+            if (_currentView is Views.RegisterView registerView)
+            {
+                var animatedGrid = registerView.FindName("animatedGrid") as Grid;
+                if (animatedGrid != null)
+                {
+                    var storyboard = (Storyboard)registerView.FindResource("SlideOutFromTopAnimation");
+                    storyboard.Begin(animatedGrid);
+                    await Task.Delay(900);
+                }
+
+
+            }
+            CurrentView = new Views.VerifyAccountView();
         }
 
     }

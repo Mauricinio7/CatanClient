@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using CatanClient.Views;
+using System.Windows.Media.Animation;
 
 namespace CatanClient.ViewModels
 {
@@ -39,25 +41,65 @@ namespace CatanClient.ViewModels
 
         public LoginViewModel()
         {
-            // Inicializar el comando
             LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
-        // Método ejecutado al presionar el botón de login
+
+        //TODO Exeptions and quit all hard code
         private void ExecuteLogin(object parameter)
         {
-            if (string.IsNullOrWhiteSpace(Username))
+            if (!string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password))
             {
-                MessageBox.Show("No se ha ingresado ningún nombre.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //TODO quit hardcode
+                if (isValidUser())
+                {
+                    MessageBoxResult result = MessageBox.Show($"Bienvenido, {Username}!\nContraseña: {Password}", "Login Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        if (parameter is Window ventanaActual)
+                        {
+                            ventanaActual.IsEnabled = false;
+                            Storyboard fadeOutStoryboard = ventanaActual.FindResource("FadeOutAnimation") as Storyboard;
+                            if (fadeOutStoryboard != null)
+                            {
+                                fadeOutStoryboard.Completed += (s, e) =>
+                                {
+                                    //TODO  
+                                    
+                                };
+
+                                fadeOutStoryboard.Begin(ventanaActual);
+                            }
+                        }
+                    }
+                }
             }
-            else if (string.IsNullOrWhiteSpace(Password))
+            //TODO invalid valors exception
+            else if (!isValidEmail() || !isValidPassword())
             {
-                MessageBox.Show("No se ha ingresado ninguna contraseña.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Se han ingresado datos invalidos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                MessageBox.Show($"Bienvenido, {Username}!\nContraseña: {Password}", "Login Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+                //TODO null valors exception
+                MessageBox.Show("Se han dejado campos vacios.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        public bool isValidEmail()
+        {
+            return true;
+        }
+        public bool isValidPassword()
+        {
+            return true;
+        }
+
+        public bool isValidUser()
+        {
+            //TODO validate user with the server
+            return true;
         }
     }
 }

@@ -7,23 +7,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using CatanClient.AccountService;
+using System.ServiceModel;
+using System.Text.RegularExpressions;
+using CatanClient.UIHelpers;
 
 namespace CatanClient.ViewModels
 {
     internal class RegisterViewModel : ViewModelBase
     {
-        private string _email;
+        private string _contactInfo;
         private string _password;
         private string _username;
 
+        private string email;
+        private string phoneNumber;
 
-        public string Email
+        public string ContactInfo
         {
-            get { return _email; }
+            get { return _contactInfo; }
             set
             {
-                _email = value;
-                OnPropertyChanged(nameof(Email));
+                _contactInfo = value;
+                OnPropertyChanged(nameof(ContactInfo));
             }
         }
 
@@ -51,56 +57,133 @@ namespace CatanClient.ViewModels
 
         public RegisterViewModel()
         {
-            RegisterCommand = new RelayCommand(RegisterUser);
+            RegisterCommand = new RelayCommand(async () => await RegisterUserAsync());
         }
 
-        private void RegisterUser()
+        private async Task RegisterUserAsync()
         {
-            //TODO Validate data and enter it into the database
-
-            // Validar si algún campo está vacío
-            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(Email))
+            if (IsNotNullOrEmptyAccound(Username, ContactInfo, Password))
             {
-                MessageBox.Show("Todos los campos deben estar llenos.", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                if (IsValidAccountName(Username) && IsValidAccountPassword(Password) &&
+                    (IsValidAccountEmail(ContactInfo) || IsValidAccountPhoneNumber(ContactInfo)))
+                {
+                    email = IsValidAccountEmail(ContactInfo) ? ContactInfo : "";
+                    phoneNumber = IsValidAccountPhoneNumber(ContactInfo) ? ContactInfo : "";
+                }
+                else
+                {
+                    MessageBox.Show("Se han introducido datos inválidos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Se han dejado campos vacíos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            // Validar el correo
-            if (!Email.Contains("@") || !Email.Contains("."))
-            {
-                MessageBox.Show("El correo debe contener una arroba (@) y un punto (.)", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            Mediator.Notify("ShowVerifyAccountView");
 
-            // Validar la contraseña (al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial)
-            if (Password.Length < 8)
-            {
-                MessageBox.Show("La contraseña debe tener al menos 8 caracteres.", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            //bool isCreated = await ConnectToServerAsync();
 
-            bool hasUpperChar = Password.Any(char.IsUpper);
-            bool hasLowerChar = Password.Any(char.IsLower);
-            bool hasDigit = Password.Any(char.IsDigit);
-            bool hasSpecialChar = Password.Any(ch => !char.IsLetterOrDigit(ch));
-
-            if (!hasUpperChar || !hasLowerChar || !hasDigit || !hasSpecialChar)
-            {
-                MessageBox.Show("La contraseña debe tener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.", "Error de Registro", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (serverConexion())
-            {
-                // Si todo es correcto, muestra el mensaje de bienvenida
-                MessageBox.Show($"Bienvenido, {Username}!\nContraseña: {Password} \nCorreo: {Email}", "Registro Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            //if (isCreated)
+            //{
+            //   MessageBox.Show($"Bienvenido, {Username}!\nTu cuenta ha sido creada correctamente.", "Registro Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+            //}
         }
-        
-        public bool serverConexion()
+
+        private async Task<bool> ConnectToServerAsync()
         {
-            //TODO server conexion
+            try
+            {
+                var binding = new NetTcpBinding("NetTcpBinding_IAccountEndPoint");
+                var endpoint = new EndpointAddress("net.tcp://192.168.169.207:8081/AccountService");
+
+                var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+                var client = channelFactory.CreateChannel();
+
+                var newAccount = new AccountDto
+                {
+                    Name = Username,
+                    Email = email,
+                    PhoneNumber = phoneNumber, 
+                    Password = Password,
+                    PicturePath = ""
+                };
+
+                await client.CreateAccountAsync(newAccount);
+
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+
+                return true;
+            }
+            catch (FaultException ex)
+            {
+                MessageBox.Show($"Error del servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show($"Error de comunicación: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show($"Error de tiempo de espera: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return false;
+        }
+
+        public bool IsNotNullOrEmptyAccound(string name, string ContactInfo, string password)
+        {
+            return (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(ContactInfo) && !string.IsNullOrEmpty(password));
+        }
+
+        public bool IsValidAccountName(string name)
+        {
+            string nameRegex = "^[a-zA-Z0-9 ]+$";
+
+            return Regex.IsMatch(name, nameRegex);
+        }
+
+        public bool IsValidAccountEmail(string email)
+        {
+            string emailRegex = @"^[a-zA-Z0-9._-]+(?<!\.)@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+            if (!Regex.IsMatch(email, emailRegex)) return false;
+
+            string[] parts = email.Split('@');
+
+            if (parts.Length != 2) return false;
+
+            string localPart = parts[0];
+            string domainPart = parts[1];
+
+            if (Regex.IsMatch(localPart, "\\.\\.+") || Regex.IsMatch(domainPart, "\\.\\.+")) return false;
+
+            if (localPart.Contains("..")) return false;
+
+            if (domainPart.StartsWith("-") || domainPart.EndsWith("-") ||
+                domainPart.StartsWith(".") || domainPart.EndsWith(".")) return false;
+
             return true;
         }
+
+
+        public bool IsValidAccountPhoneNumber(string phoneNumber)
+        {
+            string phoneNumberRegex = "^[0-9]+$";
+
+            return Regex.IsMatch((string)phoneNumber, phoneNumberRegex);
+        }
+
+        public bool IsValidAccountPassword(string password)
+        {
+            string passwordRegex = "^[a-zA-Z0-9_]+$";
+            return Regex.IsMatch(password, passwordRegex);
+        }
+
     }
 }

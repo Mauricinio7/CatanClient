@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CatanClient
+namespace CatanClient.Views
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para VerifyAccountView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class VerifyAccountView : UserControl
     {
-        public MainWindow()
+        public VerifyAccountView()
         {
             InitializeComponent();
         }

@@ -61,11 +61,11 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Resend.
+        ///   Busca una cadena traducida similar a Abort.
         /// </summary>
-        public static string btn_resend {
+        public static string button_abort {
             get {
-                return ResourceManager.GetString("btn_resend", resourceCulture);
+                return ResourceManager.GetString("button_abort", resourceCulture);
             }
         }
         
@@ -84,6 +84,15 @@ namespace CatanClient.Properties {
         public static string button_back {
             get {
                 return ResourceManager.GetString("button_back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string button_cancel {
+            get {
+                return ResourceManager.GetString("button_cancel", resourceCulture);
             }
         }
         
@@ -214,6 +223,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Resend.
+        /// </summary>
+        public static string button_resend {
+            get {
+                return ResourceManager.GetString("button_resend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Save.
         /// </summary>
         public static string button_save {
@@ -255,24 +273,6 @@ namespace CatanClient.Properties {
         public static string button_view_profile {
             get {
                 return ResourceManager.GetString("button_view_profile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Abort.
-        /// </summary>
-        public static string buttton_abort {
-            get {
-                return ResourceManager.GetString("buttton_abort", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Cancel.
-        /// </summary>
-        public static string buttton_cancel {
-            get {
-                return ResourceManager.GetString("buttton_cancel", resourceCulture);
             }
         }
         

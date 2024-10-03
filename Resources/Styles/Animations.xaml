@@ -21,4 +21,24 @@
                      From="0" To="-1200" Duration="0:0:1"/>
     </Storyboard>
 
+    <Storyboard x:Key="SlideInFromRightAnimation" >
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                         From="2000" To="0" Duration="0:0:1"/>
+    </Storyboard>
+
+    <Storyboard x:Key="SlideOutFromRightAnimation" >
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                     From="0" To="2000" Duration="0:0:1"/>
+    </Storyboard>
+
+    <Storyboard x:Key="SlideInFromLeftAnimation" >
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                     From="-2000" To="0" Duration="0:0:1"/>
+    </Storyboard>
+
+    <Storyboard x:Key="SlideOutFromLeftAnimation" >
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                 From="0" To="-2000" Duration="0:0:1"/>
+    </Storyboard>
+
 </ResourceDictionary>

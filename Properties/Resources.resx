@@ -231,7 +231,7 @@
   <data name="dialog_empty_fields_message" xml:space="preserve">
     <value>Required fields have been left empty</value>
   </data>
-  <data name="buttton_cancel" xml:space="preserve">
+  <data name="button_cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="dialog_database_load_exception_message" xml:space="preserve">
@@ -399,7 +399,7 @@
   <data name="button_confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
-  <data name="buttton_abort" xml:space="preserve">
+  <data name="button_abort" xml:space="preserve">
     <value>Abort</value>
   </data>
   <data name="dialog_succes_kick_player_message" xml:space="preserve">
@@ -432,7 +432,7 @@
   <data name="label_enter_verification_code" xml:space="preserve">
     <value>Enter your verification code</value>
   </data>
-  <data name="btn_resend" xml:space="preserve">
+  <data name="button_resend" xml:space="preserve">
     <value>Resend</value>
   </data>
   <data name="window_recover_account" xml:space="preserve">

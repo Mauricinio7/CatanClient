@@ -59,7 +59,7 @@
             PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
             Margin="78,196,88,483" 
             Style="{StaticResource PrimaryPlaceHolderTextBox}"
-            Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ContactInfo, UpdateSourceTrigger=PropertyChanged}"
             />
             <TextBlock HorizontalAlignment="Left" 
             Margin="82,295,0,0" 
