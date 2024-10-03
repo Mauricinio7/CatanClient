@@ -68,11 +68,11 @@
             Text="{Binding Source={x:Static properties:Resources.global_password}, StringFormat='{}{0}:'}" />
             <controls:ShowPasswordPlaceholderControl
             Margin="78,306,88,306"
-            TextBoxWidth="670"
+            TextBoxWidth="630"
             TextBoxHeight="55"
-            Style="{StaticResource PrimaryShowPasswordPlaceholder}"
+            Style="{StaticResource SynthwavePasswordBoxStyle}"
             PlaceholderText="{x:Static properties:Resources.global_password}"
-            CheckBoxMargin="5,100,0,0"
+            CheckBoxMargin="5,110,0,0"
             Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
             />
 

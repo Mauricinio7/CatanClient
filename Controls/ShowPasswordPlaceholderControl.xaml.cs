@@ -30,7 +30,16 @@ namespace CatanClient.Controls
             PasswordBox.SetBinding(HeightProperty, heightBinding);
         }
 
-     public static readonly DependencyProperty PasswordProperty =
+        public static readonly DependencyProperty LabelStyleProperty =
+            DependencyProperty.Register("LabelStyle", typeof(Style), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(null));
+
+        public Style LabelStyle
+        {
+            get { return (Style)GetValue(LabelStyleProperty); }
+            set { SetValue(LabelStyleProperty, value); }
+        }
+
+        public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.Register("Password", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(string.Empty));
 
         public string Password

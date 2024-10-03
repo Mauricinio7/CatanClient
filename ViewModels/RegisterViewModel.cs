@@ -69,6 +69,9 @@ namespace CatanClient.ViewModels
                 {
                     email = IsValidAccountEmail(ContactInfo) ? ContactInfo : "";
                     phoneNumber = IsValidAccountPhoneNumber(ContactInfo) ? ContactInfo : "";
+
+                    //TODO conecction
+                    Mediator.Notify("ShowVerifyAccountView");
                 }
                 else
                 {
@@ -80,7 +83,7 @@ namespace CatanClient.ViewModels
                 MessageBox.Show("Se han dejado campos vacíos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            Mediator.Notify("ShowVerifyAccountView");
+            
 
             //bool isCreated = await ConnectToServerAsync();
 

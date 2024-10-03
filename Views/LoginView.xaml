@@ -39,26 +39,26 @@
 
             <Label Content="{x:Static properties:Resources.global_log_in}"  HorizontalAlignment="Center" Margin="0,83,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="White" FontFamily="{StaticResource PrimaryFontFamily}" />
             <TextBlock HorizontalAlignment="Left" 
-           Margin="76,191,0,0" 
+           Margin="76,180,0,0" 
            VerticalAlignment="Top" 
            Style="{StaticResource PrimaryTextBlockStyle}"
            Text="{Binding Source={x:Static properties:Resources.global_email_phone_number}, StringFormat='{}{0}:'}" />
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                 PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
-                Margin="76,238,27,509" Width="449"  
+                Margin="70,215,33,516" Width="449"  
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                 />
             <TextBlock HorizontalAlignment="Left" 
-                Margin="76,315,0,0" 
+                Margin="76,317,0,0" 
                 VerticalAlignment="Top" 
                 Style="{StaticResource PrimaryTextBlockStyle}"
                 Text="{Binding Source={x:Static properties:Resources.global_password}, StringFormat='{}{0}:'}" />
             <controls:ShowPasswordPlaceholderControl
-                Margin="76,334,23,365"
+                Margin="70,323,29,350"
                 TextBoxWidth="449"
-                TextBoxHeight="44"
-                Style="{StaticResource PrimaryShowPasswordPlaceholder}"
+                TextBoxHeight="55"
+                Style="{StaticResource SynthwavePasswordBoxStyle}"
                 PlaceholderText="{x:Static properties:Resources.global_password}"
                 Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                 />
@@ -75,9 +75,9 @@
             <Button Content="{x:Static properties:Resources.button_help}" HorizontalAlignment="Left" Margin="381,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
                 Style="{StaticResource PrimaryButtonStyle}"
                     FontSize="7"/>
-            <Button Content="{x:Static properties:Resources.button_play_as_gest}" HorizontalAlignment="Left" Margin="76,470,0,0" VerticalAlignment="Top" Height="64" Width="254"
+            <Button Content="{x:Static properties:Resources.button_play_as_gest}" HorizontalAlignment="Left" Margin="76,469,0,0" VerticalAlignment="Top" Height="64" Width="254"
                 Style="{StaticResource PrimaryButtonStyle}"/>
-            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="355,470,0,0" VerticalAlignment="Top" Height="64" Width="170" 
+            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="353,469,0,0" VerticalAlignment="Top" Height="64" Width="170" 
             Style="{StaticResource PrimaryButtonStyle}"
             Command="{Binding DataContext.ShowRegisterViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                     />

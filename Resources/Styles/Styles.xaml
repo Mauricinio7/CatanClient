@@ -116,6 +116,7 @@
         <Setter Property="FontSizeValue" Value="16" />
         <Setter Property="BorderThicknessValue" Value="0" />
         <Setter Property="LabelStyle" Value="{StaticResource NeonLabelStyle}" />
+        <Setter Property="CheckBoxMargin" Value="5,100,0,0" />
         <Setter Property="BackgroundColorValue">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
