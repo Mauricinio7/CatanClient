@@ -25,6 +25,9 @@ namespace CatanClient.AccountService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
         private string NameField;
         
         private string PasswordField;
@@ -34,6 +37,11 @@ namespace CatanClient.AccountService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PicturePathField;
+        
+        private string PreferredLanguageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TokenField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -54,6 +62,19 @@ namespace CatanClient.AccountService {
                 if ((object.ReferenceEquals(this.EmailField, value) != true)) {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -110,6 +131,94 @@ namespace CatanClient.AccountService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string PreferredLanguage {
+            get {
+                return this.PreferredLanguageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
+                    this.PreferredLanguageField = value;
+                    this.RaisePropertyChanged("PreferredLanguage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Token {
+            get {
+                return this.TokenField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TokenField, value) != true)) {
+                    this.TokenField = value;
+                    this.RaisePropertyChanged("Token");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.HelperDto" +
+        "s")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageResponseField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MessageResponse {
+            get {
+                return this.MessageResponseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageResponseField, value) != true)) {
+                    this.MessageResponseField = value;
+                    this.RaisePropertyChanged("MessageResponse");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -125,10 +234,10 @@ namespace CatanClient.AccountService {
     public interface IAccountEndPoint {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/CreateAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/CreateAccountResponse")]
-        void CreateAccount(CatanClient.AccountService.AccountDto newAccount);
+        CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto newAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/CreateAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/CreateAccountResponse")]
-        System.Threading.Tasks.Task CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount);
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -158,11 +267,11 @@ namespace CatanClient.AccountService {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateAccount(CatanClient.AccountService.AccountDto newAccount) {
-            base.Channel.CreateAccount(newAccount);
+        public CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto newAccount) {
+            return base.Channel.CreateAccount(newAccount);
         }
         
-        public System.Threading.Tasks.Task CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount) {
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount) {
             return base.Channel.CreateAccountAsync(newAccount);
         }
     }

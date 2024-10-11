@@ -72,13 +72,15 @@
                 Command="{Binding LoginCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 />
-            <Button Content="{x:Static properties:Resources.button_help}" HorizontalAlignment="Left" Margin="381,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
-                Style="{StaticResource PrimaryButtonStyle}"
+            <Button Content="{x:Static properties:Resources.button_help}" HorizontalAlignment="Left" Margin="375,617,0,0" VerticalAlignment="Top" Height="51" Width="144"
+                Style="{StaticResource NeonButtonStyle}"
                     FontSize="7"/>
             <Button Content="{x:Static properties:Resources.button_play_as_gest}" HorizontalAlignment="Left" Margin="76,469,0,0" VerticalAlignment="Top" Height="64" Width="254"
-                Style="{StaticResource PrimaryButtonStyle}"/>
-            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="353,469,0,0" VerticalAlignment="Top" Height="64" Width="170" 
-            Style="{StaticResource PrimaryButtonStyle}"
+                Style="{StaticResource NeonButtonStyle}"
+                    FontSize="11"/>
+            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="349,469,0,0" VerticalAlignment="Top" Height="64" Width="170" 
+            Style="{StaticResource NeonButtonStyle}"
+                    FontSize="11"
             Command="{Binding DataContext.ShowRegisterViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                     />
 

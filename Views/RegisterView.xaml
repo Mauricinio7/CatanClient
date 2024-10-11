@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.DataContext>
-        <viewmodels:RegisterViewModel />
+        <viewmodels:RegisterViewModel/>
     </UserControl.DataContext>
 
 
@@ -58,7 +58,7 @@
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
             PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
             Margin="78,196,88,483" 
-            Style="{StaticResource PrimaryPlaceHolderTextBox}"
+            Style="{StaticResource SynthwaveTextBoxStyle}"
             Text="{Binding ContactInfo, UpdateSourceTrigger=PropertyChanged}"
             />
             <TextBlock HorizontalAlignment="Left" 
@@ -84,17 +84,17 @@
             <controls:PlaceholderTextBoxControl x:Name="TextBoxUsername"
                                                 PlaceholderText="{x:Static properties:Resources.global_username}"
                                                 Margin="78,512,88,167"
-                                                Style="{StaticResource PrimaryPlaceHolderTextBox}"
+                                                Style="{StaticResource SynthwaveTextBoxStyle}"
                                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                                                 />
 
-            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="44,632,0,0" VerticalAlignment="Top" Height="47" Width="167"
-                Style="{StaticResource PrimaryButtonStyle}"
+            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="46,628,0,0" VerticalAlignment="Top" Height="56" Width="167"
+                Style="{StaticResource NeonButtonStyle}"
                 Command="{Binding RegisterCommand}"
                 />
 
-            <Button Content="{x:Static properties:Resources.button_back}" HorizontalAlignment="Left" Margin="588,632,0,0" VerticalAlignment="Top" Height="47" Width="167"
-                    Style="{StaticResource PrimaryButtonStyle}"
+            <Button Content="{x:Static properties:Resources.button_back}" HorizontalAlignment="Left" Margin="571,628,0,0" VerticalAlignment="Top" Height="56" Width="167"
+                    Style="{StaticResource NeonButtonStyle}"
                     Command="{Binding DataContext.ShowLoginViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                 />
 

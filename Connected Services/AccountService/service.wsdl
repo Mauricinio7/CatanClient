@@ -15,6 +15,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.Account" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.HelperDtos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IAccountEndPoint_CreateAccount_InputMessage">
@@ -45,9 +46,9 @@
   </wsdl:binding>
   <wsdl:service name="AccountServiceEndPoint">
     <wsdl:port name="NetTcpBinding_IAccountEndPoint" binding="tns:NetTcpBinding_IAccountEndPoint">
-      <soap12:address location="net.tcp://192.168.169.207:8081/AccountService" />
+      <soap12:address location="net.tcp://localhost:8080/AccountService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.169.207:8081/AccountService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8080/AccountService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

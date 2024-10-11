@@ -58,7 +58,7 @@
 
             <controls:PlaceholderTextBoxControl 
                 PlaceholderText="Ingrese su código"
-                Style="{StaticResource PrimaryPlaceHolderTextBox}"                          
+                Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 HorizontalAlignment="Left" Height="111" 
                 VerticalAlignment="Top" Width="1232" Margin="99,460,0,0" 
                 FontSizeValue="28"
@@ -67,11 +67,11 @@
             <Button
                 
                 Content="{x:Static properties:Resources.button_confirm}"
-                Style="{StaticResource PrimaryButtonStyle}"
+                Style="{StaticResource NeonButtonStyle}"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Width="208" Height="80" 
-                Margin="834,743,0,0"
+                Width="208" Height="95" 
+                Margin="853,726,0,0"
                 FontSize="20"
                 FontWeight="Bold"
                 
@@ -80,25 +80,25 @@
             <Button
                 
                 Content="{x:Static properties:Resources.button_cancel}"
-                Style="{StaticResource PrimaryButtonStyle}"
+                Style="{StaticResource NeonButtonStyle}"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Width="208" Height="80" 
-                Margin="1123,743,0,0"
+                Width="208" Height="97" 
+                Margin="1123,726,0,0"
                 FontSize="18"
                 Command="{Binding DataContext.OcultVerifyAccountViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                 />
             <Button
                 Content="{x:Static properties:Resources.button_resend}"
-                Style="{StaticResource PrimaryButtonStyle}"
+                Style="{StaticResource NeonButtonStyle}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="99,734,0,0"                  
+                Margin="99,719,0,0"                  
                 FontSize="18"
                 FontWeight="Bold"
                 Padding="20,30"              
                 MinWidth="100"
-                MinHeight="80" Height="79"
+                MinHeight="80" Height="95"
                 />
 
 

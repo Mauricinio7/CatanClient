@@ -71,7 +71,14 @@ namespace CatanClient.ViewModels
                     phoneNumber = IsValidAccountPhoneNumber(ContactInfo) ? ContactInfo : "";
 
                     //TODO conecction
-                    Mediator.Notify("ShowVerifyAccountView");
+                    
+                    bool isCreated = await ConnectToServerAsync();
+
+                    if (isCreated)
+                    {
+                        MessageBox.Show($"Bienvenido, {Username}!\nTu cuenta ha sido creada correctamente.", "Registro Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Mediator.Notify("ShowVerifyAccountView");
+                    }
                 }
                 else
                 {
@@ -85,12 +92,7 @@ namespace CatanClient.ViewModels
 
             
 
-            //bool isCreated = await ConnectToServerAsync();
-
-            //if (isCreated)
-            //{
-            //   MessageBox.Show($"Bienvenido, {Username}!\nTu cuenta ha sido creada correctamente.", "Registro Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
-            //}
+            
         }
 
         private async Task<bool> ConnectToServerAsync()
@@ -98,10 +100,16 @@ namespace CatanClient.ViewModels
             try
             {
                 var binding = new NetTcpBinding("NetTcpBinding_IAccountEndPoint");
-                var endpoint = new EndpointAddress("net.tcp://192.168.169.207:8081/AccountService");
+                var endpoint = new EndpointAddress("net.tcp://192.168.236.207:8080/AccountService");
 
                 var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
                 var client = channelFactory.CreateChannel();
+
+                if (client == null)
+                {
+                    MessageBox.Show("No se pudo crear el canal de comunicación con el servidor.");
+                    return false;
+                }
 
                 var newAccount = new AccountDto
                 {
@@ -109,10 +117,18 @@ namespace CatanClient.ViewModels
                     Email = email,
                     PhoneNumber = phoneNumber, 
                     Password = Password,
-                    PicturePath = ""
+                    PicturePath = "",
+                    PreferredLanguage = "en"
                 };
 
-                await client.CreateAccountAsync(newAccount);
+                MessageBox.Show("Se creo usuario");
+
+                var op = await client.CreateAccountAsync(newAccount);
+
+
+
+                MessageBox.Show("Pasó");
+
 
                 ((IClientChannel)client).Close();
                 channelFactory.Close();

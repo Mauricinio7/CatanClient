@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="/YoF+hP2m24KpTKK9sHyOqEWON8dpnzDwxE+bbcRgFc=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="nEpYbG8kyUjRpbhrdG6QLqQwNHnR9lvdbCz92mZSdqE=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IAccountEndPoint">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IAccountEndPoint" contract="AccountService.IAccountEndPoint" bindingType="netTcpBinding" address="net.tcp://192.168.169.207:8081/AccountService" bindingConfiguration="NetTcpBinding_IAccountEndPoint">
+    <endpoint name="NetTcpBinding_IAccountEndPoint" contract="AccountService.IAccountEndPoint" bindingType="netTcpBinding" address="net.tcp://localhost:8080/AccountService" bindingConfiguration="NetTcpBinding_IAccountEndPoint">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.169.207:8081/AccountService</serializedValue>
+          <serializedValue>net.tcp://localhost:8080/AccountService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

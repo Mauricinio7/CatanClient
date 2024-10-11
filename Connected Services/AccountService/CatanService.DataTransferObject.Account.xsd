@@ -3,10 +3,13 @@
   <xs:complexType name="AccountDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element name="Name" nillable="true" type="xs:string" />
       <xs:element name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PicturePath" nillable="true" type="xs:string" />
+      <xs:element name="PreferredLanguage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AccountDto" nillable="true" type="tns:AccountDto" />

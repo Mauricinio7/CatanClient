@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="f206905d-620f-455e-8575-6fa8f8e9db29" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="0ecda879-1d69-4c1b-b40e-0958e879d4aa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://192.168.169.207:8081/AccountService/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://192.168.236.207:8080/AccountService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4b55656f-3bdc-4a71-b517-e43761f70692" SourceId="1" SourceUrl="net.tcp://192.168.169.207:8081/AccountService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="50ce8342-1f01-4810-a642-b5f987bef56a" SourceId="1" SourceUrl="net.tcp://192.168.169.207:8081/AccountService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c374ca4a-7ce1-4d0c-8066-ed73826d57c9" SourceId="1" SourceUrl="net.tcp://192.168.169.207:8081/AccountService/mex" />
-    <MetadataFile FileName="CatanService.DataTransferObject.Account.xsd" MetadataType="Schema" ID="f5a68787-2492-4baf-93c0-e5da1ed15f79" SourceId="1" SourceUrl="net.tcp://192.168.169.207:8081/AccountService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="76501af2-219f-473f-9609-ec0477c2eca7" SourceId="1" SourceUrl="net.tcp://192.168.236.207:8080/AccountService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="233ee662-a5ea-469b-94fc-f3e73e9e4408" SourceId="1" SourceUrl="net.tcp://192.168.236.207:8080/AccountService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b4e631ef-63bf-4ebf-a4e8-8822dc706148" SourceId="1" SourceUrl="net.tcp://192.168.236.207:8080/AccountService/mex" />
+    <MetadataFile FileName="CatanService.DataTransferObject.Account.xsd" MetadataType="Schema" ID="2b7d7a0e-6377-4f29-968f-f5048b07fe65" SourceId="1" SourceUrl="net.tcp://192.168.236.207:8080/AccountService/mex" />
+    <MetadataFile FileName="CatanService.DataTransferObject.HelperDtos.xsd" MetadataType="Schema" ID="e65cefd0-88d8-4453-a8b8-1372379b9f06" SourceId="1" SourceUrl="net.tcp://192.168.236.207:8080/AccountService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
