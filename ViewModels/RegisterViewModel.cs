@@ -76,8 +76,7 @@ namespace CatanClient.ViewModels
 
                     if (isCreated)
                     {
-                        MessageBox.Show($"Bienvenido, {Username}!\nTu cuenta ha sido creada correctamente.", "Registro Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Mediator.Notify("ShowVerifyAccountView");
+                        Mediator.Notify("ShowVerifyAccountView", null);
                     }
                 }
                 else
@@ -97,62 +96,44 @@ namespace CatanClient.ViewModels
 
         private async Task<bool> ConnectToServerAsync()
         {
+
+            var binding = new BasicHttpBinding();
+            var endpoint = new EndpointAddress("http://192.168.1.127:8181/AccountService");
+            var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            OperationResultDto result;
+
             try
             {
-                var binding = new NetTcpBinding("NetTcpBinding_IAccountEndPoint");
-                var endpoint = new EndpointAddress("net.tcp://192.168.236.207:8080/AccountService");
-
-                var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
-                var client = channelFactory.CreateChannel();
-
-                if (client == null)
-                {
-                    MessageBox.Show("No se pudo crear el canal de comunicación con el servidor.");
-                    return false;
-                }
-
-                var newAccount = new AccountDto
+                var accountDto = new AccountDto
                 {
                     Name = Username,
                     Email = email,
-                    PhoneNumber = phoneNumber, 
+                    PhoneNumber = phoneNumber,
                     Password = Password,
                     PicturePath = "",
                     PreferredLanguage = "en"
                 };
 
-                MessageBox.Show("Se creo usuario");
+                result = await client.CreateAccountAsync(accountDto);
+                MessageBox.Show(result.IsSuccess + " " + result.MessageResponse);
 
-                var op = await client.CreateAccountAsync(newAccount);
+                return result.IsSuccess;
 
-
-
-                MessageBox.Show("Pasó");
-
-
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-
-                return true;
-            }
-            catch (FaultException ex)
-            {
-                MessageBox.Show($"Error del servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (CommunicationException ex)
-            {
-                MessageBox.Show($"Error de comunicación: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (TimeoutException ex)
-            {
-                MessageBox.Show($"Error de tiempo de espera: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error: {ex.Message}");
+                return false;
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+                
+                
             }
 
-            return false;
         }
 
         public bool IsNotNullOrEmptyAccound(string name, string ContactInfo, string password)

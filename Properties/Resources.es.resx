@@ -483,4 +483,10 @@
   <data name="global_email_phone_number" xml:space="preserve">
     <value>Correo o teléfono</value>
   </data>
+  <data name="label_max_players" xml:space="preserve">
+    <value>Número máximo de jugadores</value>
+  </data>
+  <data name="label_room_name" xml:space="preserve">
+    <value>Nombre de la sala</value>
+  </data>
 </root>

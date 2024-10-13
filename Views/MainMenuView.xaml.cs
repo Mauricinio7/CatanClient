@@ -1,9 +1,6 @@
-﻿using CatanClient.AccountService;
-using CatanClient.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,14 +16,13 @@ using System.Windows.Shapes;
 namespace CatanClient.Views
 {
     /// <summary>
-    /// Lógica de interacción para VerifyAccountView.xaml
+    /// Lógica de interacción para MainMenuView.xaml
     /// </summary>
-    public partial class VerifyAccountView : UserControl
+    public partial class MainMenuView : UserControl
     {
-        public VerifyAccountView(AccountDto account)
+        public MainMenuView()
         {
             InitializeComponent();
-            this.DataContext = new VerifyAccountViewModel(account);
         }
     }
 }

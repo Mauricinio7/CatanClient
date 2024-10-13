@@ -18,7 +18,7 @@ namespace CatanClient.UIHelpers
             }
         }
 
-        public static void Notify(string token, object args = null)
+        public static void Notify(string token, object args)
         {
             if (_actions.ContainsKey(token))
             {

@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1700"
         WindowStartupLocation="CenterScreen"
+        Background="Black"
         >
 
     <Window.Resources>
@@ -22,17 +23,10 @@
     <Window.DataContext>
         <viewModels:MainWindowsViewModel />
     </Window.DataContext>
-    
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="Window.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}" />
-        </EventTrigger>
-    </Window.Triggers>
-
 
 
     <Grid>
-        <views:StartupBackground />
+        <ContentControl Content="{Binding BackgroundView}" />
         <ContentControl Content="{Binding CurrentView}" />
     </Grid>
 

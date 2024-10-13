@@ -69,7 +69,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\GameService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="UIHelpers\Mediator.cs" />
+    <Compile Include="ViewModels\CreateRoomViewModel.cs" />
+    <Compile Include="ViewModels\GameLobbyViewModel.cs" />
+    <Compile Include="ViewModels\VerifyAccountViewModel.cs" />
+    <Compile Include="Views\CreateRoomView.xaml.cs">
+      <DependentUpon>CreateRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameLobbyView.xaml.cs">
+      <DependentUpon>GameLobbyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenuBackgroundView.xaml.cs">
+      <DependentUpon>MainMenuBackgroundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VerifyAccountView.xaml.cs">
       <DependentUpon>VerifyAccountView.xaml</DependentUpon>
     </Compile>
@@ -89,7 +109,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CreateRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameLobbyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainMenuBackgroundView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,22 +203,32 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Connected Services\AccountService\AccountService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AccountService\AccountService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AccountService\AccountService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AccountService\AccountService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AccountService\AccountServiceEndPoint.wsdl" />
     <None Include="Connected Services\AccountService\CatanClient.AccountService.OperationResultDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\AccountService\CatanService.DataTransferObject.Account.xsd">
+    <None Include="Connected Services\AccountService\CatanClient.AccountService.OperationResultProfileDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GameService\GameService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountService\CatanService.DataTransferObject.HelperDtos.xsd">
+    <None Include="Connected Services\GameService\GameService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountService\service.wsdl" />
-    <None Include="Connected Services\AccountService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\AccountService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -194,7 +240,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Enums\" />
     <Folder Include="Resources\Sounds\" />
+    <Folder Include="Services\" />
     <Folder Include="Windows\" />
   </ItemGroup>
   <ItemGroup>
@@ -210,7 +258,29 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Gifs\SynthWaveAnimatedBackground2.gif" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
+    <WCFMetadataStorage Include="Connected Services\GameService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\GameService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountService\AccountService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\AccountService\configuration91.svcinfo" />

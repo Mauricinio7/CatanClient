@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatanClient.Views"
              xmlns:controls="clr-namespace:CatanClient.Controls"
-             xmlns:properties="clr-namespace:CatanClient.Properties"
+             xmlns:properties="clr-namespace:CatanClient.Properties" xmlns:viewmodels="clr-namespace:CatanClient.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:VerifyAccountViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
 
@@ -62,6 +62,7 @@
                 HorizontalAlignment="Left" Height="111" 
                 VerticalAlignment="Top" Width="1232" Margin="99,460,0,0" 
                 FontSizeValue="28"
+                Text="{Binding VerificationCode, UpdateSourceTrigger=PropertyChanged}"
                 />
 
             <Button
@@ -74,9 +75,9 @@
                 Margin="853,726,0,0"
                 FontSize="20"
                 FontWeight="Bold"
-                
-                
+                Command="{Binding VerifyAccountCommand}"
                 />
+            
             <Button
                 
                 Content="{x:Static properties:Resources.button_cancel}"

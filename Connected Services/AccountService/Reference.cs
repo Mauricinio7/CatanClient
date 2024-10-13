@@ -15,7 +15,7 @@ namespace CatanClient.AccountService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.Account")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
     public partial class AccountDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -169,9 +169,9 @@ namespace CatanClient.AccountService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.HelperDto" +
-        "s")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.AccountService.OperationResultProfileDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -229,6 +229,136 @@ namespace CatanClient.AccountService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultProfileDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultProfileDto : CatanClient.AccountService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.AccountService.ProfileDto ProfileDtoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.AccountService.AuthenticationStatus StatusField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.AccountService.ProfileDto ProfileDto {
+            get {
+                return this.ProfileDtoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileDtoField, value) != true)) {
+                    this.ProfileDtoField = value;
+                    this.RaisePropertyChanged("ProfileDto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.AccountService.AuthenticationStatus Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProfileDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class ProfileDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PicturePathField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PicturePath {
+            get {
+                return this.PicturePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PicturePathField, value) != true)) {
+                    this.PicturePathField = value;
+                    this.RaisePropertyChanged("PicturePath");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthenticationStatus", Namespace="http://schemas.datacontract.org/2004/07/")]
+    public enum AuthenticationStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Incorrect = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotVerified = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Verified = 2,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AccountService.IAccountEndPoint")]
     public interface IAccountEndPoint {
@@ -238,6 +368,18 @@ namespace CatanClient.AccountService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/CreateAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/CreateAccountResponse")]
         System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/VerifyAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/VerifyAccountResponse")]
+        CatanClient.AccountService.OperationResultDto VerifyAccount(CatanClient.AccountService.AccountDto accountRecord);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/VerifyAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/VerifyAccountResponse")]
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> VerifyAccountAsync(CatanClient.AccountService.AccountDto accountRecord);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/LogIn", ReplyAction="http://tempuri.org/IAccountEndPoint/LogInResponse")]
+        CatanClient.AccountService.OperationResultProfileDto LogIn(CatanClient.AccountService.AccountDto accountRecord);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/LogIn", ReplyAction="http://tempuri.org/IAccountEndPoint/LogInResponse")]
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountRecord);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -273,6 +415,22 @@ namespace CatanClient.AccountService {
         
         public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount) {
             return base.Channel.CreateAccountAsync(newAccount);
+        }
+        
+        public CatanClient.AccountService.OperationResultDto VerifyAccount(CatanClient.AccountService.AccountDto accountRecord) {
+            return base.Channel.VerifyAccount(accountRecord);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> VerifyAccountAsync(CatanClient.AccountService.AccountDto accountRecord) {
+            return base.Channel.VerifyAccountAsync(accountRecord);
+        }
+        
+        public CatanClient.AccountService.OperationResultProfileDto LogIn(CatanClient.AccountService.AccountDto accountRecord) {
+            return base.Channel.LogIn(accountRecord);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountRecord) {
+            return base.Channel.LogInAsync(accountRecord);
         }
     }
 }

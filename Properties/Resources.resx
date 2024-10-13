@@ -477,4 +477,10 @@
   <data name="global_email_phone_number" xml:space="preserve">
     <value>Email or Phone Number</value>
   </data>
+  <data name="label_max_players" xml:space="preserve">
+    <value>Maximum number of players</value>
+  </data>
+  <data name="label_room_name" xml:space="preserve">
+    <value>Name of the room</value>
+  </data>
 </root>

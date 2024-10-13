@@ -907,6 +907,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Maximum number of players.
+        /// </summary>
+        public static string label_max_players {
+            get {
+                return ResourceManager.GetString("label_max_players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Message Field.
         /// </summary>
         public static string label_message_field {
@@ -975,6 +984,15 @@ namespace CatanClient.Properties {
         public static string label_recover_password {
             get {
                 return ResourceManager.GetString("label_recover_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Name of the room.
+        /// </summary>
+        public static string label_room_name {
+            get {
+                return ResourceManager.GetString("label_room_name", resourceCulture);
             }
         }
         
