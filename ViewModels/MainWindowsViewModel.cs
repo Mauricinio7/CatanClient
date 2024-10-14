@@ -48,7 +48,6 @@ namespace CatanClient.ViewModels
         public ICommand ShowCreateRoomCommand { get; }
         public ICommand BackFromCreateRoomCommand { get; }
         public ICommand ShowGameLobbyCommand { get; }
-        public ICommand OcultVerifyAccountViewLoginCommand { get; }
 
         public MainWindowsViewModel()
         {
@@ -64,11 +63,11 @@ namespace CatanClient.ViewModels
             ShowCreateRoomCommand = new RelayCommand(async () => await ShowCreateRoom());
             BackFromCreateRoomCommand = new RelayCommand(async () => await BackFromCreateRoom());
             ShowGameLobbyCommand = new RelayCommand(async () => await ShowGameLobby());
-            OcultVerifyAccountViewLoginCommand = new RelayCommand(async () => await OcultVerifyAccountViewLogin());
 
             Mediator.Register("ShowVerifyAccountView", args => ShowVerifyAccountViewCommand.Execute(args));
             Mediator.Register("ShowMainMenuView", args => ShowMainMenuViewCommand.Execute(null));
             Mediator.Register("ShowMainMenuBackgroundView", args => ShowMainMenuBackgroundViewCommand.Execute(null));
+            Mediator.Register("OcultVerifyAccountView", args => OcultVerifyAccountViewCommand.Execute(null));
         }
 
 
@@ -120,23 +119,6 @@ namespace CatanClient.ViewModels
 
 
             }
-            CurrentView = new Views.RegisterView();
-        }
-
-        private async Task OcultVerifyAccountViewLogin()
-        {
-            if (_currentView is Views.VerifyAccountView verifyAccountView)
-            {
-                var animatedGrid = verifyAccountView.FindName("animatedGrid") as Grid;
-                if (animatedGrid != null)
-                {
-                    var storyboard = (Storyboard)verifyAccountView.FindResource("SlideOutFromRightAnimation");
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(820);
-                }
-
-
-            }
             CurrentView = new Views.LoginView();
         }
 
@@ -171,7 +153,6 @@ namespace CatanClient.ViewModels
                 }
             }
 
-            // Asignar el DataContext del VerifyAccountViewModel con el AccountDto
             var verifyAccountView = new Views.VerifyAccountView(accountDto);
 
             CurrentView = verifyAccountView;

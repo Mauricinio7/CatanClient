@@ -19,6 +19,7 @@ namespace CatanClient.ViewModels
         private string _contactInfo;
         private string _password;
         private string _username;
+        private AccountDto account;
 
         private string email;
         private string phoneNumber;
@@ -69,14 +70,12 @@ namespace CatanClient.ViewModels
                 {
                     email = IsValidAccountEmail(ContactInfo) ? ContactInfo : "";
                     phoneNumber = IsValidAccountPhoneNumber(ContactInfo) ? ContactInfo : "";
-
-                    //TODO conecction
                     
                     bool isCreated = await ConnectToServerAsync();
 
                     if (isCreated)
                     {
-                        Mediator.Notify("ShowVerifyAccountView", null);
+                        Mediator.Notify("ShowVerifyAccountView", account);
                     }
                 }
                 else
@@ -94,28 +93,29 @@ namespace CatanClient.ViewModels
             
         }
 
+        //TODO is a service
         private async Task<bool> ConnectToServerAsync()
         {
 
             var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress("http://192.168.1.127:8181/AccountService");
+            var endpoint = new EndpointAddress("http://192.168.1.127:8181/AccountService"); //TODO quit harcode
             var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultDto result;
 
             try
             {
-                var accountDto = new AccountDto
+                account = new AccountDto
                 {
                     Name = Username,
                     Email = email,
                     PhoneNumber = phoneNumber,
                     Password = Password,
-                    PicturePath = "",
+                    PicturePath = String.Empty,
                     PreferredLanguage = "en"
                 };
 
-                result = await client.CreateAccountAsync(accountDto);
+                result = await client.CreateAccountAsync(account);
                 MessageBox.Show(result.IsSuccess + " " + result.MessageResponse);
 
                 return result.IsSuccess;

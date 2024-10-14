@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using CatanClient.AccountService;
 using System.ServiceModel;
 using System.Security.Principal;
+using System.Globalization;
 
 namespace CatanClient.ViewModels
 {
@@ -129,13 +130,6 @@ namespace CatanClient.ViewModels
             {
                 MessageBox.Show($"Error: {ex.Message}");
                 return AccountService.AuthenticationStatus.Incorrect;
-            }
-            finally
-            {
-               // ((IClientChannel)client).Close();
-               // channelFactory.Close();
-
-
             }
         }
 

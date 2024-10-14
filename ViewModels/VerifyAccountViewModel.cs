@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows;
 using System.Security.Principal;
 using System.Xml.Linq;
+using CatanClient.UIHelpers;
 
 namespace CatanClient.ViewModels
 {
@@ -59,6 +60,7 @@ namespace CatanClient.ViewModels
             {
 
                MessageBox.Show("Usuario verificado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+               Mediator.Notify("OcultVerifyAccountView", null);
             }
             else
             {
@@ -66,11 +68,11 @@ namespace CatanClient.ViewModels
             }
         }
 
-        // Método que llama al servicio WCF para verificar el usuario
+        //TODO is a service
         public bool VerifyUserAccount()
         {
             var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress("http://192.168.1.127:8181/AccountService");
+            var endpoint = new EndpointAddress("http://192.168.1.127:8181/AccountService"); //TODO quit harcode
             var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultDto result;
@@ -82,7 +84,6 @@ namespace CatanClient.ViewModels
                 MessageBox.Show(Account.Token);
                 MessageBox.Show(Account.Email);
 
-                // Llamada sincrónica al método de verificación de usuario
                 result = client.VerifyAccountAsync(Account).Result;
 
                 MessageBox.Show(result.IsSuccess + " " + result.MessageResponse);
