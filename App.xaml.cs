@@ -9,6 +9,11 @@ using System.Globalization;
 using System.Threading;
 using Serilog;
 using CatanClient.UIHelpers;
+using Autofac;
+using CatanClient.Views;
+using CatanClient.Services;
+using CatanClient.Singleton;
+using CatanClient.ViewModels;
 
 namespace CatanClient
 {
@@ -23,6 +28,8 @@ namespace CatanClient
 
         }
 
+        public static IContainer Container { get; private set; }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             
@@ -36,6 +43,19 @@ namespace CatanClient
             Log.Information("La aplicación ha iniciado.");  
 
             base.OnStartup(e);
+
+            // Configurar el contenedor de Autofac
+            var builder = new ContainerBuilder();
+
+            // Registrar los servicios, ViewModels y vistas
+            ConfigureContainer(builder);
+
+            // Construir el contenedor de Autofac
+            Container = builder.Build();
+
+            // Resolver la ventana principal desde el contenedor de Autofac
+            var mainWindow = Container.Resolve<MainWindow>();
+            mainWindow.Show();
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -44,6 +64,21 @@ namespace CatanClient
 
             Log.CloseAndFlush();
             base.OnExit(e);
+        }
+
+        private void ConfigureContainer(ContainerBuilder builder)
+        {
+            // Registrar los ViewModels
+            builder.RegisterType<LoginViewModel>().AsSelf();
+            builder.RegisterType<MainWindowsViewModel>().AsSelf();
+
+            // Registrar los servicios como interfaces
+            builder.RegisterType<AccountServiceClient>().As<IAccountServiceClient>().SingleInstance();
+            builder.RegisterType<ProfileSingleton>().As<IProfileSingleton>().SingleInstance();
+
+            // Registrar las vistas
+            builder.RegisterType<MainWindow>().AsSelf();
+            builder.RegisterType<LoginView>().AsSelf();
         }
 
 

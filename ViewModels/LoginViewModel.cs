@@ -28,6 +28,9 @@ namespace CatanClient.ViewModels
         private string email;
         private string phoneNumber;
 
+        private readonly IAccountServiceClient accountServiceClient;
+        private readonly IProfileSingleton profileSingleton;
+
         public string Username
         {
             get => username;
@@ -70,8 +73,10 @@ namespace CatanClient.ViewModels
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(IAccountServiceClient accountServiceClient, IProfileSingleton profileSingleton)
         {
+            this.accountServiceClient = accountServiceClient;
+            this.profileSingleton = profileSingleton;
             LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
@@ -103,7 +108,7 @@ namespace CatanClient.ViewModels
 
         private void AuthenticateUser(AccountDto account, object window)
         {
-            OperationResultProfileDto result = AccountServiceClient.IsValidAuthentication(account) ?? new OperationResultProfileDto
+            OperationResultProfileDto result = accountServiceClient.IsValidAuthentication(account) ?? new OperationResultProfileDto
             {
                 Status = AuthenticationStatus.ServerNotFound
             };
@@ -112,13 +117,13 @@ namespace CatanClient.ViewModels
             {
                 case AccountService.AuthenticationStatus.Verified:
 
-                    ProfileSingleton.Instance.SetProfile(result.ProfileDto);
+                    profileSingleton.SetProfile(result.ProfileDto);
 
                     ShowMainMenu(window);
                     break;
                 case AccountService.AuthenticationStatus.InGame: //TODO: Sed to room
 
-                    ProfileSingleton.Instance.SetProfile(result.ProfileDto);
+                    profileSingleton.SetProfile(result.ProfileDto);
 
                     ShowMainMenu(window);
                     break;

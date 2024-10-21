@@ -42,11 +42,13 @@ namespace CatanClient.ViewModels
             }
         }
         public ICommand VerifyAccountCommand { get; }
+        private IAccountServiceClient accountServiceClient;
 
         public VerifyAccountViewModel(AccountDto account)
         {
             VerifyAccountCommand = new RelayCommand(ExecuteVerifyAccount);
             Account = account;
+            //this.accountServiceClient = accountServiceClient;
         }
 
         private void ExecuteVerifyAccount(object parameter)
@@ -57,7 +59,7 @@ namespace CatanClient.ViewModels
                 return;
             }
 
-            var status = AccountServiceClient.VerifyUserAccount(Account, VerificationCode);
+            var status = accountServiceClient.VerifyUserAccount(Account, VerificationCode);
 
             if (status)
             {

@@ -12,11 +12,11 @@ using System.Windows;
 
 namespace CatanClient.Services
 {
-    public static class AccountServiceClient
+    public class AccountServiceClient : IAccountServiceClient
     {
         //TODO Refactor all methods to have only 1 return
 
-        public static OperationResultProfileDto IsValidAuthentication(AccountDto account)
+        public OperationResultProfileDto IsValidAuthentication(AccountDto account)
         {
             var binding = new BasicHttpBinding();
             var endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
@@ -42,7 +42,7 @@ namespace CatanClient.Services
             return result;
         }
 
-        public static bool VerifyUserAccount(AccountDto account, string token)
+        public bool VerifyUserAccount(AccountDto account, string token)
         {
             var binding = new BasicHttpBinding();
             var endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
@@ -70,7 +70,7 @@ namespace CatanClient.Services
             }
             return flag;
         }
-        public static async Task<bool> CreateAccountInServerAsync(AccountDto account)
+        public async Task<bool> CreateAccountInServerAsync(AccountDto account)
         {
 
             var binding = new BasicHttpBinding();

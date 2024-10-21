@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace CatanClient.Singleton
 {
-    internal class ProfileSingleton
+    internal class ProfileSingleton : IProfileSingleton
     {
         private static ProfileSingleton instance;
         public ProfileDto Profile { get; private set; }
 
-        private ProfileSingleton() { }
+        public ProfileSingleton() { }
 
         public static ProfileSingleton Instance
         {
