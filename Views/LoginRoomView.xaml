@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="CatanClient.Views.LoginRoomView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatanClient.Views"
+        xmlns:properties="clr-namespace:CatanClient.Properties"
+        xmlns:controls="clr-namespace:CatanClient.Controls"
+        mc:Ignorable="d"
+        d:DesignHeight="550" d:DesignWidth="900">
+
+    <Viewbox Stretch="Uniform" Margin="128,70,128,70">
+        <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0.5,0.5" Width="1581" Height="900" x:Name="animatedGrid">
+
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <StaticResource ResourceKey="SlideInFromRightAnimation"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <Grid.RenderTransform>
+                <TranslateTransform X="2000" />
+            </Grid.RenderTransform>
+
+            <TextBlock Text="{x:Static properties:Resources.label_enter_lobby_code}" 
+               FontSize="55" 
+               FontWeight="Bold" 
+               Foreground="White" 
+               FontFamily="{StaticResource PrimaryFontFamily}" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="200,118,0,0"
+               TextWrapping="Wrap"
+               TextAlignment="Center"
+               LineHeight="75"
+               LineStackingStrategy="BlockLineHeight"/>
+
+            <controls:PlaceholderTextBoxControl x:Name="TextBoxRoomName"
+            FontSizeValue="25"
+            PlaceholderText="{x:Static properties:Resources.label_enter_lobby_code}"
+            Margin="240,421,240,323"  
+            Style="{StaticResource SynthwaveTextBoxStyle}"                          
+            Text="{Binding RoomCode, UpdateSourceTrigger=PropertyChanged}"
+            />
+
+
+
+            <Button Margin="1109,726,67,71"
+            Style="{StaticResource NeonButtonStyle}"
+            Content="{x:Static properties:Resources.button_join_room}"
+            FontSize="20"
+            Command="{Binding LoginRoomCommand}"
+        />
+
+            <Button Margin="75,726,1255,71"
+            Style="{StaticResource NeonButtonStyle}"
+            Content="{x:Static properties:Resources.button_back}"
+            FontSize="20"
+            Command="{Binding DataContext.BackFromLoginRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"    
+        />
+
+
+
+        </Grid>
+
+    </Viewbox>
+
+</UserControl>

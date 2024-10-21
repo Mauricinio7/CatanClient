@@ -1,4 +1,5 @@
-﻿using CatanClient.ViewModels;
+﻿using CatanClient.GameService;
+using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,14 +24,17 @@ namespace CatanClient.Views
     public partial class GameLobbyView : UserControl
     {
 
-        public GameLobbyView()
+        public GameLobbyView(GameDto gameDto)
         {
             InitializeComponent();
-            // Asignar el DataContext (solo si es necesario)
-            this.DataContext = new GameLobbyViewModel();
+            ChatService.GameDto game = new ChatService.GameDto();
+            game.Name = gameDto.Name;
+            game.Id = gameDto.Id;
+            game.MaxNumberPlayers = gameDto.MaxNumberPlayers;
+
+            this.DataContext = new GameLobbyViewModel(game);
         }
 
-        // Definir el conversor dentro del code-behind
         
 
     }

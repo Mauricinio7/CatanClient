@@ -412,6 +412,24 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Fail.
+        /// </summary>
+        public static string dialog_fail {
+            get {
+                return ResourceManager.GetString("dialog_fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User verification failed.
+        /// </summary>
+        public static string dialog_fail_verify_user {
+            get {
+                return ResourceManager.GetString("dialog_fail_verify_user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a This player has been added to your friends list.
         /// </summary>
         public static string dialog_friend_added_message {
@@ -471,6 +489,15 @@ namespace CatanClient.Properties {
         public static string dialog_invalid_username_characters {
             get {
                 return ResourceManager.GetString("dialog_invalid_username_characters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Incorrect username or password.
+        /// </summary>
+        public static string dialog_invalid_username_password {
+            get {
+                return ResourceManager.GetString("dialog_invalid_username_password", resourceCulture);
             }
         }
         
@@ -610,6 +637,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Succes.
+        /// </summary>
+        public static string dialog_succes {
+            get {
+                return ResourceManager.GetString("dialog_succes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The player has been successfully kicked.
         /// </summary>
         public static string dialog_succes_kick_player_message {
@@ -624,6 +660,15 @@ namespace CatanClient.Properties {
         public static string dialog_succes_remove_friend_message {
             get {
                 return ResourceManager.GetString("dialog_succes_remove_friend_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User verified successfully.
+        /// </summary>
+        public static string dialog_succes_verify_user_message {
+            get {
+                return ResourceManager.GetString("dialog_succes_verify_user_message", resourceCulture);
             }
         }
         
@@ -655,6 +700,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Unverified user.
+        /// </summary>
+        public static string dialog_unverified_user {
+            get {
+                return ResourceManager.GetString("dialog_unverified_user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a A verification code has been sent to your email or phone number. Please confirm your account by entering the access code..
         /// </summary>
         public static string dialog_verification_account_message {
@@ -664,7 +718,7 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Welcome, User!.
+        ///   Busca una cadena traducida similar a Welcome, User.
         /// </summary>
         public static string dialog_welcome {
             get {
@@ -979,11 +1033,38 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Join to the game.
+        /// </summary>
+        public static string label_player_join {
+            get {
+                return ResourceManager.GetString("label_player_join", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Left the game.
+        /// </summary>
+        public static string label_player_left {
+            get {
+                return ResourceManager.GetString("label_player_left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Recover password.
         /// </summary>
         public static string label_recover_password {
             get {
                 return ResourceManager.GetString("label_recover_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Room:.
+        /// </summary>
+        public static string label_room {
+            get {
+                return ResourceManager.GetString("label_room", resourceCulture);
             }
         }
         
@@ -1110,6 +1191,15 @@ namespace CatanClient.Properties {
         public static string option_undefined {
             get {
                 return ResourceManager.GetString("option_undefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your user is not verified, please verify.
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

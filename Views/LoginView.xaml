@@ -12,7 +12,7 @@
 
     <UserControl.DataContext>
         <viewModels:LoginViewModel/>
-    </UserControl.DataContext>An
+    </UserControl.DataContext>
 
     <Viewbox Stretch="Uniform" Margin="20">
         <Grid x:Name="animatedGrid" Background="{StaticResource SecondaryColor}" Margin="522,88,522,88" RenderTransformOrigin="0.5,0.5" >

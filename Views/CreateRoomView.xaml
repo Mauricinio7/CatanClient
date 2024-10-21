@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatanClient.Views"
              xmlns:properties="clr-namespace:CatanClient.Properties"
-             xmlns:controls="clr-namespace:CatanClient.Controls"
+             xmlns:controls="clr-namespace:CatanClient.Controls" xmlns:viewmodels="clr-namespace:CatanClient.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:CreateRoomViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
 
@@ -48,7 +48,7 @@
                 PlaceholderText="{x:Static properties:Resources.label_room_name}"
                 Margin="536,324,123,511"  
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
-                
+                Text="{Binding RoomName, UpdateSourceTrigger=PropertyChanged}"
                 />
 
             <TextBlock Text="{Binding Source={x:Static properties:Resources.label_max_players}, StringFormat='{}{0}:'}"
@@ -70,7 +70,7 @@
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.global_create_new_game}"
                 FontSize="20"
-                Command="{Binding DataContext.ShowGameLobbyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                Command="{Binding CreateRoomCommand}"
             />
 
             <Button Margin="75,726,1255,71"

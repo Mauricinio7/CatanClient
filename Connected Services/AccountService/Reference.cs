@@ -286,6 +286,9 @@ namespace CatanClient.AccountService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PicturePathField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PreferredLanguageField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -335,6 +338,19 @@ namespace CatanClient.AccountService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PreferredLanguage {
+            get {
+                return this.PreferredLanguageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
+                    this.PreferredLanguageField = value;
+                    this.RaisePropertyChanged("PreferredLanguage");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -357,6 +373,12 @@ namespace CatanClient.AccountService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Verified = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InGame = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ServerNotFound = 4,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -364,22 +386,28 @@ namespace CatanClient.AccountService {
     public interface IAccountEndPoint {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/CreateAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/CreateAccountResponse")]
-        CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto newAccount);
+        CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/CreateAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/CreateAccountResponse")]
-        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount);
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/VerifyAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/VerifyAccountResponse")]
-        CatanClient.AccountService.OperationResultDto VerifyAccount(CatanClient.AccountService.AccountDto accountRecord);
+        CatanClient.AccountService.OperationResultDto VerifyAccount(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/VerifyAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/VerifyAccountResponse")]
-        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> VerifyAccountAsync(CatanClient.AccountService.AccountDto accountRecord);
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> VerifyAccountAsync(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/LogIn", ReplyAction="http://tempuri.org/IAccountEndPoint/LogInResponse")]
-        CatanClient.AccountService.OperationResultProfileDto LogIn(CatanClient.AccountService.AccountDto accountRecord);
+        CatanClient.AccountService.OperationResultProfileDto LogIn(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/LogIn", ReplyAction="http://tempuri.org/IAccountEndPoint/LogInResponse")]
-        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountRecord);
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
+        void ResendVerificationCode(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
+        System.Threading.Tasks.Task ResendVerificationCodeAsync(CatanClient.AccountService.AccountDto accountClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -409,28 +437,36 @@ namespace CatanClient.AccountService {
                 base(binding, remoteAddress) {
         }
         
-        public CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto newAccount) {
-            return base.Channel.CreateAccount(newAccount);
+        public CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.CreateAccount(accountClientDto);
         }
         
-        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto newAccount) {
-            return base.Channel.CreateAccountAsync(newAccount);
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.CreateAccountAsync(accountClientDto);
         }
         
-        public CatanClient.AccountService.OperationResultDto VerifyAccount(CatanClient.AccountService.AccountDto accountRecord) {
-            return base.Channel.VerifyAccount(accountRecord);
+        public CatanClient.AccountService.OperationResultDto VerifyAccount(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.VerifyAccount(accountClientDto);
         }
         
-        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> VerifyAccountAsync(CatanClient.AccountService.AccountDto accountRecord) {
-            return base.Channel.VerifyAccountAsync(accountRecord);
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> VerifyAccountAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.VerifyAccountAsync(accountClientDto);
         }
         
-        public CatanClient.AccountService.OperationResultProfileDto LogIn(CatanClient.AccountService.AccountDto accountRecord) {
-            return base.Channel.LogIn(accountRecord);
+        public CatanClient.AccountService.OperationResultProfileDto LogIn(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.LogIn(accountClientDto);
         }
         
-        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountRecord) {
-            return base.Channel.LogInAsync(accountRecord);
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.LogInAsync(accountClientDto);
+        }
+        
+        public void ResendVerificationCode(CatanClient.AccountService.AccountDto accountClientDto) {
+            base.Channel.ResendVerificationCode(accountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task ResendVerificationCodeAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.ResendVerificationCodeAsync(accountClientDto);
         }
     }
 }

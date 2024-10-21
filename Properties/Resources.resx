@@ -142,7 +142,7 @@
     <value>Need help?</value>
   </data>
   <data name="dialog_welcome" xml:space="preserve">
-    <value>Welcome, User!</value>
+    <value>Welcome, User</value>
   </data>
   <data name="button_exit" xml:space="preserve">
     <value>Exit</value>
@@ -482,5 +482,35 @@
   </data>
   <data name="label_room_name" xml:space="preserve">
     <value>Name of the room</value>
+  </data>
+  <data name="dialog_invalid_username_password" xml:space="preserve">
+    <value>Incorrect username or password</value>
+  </data>
+  <data name="dialog_unverified_user" xml:space="preserve">
+    <value>Unverified user</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Your user is not verified, please verify</value>
+  </data>
+  <data name="dialog_fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="dialog_fail_verify_user" xml:space="preserve">
+    <value>User verification failed</value>
+  </data>
+  <data name="dialog_succes" xml:space="preserve">
+    <value>Succes</value>
+  </data>
+  <data name="dialog_succes_verify_user_message" xml:space="preserve">
+    <value>User verified successfully</value>
+  </data>
+  <data name="label_player_join" xml:space="preserve">
+    <value>Join to the game</value>
+  </data>
+  <data name="label_player_left" xml:space="preserve">
+    <value>Left the game</value>
+  </data>
+  <data name="label_room" xml:space="preserve">
+    <value>Room:</value>
   </data>
 </root>

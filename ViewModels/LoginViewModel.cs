@@ -14,21 +14,26 @@ using CatanClient.AccountService;
 using System.ServiceModel;
 using System.Security.Principal;
 using System.Globalization;
+using Serilog;
+using System.Text.RegularExpressions;
+using CatanClient.Services;
+using CatanClient.Singleton;
 
 namespace CatanClient.ViewModels
 {
     internal class LoginViewModel : ViewModelBase
     {
-        private string _username;
-        private string _password;
-        private AccountDto accountDto;
+        private string username;
+        private string password;
+        private string email;
+        private string phoneNumber;
 
         public string Username
         {
-            get => _username;
+            get => username;
             set
             {
-                _username = value;
+                username = value;
                 OnPropertyChanged(nameof(Username));
             }
         }
@@ -36,11 +41,30 @@ namespace CatanClient.ViewModels
 
         public string Password
         {
-            get => _password;
+            get => password;
             set
             {
-                _password = value;
+                password = value;
                 OnPropertyChanged(nameof(Password));
+            }
+        }
+
+        public string Email
+        {             get => email;
+            set
+            {
+                email = value;
+                OnPropertyChanged(nameof(Email));
+            }
+        }
+
+        public string PhoneNumber
+        {
+            get => phoneNumber;
+            set
+            {
+                phoneNumber = value;
+                OnPropertyChanged(nameof(PhoneNumber));
             }
         }
 
@@ -51,105 +75,80 @@ namespace CatanClient.ViewModels
             LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
-
-        //TODO Exeptions and quit all hard code
-        private void ExecuteLogin(object parameter)
+        private void ExecuteLogin(object actualWindow) 
         {
-            if (!isValidEmail() || !isValidPassword())
+
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
-                //TODO invalid valors exception
-                MessageBox.Show("Se han ingresado datos invalidos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
-            {
-                //TODO null valors exception
-                MessageBox.Show("Se han dejado campos vacios.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                //TODO quit hardcode
+                Email = AccountUtilities.IsValidAccountEmail(Username) ? Username : String.Empty;
+                PhoneNumber = AccountUtilities.IsValidAccountPhoneNumber(Username) ? Username : String.Empty;
 
-                switch (isValidUser())
+                if ((!AccountUtilities.IsValidAccountEmail(Email) && !AccountUtilities.IsValidAccountPhoneNumber(PhoneNumber)) || !AccountUtilities.IsValidAccountPassword(Password))
                 {
-                    case AccountService.AuthenticationStatus.Verified:
-                        ShowMainMenu(parameter);
-                        break;
-                    case AccountService.AuthenticationStatus.NotVerified:
-                        ShowVerifyAccountView(accountDto);
-                        break;
-                    case AccountService.AuthenticationStatus.Incorrect:
-                        MessageBox.Show("Usuario no existe.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
+                    MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-
-               
-            }
-        }
-
-        public bool isValidEmail()
-        {
-            return true;
-        }
-        public bool isValidPassword()
-        {
-            return true;
-        }
-
-        public AuthenticationStatus isValidUser()
-        {
-
-            var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress("http://192.168.1.127:8181/AccountService");
-            var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
-            IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultProfileDto result;
-
-            try
-            {
-                accountDto = new AccountDto
+                else
                 {
-                    //TODO phoneNumber
-                    Name = "",
-                    Email = Username,
-                    PhoneNumber = "",
-                    Password = Password,
-                    PicturePath = "",
-                    PreferredLanguage = ""
-                };
+                    AccountDto account = AccountUtilities.CreateAccount(Email, PhoneNumber, Password, String.Empty);
+                    
+                    AuthenticateUser(account, actualWindow);
+                }
+            } 
+            
+        }
 
-
-                result = client.LogInAsync(accountDto).Result;
-                MessageBox.Show(result.IsSuccess + " " + result.MessageResponse);
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-
-                return result.Status;
-
-            }
-            catch (Exception ex)
+        private void AuthenticateUser(AccountDto account, object window)
+        {
+            OperationResultProfileDto result = AccountServiceClient.IsValidAuthentication(account) ?? new OperationResultProfileDto
             {
-                MessageBox.Show($"Error: {ex.Message}");
-                return AccountService.AuthenticationStatus.Incorrect;
+                Status = AuthenticationStatus.ServerNotFound
+            };
+
+            switch (result.Status)
+            {
+                case AccountService.AuthenticationStatus.Verified:
+
+                    ProfileSingleton.Instance.SetProfile(result.ProfileDto);
+
+                    ShowMainMenu(window);
+                    break;
+                case AccountService.AuthenticationStatus.InGame: //TODO: Sed to room
+
+                    ProfileSingleton.Instance.SetProfile(result.ProfileDto);
+
+                    ShowMainMenu(window);
+                    break;
+                case AccountService.AuthenticationStatus.NotVerified:
+                    ShowVerifyAccountView(account);
+                    break;
+                case AccountService.AuthenticationStatus.Incorrect:
+                    MessageBox.Show(Utilities.MessageIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), Utilities.TittleIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+                default:
+                    MessageBox.Show(result.MessageResponse, result.Status.ToString(), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
             }
         }
 
-        internal void ShowMainMenu(object parameter)
+        internal void ShowMainMenu(object actualWindow)
         {
-            MessageBoxResult result = MessageBox.Show($"Bienvenido, {Username}!\nContraseña: {Password}", "Login Exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBoxResult result = MessageBox.Show(Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + ":" + Username, Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + "!", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            if (result == MessageBoxResult.OK)
-            {
-                if (parameter is Window ventanaActual)
+                if (actualWindow is Window ventanaActual)
                 {
                     ventanaActual.IsEnabled = false;
-                    Storyboard fadeOutStoryboard = ventanaActual.FindResource("FadeOutAnimation") as Storyboard;
+                    Storyboard fadeOutStoryboard = ventanaActual.FindResource(Utilities.FADEOUTANIMATION) as Storyboard;
                     if (fadeOutStoryboard != null)
                     {
                         fadeOutStoryboard.Completed += (s, e) =>
                         {
-                            Mediator.Notify("ShowMainMenuBackgroundView", null);
-                            Mediator.Notify("ShowMainMenuView", null);
-                            Storyboard fadeInStoryboard = ventanaActual.FindResource("FadeInAnimation") as Storyboard;
+                            Mediator.Notify(Utilities.SHOWMAINMENUBACKGROUND, null);
+                            Mediator.Notify(Utilities.SHOWMAINMENU, null);
+                            Storyboard fadeInStoryboard = ventanaActual.FindResource(Utilities.FADEINANIMATION) as Storyboard;
                             if (fadeInStoryboard != null)
                             {
                                 fadeInStoryboard.Completed += (sender, args) =>
@@ -164,13 +163,12 @@ namespace CatanClient.ViewModels
                         fadeOutStoryboard.Begin(ventanaActual);
                     }
                 }
-            }
         }
 
         internal void ShowVerifyAccountView(AccountDto account)
         {
-            MessageBox.Show("Usuario no verificado.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            Mediator.Notify("ShowVerifyAccountView", account);
+            MessageBox.Show(Utilities.MessageUnverifiedUser(CultureInfo.CurrentCulture.Name), Utilities.TittleUnverifiedUser(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
         }
 
     }

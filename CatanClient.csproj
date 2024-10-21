@@ -48,6 +48,9 @@
     <Reference Include="Serilog.Sinks.Console, Version=6.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>packages\Serilog.Sinks.Console.6.0.0\lib\net471\Serilog.Sinks.Console.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=6.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>packages\Serilog.Sinks.File.6.0.0\lib\net471\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -96,7 +99,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Callbacks\ChatCallback.cs" />
     <Compile Include="Connected Services\AccountService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ChatService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -106,16 +115,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PlayerInRoomCard.xaml.cs">
+      <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\AccountServiceClient.cs" />
+    <Compile Include="Services\ChatServiceClient.cs" />
+    <Compile Include="Services\GameServiceClient.cs" />
+    <Compile Include="Singleton\ProfileSingleton.cs" />
+    <Compile Include="UIHelpers\AccountUtilities.cs" />
+    <Compile Include="UIHelpers\ChatMessage.cs" />
     <Compile Include="UIHelpers\Mediator.cs" />
     <Compile Include="UIHelpers\Utilities.cs" />
     <Compile Include="ViewModels\CreateRoomViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
+    <Compile Include="ViewModels\LoginRoomViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountViewModel.cs" />
     <Compile Include="Views\CreateRoomView.xaml.cs">
       <DependentUpon>CreateRoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginRoomView.xaml.cs">
+      <DependentUpon>LoginRoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainMenuBackgroundView.xaml.cs">
       <DependentUpon>MainMenuBackgroundView.xaml</DependentUpon>
@@ -127,6 +149,10 @@
       <DependentUpon>VerifyAccountView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\PlaceholderTextBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PlayerInRoomCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GameLobbyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginRoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,10 +285,26 @@
     <None Include="Connected Services\AccountService\CatanClient.AccountService.OperationResultProfileDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ChatService\ChatService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatService\ChatService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatService\ChatService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatService\ChatServiceEndpoint.wsdl" />
+    <None Include="Connected Services\GameService\CatanClient.GameService.OperationResultGameDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\GameService\GameService.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />
@@ -275,7 +321,6 @@
   <ItemGroup>
     <Folder Include="Enums\" />
     <Folder Include="Resources\Sounds\" />
-    <Folder Include="Services\" />
     <Folder Include="Windows\" />
   </ItemGroup>
   <ItemGroup>
@@ -294,8 +339,27 @@
     <Resource Include="Resources\Gifs\SynthWaveAnimatedBackground2.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\ShibaTest.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
+    <WCFMetadataStorage Include="Connected Services\ChatService\" />
     <WCFMetadataStorage Include="Connected Services\GameService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountService\AccountService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\GameService\GameService.disco" />
@@ -313,16 +377,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountService\AccountService.disco" />
+    <None Include="Connected Services\ChatService\ChatService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountService\configuration91.svcinfo" />
+    <None Include="Connected Services\ChatService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountService\configuration.svcinfo" />
+    <None Include="Connected Services\ChatService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountService\Reference.svcmap">
+    <None Include="Connected Services\ChatService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

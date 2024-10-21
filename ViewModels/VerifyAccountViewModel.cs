@@ -11,30 +11,33 @@ using System.Windows;
 using System.Security.Principal;
 using System.Xml.Linq;
 using CatanClient.UIHelpers;
+using System.Globalization;
+using Serilog;
+using CatanClient.Services;
 
 namespace CatanClient.ViewModels
 {
     internal class VerifyAccountViewModel : ViewModelBase
     {
-        private AccountDto _account;
-        private string _verificationCode;
+        private AccountDto account;
+        private string verificationCode;
 
         public AccountDto Account
         {
-            get => _account;
+            get => account;
             set
             {
-                _account = value;
+                account = value;
                 OnPropertyChanged(nameof(Account));
             }
         }
 
         public string VerificationCode
         {
-            get => _verificationCode;
+            get => verificationCode;
             set
             {
-                _verificationCode = value;
+                verificationCode = value;
                 OnPropertyChanged(nameof(VerificationCode));
             }
         }
@@ -50,58 +53,26 @@ namespace CatanClient.ViewModels
         {
             if (string.IsNullOrWhiteSpace(VerificationCode))
             {
-                MessageBox.Show("El código de verificación está vacío.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            var status = VerifyUserAccount();
+            var status = AccountServiceClient.VerifyUserAccount(Account, VerificationCode);
 
             if (status)
             {
 
-               MessageBox.Show("Usuario verificado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-               Mediator.Notify("OcultVerifyAccountView", null);
+               MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+               Mediator.Notify(Utilities.OCULTVERIFYACCOUNT, null);
             }
             else
             {
-                MessageBox.Show("No se ha podido verificar el usuario.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        //TODO is a service
-        public bool VerifyUserAccount()
-        {
-            var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress("http://192.168.1.127:8181/AccountService"); //TODO quit harcode
-            var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
-            IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultDto result;
+        
 
-            try
-            {
-              Account.Token = VerificationCode;
-
-                MessageBox.Show(Account.Token);
-                MessageBox.Show(Account.Email);
-
-                result = client.VerifyAccountAsync(Account).Result;
-
-                MessageBox.Show(result.IsSuccess + " " + result.MessageResponse);
-
-                return result.IsSuccess;
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-                return false;
-            }
-            finally
-            {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-            }
-
-        }
+        
     }
 }

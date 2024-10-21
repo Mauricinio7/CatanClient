@@ -1,20 +1,31 @@
-﻿using CatanClient.Commands;
+﻿using CatanClient.Callbacks;
+using CatanClient.ChatService;
+using CatanClient.Commands;
+using CatanClient.Services;
+using CatanClient.Singleton;
+using CatanClient.UIHelpers;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CatanClient.ViewModels
 {
     internal class GameLobbyViewModel : ViewModelBase
     {
-        private string _newMessage;
-        private Timer _systemMessageTimer;
+        private string newMessage;
+        private GameDto game;
+        private ProfileDto profile;
 
 
         public ObservableCollection<ChatMessage> Messages { get; set; }
@@ -22,60 +33,61 @@ namespace CatanClient.ViewModels
 
         public string NewMessage
         {
-            get { return _newMessage; }
+            get { return newMessage; }
             set
             {
-                _newMessage = value;
+                newMessage = value;
                 OnPropertyChanged(nameof(NewMessage));
             }
         }
 
         public ICommand SendMessageCommand { get; }
 
-        public GameLobbyViewModel()
+        public GameLobbyViewModel(GameDto gameDto)
         {
+            game = gameDto;
+
             Messages = new ObservableCollection<ChatMessage>
             {
-                new ChatMessage { Content = "Bienvenido al chat", IsUserMessage = false }
+                new ChatMessage { Content = game.Name, Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
             };
 
-            SendMessageCommand = new RelayCommand(o => SendMessage());
-            _systemMessageTimer = new Timer(10000);  
-            _systemMessageTimer.Elapsed += SendSystemMessage;
-            _systemMessageTimer.Start();
+            var profileDto = ProfileSingleton.Instance.Profile;
+            profile = new ProfileDto
+            {
+                Id = profileDto.Id,
+                Name = profileDto.Name,
+            };
+
+            Mediator.Register("ReceiveMessage", OnReceiveMessage);
+
+            ChatServiceClient.JoinChatClient(game, profile);
+            SendMessageCommand = new RelayCommand(ExecuteSendMessage);
         }
 
-        private void SendMessage()
+        private void OnReceiveMessage(object message)
         {
-            if (!string.IsNullOrEmpty(NewMessage))
+            var chatMessage = message as ChatMessage;
+            if (chatMessage != null)
             {
-                Messages.Add(new ChatMessage { Content = NewMessage, IsUserMessage = true });
-                NewMessage = string.Empty;
+                Messages.Add(chatMessage);
             }
         }
 
-        private void ReciveMessageCallback(string message)
+        private void ExecuteSendMessage()
         {
-            if (!string.IsNullOrEmpty(message))
-            {
-                Messages.Add(new ChatMessage { Content = message, IsUserMessage = false });
-                NewMessage = string.Empty;
-            }
+            ChatServiceClient.SendMessageToServer(game, profile, NewMessage);
         }
 
-        private void SendSystemMessage(object sender, ElapsedEventArgs e)
-        {
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                Messages.Add(new ChatMessage { Content = "Mensaje automático del sistema", IsUserMessage = false });
-            });
-        }
+ 
+
+        
+
+        
     }
-    public class ChatMessage
-    {
-        public string Content { get; set; }
-        public bool IsUserMessage { get; set; }  
-    }
+    
+
+
 }
 
 

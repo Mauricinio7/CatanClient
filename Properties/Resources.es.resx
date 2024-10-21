@@ -142,7 +142,7 @@
     <value>¿Necesitas ayuda?</value>
   </data>
   <data name="dialog_welcome" xml:space="preserve">
-    <value>¡Bienvenido, Usuario!</value>
+    <value>¡Bienvenido, Usuario</value>
   </data>
   <data name="button_exit" xml:space="preserve">
     <value>Salir</value>
@@ -488,5 +488,35 @@
   </data>
   <data name="label_room_name" xml:space="preserve">
     <value>Nombre de la sala</value>
+  </data>
+  <data name="dialog_invalid_username_password" xml:space="preserve">
+    <value>Usuario o contraseña incorrecta</value>
+  </data>
+  <data name="dialog_unverified_user" xml:space="preserve">
+    <value>Usuario sin verificar</value>
+  </data>
+  <data name="dialog_unverified_user_message" xml:space="preserve">
+    <value>Su usuario no se encuentra verificado, favor de verificarlo</value>
+  </data>
+  <data name="dialog_fail" xml:space="preserve">
+    <value>La acción ha fallado</value>
+  </data>
+  <data name="dialog_fail_verify_user" xml:space="preserve">
+    <value>No se ha podido verificar el usuario</value>
+  </data>
+  <data name="dialog_succes" xml:space="preserve">
+    <value>Éxito</value>
+  </data>
+  <data name="dialog_succes_verify_user_message" xml:space="preserve">
+    <value>Usuario verificado correctamente</value>
+  </data>
+  <data name="label_player_join" xml:space="preserve">
+    <value>Se ha unido al juego</value>
+  </data>
+  <data name="label_player_left" xml:space="preserve">
+    <value>Ha salido del juego</value>
+  </data>
+  <data name="label_room" xml:space="preserve">
+    <value>Sala:</value>
   </data>
 </root>

@@ -47,6 +47,7 @@
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_join_game}"
                 FontSize="35"
+                Command="{Binding DataContext.ShowLoginRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
            />
 
             <Button Margin="30,43,1389,786"

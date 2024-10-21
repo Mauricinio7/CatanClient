@@ -8,21 +8,21 @@ namespace CatanClient.UIHelpers
 {
     internal class Mediator
     {
-        private static IDictionary<string, Action<object>> _actions = new Dictionary<string, Action<object>>();
+        private static IDictionary<string, Action<object>> actions = new Dictionary<string, Action<object>>();
 
         public static void Register(string token, Action<object> callback)
         {
-            if (!_actions.ContainsKey(token))
+            if (!actions.ContainsKey(token))
             {
-                _actions[token] = callback;
+                actions[token] = callback;
             }
         }
 
         public static void Notify(string token, object args)
         {
-            if (_actions.ContainsKey(token))
+            if (actions.ContainsKey(token))
             {
-                _actions[token](args);
+                actions[token](args);
             }
         }
     }

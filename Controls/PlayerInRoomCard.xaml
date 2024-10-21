@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="CatanClient.Controls.PlayerInRoomCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatanClient.Controls"
+             mc:Ignorable="d" Height="182" Width="480">
+
+
+    <Grid Background="White" Margin="0,0,0,0" Height="180" VerticalAlignment="Center" >
+        <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
+        <TextBlock
+            Margin="166,78,0,64"
+            Text="Not Ready"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="Black"
+            FontSize="30"
+            />
+        <TextBlock
+            Margin="10,155,130,7"
+            Text="Mauricinio7"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="Black"
+            FontSize="13"
+            />
+
+
+    </Grid>
+</UserControl>

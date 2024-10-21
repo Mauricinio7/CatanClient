@@ -20,10 +20,25 @@
                 Command="{Binding DataContext.ShowMainMenuViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 />
 
-            <!-- ListBox de mensajes -->
+            <TextBlock 
+                Margin="354,75,481,987"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Text="{x:Static properties:Resources.label_room}"
+                FontSize="45"
+             /> 
+
+            <TextBlock 
+                Margin="286,213,672,861"
+                Style="{StaticResource PrimaryTextBlockStyle}"
+                Text="{Binding Source={x:Static properties:Resources.label_waiting_players}, StringFormat='{}{0}...'}"
+                FontSize="40"
+                
+             />
+
+
             <ListBox ItemsSource="{Binding Messages}"
-                     Margin="50,165,50,400"
-                     Background="Transparent"
+                     Margin="142,338,565,393"
+                     Background="white"
                      BorderThickness="0"
                      ScrollViewer.VerticalScrollBarVisibility="Auto">
 
@@ -43,18 +58,29 @@
 
 
             <controls:PlaceholderTextBoxControl x:Name="TextBoxChat"
-                                                FontSizeValue="25"
-                                                PlaceholderText="{x:Static properties:Resources.label_chat}"
-                                                Margin="226,820,670,272"
-                                                Style="{StaticResource SynthwaveTextBoxStyle}"                          
-                                                Text="{Binding NewMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                FontSizeValue="25"
+                PlaceholderText="{x:Static properties:Resources.label_chat}"
+                Margin="142,820,848,272"
+                Style="{StaticResource SynthwaveTextBoxStyle}"                          
+                Text="{Binding NewMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
             <Button 
-                Margin="1286,820,380,272"
+                Margin="1101,820,565,272"
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_send}"
                 FontSize="15"
                 Command="{Binding SendMessageCommand}" />
+            
+            <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" 
+                     Margin="1416,213,65,272"
+                     />
+
+            <Button 
+                Margin="38,1007,1570,73"
+                Style="{StaticResource NeonButtonStyle}"
+                Content="Listo"
+                FontSize="25"
+             />
 
 
         </Grid>

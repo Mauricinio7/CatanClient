@@ -18,21 +18,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProfileDto" nillable="true" type="tns:ProfileDto" />
-  <xs:complexType name="OperationResultGameDto">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:OperationResultDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="GameDto" nillable="true" type="tns:GameDto" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="OperationResultGameDto" nillable="true" type="tns:OperationResultGameDto" />
-  <xs:complexType name="OperationResultDto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
-      <xs:element minOccurs="0" name="MessageResponse" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OperationResultDto" nillable="true" type="tns:OperationResultDto" />
 </xs:schema>

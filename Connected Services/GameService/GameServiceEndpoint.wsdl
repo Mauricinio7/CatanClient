@@ -12,24 +12,101 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://192.168.1.127:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://192.168.1.127:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.1.127:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IGameEndPoint_SendMessageToRoom_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessageToRoom" />
+  <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGame" />
   </wsdl:message>
-  <wsdl:message name="IGameEndPoint_SendMessageToRoom_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessageToRoomResponse" />
+  <wsdl:message name="IGameEndPoint_CreateGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_FinishGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:FinishGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_FinishGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FinishGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_QuitGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:QuitGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_QuitGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QuitGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_JoinGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_JoinGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_StartGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_StartGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
   </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
-    <wsdl:operation name="SendMessageToRoom">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/SendMessageToRoom" message="tns:IGameEndPoint_SendMessageToRoom_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/SendMessageToRoomResponse" message="tns:IGameEndPoint_SendMessageToRoom_OutputMessage" />
+    <wsdl:operation name="CreateGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGame" message="tns:IGameEndPoint_CreateGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGameResponse" message="tns:IGameEndPoint_CreateGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/FinishGame" message="tns:IGameEndPoint_FinishGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/FinishGameResponse" message="tns:IGameEndPoint_FinishGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QuitGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGame" message="tns:IGameEndPoint_QuitGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGameResponse" message="tns:IGameEndPoint_QuitGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGame" message="tns:IGameEndPoint_JoinGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameResponse" message="tns:IGameEndPoint_JoinGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/StartGame" message="tns:IGameEndPoint_StartGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/StartGameResponse" message="tns:IGameEndPoint_StartGame_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGameEndPoint" type="tns:IGameEndPoint">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="SendMessageToRoom">
-      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/SendMessageToRoom" style="document" />
+    <wsdl:operation name="CreateGame">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/CreateGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishGame">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/FinishGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuitGame">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/QuitGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/JoinGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/StartGame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -41,8 +118,44 @@
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
     <wsp:PolicyReference URI="#NetTcpBinding_IGameEndPoint_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="SendMessageToRoom">
-      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/SendMessageToRoom" style="document" />
+    <wsdl:operation name="CreateGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/CreateGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/FinishGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuitGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/QuitGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/JoinGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
