@@ -65,7 +65,6 @@ namespace CatanClient.ViewModels
 
             if(game == null)
             {
-                MessageBox.Show("Me manda el game null el maldito");
                 return;
             }
 

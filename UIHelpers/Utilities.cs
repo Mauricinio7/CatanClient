@@ -24,7 +24,7 @@ namespace CatanClient.UIHelpers
         public const char STRING_CHAR_ARROBA = '@';
         public const string STRING_CHAR_DASH = "-";
         public const string STRING_CHAR_POINT = ".";
-        public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/CatanClient/logs/errorlog.txt";
+        public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/repos/CatanClient/logs/errorlog.txt";
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
         public const string IPACCOUNTSERVICE = "http://192.168.1.127:8181/AccountService";

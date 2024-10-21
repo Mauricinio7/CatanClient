@@ -1,0 +1,88 @@
+﻿C:\Users\mauricio\source\CatanClient\App.xaml
+C:\Users\mauricio\source\CatanClient\Callbacks\ChatCallback.cs
+C:\Users\mauricio\source\CatanClient\Controls\PlayerInRoomCard.xaml.cs
+C:\Users\mauricio\source\CatanClient\Services\AccountServiceClient.cs
+C:\Users\mauricio\source\CatanClient\Services\ChatServiceClient.cs
+C:\Users\mauricio\source\CatanClient\Services\GameServiceClient.cs
+C:\Users\mauricio\source\CatanClient\Singleton\ProfileSingleton.cs
+C:\Users\mauricio\source\CatanClient\UIHelpers\AccountUtilities.cs
+C:\Users\mauricio\source\CatanClient\UIHelpers\ChatMessage.cs
+C:\Users\mauricio\source\CatanClient\UIHelpers\Mediator.cs
+C:\Users\mauricio\source\CatanClient\UIHelpers\Utilities.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\CreateRoomViewModel.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\GameLobbyViewModel.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\LoginRoomViewModel.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\VerifyAccountViewModel.cs
+C:\Users\mauricio\source\CatanClient\Views\CreateRoomView.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\GameLobbyView.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\LoginRoomView.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\MainMenuBackgroundView.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\MainMenuView.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\VerifyAccountView.xaml.cs
+C:\Users\mauricio\source\CatanClient\App.xaml.cs
+C:\Users\mauricio\source\CatanClient\Commands\RelayCommand.cs
+C:\Users\mauricio\source\CatanClient\Controls\PlaceholderTextBoxControl.xaml.cs
+C:\Users\mauricio\source\CatanClient\Controls\ShowPasswordPlaceholderControl.xaml.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\LoginViewModel.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\MainWindowsViewModel.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\RegisterViewModel.cs
+C:\Users\mauricio\source\CatanClient\ViewModels\ViewModelBase.cs
+C:\Users\mauricio\source\CatanClient\Views\LoginView.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\RegisterView.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\StartupBackground.xaml.cs
+C:\Users\mauricio\source\CatanClient\Views\MainWindow.xaml.cs
+C:\Users\mauricio\source\CatanClient\Properties\AssemblyInfo.cs
+C:\Users\mauricio\source\CatanClient\Properties\Resources.resx
+C:\Users\mauricio\source\CatanClient\Properties\Resources.es.resx
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\AccountService.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\AccountService1.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\AccountService2.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\AccountService3.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\AccountServiceEndPoint.wsdl
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\CatanClient.AccountService.OperationResultDto.datasource
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\CatanClient.AccountService.OperationResultProfileDto.datasource
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\ChatService.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\ChatService1.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\ChatService2.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\ChatServiceEndpoint.wsdl
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\CatanClient.GameService.OperationResultGameDto.datasource
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\GameService.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\GameService1.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\GameService2.xsd
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\GameServiceEndpoint.wsdl
+C:\Users\mauricio\source\CatanClient\packages.config
+C:\Users\mauricio\source\CatanClient\Properties\Settings.settings
+C:\Users\mauricio\source\CatanClient\App.config
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\AccountService.disco
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\configuration91.svcinfo
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\configuration.svcinfo
+C:\Users\mauricio\source\CatanClient\Connected Services\AccountService\Reference.svcmap
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\GameService.disco
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\configuration91.svcinfo
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\configuration.svcinfo
+C:\Users\mauricio\source\CatanClient\Connected Services\GameService\Reference.svcmap
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\ChatService.disco
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\configuration91.svcinfo
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\configuration.svcinfo
+C:\Users\mauricio\source\CatanClient\Connected Services\ChatService\Reference.svcmap
+C:\Users\mauricio\source\CatanClient\Controls\PlaceholderTextBoxControl.xaml
+C:\Users\mauricio\source\CatanClient\Controls\PlayerInRoomCard.xaml
+C:\Users\mauricio\source\CatanClient\Controls\ShowPasswordPlaceholderControl.xaml
+C:\Users\mauricio\source\CatanClient\Resources\Styles\Animations.xaml
+C:\Users\mauricio\source\CatanClient\Resources\Styles\Styles.xaml
+C:\Users\mauricio\source\CatanClient\Views\CreateRoomView.xaml
+C:\Users\mauricio\source\CatanClient\Views\GameLobbyView.xaml
+C:\Users\mauricio\source\CatanClient\Views\LoginRoomView.xaml
+C:\Users\mauricio\source\CatanClient\Views\LoginView.xaml
+C:\Users\mauricio\source\CatanClient\Views\MainMenuBackgroundView.xaml
+C:\Users\mauricio\source\CatanClient\Views\MainMenuView.xaml
+C:\Users\mauricio\source\CatanClient\Views\RegisterView.xaml
+C:\Users\mauricio\source\CatanClient\Views\StartupBackground.xaml
+C:\Users\mauricio\source\CatanClient\Views\MainWindow.xaml
+C:\Users\mauricio\source\CatanClient\Views\VerifyAccountView.xaml
+C:\Users\mauricio\source\CatanClient\Resources\Fonts\PressStart2P-Regular.ttf
+C:\Users\mauricio\source\CatanClient\Resources\Gifs\AnimatedBackground1.gif
+C:\Users\mauricio\source\CatanClient\Resources\Images\login_frame.png
+C:\Users\mauricio\source\CatanClient\Resources\Images\register_frame.png
+C:\Users\mauricio\source\CatanClient\Resources\Gifs\SynthWaveAnimatedBackground2.gif
+C:\Users\mauricio\source\CatanClient\Resources\Images\ShibaTest.png
