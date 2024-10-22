@@ -51,8 +51,9 @@ namespace CatanClient.ViewModels
 
 
         public ICommand CreateRoomCommand { get; }
+        private readonly ServiceManager serviceManager;
 
-        public CreateRoomViewModel()
+        public CreateRoomViewModel(ServiceManager serviceManager)
         {
             OptionsList = new ObservableCollection<string>
             {
@@ -62,6 +63,7 @@ namespace CatanClient.ViewModels
             };
 
             CreateRoomCommand = new RelayCommand(ExecuteCreateRoom);
+            this.serviceManager = serviceManager;
         }
 
 
@@ -75,7 +77,7 @@ namespace CatanClient.ViewModels
 
             };
 
-            var profileDto = ProfileSingleton.Instance.Profile;
+            var profileDto = serviceManager.ProfileSingleton.Profile;
 
             ProfileDto profile = new ProfileDto
             {
@@ -85,7 +87,7 @@ namespace CatanClient.ViewModels
                 PreferredLanguage = CultureInfo.CurrentCulture.Name, //TODO quit hardcode and do it whit actual culture               
             };
 
-            OperationResultGameDto result = GameServiceClient.CreateRoomClient(gameDto, profile);
+            OperationResultGameDto result = serviceManager.GameServiceClient.CreateRoomClient(gameDto, profile);
 
             GameDto game = result.GameDto;
 

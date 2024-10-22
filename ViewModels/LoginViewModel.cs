@@ -28,8 +28,7 @@ namespace CatanClient.ViewModels
         private string email;
         private string phoneNumber;
 
-        private readonly IAccountServiceClient accountServiceClient;
-        private readonly IProfileSingleton profileSingleton;
+        private readonly ServiceManager serviceManager;
 
         public string Username
         {
@@ -73,10 +72,9 @@ namespace CatanClient.ViewModels
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel(IAccountServiceClient accountServiceClient, IProfileSingleton profileSingleton)
+        public LoginViewModel(ServiceManager serviceManager)
         {
-            this.accountServiceClient = accountServiceClient;
-            this.profileSingleton = profileSingleton;
+            this.serviceManager = serviceManager;
             LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
@@ -108,7 +106,7 @@ namespace CatanClient.ViewModels
 
         private void AuthenticateUser(AccountDto account, object window)
         {
-            OperationResultProfileDto result = accountServiceClient.IsValidAuthentication(account) ?? new OperationResultProfileDto
+            OperationResultProfileDto result = serviceManager.AccountServiceClient.IsValidAuthentication(account) ?? new OperationResultProfileDto
             {
                 Status = AuthenticationStatus.ServerNotFound
             };
@@ -117,13 +115,13 @@ namespace CatanClient.ViewModels
             {
                 case AccountService.AuthenticationStatus.Verified:
 
-                    profileSingleton.SetProfile(result.ProfileDto);
+                    serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
 
                     ShowMainMenu(window);
                     break;
                 case AccountService.AuthenticationStatus.InGame: //TODO: Sed to room
 
-                    profileSingleton.SetProfile(result.ProfileDto);
+                    serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
 
                     ShowMainMenu(window);
                     break;

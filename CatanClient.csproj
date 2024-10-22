@@ -134,6 +134,9 @@
     <Compile Include="Services\ChatServiceClient.cs" />
     <Compile Include="Services\GameServiceClient.cs" />
     <Compile Include="Services\IAccountServiceClient.cs" />
+    <Compile Include="Services\IChatServiceClient.cs" />
+    <Compile Include="Services\IGameServiceClient.cs" />
+    <Compile Include="Services\ServiceManager.cs" />
     <Compile Include="Singleton\IProfileSingleton.cs" />
     <Compile Include="Singleton\ProfileSingleton.cs" />
     <Compile Include="UIHelpers\AccountUtilities.cs" />

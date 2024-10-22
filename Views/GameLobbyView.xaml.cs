@@ -1,9 +1,12 @@
-﻿using CatanClient.GameService;
+﻿using Autofac;
+using CatanClient.AccountService;
+using CatanClient.GameService;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +35,9 @@ namespace CatanClient.Views
             game.Id = gameDto.Id;
             game.MaxNumberPlayers = gameDto.MaxNumberPlayers;
 
-            this.DataContext = new GameLobbyViewModel(game);
+            this.DataContext = App.Container.Resolve<GameLobbyViewModel>(
+                new TypedParameter(typeof(ChatService.GameDto), game)
+            );
         }
 
         

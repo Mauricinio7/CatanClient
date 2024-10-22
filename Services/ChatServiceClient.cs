@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace CatanClient.Services
 {
-    public static class ChatServiceClient
+    public class ChatServiceClient : IChatServiceClient
     {
         private static ChatCallback callback = new ChatCallback();
-        public static void JoinChatClient(ChatService.GameDto game, ProfileDto profile)
+        public void JoinChatClient(ChatService.GameDto game, ProfileDto profile)
         {
             var instanceContext = new InstanceContext(callback);
 
@@ -30,7 +30,7 @@ namespace CatanClient.Services
 
         }
 
-        public static void SendMessageToServer(ChatService.GameDto game, ProfileDto profile, string message)
+        public void SendMessageToServer(ChatService.GameDto game, ProfileDto profile, string message)
         {
             var instanceContext = new InstanceContext(callback);
 

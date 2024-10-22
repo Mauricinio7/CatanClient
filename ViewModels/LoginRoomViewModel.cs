@@ -34,11 +34,13 @@ namespace CatanClient.ViewModels
 
 
         public ICommand LoginRoomCommand { get; }
+        private readonly ServiceManager serviceManager;
 
-        public LoginRoomViewModel()
+        public LoginRoomViewModel(ServiceManager serviceManager)
         {
 
             LoginRoomCommand = new RelayCommand(ExecuteLoginRoom);
+            this.serviceManager = serviceManager;
         }
 
 
@@ -48,7 +50,7 @@ namespace CatanClient.ViewModels
 
             MessageBox.Show(roomCode);
 
-            var profileDto = ProfileSingleton.Instance.Profile;
+            var profileDto = serviceManager.ProfileSingleton.Profile;
 
             ProfileDto profile = new ProfileDto
             {
@@ -59,7 +61,7 @@ namespace CatanClient.ViewModels
             };
 
 
-            OperationResultGameDto result = GameServiceClient.JoinRoomClient(roomCode, profile); //TODO quit hardcode
+            OperationResultGameDto result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile); //TODO quit hardcode
 
             GameDto game = result.GameDto;
 

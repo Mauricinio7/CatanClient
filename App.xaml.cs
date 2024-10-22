@@ -44,16 +44,12 @@ namespace CatanClient
 
             base.OnStartup(e);
 
-            // Configurar el contenedor de Autofac
             var builder = new ContainerBuilder();
 
-            // Registrar los servicios, ViewModels y vistas
             ConfigureContainer(builder);
 
-            // Construir el contenedor de Autofac
             Container = builder.Build();
 
-            // Resolver la ventana principal desde el contenedor de Autofac
             var mainWindow = Container.Resolve<MainWindow>();
             mainWindow.Show();
         }
@@ -68,17 +64,28 @@ namespace CatanClient
 
         private void ConfigureContainer(ContainerBuilder builder)
         {
-            // Registrar los ViewModels
-            builder.RegisterType<LoginViewModel>().AsSelf();
-            builder.RegisterType<MainWindowsViewModel>().AsSelf();
-
-            // Registrar los servicios como interfaces
             builder.RegisterType<AccountServiceClient>().As<IAccountServiceClient>().SingleInstance();
+            builder.RegisterType<GameServiceClient>().As<IGameServiceClient>().SingleInstance();
+            builder.RegisterType<ChatServiceClient>().As<IChatServiceClient>().SingleInstance();
             builder.RegisterType<ProfileSingleton>().As<IProfileSingleton>().SingleInstance();
 
-            // Registrar las vistas
-            builder.RegisterType<MainWindow>().AsSelf();
+            builder.RegisterType<ServiceManager>().AsSelf();
+
+            builder.RegisterType<CreateRoomViewModel>().AsSelf();
+            builder.RegisterType<GameLobbyViewModel>().AsSelf();
+            builder.RegisterType<LoginRoomViewModel>().AsSelf();
+            builder.RegisterType<LoginViewModel>().AsSelf();
+            builder.RegisterType<MainWindowsViewModel>().AsSelf();
+            builder.RegisterType<RegisterViewModel>().AsSelf();
+            builder.RegisterType<VerifyAccountViewModel>().AsSelf();
+
+            builder.RegisterType<CreateRoomView>().AsSelf();
+            builder.RegisterType<GameLobbyView>().AsSelf();
+            builder.RegisterType<LoginRoomView>().AsSelf();
             builder.RegisterType<LoginView>().AsSelf();
+            builder.RegisterType<MainWindow>().AsSelf();
+            builder.RegisterType<RegisterView>().AsSelf();
+            builder.RegisterType<VerifyAccountView>().AsSelf();
         }
 
 

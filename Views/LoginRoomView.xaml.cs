@@ -1,4 +1,5 @@
-﻿using CatanClient.ViewModels;
+﻿using Autofac;
+using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace CatanClient.Views
         public LoginRoomView()
         {
             InitializeComponent();
-            this.DataContext = new LoginRoomViewModel();
+            DataContext = App.Container.Resolve<LoginRoomViewModel>();
         }
     }
 }

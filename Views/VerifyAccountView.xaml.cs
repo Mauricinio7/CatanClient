@@ -1,4 +1,5 @@
-﻿using CatanClient.AccountService;
+﻿using Autofac;
+using CatanClient.AccountService;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,9 @@ namespace CatanClient.Views
         public VerifyAccountView(AccountDto account)
         {
             InitializeComponent();
-            this.DataContext = new VerifyAccountViewModel(account);
+            this.DataContext = App.Container.Resolve<VerifyAccountViewModel>(
+                new TypedParameter(typeof(AccountDto), account)
+            );
         }
     }
 }

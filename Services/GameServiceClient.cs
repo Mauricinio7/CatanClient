@@ -11,9 +11,9 @@ using System.Windows;
 
 namespace CatanClient.Services
 {
-    public static class GameServiceClient
+    public class GameServiceClient : IGameServiceClient
     {
-        public static OperationResultGameDto CreateRoomClient(GameDto game, ProfileDto profile)
+        public OperationResultGameDto CreateRoomClient(GameDto game, ProfileDto profile)
         {
             var binding = new BasicHttpBinding();
             var endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
@@ -27,7 +27,7 @@ namespace CatanClient.Services
 
                 MessageBox.Show(result.IsSuccess.ToString());
             }
-            catch (Exception ex) //TODO do a good exception 
+            catch (Exception ex) 
             {
                 Log.Information(ex.Message);
                 MessageBox.Show($"{ex.Message}");
@@ -40,7 +40,7 @@ namespace CatanClient.Services
             return result;
         }
 
-        public static OperationResultGameDto JoinRoomClient(string code, ProfileDto profile)
+        public OperationResultGameDto JoinRoomClient(string code, ProfileDto profile)
         {
             var binding = new BasicHttpBinding();
             var endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
@@ -59,7 +59,7 @@ namespace CatanClient.Services
 
                 return result;
             }
-            catch (Exception ex) //TODO do a good exception 
+            catch (Exception ex) 
             {
                 Log.Information(ex.Message);
                 return result;

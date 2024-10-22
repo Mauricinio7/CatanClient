@@ -56,12 +56,13 @@ namespace CatanClient.ViewModels
         }
 
         public ICommand RegisterCommand { get; set; }
-        private IAccountServiceClient accountServiceClient;
+        private readonly ServiceManager serviceManager;
 
-        public RegisterViewModel(IAccountServiceClient accountServiceClient)
+
+        public RegisterViewModel(ServiceManager serviceManager)
         {
             RegisterCommand = new RelayCommand(async () => await RegisterUserAsync());
-            this.accountServiceClient = accountServiceClient;
+            this.serviceManager = serviceManager;
         }
 
         private async Task RegisterUserAsync()
@@ -76,7 +77,7 @@ namespace CatanClient.ViewModels
 
                     AccountDto account = AccountUtilities.CreateAccount(email, phoneNumber, Password, Username);
                     
-                    bool isCreated = await accountServiceClient.CreateAccountInServerAsync(account); 
+                    bool isCreated = await serviceManager.AccountServiceClient.CreateAccountInServerAsync(account); 
 
                     if (isCreated)
                     {

@@ -42,17 +42,19 @@ namespace CatanClient.ViewModels
         }
 
         public ICommand SendMessageCommand { get; }
+        private readonly ServiceManager serviceManager;
 
-        public GameLobbyViewModel(GameDto gameDto)
+        public GameLobbyViewModel(GameDto gameDto, ServiceManager serviceManager)
         {
             game = gameDto;
+            this.serviceManager = serviceManager;
 
             Messages = new ObservableCollection<ChatMessage>
             {
                 new ChatMessage { Content = game.Name, Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
             };
 
-            var profileDto = ProfileSingleton.Instance.Profile;
+            var profileDto = serviceManager.ProfileSingleton.Profile;
             profile = new ProfileDto
             {
                 Id = profileDto.Id,
@@ -61,8 +63,9 @@ namespace CatanClient.ViewModels
 
             Mediator.Register("ReceiveMessage", OnReceiveMessage);
 
-            ChatServiceClient.JoinChatClient(game, profile);
+            this.serviceManager.ChatServiceClient.JoinChatClient(game, profile);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
+            
         }
 
         private void OnReceiveMessage(object message)
@@ -76,7 +79,7 @@ namespace CatanClient.ViewModels
 
         private void ExecuteSendMessage()
         {
-            ChatServiceClient.SendMessageToServer(game, profile, NewMessage);
+            serviceManager.ChatServiceClient.SendMessageToServer(game, profile, NewMessage);
         }
 
  
