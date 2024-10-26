@@ -104,35 +104,30 @@ namespace CatanClient.ViewModels
             
         }
 
-        private void AuthenticateUser(AccountDto account, object window)
+        internal void AuthenticateUser(AccountDto account, object window)
         {
-            OperationResultProfileDto result = serviceManager.AccountServiceClient.IsValidAuthentication(account) ?? new OperationResultProfileDto
-            {
-                Status = AuthenticationStatus.ServerNotFound
-            };
+            OperationResultProfileDto result = serviceManager.AccountServiceClient.IsValidAuthentication(account);
 
-            switch (result.Status)
+
+            switch (result.AunthenticationStatus)
             {
-                case AccountService.AuthenticationStatus.Verified:
+                case AccountService.EnumAuthenticationStatus.Verified:
 
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
 
                     ShowMainMenu(window);
                     break;
-                case AccountService.AuthenticationStatus.InGame: //TODO: Sed to room
+                case AccountService.EnumAuthenticationStatus.InGame: //TODO: Sed to room
 
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
 
                     ShowMainMenu(window);
                     break;
-                case AccountService.AuthenticationStatus.NotVerified:
+                case AccountService.EnumAuthenticationStatus.NotVerified:
                     ShowVerifyAccountView(account);
                     break;
-                case AccountService.AuthenticationStatus.Incorrect:
+                case AccountService.EnumAuthenticationStatus.Incorrect:
                     MessageBox.Show(Utilities.MessageIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), Utilities.TittleIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                    break;
-                default:
-                    MessageBox.Show(result.MessageResponse, result.Status.ToString(), MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
             }
         }

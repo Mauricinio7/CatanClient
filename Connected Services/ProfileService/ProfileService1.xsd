@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataTransferObject.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataTransferObject.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="EnumAuthenticationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Incorrect" />
+      <xs:enumeration value="NotVerified" />
+      <xs:enumeration value="Verified" />
+      <xs:enumeration value="InGame" />
+      <xs:enumeration value="ServerNotFound" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumAuthenticationStatus" nillable="true" type="tns:EnumAuthenticationStatus" />
+  <xs:simpleType name="EnumChangeAccountRegister">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Invalid" />
+      <xs:enumeration value="AlreadyExists" />
+      <xs:enumeration value="UnableToSaveData" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumChangeAccountRegister" nillable="true" type="tns:EnumChangeAccountRegister" />
+</xs:schema>

@@ -78,6 +78,10 @@ namespace CatanClient
             builder.RegisterType<MainWindowsViewModel>().AsSelf();
             builder.RegisterType<RegisterViewModel>().AsSelf();
             builder.RegisterType<VerifyAccountViewModel>().AsSelf();
+            builder.RegisterType<ConfigureProfileViewModel>().AsSelf();
+            builder.RegisterType<EditProfileWindowViewModel>().AsSelf();
+            builder.RegisterType<VerifyAccountChangeWindowViewModel>().AsSelf();
+            builder.RegisterType<MainMenuViewModel>().AsSelf();
 
             builder.RegisterType<CreateRoomView>().AsSelf();
             builder.RegisterType<GameLobbyView>().AsSelf();
@@ -86,6 +90,10 @@ namespace CatanClient
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<RegisterView>().AsSelf();
             builder.RegisterType<VerifyAccountView>().AsSelf();
+            builder.RegisterType<ConfigureProfileView>().AsSelf();
+            builder.RegisterType<EditProfileWindow>().AsSelf();
+            builder.RegisterType<VerifyAccountChangeWindow>().AsSelf();
+            builder.RegisterType<MainMenuView>().AsSelf();
         }
 
 

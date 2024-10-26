@@ -27,8 +27,11 @@ namespace CatanClient.ViewModels
             get => roomCode;
             set
             {
-                roomCode = value;
-                OnPropertyChanged(nameof(roomCode));
+                if (roomCode != value)
+                {
+                    roomCode = value;
+                    OnPropertyChanged(nameof(RoomCode)); 
+                }
             }
         }
 
@@ -46,11 +49,8 @@ namespace CatanClient.ViewModels
 
 
         private void ExecuteLoginRoom(object parameter)
-        {
-
-            MessageBox.Show(roomCode);
-
-            var profileDto = serviceManager.ProfileSingleton.Profile;
+        { 
+            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
 
             ProfileDto profile = new ProfileDto
             {
@@ -63,14 +63,18 @@ namespace CatanClient.ViewModels
 
             OperationResultGameDto result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile); //TODO quit hardcode
 
-            GameDto game = result.GameDto;
-
-            if(game == null)
+            if(result.IsSuccess == true)
             {
-                return;
+                GameDto game = result.GameDto;
+                Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
             }
+            else
+            {
+                //TODO message game not found
+            }
+            
 
-            Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
+            
 
         }
 

@@ -52,6 +52,7 @@ namespace CatanClient.ViewModels
         public ICommand BackFromCreateRoomCommand { get; }
         public ICommand BackFromLoginRoomCommand { get; }
         public ICommand ShowGameLobbyCommand { get; }
+        public ICommand ShowConfigureProfileCommand { get; }
 
         public MainWindowsViewModel()
         {
@@ -65,11 +66,14 @@ namespace CatanClient.ViewModels
             ShowMainMenuViewCommand = new RelayCommand(ShowMainMenuView);
             ShowMainMenuBackgroundViewCommand = new RelayCommand(ShowMainMenuBackgroundView);
             ShowCreateRoomCommand = new RelayCommand(async () => await ShowCreateRoom());
+            
             ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
             BackFromCreateRoomCommand = new RelayCommand(async () => await BackFromCreateRoom());
             BackFromLoginRoomCommand = new RelayCommand(async () => await BackFromLoginRoom());
             ShowGameLobbyCommand = new RelayCommand(async (object gameDto) => await ShowGameLobby(gameDto));
+            ShowConfigureProfileCommand = new RelayCommand(async (object accountDto) => await ShowConfigureProfile(accountDto));
 
+            Mediator.Register("ShowConfigureProfile", args => ShowConfigureProfileCommand.Execute(args));
             Mediator.Register(Utilities.SHOWVERIFYACCOUNT, args => ShowVerifyAccountViewCommand.Execute(args));
             Mediator.Register(Utilities.SHOWGAMELOBBY, args => ShowGameLobbyCommand.Execute(args));
             Mediator.Register(Utilities.SHOWMAINMENU, args => ShowMainMenuViewCommand.Execute(null));
@@ -82,10 +86,9 @@ namespace CatanClient.ViewModels
         {
             if (currentView is Views.LoginView loginView)
             {
-                var animatedGrid = loginView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (loginView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
+                    Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(1000);
                 }
@@ -97,10 +100,9 @@ namespace CatanClient.ViewModels
         {
             if (currentView is Views.RegisterView registerView)
             {
-                var animatedGrid = registerView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (registerView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)registerView.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
+                    Storyboard storyboard = (Storyboard)registerView.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(1000);
                 }
@@ -110,16 +112,14 @@ namespace CatanClient.ViewModels
             CurrentView = new Views.LoginView();
         }
 
-        //TODO quit all methods and do it more general
 
         private async Task OcultVerifyAccountView()
         {
             if (currentView is Views.VerifyAccountView verifyAccountView)
             {
-                var animatedGrid = verifyAccountView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (verifyAccountView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)verifyAccountView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    Storyboard storyboard = (Storyboard)verifyAccountView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(820);
                 }
@@ -131,8 +131,7 @@ namespace CatanClient.ViewModels
 
         private async Task ShowVerifyAccountView(object accountDtoObj)
         {
-            var accountDto = accountDtoObj as AccountDto; 
-            if (accountDto == null)
+            if (!(accountDtoObj is AccountDto accountDto))
             {
                 MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -140,10 +139,9 @@ namespace CatanClient.ViewModels
 
             if (currentView is Views.RegisterView registerView)
             {
-                var animatedGrid = registerView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (registerView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
+                    Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(900);
                 }
@@ -151,24 +149,22 @@ namespace CatanClient.ViewModels
 
             if (currentView is Views.LoginView loginview)
             {
-                var animatedGrid = loginview.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (loginview.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)loginview.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
+                    Storyboard storyboard = (Storyboard)loginview.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(900);
                 }
             }
 
-            var verifyAccountView = new Views.VerifyAccountView(accountDto);
+            VerifyAccountView verifyAccountView = new Views.VerifyAccountView(accountDto);
 
             CurrentView = verifyAccountView;
         }
 
         private async Task ShowGameLobby(object gameDtoObj)
         {
-            var gameDto = gameDtoObj as GameDto;
-            if (gameDto == null)
+            if (!(gameDtoObj is GameDto gameDto))
             {
                 MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -176,16 +172,15 @@ namespace CatanClient.ViewModels
 
             if (currentView is Views.CreateRoomView mainMenuView)
             {
-                var animatedGrid = mainMenuView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (mainMenuView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(900);
                 }
             }
 
-            var lobbyRoomView = new Views.GameLobbyView(gameDto);
+            GameLobbyView lobbyRoomView = new Views.GameLobbyView(gameDto);
 
             CurrentView = lobbyRoomView;
         }
@@ -204,10 +199,9 @@ namespace CatanClient.ViewModels
         {
             if (currentView is Views.MainMenuView mainMenuView)
             {
-                var animatedGrid = mainMenuView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (mainMenuView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(900);
                 }
@@ -219,10 +213,9 @@ namespace CatanClient.ViewModels
         {
             if (currentView is Views.MainMenuView mainMenuView)
             {
-                var animatedGrid = mainMenuView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (mainMenuView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(900);
                 }
@@ -230,14 +223,37 @@ namespace CatanClient.ViewModels
             CurrentView = new Views.LoginRoomView();
         }
 
+
+        private async Task ShowConfigureProfile(object account)
+        {
+            if (!(account is AccountDto accountDto))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (currentView is Views.MainMenuView mainMenuView)
+            {
+                if (mainMenuView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+                {
+                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    storyboard.Begin(animatedGrid);
+                    await Task.Delay(900);
+                }
+            }
+
+            ConfigureProfileView configureProfileView = new Views.ConfigureProfileView(accountDto);
+
+            CurrentView = configureProfileView;
+        }
+
         private async Task BackFromCreateRoom()
         {
             if (currentView is Views.CreateRoomView createRoomView)
             {
-                var animatedGrid = createRoomView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (createRoomView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)createRoomView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    Storyboard storyboard = (Storyboard)createRoomView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(900);
                 }
@@ -249,10 +265,9 @@ namespace CatanClient.ViewModels
         {
             if (currentView is Views.LoginRoomView loginRoomView)
             {
-                var animatedGrid = loginRoomView.FindName(Utilities.ANIMATEDGRID) as Grid;
-                if (animatedGrid != null)
+                if (loginRoomView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
                 {
-                    var storyboard = (Storyboard)loginRoomView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    Storyboard storyboard = (Storyboard)loginRoomView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
                     storyboard.Begin(animatedGrid);
                     await Task.Delay(900);
                 }

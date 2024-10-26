@@ -59,7 +59,7 @@ namespace CatanClient.ViewModels
                 return;
             }
 
-            var status = serviceManager.AccountServiceClient.VerifyUserAccount(Account, VerificationCode);
+            bool status = serviceManager.AccountServiceClient.VerifyUserAccount(Account, VerificationCode);
 
             if (status)
             {

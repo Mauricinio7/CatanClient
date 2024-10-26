@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatanClient.UIHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace CatanClient.Views
 
         private void Load_Gif()
         {
-            var imageUri = new Uri("pack://application:,,,/Resources/Gifs/SynthWaveAnimatedBackground2.gif", UriKind.Absolute);
+            var imageUri = new Uri(Utilities.SYNTH_WAVE_BACKGROUND2_PATH, UriKind.Absolute);
             var imageSource = new BitmapImage(imageUri);
             ImageBehavior.SetAnimatedSource(SynthWaveAnimatedBackground2, imageSource);
         }

@@ -42,6 +42,7 @@ namespace CatanClient.ViewModels
         }
 
         public ICommand SendMessageCommand { get; }
+        public ICommand LeftRoomCommand { get; }
         private readonly ServiceManager serviceManager;
 
         public GameLobbyViewModel(GameDto gameDto, ServiceManager serviceManager)
@@ -54,7 +55,7 @@ namespace CatanClient.ViewModels
                 new ChatMessage { Content = game.Name, Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
             };
 
-            var profileDto = serviceManager.ProfileSingleton.Profile;
+            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profile = new ProfileDto
             {
                 Id = profileDto.Id,
@@ -65,28 +66,55 @@ namespace CatanClient.ViewModels
 
             this.serviceManager.ChatServiceClient.JoinChatClient(game, profile);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
-            
+            LeftRoomCommand = new RelayCommand(ExecuteLeftRoom);
+
         }
 
-        private void OnReceiveMessage(object message)
+        internal void OnReceiveMessage(object message)
         {
-            var chatMessage = message as ChatMessage;
+            ChatMessage chatMessage = message as ChatMessage;
             if (chatMessage != null)
             {
                 Messages.Add(chatMessage);
             }
         }
 
-        private void ExecuteSendMessage()
+        internal void ExecuteSendMessage()
         {
             serviceManager.ChatServiceClient.SendMessageToServer(game, profile, NewMessage);
         }
 
- 
+        internal void ExecuteLeftRoom()
+        {
+            serviceManager.ChatServiceClient.LeftChatClient(game, profile);
 
+            GameService.GameDto gameRoom = new GameService.GameDto
+            {
+                Name = game.Name,
+                Id = game.Id,
+                AccessKey = game.AccessKey,
+                MaxNumberPlayers = game.MaxNumberPlayers
+            };
+
+            GameService.ProfileDto profileRoom = new GameService.ProfileDto
+            {
+                Name = profile.Name,
+                Id = profile.Id,
+                PicturePath = profile.PicturePath,
+                PreferredLanguage = profile.PreferredLanguage
+            };
+
+
+            serviceManager.GameServiceClient.LeftRoomClient(gameRoom, profileRoom);
+
+            Mediator.Notify(Utilities.SHOWMAINMENU, null);
+        }
         
 
-        
+
+
+
+
     }
     
 

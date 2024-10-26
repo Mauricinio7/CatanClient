@@ -1,0 +1,6 @@
+﻿C:\Users\mauricio\source\repos\CatanClient.Tests\LoginViewModelTests.cs
+C:\Users\mauricio\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\net452\xunit.runner.visualstudio.testadapter.dll
+C:\Users\mauricio\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\net452\xunit.runner.reporters.net452.dll
+C:\Users\mauricio\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\net452\xunit.runner.utility.net452.dll
+C:\Users\mauricio\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\net452\xunit.abstractions.dll
+C:\Users\mauricio\source\repos\CatanClient.Tests\._.DS_Store

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatanClient.UIHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty LabelStyleProperty =
-            DependencyProperty.Register("LabelStyle", typeof(Style), typeof(PlaceholderTextBoxControl), new PropertyMetadata(null));
+            DependencyProperty.Register(Utilities.LABEL_STYLE, typeof(Style), typeof(PlaceholderTextBoxControl), new PropertyMetadata(null));
 
         public Style LabelStyle
         {
@@ -35,7 +36,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty TextProperty =
-        DependencyProperty.Register("Text", typeof(string), typeof(PlaceholderTextBoxControl),
+        DependencyProperty.Register(Utilities.TEXT, typeof(string), typeof(PlaceholderTextBoxControl),
         new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string Text
@@ -45,7 +46,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderTextProperty =
-            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(PlaceholderTextBoxControl), new PropertyMetadata("Write here..."));
+            DependencyProperty.Register(Utilities.PLACEHOLDER_TEXT, typeof(string), typeof(PlaceholderTextBoxControl), new PropertyMetadata("Write here..."));
 
         public string PlaceholderText
         {
@@ -55,7 +56,7 @@ namespace CatanClient.Controls
 
 
         public static readonly DependencyProperty FontSizeValueProperty =
-            DependencyProperty.Register("FontSizeValue", typeof(double), typeof(PlaceholderTextBoxControl), new PropertyMetadata(15.0));
+            DependencyProperty.Register(Utilities.FONT_SIZE_VALUE, typeof(double), typeof(PlaceholderTextBoxControl), new PropertyMetadata(15.0));
 
         public double FontSizeValue
         {
@@ -64,7 +65,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty BackgroundColorValueProperty =
-            DependencyProperty.Register("BackgroundColorValue", typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.Black));
+            DependencyProperty.Register(Utilities.BACKGROUND_COLOR_VALUE, typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.Black));
 
         public Brush BackgroundColorValue
         {
@@ -73,7 +74,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderForegroundColorValueProperty =
-            DependencyProperty.Register("PlaceholderForegroundColorValue", typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register(Utilities.PLACEHOLDER_FOREGROUND_COLOR_VALUE, typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.LightGray));
 
         public Brush PlaceholderForegroundColorValue
         {
@@ -82,7 +83,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty WritingForegroundColorValueProperty =
-            DependencyProperty.Register("WritingForegroundColorValue", typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.White));
+            DependencyProperty.Register(Utilities.WRITING_FOREGROUND_COLOR_VALUE, typeof(Brush), typeof(PlaceholderTextBoxControl), new PropertyMetadata(Brushes.White));
 
         public Brush WritingForegroundColorValue
         {
@@ -91,7 +92,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PaddingValueProperty =
-            DependencyProperty.Register("PaddingValue", typeof(Thickness), typeof(PlaceholderTextBoxControl), new PropertyMetadata(new Thickness(15)));
+            DependencyProperty.Register(Utilities.PADDING_VALUE, typeof(Thickness), typeof(PlaceholderTextBoxControl), new PropertyMetadata(new Thickness(15)));
 
         public Thickness PaddingValue
         {
@@ -100,7 +101,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty BorderThicknessValueProperty =
-            DependencyProperty.Register("BorderThicknessValue", typeof(Thickness), typeof(PlaceholderTextBoxControl), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.Register(Utilities.BORDER_THICKNESS_VALUE, typeof(Thickness), typeof(PlaceholderTextBoxControl), new PropertyMetadata(new Thickness(0)));
 
         public Thickness BorderThicknessValue
         {

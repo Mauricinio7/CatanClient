@@ -15,11 +15,11 @@ namespace CatanClient.Services
     {
         public OperationResultGameDto CreateRoomClient(GameDto game, ProfileDto profile)
         {
-            var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            var channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
-            OperationResultGameDto result = null;
+            OperationResultGameDto result;
 
             try
             {
@@ -29,6 +29,11 @@ namespace CatanClient.Services
             }
             catch (Exception ex) 
             {
+                result = new OperationResultGameDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
                 Log.Information(ex.Message);
                 MessageBox.Show($"{ex.Message}");
             }
@@ -42,11 +47,11 @@ namespace CatanClient.Services
 
         public OperationResultGameDto JoinRoomClient(string code, ProfileDto profile)
         {
-            var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            var channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
-            OperationResultGameDto result = null;
+            OperationResultGameDto result;
 
             try
             {
@@ -57,18 +62,51 @@ namespace CatanClient.Services
 
                 MessageBox.Show(result.IsSuccess.ToString());
 
-                return result;
             }
             catch (Exception ex) 
             {
+                result = new OperationResultGameDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+                //MESAGE
                 Log.Information(ex.Message);
-                return result;
             }
             finally
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
             }
+            return result;
+        }
+
+        public bool LeftRoomClient(GameDto game, ProfileDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            IGameEndPoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+
+                result = client.QuitGame(game, profile).IsSuccess;
+
+                MessageBox.Show(result.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                Log.Information(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
         }
     }
 }

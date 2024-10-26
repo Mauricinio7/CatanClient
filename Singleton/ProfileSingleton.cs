@@ -12,6 +12,7 @@ namespace CatanClient.Singleton
         private static ProfileSingleton instance;
         public ProfileDto Profile { get; private set; }
 
+
         public ProfileSingleton() { }
 
         public static ProfileSingleton Instance
@@ -29,6 +30,11 @@ namespace CatanClient.Singleton
         public void SetProfile(ProfileDto profile)
         {
             Profile = profile;
+        }
+
+        public void SetName(string name)
+        {
+            Profile.Name = name;
         }
     }
 }

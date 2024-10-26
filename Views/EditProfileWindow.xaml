@@ -1,0 +1,69 @@
+﻿<Window x:Class="CatanClient.Views.EditProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatanClient.Views"
+        xmlns:properties="clr-namespace:CatanClient.Properties" 
+        xmlns:controls="clr-namespace:CatanClient.Controls"
+        mc:Ignorable="d"
+        Title="EditProfileWindow" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
+
+
+    <Viewbox Stretch="Fill" Margin="0,0,0,0">
+        <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0.5,0.5" Width="1576" Height="900" x:Name="animatedGrid">
+
+            <TextBlock
+          Style="{StaticResource PrimaryTextBlockStyle}"  
+          Text="{Binding PromptText}" 
+          TextWrapping="Wrap"
+          Margin="39,172,0,0"
+          VerticalAlignment="Top"
+          HorizontalAlignment="Left"
+          LineHeight="50"
+          FontSize="50"
+          LineStackingStrategy="BlockLineHeight" Width="1490" Height="176"
+        />
+
+            <controls:PlaceholderTextBoxControl 
+            PlaceholderText="{Binding PromptText}"
+            Style="{StaticResource SynthwaveTextBoxStyle}"                          
+            HorizontalAlignment="Left" Height="124" 
+            VerticalAlignment="Top" Width="1346" Margin="125,410,0,0" 
+            FontSizeValue="28"
+            Text="{Binding NewValue, UpdateSourceTrigger=PropertyChanged}"
+            />
+
+            <Button
+            
+            Content="{x:Static properties:Resources.button_save}" 
+            Style="{StaticResource NeonButtonStyle}"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="208" Height="97" 
+            Margin="1268,731,0,0"
+            FontSize="18"
+            Command="{Binding SaveCommand}"
+            />
+            <Button
+            Content="{x:Static properties:Resources.button_exit}" 
+            Style="{StaticResource NeonButtonStyle}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="125,714,0,0"                  
+            FontSize="18"
+            FontWeight="Bold"
+            Padding="20,30"              
+            MinWidth="100"
+            MinHeight="80" Height="95" 
+            Click="ButtonExit_Click" 
+            />
+
+
+        </Grid>
+
+
+    </Viewbox>
+</Window>

@@ -44,8 +44,11 @@ namespace CatanClient.ViewModels
             get => roomName;
             set
             {
-                roomName = value;
-                OnPropertyChanged(nameof(roomName));
+                if (roomName != value)  
+                {
+                    roomName = value;
+                    OnPropertyChanged(nameof(RoomName));  
+                }
             }
         }
 
@@ -69,34 +72,33 @@ namespace CatanClient.ViewModels
 
         private void ExecuteCreateRoom(object parameter)
         {
-
-            GameDto gameDto = new GameDto
+            if(!String.IsNullOrEmpty(RoomName) && !String.IsNullOrEmpty(SelectedOption))
             {
-                MaxNumberPlayers = int.Parse(SelectedOption),
-                Name = RoomName
+                GameDto gameDto = new GameDto
+                {
+                    MaxNumberPlayers = int.Parse(SelectedOption),
+                    Name = RoomName
 
-            };
+                };
 
-            var profileDto = serviceManager.ProfileSingleton.Profile;
+                AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
 
-            ProfileDto profile = new ProfileDto
-            {
-                Name = profileDto.Name,
-                Id = profileDto.Id,
-                PicturePath = profileDto.PicturePath,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name, //TODO quit hardcode and do it whit actual culture               
-            };
+                ProfileDto profile = new ProfileDto
+                {
+                    Name = profileDto.Name,
+                    Id = profileDto.Id,
+                    PicturePath = profileDto.PicturePath,
+                    PreferredLanguage = CultureInfo.CurrentCulture.Name, //TODO quit hardcode and do it whit actual culture               
+                };
+                OperationResultGameDto result = serviceManager.GameServiceClient.CreateRoomClient(gameDto, profile);
 
-            OperationResultGameDto result = serviceManager.GameServiceClient.CreateRoomClient(gameDto, profile);
+                if (result.IsSuccess)
+                {
+                    GameDto game = result.GameDto;
+                    Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
+                }
+            }
 
-            GameDto game = result.GameDto;
-
-            MessageBox.Show(game.Name);
-
-            Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
-            
         }
-
-        
     }
 }

@@ -30,10 +30,12 @@ namespace CatanClient.Views
         public GameLobbyView(GameDto gameDto)
         {
             InitializeComponent();
-            ChatService.GameDto game = new ChatService.GameDto();
-            game.Name = gameDto.Name;
-            game.Id = gameDto.Id;
-            game.MaxNumberPlayers = gameDto.MaxNumberPlayers;
+            ChatService.GameDto game = new ChatService.GameDto
+            {
+                Name = gameDto.Name,
+                Id = gameDto.Id,
+                MaxNumberPlayers = gameDto.MaxNumberPlayers
+            };
 
             this.DataContext = App.Container.Resolve<GameLobbyViewModel>(
                 new TypedParameter(typeof(ChatService.GameDto), game)

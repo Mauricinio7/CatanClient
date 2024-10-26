@@ -18,6 +18,9 @@ namespace CatanClient.Services
         
 
         OperationResultGameDto JoinRoomClient(string code, ProfileDto profile);
-        
+
+        bool LeftRoomClient(GameDto game, ProfileDto profile);
+
+
         }
 }

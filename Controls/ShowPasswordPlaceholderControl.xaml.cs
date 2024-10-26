@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using CatanClient.UIHelpers;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -13,7 +14,7 @@ namespace CatanClient.Controls
         {
             InitializeComponent();
 
-            var widthBinding = new Binding("Width")
+            var widthBinding = new Binding(Utilities.WIDTH)
             {
                 Source = PasswordTextBox,
                 Mode = BindingMode.TwoWay,
@@ -21,7 +22,7 @@ namespace CatanClient.Controls
             };
             PasswordBox.SetBinding(WidthProperty, widthBinding);
 
-            var heightBinding = new Binding("Height")
+            var heightBinding = new Binding(Utilities.HEIGHT)
             {
                 Source = PasswordTextBox,
                 Mode = BindingMode.TwoWay,
@@ -31,7 +32,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty LabelStyleProperty =
-            DependencyProperty.Register("LabelStyle", typeof(Style), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(null));
+            DependencyProperty.Register(Utilities.LABEL_STYLE, typeof(Style), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(null));
 
         public Style LabelStyle
         {
@@ -40,7 +41,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.Register("Password", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(Utilities.PASSWORD, typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(string.Empty));
 
         public string Password
         {
@@ -49,7 +50,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty TextBoxWidthProperty =
-            DependencyProperty.Register("TextBoxWidth", typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(200.0));
+            DependencyProperty.Register(Utilities.TEXT_BOX_WIDTH, typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(200.0));
 
         public double TextBoxWidth
         {
@@ -58,7 +59,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty TextBoxHeightProperty =
-            DependencyProperty.Register("TextBoxHeight", typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(44.0));
+            DependencyProperty.Register(Utilities.TEXT_BOX_HEIGHT, typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(44.0));
 
         public double TextBoxHeight
         {
@@ -67,7 +68,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty BackgroundColorValueProperty =
-            DependencyProperty.Register("BackgroundColorValue", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
+            DependencyProperty.Register(Utilities.BACKGROUND_COLOR_VALUE, typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
 
         public Brush BackgroundColorValue
         {
@@ -76,7 +77,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderForegroundColorValueProperty =
-            DependencyProperty.Register("PlaceholderForegroundColorValue", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register(Utilities.PLACEHOLDER_FOREGROUND_COLOR_VALUE, typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.LightGray));
 
         public Brush PlaceholderForegroundColorValue
         {
@@ -85,7 +86,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty WritingForegroundColorValueProperty =
-            DependencyProperty.Register("WritingForegroundColorValue", typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
+            DependencyProperty.Register(Utilities.WRITING_FOREGROUND_COLOR_VALUE, typeof(Brush), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(Brushes.White));
 
         public Brush WritingForegroundColorValue
         {
@@ -94,7 +95,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PlaceholderTextProperty =
-            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata("Password"));
+            DependencyProperty.Register(Utilities.PLACEHOLDER_TEXT, typeof(string), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata("Password"));
 
         public string PlaceholderText
         {
@@ -103,7 +104,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty FontSizeValueProperty =
-            DependencyProperty.Register("FontSizeValue", typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(15.0));
+            DependencyProperty.Register(Utilities.FONT_SIZE_VALUE, typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(15.0));
 
         public double FontSizeValue
         {
@@ -112,7 +113,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty PaddingValueProperty =
-            DependencyProperty.Register("PaddingValue", typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(15)));
+            DependencyProperty.Register(Utilities.PADDING_VALUE, typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(15)));
 
         public Thickness PaddingValue
         {
@@ -121,7 +122,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty BorderThicknessValueProperty =
-            DependencyProperty.Register("BorderThicknessValue", typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.Register(Utilities.BORDER_THICKNESS_VALUE, typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(0)));
 
         public Thickness BorderThicknessValue
         {
@@ -130,7 +131,7 @@ namespace CatanClient.Controls
         }
 
         public static readonly DependencyProperty CheckBoxMarginProperty =
-            DependencyProperty.Register("CheckBoxMargin", typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(0, 60, 0, 0)));
+            DependencyProperty.Register(Utilities.CHECK_BOX_MARGIN, typeof(Thickness), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(new Thickness(0, 60, 0, 0)));
 
         public Thickness CheckBoxMargin
         {

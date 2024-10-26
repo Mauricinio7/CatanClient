@@ -63,7 +63,6 @@ namespace CatanClient.UIHelpers
                 Email = email,
                 PhoneNumber = phoneNumber,
                 Password = password,
-                PicturePath = String.Empty,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name
                 
             };

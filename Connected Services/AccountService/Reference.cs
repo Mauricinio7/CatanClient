@@ -26,22 +26,25 @@ namespace CatanClient.AccountService {
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private System.Nullable<int> IdField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PicturePathField;
-        
         private string PreferredLanguageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TokenField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TokenExpirationField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -67,7 +70,7 @@ namespace CatanClient.AccountService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public System.Nullable<int> Id {
             get {
                 return this.IdField;
             }
@@ -79,7 +82,7 @@ namespace CatanClient.AccountService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
                 return this.NameField;
@@ -92,7 +95,7 @@ namespace CatanClient.AccountService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Password {
             get {
                 return this.PasswordField;
@@ -119,19 +122,6 @@ namespace CatanClient.AccountService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PicturePath {
-            get {
-                return this.PicturePathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PicturePathField, value) != true)) {
-                    this.PicturePathField = value;
-                    this.RaisePropertyChanged("PicturePath");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string PreferredLanguage {
             get {
                 return this.PreferredLanguageField;
@@ -157,6 +147,19 @@ namespace CatanClient.AccountService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime TokenExpiration {
+            get {
+                return this.TokenExpirationField;
+            }
+            set {
+                if ((this.TokenExpirationField.Equals(value) != true)) {
+                    this.TokenExpirationField = value;
+                    this.RaisePropertyChanged("TokenExpiration");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -172,6 +175,9 @@ namespace CatanClient.AccountService {
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.AccountService.OperationResultProfileDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.AccountService.OperationResultAccountDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.AccountService.OperationResultCreateAccountDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -236,10 +242,39 @@ namespace CatanClient.AccountService {
     public partial class OperationResultProfileDto : CatanClient.AccountService.OperationResultDto {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CatanClient.AccountService.ProfileDto ProfileDtoField;
+        private CatanClient.AccountService.EnumAuthenticationStatus AunthenticationStatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CatanClient.AccountService.AuthenticationStatus StatusField;
+        private CatanClient.AccountService.EnumChangeAccountRegister ChangeAccountRegisterField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.AccountService.ProfileDto ProfileDtoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.AccountService.EnumAuthenticationStatus AunthenticationStatus {
+            get {
+                return this.AunthenticationStatusField;
+            }
+            set {
+                if ((this.AunthenticationStatusField.Equals(value) != true)) {
+                    this.AunthenticationStatusField = value;
+                    this.RaisePropertyChanged("AunthenticationStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.AccountService.EnumChangeAccountRegister ChangeAccountRegister {
+            get {
+                return this.ChangeAccountRegisterField;
+            }
+            set {
+                if ((this.ChangeAccountRegisterField.Equals(value) != true)) {
+                    this.ChangeAccountRegisterField = value;
+                    this.RaisePropertyChanged("ChangeAccountRegister");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public CatanClient.AccountService.ProfileDto ProfileDto {
@@ -253,19 +288,92 @@ namespace CatanClient.AccountService {
                 }
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultChangeRegisterEmailOrPhone", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultChangeRegisterEmailOrPhone : CatanClient.AccountService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.AccountService.EnumChangeAccountRegister StatusChangeAccountRegisterField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CatanClient.AccountService.AuthenticationStatus Status {
+        public CatanClient.AccountService.EnumChangeAccountRegister StatusChangeAccountRegister {
             get {
-                return this.StatusField;
+                return this.StatusChangeAccountRegisterField;
             }
             set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
+                if ((this.StatusChangeAccountRegisterField.Equals(value) != true)) {
+                    this.StatusChangeAccountRegisterField = value;
+                    this.RaisePropertyChanged("StatusChangeAccountRegister");
                 }
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultAccountDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultAccountDto : CatanClient.AccountService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.AccountService.AccountDto AccountDtoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.AccountService.AccountDto AccountDto {
+            get {
+                return this.AccountDtoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AccountDtoField, value) != true)) {
+                    this.AccountDtoField = value;
+                    this.RaisePropertyChanged("AccountDto");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultCreateAccountDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultCreateAccountDto : CatanClient.AccountService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.AccountService.EnumCreateAccountStatus statusField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.AccountService.EnumCreateAccountStatus status {
+            get {
+                return this.statusField;
+            }
+            set {
+                if ((this.statusField.Equals(value) != true)) {
+                    this.statusField = value;
+                    this.RaisePropertyChanged("status");
+                }
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EnumCreateAccountStatus", Namespace="http://schemas.datacontract.org/2004/07/DataTransferObject.Enums")]
+    public enum EnumCreateAccountStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ExistsName = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ExistsAccount = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ErrorSaving = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SuccessSave = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -278,15 +386,13 @@ namespace CatanClient.AccountService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private System.Nullable<int> IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PicturePathField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PreferredLanguageField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -300,7 +406,7 @@ namespace CatanClient.AccountService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public System.Nullable<int> Id {
             get {
                 return this.IdField;
             }
@@ -312,7 +418,7 @@ namespace CatanClient.AccountService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Name {
             get {
                 return this.NameField;
@@ -338,7 +444,7 @@ namespace CatanClient.AccountService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string PreferredLanguage {
             get {
                 return this.PreferredLanguageField;
@@ -362,8 +468,8 @@ namespace CatanClient.AccountService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AuthenticationStatus", Namespace="http://schemas.datacontract.org/2004/07/")]
-    public enum AuthenticationStatus : int {
+    [System.Runtime.Serialization.DataContractAttribute(Name="EnumAuthenticationStatus", Namespace="http://schemas.datacontract.org/2004/07/DataTransferObject.Enums")]
+    public enum EnumAuthenticationStatus : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Incorrect = 0,
@@ -381,15 +487,32 @@ namespace CatanClient.AccountService {
         ServerNotFound = 4,
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EnumChangeAccountRegister", Namespace="http://schemas.datacontract.org/2004/07/DataTransferObject.Enums")]
+    public enum EnumChangeAccountRegister : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Success = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Invalid = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AlreadyExists = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UnableToSaveData = 3,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AccountService.IAccountEndPoint")]
     public interface IAccountEndPoint {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/CreateAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/CreateAccountResponse")]
-        CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto accountClientDto);
+        CatanClient.AccountService.OperationResultCreateAccountDto CreateAccount(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/CreateAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/CreateAccountResponse")]
-        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto accountClientDto);
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultCreateAccountDto> CreateAccountAsync(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/VerifyAccount", ReplyAction="http://tempuri.org/IAccountEndPoint/VerifyAccountResponse")]
         CatanClient.AccountService.OperationResultDto VerifyAccount(CatanClient.AccountService.AccountDto accountClientDto);
@@ -404,10 +527,42 @@ namespace CatanClient.AccountService {
         System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
-        void ResendVerificationCode(CatanClient.AccountService.AccountDto accountClientDto);
+        void ResendVerificationCode(int idAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
-        System.Threading.Tasks.Task ResendVerificationCodeAsync(CatanClient.AccountService.AccountDto accountClientDto);
+        System.Threading.Tasks.Task ResendVerificationCodeAsync(int idAccount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangePasswordResponse")]
+        CatanClient.AccountService.OperationResultDto ChangePassword(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangePasswordResponse")]
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> ChangePasswordAsync(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangeEmailOrPhone", ReplyAction="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangeEmailOrPhoneRespo" +
+            "nse")]
+        CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone SendVerificationCodeToChangeEmailOrPhone(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangeEmailOrPhone", ReplyAction="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangeEmailOrPhoneRespo" +
+            "nse")]
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone> SendVerificationCodeToChangeEmailOrPhoneAsync(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangeEmailOrPhone", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangeEmailOrPhoneResponse")]
+        CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone ChangeEmailOrPhone(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangeEmailOrPhone", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangeEmailOrPhoneResponse")]
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone> ChangeEmailOrPhoneAsync(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformation", ReplyAction="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformationResponse")]
+        CatanClient.AccountService.OperationResultAccountDto ConsultAccounProfileInformation(CatanClient.AccountService.ProfileDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformation", ReplyAction="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformationResponse")]
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultAccountDto> ConsultAccounProfileInformationAsync(CatanClient.AccountService.ProfileDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePasswordResponse")]
+        CatanClient.AccountService.OperationResultDto SendVerificationCodeToChangePassword(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePasswordResponse")]
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> SendVerificationCodeToChangePasswordAsync(CatanClient.AccountService.AccountDto accountClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -437,11 +592,11 @@ namespace CatanClient.AccountService {
                 base(binding, remoteAddress) {
         }
         
-        public CatanClient.AccountService.OperationResultDto CreateAccount(CatanClient.AccountService.AccountDto accountClientDto) {
+        public CatanClient.AccountService.OperationResultCreateAccountDto CreateAccount(CatanClient.AccountService.AccountDto accountClientDto) {
             return base.Channel.CreateAccount(accountClientDto);
         }
         
-        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> CreateAccountAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultCreateAccountDto> CreateAccountAsync(CatanClient.AccountService.AccountDto accountClientDto) {
             return base.Channel.CreateAccountAsync(accountClientDto);
         }
         
@@ -461,12 +616,52 @@ namespace CatanClient.AccountService {
             return base.Channel.LogInAsync(accountClientDto);
         }
         
-        public void ResendVerificationCode(CatanClient.AccountService.AccountDto accountClientDto) {
-            base.Channel.ResendVerificationCode(accountClientDto);
+        public void ResendVerificationCode(int idAccount) {
+            base.Channel.ResendVerificationCode(idAccount);
         }
         
-        public System.Threading.Tasks.Task ResendVerificationCodeAsync(CatanClient.AccountService.AccountDto accountClientDto) {
-            return base.Channel.ResendVerificationCodeAsync(accountClientDto);
+        public System.Threading.Tasks.Task ResendVerificationCodeAsync(int idAccount) {
+            return base.Channel.ResendVerificationCodeAsync(idAccount);
+        }
+        
+        public CatanClient.AccountService.OperationResultDto ChangePassword(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.ChangePassword(accountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> ChangePasswordAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.ChangePasswordAsync(accountClientDto);
+        }
+        
+        public CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone SendVerificationCodeToChangeEmailOrPhone(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.SendVerificationCodeToChangeEmailOrPhone(accountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone> SendVerificationCodeToChangeEmailOrPhoneAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.SendVerificationCodeToChangeEmailOrPhoneAsync(accountClientDto);
+        }
+        
+        public CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone ChangeEmailOrPhone(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.ChangeEmailOrPhone(accountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone> ChangeEmailOrPhoneAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.ChangeEmailOrPhoneAsync(accountClientDto);
+        }
+        
+        public CatanClient.AccountService.OperationResultAccountDto ConsultAccounProfileInformation(CatanClient.AccountService.ProfileDto accountClientDto) {
+            return base.Channel.ConsultAccounProfileInformation(accountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultAccountDto> ConsultAccounProfileInformationAsync(CatanClient.AccountService.ProfileDto accountClientDto) {
+            return base.Channel.ConsultAccounProfileInformationAsync(accountClientDto);
+        }
+        
+        public CatanClient.AccountService.OperationResultDto SendVerificationCodeToChangePassword(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.SendVerificationCodeToChangePassword(accountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> SendVerificationCodeToChangePasswordAsync(CatanClient.AccountService.AccountDto accountClientDto) {
+            return base.Channel.SendVerificationCodeToChangePasswordAsync(accountClientDto);
         }
     }
 }

@@ -127,6 +127,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ProfileService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PlayerInRoomCard.xaml.cs">
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
@@ -143,12 +148,25 @@
     <Compile Include="UIHelpers\ChatMessage.cs" />
     <Compile Include="UIHelpers\Mediator.cs" />
     <Compile Include="UIHelpers\Utilities.cs" />
+    <Compile Include="ViewModels\ConfigureProfileViewModel.cs" />
     <Compile Include="ViewModels\CreateRoomViewModel.cs" />
+    <Compile Include="ViewModels\EditProfileWindowViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\LoginRoomViewModel.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\VerifyAccountChangeWindowViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountViewModel.cs" />
+    <Compile Include="Views\ConfigureProfileView.xaml.cs">
+      <DependentUpon>ConfigureProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateRoomView.xaml.cs">
       <DependentUpon>CreateRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPasswordWindow.xaml.cs">
+      <DependentUpon>EditPasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditProfileWindow.xaml.cs">
+      <DependentUpon>EditProfileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
@@ -161,6 +179,9 @@
     </Compile>
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VerifyAccountChangeWindow.xaml.cs">
+      <DependentUpon>VerifyAccountChangeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VerifyAccountView.xaml.cs">
       <DependentUpon>VerifyAccountView.xaml</DependentUpon>
@@ -185,7 +206,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ConfigureProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreateRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditProfileWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +287,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\VerifyAccountChangeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\VerifyAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -296,6 +333,15 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\AccountService\AccountServiceEndPoint.wsdl" />
+    <None Include="Connected Services\AccountService\CatanClient.AccountService.OperationResultAccountDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\AccountService\CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\AccountService\CatanClient.AccountService.OperationResultCreateAccountDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\AccountService\CatanClient.AccountService.OperationResultDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -312,6 +358,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ChatService\ChatServiceEndpoint.wsdl" />
+    <None Include="Connected Services\GameService\CatanClient.GameService.OperationResultDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\GameService\CatanClient.GameService.OperationResultGameDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -325,6 +374,22 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />
+    <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultProfileDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProfileService\ProfileService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileService\ProfileService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileService\ProfileService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileService\ProfileService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileService\ProfileServiceEndpoint.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -362,6 +427,7 @@
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
     <WCFMetadataStorage Include="Connected Services\GameService\" />
+    <WCFMetadataStorage Include="Connected Services\ProfileService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\AccountService\AccountService.disco" />
@@ -404,6 +470,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\ProfileService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

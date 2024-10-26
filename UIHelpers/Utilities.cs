@@ -18,7 +18,7 @@ namespace CatanClient.UIHelpers
         public const string REGEX_PROFILE_NAME_VALIDATION = "^[a-zA-Z0-9 ]+$";
         public const string REGEX_PROFILE_EMAIL_VALIDATION = @"^[a-zA-Z0-9._-]+(?<!\.)@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
         public const string REGEX_PHONE_NUMBER_VALIDATION = "^[0-9]+$";
-        public const string REGEX_PASSWORD_ACCOUNT_VALIDATION = "^[a-zA-Z0-9_]+$";
+        public const string REGEX_PASSWORD_ACCOUNT_VALIDATION = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>_])(?=.*[a-zA-Z0-9]).{8,}$";
         public const string REGEX_DOUBLE_POINTS = "\\.\\.+";
         public const string STRING_CHAR_SPACE = " ";
         public const char STRING_CHAR_ARROBA = '@';
@@ -27,9 +27,10 @@ namespace CatanClient.UIHelpers
         public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/repos/CatanClient/logs/errorlog.txt";
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
-        public const string IPACCOUNTSERVICE = "http://192.168.1.127:8181/AccountService";
-        public const string IP_GAME_SERVICE = "http://192.168.1.127:8191/GameService";
-        public const string IP_CHAT_SERVICE = "net.tcp://192.168.1.127:8202/ChatService";
+        public const string IPACCOUNTSERVICE = "http://192.168.230.207:8181/AccountService";
+        public const string IP_GAME_SERVICE = "http://192.168.230.207:8191/GameService";
+        public const string IP_CHAT_SERVICE = "net.tcp://192.168.230.207:8202/ChatService";
+        public const string IP_PROFILE_SERVICE = "http://192.168.230.207:8383/ProfileService";
         public const string FADEOUTANIMATION = "FadeOutAnimation";
         public const string SHOWMAINMENUBACKGROUND = "ShowMainMenuBackgroundView";
         public const string SHOWMAINMENU = "ShowMainMenuView";
@@ -41,6 +42,23 @@ namespace CatanClient.UIHelpers
         public const string SLIDEOUTFROMTOPANIMATION = "SlideOutFromTopAnimation";
         public const string SLIDEOUTFROMRIGHTANIMATION = "SlideOutFromRightAnimation";
         public const string SYSTEM_NAME = "System";
+        public const string LABEL_STYLE = "LabelStyle";
+        public const string TEXT = "Text";
+        public const string PLACEHOLDER_TEXT = "PlaceholderText";
+        public const string FONT_SIZE_VALUE = "FontSizeValue";
+        public const string BACKGROUND_COLOR_VALUE = "BackgroundColorValue";
+        public const string PLACEHOLDER_FOREGROUND_COLOR_VALUE = "PlaceholderForegroundColorValue";
+        public const string WRITING_FOREGROUND_COLOR_VALUE = "WritingForegroundColorValue";
+        public const string PADDING_VALUE = "PaddingValue";
+        public const string BORDER_THICKNESS_VALUE = "BorderThicknessValue";
+        public const string WIDTH = "Width";
+        public const string HEIGHT = "Height";
+        public const string PASSWORD = "Password";
+        public const string TEXT_BOX_WIDTH = "TextBoxWidth";
+        public const string TEXT_BOX_HEIGHT = "TextBoxHeight";
+        public const string CHECK_BOX_MARGIN = "CheckBoxMargin";
+        public const string SYNTH_WAVE_BACKGROUND2_PATH = "pack://application:,,,/Resources/Gifs/SynthWaveAnimatedBackground2.gif";
+        public const string SYNTH_WAVE_BACKGROUND1_PATH = "pack://application:,,,/Resources/Gifs/AnimatedBackground1.gif";
 
         public static string MessageDataBaseUnableToLoad(string language, Exception ex)
         {

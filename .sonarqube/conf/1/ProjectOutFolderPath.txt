@@ -1,1 +1,1 @@
-C:\Users\mauricio\source\CatanClient\.sonarqube\out\1
+C:\Users\mauricio\source\repos\CatanClient\.sonarqube\out\1

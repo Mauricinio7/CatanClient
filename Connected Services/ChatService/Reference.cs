@@ -26,10 +26,10 @@ namespace CatanClient.ChatService {
         private string AccessKeyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int MaxNumberPlayersField;
+        private System.Nullable<int> MaxNumberPlayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -58,7 +58,7 @@ namespace CatanClient.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public System.Nullable<int> Id {
             get {
                 return this.IdField;
             }
@@ -71,7 +71,7 @@ namespace CatanClient.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int MaxNumberPlayers {
+        public System.Nullable<int> MaxNumberPlayers {
             get {
                 return this.MaxNumberPlayersField;
             }
@@ -116,15 +116,13 @@ namespace CatanClient.ChatService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private System.Nullable<int> IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PicturePathField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PreferredLanguageField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -138,7 +136,7 @@ namespace CatanClient.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public System.Nullable<int> Id {
             get {
                 return this.IdField;
             }
@@ -150,7 +148,7 @@ namespace CatanClient.ChatService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Name {
             get {
                 return this.NameField;
@@ -176,7 +174,7 @@ namespace CatanClient.ChatService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string PreferredLanguage {
             get {
                 return this.PreferredLanguageField;

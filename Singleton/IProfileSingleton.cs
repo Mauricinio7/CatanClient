@@ -11,5 +11,7 @@ namespace CatanClient.Singleton
     {
         ProfileDto Profile { get; }
         void SetProfile(ProfileDto profile);
+
+        void SetName(string name);
     }
 }

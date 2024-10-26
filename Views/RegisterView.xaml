@@ -86,7 +86,7 @@
                                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                                                 />
 
-            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="46,628,0,0" VerticalAlignment="Top" Height="56" Width="167"
+            <Button Content="{x:Static properties:Resources.global_register}" HorizontalAlignment="Left" Margin="46,628,0,0" VerticalAlignment="Top" Height="56" Width="204"
                 Style="{StaticResource NeonButtonStyle}"
                 Command="{Binding RegisterCommand}"
                 />

@@ -17,7 +17,7 @@
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_back}"
                 FontSize="15"
-                Command="{Binding DataContext.ShowMainMenuViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                Command="{Binding LeftRoomCommand}"
                 />
 
             <TextBlock 

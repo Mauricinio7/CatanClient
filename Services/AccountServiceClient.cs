@@ -14,15 +14,14 @@ namespace CatanClient.Services
 {
     public class AccountServiceClient : IAccountServiceClient
     {
-        //TODO Refactor all methods to have only 1 return
 
         public OperationResultProfileDto IsValidAuthentication(AccountDto account)
         {
-            var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
-            var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultProfileDto result = null;
+            OperationResultProfileDto result;
 
             try
             {
@@ -31,6 +30,13 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
+                result = new OperationResultProfileDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message,
+                    AunthenticationStatus = EnumAuthenticationStatus.ServerNotFound
+                };
+
                 Log.Information(ex.Message);
                 MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
@@ -44,9 +50,9 @@ namespace CatanClient.Services
 
         public bool VerifyUserAccount(AccountDto account, string token)
         {
-            var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
-            var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultDto result;
             bool flag = false;
@@ -73,9 +79,9 @@ namespace CatanClient.Services
         public async Task<bool> CreateAccountInServerAsync(AccountDto account)
         {
 
-            var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
-            var channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultDto result;
             bool flag = false;
@@ -100,6 +106,73 @@ namespace CatanClient.Services
                 channelFactory.Close();
             }
             return flag;
+        }
+
+        public OperationResultChangeRegisterEmailOrPhone ChangeEmail(AccountDto account)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            OperationResultChangeRegisterEmailOrPhone result;
+
+            try
+            {
+                result = client.ChangeEmailOrPhone(account);
+
+                MessageBox.Show(result.IsSuccess.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultChangeRegisterEmailOrPhone
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+
+                Log.Information(ex.Message);
+                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+        public OperationResultChangeRegisterEmailOrPhone ConfirmEmail(AccountDto account)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            OperationResultChangeRegisterEmailOrPhone result;
+
+            try
+            {
+                result = client.SendVerificationCodeToChangeEmailOrPhone(account);
+
+                MessageBox.Show(result.IsSuccess.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultChangeRegisterEmailOrPhone
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+
+                Log.Information(ex.Message);
+                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
         }
     }
 }

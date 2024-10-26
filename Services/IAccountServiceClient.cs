@@ -20,5 +20,9 @@ namespace CatanClient.Services
         bool VerifyUserAccount(AccountDto account, string token);
         
         Task<bool> CreateAccountInServerAsync(AccountDto account);
+
+        OperationResultChangeRegisterEmailOrPhone ChangeEmail(AccountDto account);
+
+        OperationResultChangeRegisterEmailOrPhone ConfirmEmail(AccountDto account);
     }
 }

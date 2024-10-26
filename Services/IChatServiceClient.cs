@@ -14,5 +14,7 @@ namespace CatanClient.Services
         void JoinChatClient(ChatService.GameDto game, ProfileDto profile);
 
         void SendMessageToServer(ChatService.GameDto game, ProfileDto profile, string message);
+
+        void LeftChatClient(ChatService.GameDto game, ProfileDto profile);
     }
 }
