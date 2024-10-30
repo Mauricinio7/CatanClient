@@ -15,19 +15,4 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="JoinGameAsaGuestAccount">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="guestAccountClientDto" nillable="true" type="q2:GuestAccountDto" />
-        <xs:element minOccurs="0" name="codeAccess" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="JoinGameAsaGuestAccountResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="JoinGameAsaGuestAccountResult" nillable="true" type="q3:OperationResultGameDto" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
 </xs:schema>

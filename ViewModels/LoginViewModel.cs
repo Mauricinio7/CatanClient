@@ -73,6 +73,7 @@ namespace CatanClient.ViewModels
 
         public ICommand LoginCommand { get; }
         public ICommand JoinGuestCommand { get; }
+        
 
         public LoginViewModel(ServiceManager serviceManager)
         {

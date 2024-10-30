@@ -77,7 +77,7 @@
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_back}"
                 FontSize="20"
-                Command="{Binding DataContext.BackFromCreateRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"    
+                Command="{Binding DataContext.BackToMainMenuCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"    
             />
 
             

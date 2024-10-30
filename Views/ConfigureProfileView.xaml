@@ -80,7 +80,7 @@
             <Button Margin="45,1039,838,47" 
                 Content="{x:Static properties:Resources.button_exit}" 
                 Style="{StaticResource NeonButtonStyle}"
-                Command="{Binding DataContext.BackFromCreateRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"    
+                Command="{Binding DataContext.BackToMainMenuCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"    
                 />
 
 

@@ -391,9 +391,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />
-    <None Include="Connected Services\GuestAccountService\CatanClient.GuestAccountService.OperationResultGameDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\GuestAccountService\CatanClient.GuestAccountService.OperationResultGuestAccountDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -122,7 +122,7 @@ namespace CatanClient.ViewModels
                     serviceManager.ProfileSingleton.SetName(username);
 
                     Mediator.Notify(Utilities.CLOSE_EDIT_PROFILE, null);
-                    Mediator.Notify(Utilities.BACK_FROM_CREATE_ROOM, null);
+                    Mediator.Notify(Utilities.BACK_TO_MAIN_MENU_ROOM, null);
                 }
                 else
                 {

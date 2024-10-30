@@ -13,35 +13,16 @@
   <wsdl:message name="IGuestAccountEndpoint_CreateGuestAccount_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateGuestAccountResponse" />
   </wsdl:message>
-  <wsdl:message name="IGuestAccountEndpoint_JoinGameAsaGuestAccount_InputMessage">
-    <wsdl:part name="parameters" element="tns:JoinGameAsaGuestAccount" />
-  </wsdl:message>
-  <wsdl:message name="IGuestAccountEndpoint_JoinGameAsaGuestAccount_OutputMessage">
-    <wsdl:part name="parameters" element="tns:JoinGameAsaGuestAccountResponse" />
-  </wsdl:message>
   <wsdl:portType name="IGuestAccountEndpoint">
     <wsdl:operation name="CreateGuestAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IGuestAccountEndpoint/CreateGuestAccount" message="tns:IGuestAccountEndpoint_CreateGuestAccount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGuestAccountEndpoint/CreateGuestAccountResponse" message="tns:IGuestAccountEndpoint_CreateGuestAccount_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="JoinGameAsaGuestAccount">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGuestAccountEndpoint/JoinGameAsaGuestAccount" message="tns:IGuestAccountEndpoint_JoinGameAsaGuestAccount_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGuestAccountEndpoint/JoinGameAsaGuestAccountResponse" message="tns:IGuestAccountEndpoint_JoinGameAsaGuestAccount_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGuestAccountEndpoint" type="tns:IGuestAccountEndpoint">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CreateGuestAccount">
       <soap:operation soapAction="http://tempuri.org/IGuestAccountEndpoint/CreateGuestAccount" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="JoinGameAsaGuestAccount">
-      <soap:operation soapAction="http://tempuri.org/IGuestAccountEndpoint/JoinGameAsaGuestAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

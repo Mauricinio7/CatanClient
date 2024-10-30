@@ -50,8 +50,8 @@ namespace CatanClient.ViewModels
         public ICommand ShowMainMenuBackgroundViewCommand { get; }
         public ICommand ShowCreateRoomCommand { get; }
         public ICommand ShowLoginRoomCommand { get; }
-        public ICommand BackFromCreateRoomCommand { get; }
-        public ICommand BackFromLoginRoomCommand { get; }
+        public ICommand BackToMainMenuCommand { get; }
+        public ICommand BackToGuestMainMenuCommand { get; }
         public ICommand ShowGameLobbyCommand { get; }
         public ICommand ShowConfigureProfileCommand { get; }
 
@@ -70,8 +70,8 @@ namespace CatanClient.ViewModels
             ShowCreateRoomCommand = new RelayCommand(async () => await ShowCreateRoom());
             
             ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
-            BackFromCreateRoomCommand = new RelayCommand(async () => await BackFromCreateRoom());
-            BackFromLoginRoomCommand = new RelayCommand(async () => await BackFromLoginRoom());
+            BackToMainMenuCommand = new RelayCommand(async () => await BackToMainMenu());
+            BackToGuestMainMenuCommand = new RelayCommand(async () => await BackToGuestMainMenu());
             ShowGameLobbyCommand = new RelayCommand(async (object gameDto) => await ShowGameLobby(gameDto));
             ShowConfigureProfileCommand = new RelayCommand(async (object accountDto) => await ShowConfigureProfile(accountDto));
 
@@ -82,8 +82,8 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.SHOW_GUEST_MAIN_MENU, args => ShowGuestMainMenuViewCommand.Execute(null));
             Mediator.Register(Utilities.SHOWMAINMENUBACKGROUND, args => ShowMainMenuBackgroundViewCommand.Execute(null));
             Mediator.Register(Utilities.OCULTVERIFYACCOUNT, args => OcultVerifyAccountViewCommand.Execute(null));
-            Mediator.Register(Utilities.BACK_FROM_CREATE_ROOM, args => BackFromCreateRoomCommand.Execute(null));
-
+            Mediator.Register(Utilities.BACK_TO_MAIN_MENU_ROOM, args => BackToMainMenuCommand.Execute(null));
+            Mediator.Register(Utilities.BACK_TO_GUEST_MAIN_MENU_ROOM, args => BackToGuestMainMenuCommand.Execute(null));
 
         }
 
@@ -258,7 +258,7 @@ namespace CatanClient.ViewModels
             CurrentView = configureProfileView;
         }
 
-        private async Task BackFromCreateRoom()
+        private async Task BackToMainMenu()
         {
             if (currentView is Views.CreateRoomView createRoomView)
             {
@@ -269,10 +269,20 @@ namespace CatanClient.ViewModels
                     await Task.Delay(900);
                 }
             }
+            else if (currentView is Views.LoginRoomView loginRoomView)
+            {
+                if (loginRoomView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+                {
+                    Storyboard storyboard = (Storyboard)loginRoomView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    storyboard.Begin(animatedGrid);
+                    await Task.Delay(900);
+                }
+            }
+
             CurrentView = new Views.MainMenuView();
         }
 
-        private async Task BackFromLoginRoom()
+        private async Task BackToGuestMainMenu()
         {
             if (currentView is Views.LoginRoomView loginRoomView)
             {
@@ -283,13 +293,9 @@ namespace CatanClient.ViewModels
                     await Task.Delay(900);
                 }
             }
-            CurrentView = new Views.MainMenuView();
+
+            CurrentView = new Views.GuestMainMenuView();
         }
-
-        
-
-        
-
 
     }
 }

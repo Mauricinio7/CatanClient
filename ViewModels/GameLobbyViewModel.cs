@@ -53,7 +53,7 @@ namespace CatanClient.ViewModels
 
             Messages = new ObservableCollection<ChatMessage>
             {
-                new ChatMessage { Content = game.Name, Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
+                new ChatMessage { Content = game.Name + " ID: " + game.AccessKey, Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
             };
 
             profile =  serviceManager.ProfileSingleton.Profile;

@@ -60,7 +60,7 @@
             Style="{StaticResource NeonButtonStyle}"
             Content="{x:Static properties:Resources.button_back}"
             FontSize="20"
-            Command="{Binding DataContext.BackFromLoginRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"    
+            Command="{Binding ExitLoginRoomCommand}"    
         />
 
 

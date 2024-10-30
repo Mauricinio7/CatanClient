@@ -54,7 +54,7 @@ namespace CatanClient.ViewModels
 
 
         public ICommand CreateRoomCommand { get; }
-        public ICommand ExitCreateRoomCommand { get; }
+        
         private readonly ServiceManager serviceManager;
 
         public CreateRoomViewModel(ServiceManager serviceManager)
@@ -67,23 +67,9 @@ namespace CatanClient.ViewModels
             };
 
             CreateRoomCommand = new RelayCommand(ExecuteCreateRoom);
-            ExitCreateRoomCommand = new RelayCommand(ExecuteExitCreateRoom);
             this.serviceManager = serviceManager;
         }
 
-        private void ExecuteExitCreateRoom(object parameter)
-        {
-            AccountService.ProfileDto profile = serviceManager.ProfileSingleton.Profile;
-
-            if (profile.IsRegistered)
-            {
-                Mediator.Notify(Utilities.BACK_FROM_CREATE_ROOM, profile);
-            }
-            else
-            {
-
-            }
-        }
 
         private void ExecuteCreateRoom(object parameter)
         {
@@ -111,6 +97,11 @@ namespace CatanClient.ViewModels
                 {
                     GameDto game = result.GameDto;
                     Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
+                }
+                else
+                {
+                    MessageBox.Show(result.MessageResponse);
+                    MessageBox.Show(result.IsSuccess.ToString());
                 }
             }
             else

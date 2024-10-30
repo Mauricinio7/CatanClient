@@ -37,13 +37,29 @@ namespace CatanClient.ViewModels
 
 
         public ICommand LoginRoomCommand { get; }
+        public ICommand ExitLoginRoomCommand { get; }
         private readonly ServiceManager serviceManager;
 
         public LoginRoomViewModel(ServiceManager serviceManager)
         {
 
             LoginRoomCommand = new RelayCommand(ExecuteLoginRoom);
+            ExitLoginRoomCommand = new RelayCommand(ExecuteExitLoginRoom);
             this.serviceManager = serviceManager;
+        }
+
+        private void ExecuteExitLoginRoom(object parameter)
+        {
+            AccountService.ProfileDto profile = serviceManager.ProfileSingleton.Profile;
+
+            if (profile.IsRegistered)
+            {
+                Mediator.Notify(Utilities.BACK_TO_MAIN_MENU_ROOM, null);
+            }
+            else
+            {
+                Mediator.Notify(Utilities.BACK_TO_GUEST_MAIN_MENU_ROOM, null);
+            }
         }
 
 
@@ -62,7 +78,25 @@ namespace CatanClient.ViewModels
 
             if(!String.IsNullOrWhiteSpace(roomCode))
             {
-                OperationResultGameDto result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile);
+                OperationResultGameDto result;
+
+                if (profile.IsRegistered)
+                {
+                    result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile);
+                }
+                else
+                {
+                    GuestAccountDto guest = new GuestAccountDto
+                    {
+                        Name = profile.Name,
+                        PreferredLanguage = profile.PreferredLanguage,
+                        Id = profile.Id
+                    };
+
+                    result = serviceManager.GameServiceClient.JoinRoomAsGuestClient(roomCode, guest);
+                }
+                    
+                     
 
                 if (result.IsSuccess == true)
                 {

@@ -40,7 +40,8 @@ namespace CatanClient.UIHelpers
         public const string OCULTVERIFYACCOUNT = "OcultVerifyAccountView";
         public const string SHOWGAMELOBBY = "ShowGameLobbyView";
         public const string SHOWCONFIGUREPROFILE = "ShowConfigureProfile";
-        public const string BACK_FROM_CREATE_ROOM = "BackFromCreateRoom";
+        public const string BACK_TO_MAIN_MENU_ROOM = "BackToMainMenuRoom";
+        public const string BACK_TO_GUEST_MAIN_MENU_ROOM = "BackToGuestMainMenuRoom";
         public const string CLOSE_EDIT_PROFILE = "EditProfileWindow_Close";
         public const string CLOSE_VERIFY_ACCOUNT_CHANGE = "VerifyAccountChangeWindow_Close";
         public const string CLOSE_EDIT_PASSWORD = "EditPasswordWindow_Close";

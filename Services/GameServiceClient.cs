@@ -74,6 +74,38 @@ namespace CatanClient.Services
             return result;
         }
 
+        public OperationResultGameDto JoinRoomAsGuestClient(string code, GuestAccountDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            IGameEndPoint client = channelFactory.CreateChannel();
+            OperationResultGameDto result;
+
+            try
+            {
+
+                result = client.JoinGameAsaGuest(code, profile);
+
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultGameDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
         public bool LeftRoomClient(GameDto game, ProfileDto profile)
         {
             BasicHttpBinding binding = new BasicHttpBinding();

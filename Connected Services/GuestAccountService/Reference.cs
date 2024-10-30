@@ -17,7 +17,6 @@ namespace CatanClient.GuestAccountService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.GuestAccountService.OperationResultGameDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.GuestAccountService.OperationResultGuestAccountDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -72,29 +71,6 @@ namespace CatanClient.GuestAccountService {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultGameDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
-    [System.SerializableAttribute()]
-    public partial class OperationResultGameDto : CatanClient.GuestAccountService.OperationResultDto {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CatanClient.GuestAccountService.GameDto GameDtoField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CatanClient.GuestAccountService.GameDto GameDto {
-            get {
-                return this.GameDtoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GameDtoField, value) != true)) {
-                    this.GameDtoField = value;
-                    this.RaisePropertyChanged("GameDto");
-                }
             }
         }
     }
@@ -199,99 +175,6 @@ namespace CatanClient.GuestAccountService {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
-    [System.SerializableAttribute()]
-    public partial class GameDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AccessKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> MaxNumberPlayersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccessKey {
-            get {
-                return this.AccessKeyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccessKeyField, value) != true)) {
-                    this.AccessKeyField = value;
-                    this.RaisePropertyChanged("AccessKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> MaxNumberPlayers {
-            get {
-                return this.MaxNumberPlayersField;
-            }
-            set {
-                if ((this.MaxNumberPlayersField.Equals(value) != true)) {
-                    this.MaxNumberPlayersField = value;
-                    this.RaisePropertyChanged("MaxNumberPlayers");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GuestAccountService.IGuestAccountEndpoint")]
     public interface IGuestAccountEndpoint {
@@ -301,12 +184,6 @@ namespace CatanClient.GuestAccountService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuestAccountEndpoint/CreateGuestAccount", ReplyAction="http://tempuri.org/IGuestAccountEndpoint/CreateGuestAccountResponse")]
         System.Threading.Tasks.Task<CatanClient.GuestAccountService.OperationResultGuestAccountDto> CreateGuestAccountAsync(string preferredLanguage);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuestAccountEndpoint/JoinGameAsaGuestAccount", ReplyAction="http://tempuri.org/IGuestAccountEndpoint/JoinGameAsaGuestAccountResponse")]
-        CatanClient.GuestAccountService.OperationResultGameDto JoinGameAsaGuestAccount(CatanClient.GuestAccountService.GuestAccountDto guestAccountClientDto, string codeAccess);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuestAccountEndpoint/JoinGameAsaGuestAccount", ReplyAction="http://tempuri.org/IGuestAccountEndpoint/JoinGameAsaGuestAccountResponse")]
-        System.Threading.Tasks.Task<CatanClient.GuestAccountService.OperationResultGameDto> JoinGameAsaGuestAccountAsync(CatanClient.GuestAccountService.GuestAccountDto guestAccountClientDto, string codeAccess);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -342,14 +219,6 @@ namespace CatanClient.GuestAccountService {
         
         public System.Threading.Tasks.Task<CatanClient.GuestAccountService.OperationResultGuestAccountDto> CreateGuestAccountAsync(string preferredLanguage) {
             return base.Channel.CreateGuestAccountAsync(preferredLanguage);
-        }
-        
-        public CatanClient.GuestAccountService.OperationResultGameDto JoinGameAsaGuestAccount(CatanClient.GuestAccountService.GuestAccountDto guestAccountClientDto, string codeAccess) {
-            return base.Channel.JoinGameAsaGuestAccount(guestAccountClientDto, codeAccess);
-        }
-        
-        public System.Threading.Tasks.Task<CatanClient.GuestAccountService.OperationResultGameDto> JoinGameAsaGuestAccountAsync(CatanClient.GuestAccountService.GuestAccountDto guestAccountClientDto, string codeAccess) {
-            return base.Channel.JoinGameAsaGuestAccountAsync(guestAccountClientDto, codeAccess);
         }
     }
 }
