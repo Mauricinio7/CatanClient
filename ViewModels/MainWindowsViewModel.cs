@@ -46,6 +46,7 @@ namespace CatanClient.ViewModels
         public ICommand ShowVerifyAccountViewCommand { get; }
         public ICommand OcultVerifyAccountViewCommand { get; }
         public ICommand ShowMainMenuViewCommand { get; }
+        public ICommand ShowGuestMainMenuViewCommand { get; }
         public ICommand ShowMainMenuBackgroundViewCommand { get; }
         public ICommand ShowCreateRoomCommand { get; }
         public ICommand ShowLoginRoomCommand { get; }
@@ -64,6 +65,7 @@ namespace CatanClient.ViewModels
             ShowVerifyAccountViewCommand = new RelayCommand(async (object accountDto) => await ShowVerifyAccountView(accountDto));
             OcultVerifyAccountViewCommand = new RelayCommand(async () => await OcultVerifyAccountView());
             ShowMainMenuViewCommand = new RelayCommand(ShowMainMenuView);
+            ShowGuestMainMenuViewCommand = new RelayCommand(ShowGuestMainMenuView);
             ShowMainMenuBackgroundViewCommand = new RelayCommand(ShowMainMenuBackgroundView);
             ShowCreateRoomCommand = new RelayCommand(async () => await ShowCreateRoom());
             
@@ -73,12 +75,16 @@ namespace CatanClient.ViewModels
             ShowGameLobbyCommand = new RelayCommand(async (object gameDto) => await ShowGameLobby(gameDto));
             ShowConfigureProfileCommand = new RelayCommand(async (object accountDto) => await ShowConfigureProfile(accountDto));
 
-            Mediator.Register("ShowConfigureProfile", args => ShowConfigureProfileCommand.Execute(args));
+            Mediator.Register(Utilities.SHOWCONFIGUREPROFILE, args => ShowConfigureProfileCommand.Execute(args));
             Mediator.Register(Utilities.SHOWVERIFYACCOUNT, args => ShowVerifyAccountViewCommand.Execute(args));
             Mediator.Register(Utilities.SHOWGAMELOBBY, args => ShowGameLobbyCommand.Execute(args));
             Mediator.Register(Utilities.SHOWMAINMENU, args => ShowMainMenuViewCommand.Execute(null));
+            Mediator.Register(Utilities.SHOW_GUEST_MAIN_MENU, args => ShowGuestMainMenuViewCommand.Execute(null));
             Mediator.Register(Utilities.SHOWMAINMENUBACKGROUND, args => ShowMainMenuBackgroundViewCommand.Execute(null));
             Mediator.Register(Utilities.OCULTVERIFYACCOUNT, args => OcultVerifyAccountViewCommand.Execute(null));
+            Mediator.Register(Utilities.BACK_FROM_CREATE_ROOM, args => BackFromCreateRoomCommand.Execute(null));
+
+
         }
 
 
@@ -188,6 +194,11 @@ namespace CatanClient.ViewModels
         private void ShowMainMenuView()
         {
             CurrentView = new Views.MainMenuView();
+        }
+
+        private void ShowGuestMainMenuView()
+        {
+            CurrentView = new Views.GuestMainMenuView();
         }
 
         private void ShowMainMenuBackgroundView()

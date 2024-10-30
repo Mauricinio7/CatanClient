@@ -388,7 +388,12 @@ namespace CatanClient.AccountService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> IdField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsRegisteredField;
+        
         private string NameField;
+        
+        private byte[] PictureDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PicturePathField;
@@ -418,6 +423,19 @@ namespace CatanClient.AccountService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsRegistered {
+            get {
+                return this.IsRegisteredField;
+            }
+            set {
+                if ((this.IsRegisteredField.Equals(value) != true)) {
+                    this.IsRegisteredField = value;
+                    this.RaisePropertyChanged("IsRegistered");
+                }
+            }
+        }
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Name {
             get {
@@ -427,6 +445,19 @@ namespace CatanClient.AccountService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public byte[] PictureData {
+            get {
+                return this.PictureDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
+                    this.PictureDataField = value;
+                    this.RaisePropertyChanged("PictureData");
                 }
             }
         }

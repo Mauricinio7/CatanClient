@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using CatanClient.UIHelpers;
+using CatanClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +25,9 @@ namespace CatanClient.Views
         public EditPasswordWindow()
         {
             InitializeComponent();
+            DataContext = App.Container.Resolve<EditPasswordWindowViewModel>();
+
+            Mediator.Register(Utilities.CLOSE_EDIT_PASSWORD, _ => this.Close());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using CatanClient.AccountService;
+using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace CatanClient.Views
             this.DataContext = App.Container.Resolve<VerifyAccountChangeWindowViewModel>(
                 new TypedParameter(typeof(AccountDto), account)
             );
+
+            Mediator.Register(Utilities.CLOSE_VERIFY_ACCOUNT_CHANGE, _ => this.Close());
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

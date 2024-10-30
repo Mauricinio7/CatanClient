@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CatanClient.ViewModels
@@ -15,7 +16,8 @@ namespace CatanClient.ViewModels
     internal class ConfigureProfileViewModel : ViewModelBase
     {
         public ICommand ModifyProfileCommand { get; }
-        
+        public ICommand ModifyPasswordCommand { get; }
+
 
         private string _username;
         private AccountDto account;
@@ -77,6 +79,7 @@ namespace CatanClient.ViewModels
             Profile = profileDto;
 
             ModifyProfileCommand = new RelayCommand(OnModifyProfile);
+            ModifyPasswordCommand = new RelayCommand(OnModifyPassword);
             this.serviceManager = serviceManager;
 
             Account = account;
@@ -94,6 +97,13 @@ namespace CatanClient.ViewModels
 
                 editWindow.ShowDialog();
             }
+        }
+
+        private void OnModifyPassword(object parameter)
+        {
+                var editWindow = new EditPasswordWindow();
+
+                editWindow.ShowDialog();
         }
     }
 }

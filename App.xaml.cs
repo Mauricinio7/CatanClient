@@ -67,6 +67,8 @@ namespace CatanClient
             builder.RegisterType<AccountServiceClient>().As<IAccountServiceClient>().SingleInstance();
             builder.RegisterType<GameServiceClient>().As<IGameServiceClient>().SingleInstance();
             builder.RegisterType<ChatServiceClient>().As<IChatServiceClient>().SingleInstance();
+            builder.RegisterType<ProfileServiceClient>().As<IProfileServiceClient>().SingleInstance();
+            builder.RegisterType<GuestAccountServiceClient>().As<IGuestAccountServiceClient>().SingleInstance();
             builder.RegisterType<ProfileSingleton>().As<IProfileSingleton>().SingleInstance();
 
             builder.RegisterType<ServiceManager>().AsSelf();
@@ -80,6 +82,7 @@ namespace CatanClient
             builder.RegisterType<VerifyAccountViewModel>().AsSelf();
             builder.RegisterType<ConfigureProfileViewModel>().AsSelf();
             builder.RegisterType<EditProfileWindowViewModel>().AsSelf();
+            builder.RegisterType<EditPasswordWindowViewModel>().AsSelf();
             builder.RegisterType<VerifyAccountChangeWindowViewModel>().AsSelf();
             builder.RegisterType<MainMenuViewModel>().AsSelf();
 
@@ -92,6 +95,7 @@ namespace CatanClient
             builder.RegisterType<VerifyAccountView>().AsSelf();
             builder.RegisterType<ConfigureProfileView>().AsSelf();
             builder.RegisterType<EditProfileWindow>().AsSelf();
+            builder.RegisterType<EditPasswordWindow>().AsSelf();
             builder.RegisterType<VerifyAccountChangeWindow>().AsSelf();
             builder.RegisterType<MainMenuView>().AsSelf();
         }

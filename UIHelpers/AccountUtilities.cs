@@ -1,11 +1,13 @@
 ﻿using CatanClient.AccountService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CatanClient.UIHelpers
 {
@@ -68,6 +70,15 @@ namespace CatanClient.UIHelpers
             };
 
             return account;
+        }
+
+        public static void RestartGame()
+        {
+            MessageBox.Show(Utilities.MessageRestartGame(CultureInfo.CurrentCulture.Name), Utilities.TittleRestart(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            Process.Start(exePath);
+            Application.Current.Shutdown();
         }
     }
 }

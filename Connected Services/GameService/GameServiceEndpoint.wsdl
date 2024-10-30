@@ -2,9 +2,9 @@
 <wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="GameServiceEndpoint" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://192.168.230.207:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://192.168.230.207:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://192.168.230.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -37,6 +37,12 @@
   <wsdl:message name="IGameEndPoint_StartGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:StartGameResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_JoinGameAsaGuest_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGameAsaGuest" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_JoinGameAsaGuest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGameAsaGuestResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGame" message="tns:IGameEndPoint_CreateGame_InputMessage" />
@@ -57,6 +63,10 @@
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/StartGame" message="tns:IGameEndPoint_StartGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/StartGameResponse" message="tns:IGameEndPoint_StartGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinGameAsaGuest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest" message="tns:IGameEndPoint_JoinGameAsaGuest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuestResponse" message="tns:IGameEndPoint_JoinGameAsaGuest_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -106,10 +116,19 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="JoinGameAsaGuest">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GameServiceEndpoint">
     <wsdl:port name="BasicHttpBinding_IGameEndPoint" binding="tns:BasicHttpBinding_IGameEndPoint">
-      <soap:address location="http://192.168.230.207:8191/GameService" />
+      <soap:address location="http://10.144.41.3:8191/GameService" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

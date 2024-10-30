@@ -106,118 +106,27 @@ namespace CatanClient.ChatService {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ProfileDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
-    [System.SerializableAttribute()]
-    public partial class ProfileDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> IdField;
-        
-        private string NameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PicturePathField;
-        
-        private string PreferredLanguageField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PicturePath {
-            get {
-                return this.PicturePathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PicturePathField, value) != true)) {
-                    this.PicturePathField = value;
-                    this.RaisePropertyChanged("PicturePath");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string PreferredLanguage {
-            get {
-                return this.PreferredLanguageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
-                    this.PreferredLanguageField = value;
-                    this.RaisePropertyChanged("PreferredLanguage");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatService.IChatServiceEndpoint", CallbackContract=typeof(CatanClient.ChatService.IChatServiceEndpointCallback))]
     public interface IChatServiceEndpoint {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/JoinChat")]
-        void JoinChat(CatanClient.ChatService.GameDto game, CatanClient.ChatService.ProfileDto profile);
+        void JoinChat(CatanClient.ChatService.GameDto game, string namePlayer);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/JoinChat")]
-        System.Threading.Tasks.Task JoinChatAsync(CatanClient.ChatService.GameDto game, CatanClient.ChatService.ProfileDto profile);
+        System.Threading.Tasks.Task JoinChatAsync(CatanClient.ChatService.GameDto game, string namePlayer);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChat")]
-        void SendMessageToChat(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName, string message);
+        void SendMessageToChat(CatanClient.ChatService.GameDto gameId, string namePlayer, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChat")]
-        System.Threading.Tasks.Task SendMessageToChatAsync(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName, string message);
+        System.Threading.Tasks.Task SendMessageToChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/LeaveChat")]
-        void LeaveChat(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName);
+        void LeaveChat(CatanClient.ChatService.GameDto gameId, string namePlayer);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/LeaveChat")]
-        System.Threading.Tasks.Task LeaveChatAsync(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName);
+        System.Threading.Tasks.Task LeaveChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -261,28 +170,28 @@ namespace CatanClient.ChatService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void JoinChat(CatanClient.ChatService.GameDto game, CatanClient.ChatService.ProfileDto profile) {
-            base.Channel.JoinChat(game, profile);
+        public void JoinChat(CatanClient.ChatService.GameDto game, string namePlayer) {
+            base.Channel.JoinChat(game, namePlayer);
         }
         
-        public System.Threading.Tasks.Task JoinChatAsync(CatanClient.ChatService.GameDto game, CatanClient.ChatService.ProfileDto profile) {
-            return base.Channel.JoinChatAsync(game, profile);
+        public System.Threading.Tasks.Task JoinChatAsync(CatanClient.ChatService.GameDto game, string namePlayer) {
+            return base.Channel.JoinChatAsync(game, namePlayer);
         }
         
-        public void SendMessageToChat(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName, string message) {
-            base.Channel.SendMessageToChat(gameId, playerName, message);
+        public void SendMessageToChat(CatanClient.ChatService.GameDto gameId, string namePlayer, string message) {
+            base.Channel.SendMessageToChat(gameId, namePlayer, message);
         }
         
-        public System.Threading.Tasks.Task SendMessageToChatAsync(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName, string message) {
-            return base.Channel.SendMessageToChatAsync(gameId, playerName, message);
+        public System.Threading.Tasks.Task SendMessageToChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer, string message) {
+            return base.Channel.SendMessageToChatAsync(gameId, namePlayer, message);
         }
         
-        public void LeaveChat(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName) {
-            base.Channel.LeaveChat(gameId, playerName);
+        public void LeaveChat(CatanClient.ChatService.GameDto gameId, string namePlayer) {
+            base.Channel.LeaveChat(gameId, namePlayer);
         }
         
-        public System.Threading.Tasks.Task LeaveChatAsync(CatanClient.ChatService.GameDto gameId, CatanClient.ChatService.ProfileDto playerName) {
-            return base.Channel.LeaveChatAsync(gameId, playerName);
+        public System.Threading.Tasks.Task LeaveChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer) {
+            return base.Channel.LeaveChatAsync(gameId, namePlayer);
         }
     }
 }

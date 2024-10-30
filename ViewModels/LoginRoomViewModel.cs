@@ -58,26 +58,27 @@ namespace CatanClient.ViewModels
                 Id = profileDto.Id,
                 PicturePath = profileDto.PicturePath,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name
-            };
+            }; 
 
-
-            OperationResultGameDto result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile); //TODO quit hardcode
-
-            if(result.IsSuccess == true)
+            if(!String.IsNullOrWhiteSpace(roomCode))
             {
-                GameDto game = result.GameDto;
-                Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
+                OperationResultGameDto result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile);
+
+                if (result.IsSuccess == true)
+                {
+                    GameDto game = result.GameDto;
+                    Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
+                }
+                else
+                {
+                    MessageBox.Show(result.MessageResponse);
+                    MessageBox.Show(Utilities.MessageGameNotFound(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {
-                //TODO message game not found
+                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            
-
-            
-
         }
-
-       
     }
 }

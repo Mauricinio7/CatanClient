@@ -30,13 +30,11 @@ namespace CatanClient.ViewModels
         }
         public ICommand VerifyChangeCommand { get; }
         private readonly ServiceManager serviceManager;
-        public string Field { get; }
 
         public VerifyAccountChangeWindowViewModel(AccountDto account, ServiceManager serviceManager)
         {
             VerifyChangeCommand = new RelayCommand(ExecuteVerifyChange);
             this.serviceManager = serviceManager;
-            Field = "Email";
             Account = account;
         }
 
@@ -45,43 +43,50 @@ namespace CatanClient.ViewModels
             if (string.IsNullOrWhiteSpace(VerificationCode))
             {
                 MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (Field == "Email")
-            {
-                MessageBox.Show("Email");
-
-                Account.TokenExpiration = DateTime.Now;
-                Account.Token = VerificationCode;
-
-                OperationResultChangeRegisterEmailOrPhone result;
-
-                result = serviceManager.AccountServiceClient.ConfirmEmail(Account);
-
-                if (result.IsSuccess)
-                {
-                    MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
             }
             else
             {
-                MessageBox.Show("Phone");
-                //bool status = serviceManager.AccountServiceClient.VerifyPhoneChange(VerificationCode);
-                if (true)//status)
+                Account.TokenExpiration = DateTime.Now;
+                Account.Token = VerificationCode;
+
+                if (!String.IsNullOrEmpty(Account.Password))
                 {
-                    MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                    SendVerifyCodePassword();
                 }
                 else
                 {
-                    MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    SendVerifyCodeEmailOrPhone();
                 }
+            }  
+        }
+        private void SendVerifyCodePassword()
+        {
+            OperationResultDto result;
+            result = serviceManager.AccountServiceClient.ConfirmPassword(Account);
+            if (result.IsSuccess)
+            {
+                MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                AccountUtilities.RestartGame();
             }
+            else
+            {
+                MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
 
+        private void SendVerifyCodeEmailOrPhone()
+        {
+            OperationResultChangeRegisterEmailOrPhone result;
+            result = serviceManager.AccountServiceClient.ConfirmEmailOrPhone(Account);
+            if (result.IsSuccess)
+            {
+                MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                AccountUtilities.RestartGame();
+            }
+            else
+            {
+                MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

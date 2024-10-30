@@ -21,8 +21,12 @@ namespace CatanClient.Services
         
         Task<bool> CreateAccountInServerAsync(AccountDto account);
 
-        OperationResultChangeRegisterEmailOrPhone ChangeEmail(AccountDto account);
+        OperationResultChangeRegisterEmailOrPhone ChangeEmailOrPhone(AccountDto account);
 
-        OperationResultChangeRegisterEmailOrPhone ConfirmEmail(AccountDto account);
+        OperationResultChangeRegisterEmailOrPhone ConfirmEmailOrPhone(AccountDto account);
+
+        OperationResultDto ChangePassword(AccountDto account);
+
+        OperationResultDto ConfirmPassword(AccountDto account);
     }
 }

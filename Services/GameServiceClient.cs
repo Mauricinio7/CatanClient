@@ -24,8 +24,6 @@ namespace CatanClient.Services
             try
             {
                 result = client.CreateGame(game, profile);
-
-                MessageBox.Show(result.IsSuccess.ToString());
             }
             catch (Exception ex) 
             {
@@ -34,8 +32,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-                Log.Information(ex.Message);
-                MessageBox.Show($"{ex.Message}");
+                Log.Error(ex.Message);
             }
             finally
             {
@@ -55,12 +52,8 @@ namespace CatanClient.Services
 
             try
             {
-                MessageBox.Show(profile.Name);
-
 
                 result = client.JoinGame(code, profile);
-
-                MessageBox.Show(result.IsSuccess.ToString());
 
             }
             catch (Exception ex) 
@@ -70,8 +63,8 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-                //MESAGE
-                Log.Information(ex.Message);
+
+                Log.Error(ex.Message);
             }
             finally
             {
@@ -94,12 +87,10 @@ namespace CatanClient.Services
 
                 result = client.QuitGame(game, profile).IsSuccess;
 
-                MessageBox.Show(result.ToString());
-
             }
             catch (Exception ex)
             {
-                Log.Information(ex.Message);
+                Log.Error(ex.Message);
             }
             finally
             {

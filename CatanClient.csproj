@@ -127,6 +127,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\GuestAccountService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ProfileService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -138,9 +143,13 @@
     <Compile Include="Services\AccountServiceClient.cs" />
     <Compile Include="Services\ChatServiceClient.cs" />
     <Compile Include="Services\GameServiceClient.cs" />
+    <Compile Include="Services\GuestAccountServiceClient.cs" />
     <Compile Include="Services\IAccountServiceClient.cs" />
     <Compile Include="Services\IChatServiceClient.cs" />
     <Compile Include="Services\IGameServiceClient.cs" />
+    <Compile Include="Services\IGuestAccountServiceClient.cs" />
+    <Compile Include="Services\IProfileServiceClient.cs" />
+    <Compile Include="Services\ProfileServiceClient.cs" />
     <Compile Include="Services\ServiceManager.cs" />
     <Compile Include="Singleton\IProfileSingleton.cs" />
     <Compile Include="Singleton\ProfileSingleton.cs" />
@@ -150,6 +159,7 @@
     <Compile Include="UIHelpers\Utilities.cs" />
     <Compile Include="ViewModels\ConfigureProfileViewModel.cs" />
     <Compile Include="ViewModels\CreateRoomViewModel.cs" />
+    <Compile Include="ViewModels\EditPasswordWindowViewModel.cs" />
     <Compile Include="ViewModels\EditProfileWindowViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\LoginRoomViewModel.cs" />
@@ -170,6 +180,9 @@
     </Compile>
     <Compile Include="Views\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GuestMainMenuView.xaml.cs">
+      <DependentUpon>GuestMainMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginRoomView.xaml.cs">
       <DependentUpon>LoginRoomView.xaml</DependentUpon>
@@ -223,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GameLobbyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GuestMainMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -374,6 +391,25 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />
+    <None Include="Connected Services\GuestAccountService\CatanClient.GuestAccountService.OperationResultGameDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GuestAccountService\CatanClient.GuestAccountService.OperationResultGuestAccountDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GuestAccountService\GuestAccountEndpoint.wsdl" />
+    <None Include="Connected Services\GuestAccountService\GuestAccountService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestAccountService\GuestAccountService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestAccountService\GuestAccountService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultProfileDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -427,6 +463,7 @@
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
     <WCFMetadataStorage Include="Connected Services\GameService\" />
+    <WCFMetadataStorage Include="Connected Services\GuestAccountService\" />
     <WCFMetadataStorage Include="Connected Services\ProfileService\" />
   </ItemGroup>
   <ItemGroup>
@@ -440,6 +477,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\AccountService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\ProfileService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProfileService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -460,6 +512,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\GuestAccountService\GuestAccountService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestAccountService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestAccountService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestAccountService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Connected Services\ChatService\ChatService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -470,21 +537,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\ProfileService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

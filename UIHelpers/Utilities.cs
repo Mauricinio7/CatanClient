@@ -27,16 +27,24 @@ namespace CatanClient.UIHelpers
         public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/repos/CatanClient/logs/errorlog.txt";
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
-        public const string IPACCOUNTSERVICE = "http://192.168.230.207:8181/AccountService";
-        public const string IP_GAME_SERVICE = "http://192.168.230.207:8191/GameService";
-        public const string IP_CHAT_SERVICE = "net.tcp://192.168.230.207:8202/ChatService";
-        public const string IP_PROFILE_SERVICE = "http://192.168.230.207:8383/ProfileService";
+        public const string IPACCOUNTSERVICE = "http://10.144.41.3:8181/AccountService";
+        public const string IP_GAME_SERVICE = "http://10.144.41.3:8191/GameService";
+        public const string IP_CHAT_SERVICE = "net.tcp://10.144.41.3:8202/ChatService";
+        public const string IP_PROFILE_SERVICE = "http://10.144.41.3:8383/ProfileService";
+        public const string IP_GUEST_ACCOUNT_SERVICE = "http://10.144.41.3:8484/GuestAccountService";
         public const string FADEOUTANIMATION = "FadeOutAnimation";
         public const string SHOWMAINMENUBACKGROUND = "ShowMainMenuBackgroundView";
         public const string SHOWMAINMENU = "ShowMainMenuView";
+        public const string SHOW_GUEST_MAIN_MENU = "ShowGuestMainMenuView";
         public const string SHOWVERIFYACCOUNT = "ShowVerifyAccountView";
         public const string OCULTVERIFYACCOUNT = "OcultVerifyAccountView";
         public const string SHOWGAMELOBBY = "ShowGameLobbyView";
+        public const string SHOWCONFIGUREPROFILE = "ShowConfigureProfile";
+        public const string BACK_FROM_CREATE_ROOM = "BackFromCreateRoom";
+        public const string CLOSE_EDIT_PROFILE = "EditProfileWindow_Close";
+        public const string CLOSE_VERIFY_ACCOUNT_CHANGE = "VerifyAccountChangeWindow_Close";
+        public const string CLOSE_EDIT_PASSWORD = "EditPasswordWindow_Close";
+        public const string RECIVEMESSAGE = "ReceiveMessage";
         public const string ANIMATEDGRID = "animatedGrid";
         public const string FADEINANIMATION = "FadeInAnimation";
         public const string SLIDEOUTFROMTOPANIMATION = "SlideOutFromTopAnimation";
@@ -54,6 +62,9 @@ namespace CatanClient.UIHelpers
         public const string WIDTH = "Width";
         public const string HEIGHT = "Height";
         public const string PASSWORD = "Password";
+        public const string EMAIL = "Email";
+        public const string PHONE = "Phone";
+        public const string USERNAME = "Username";
         public const string TEXT_BOX_WIDTH = "TextBoxWidth";
         public const string TEXT_BOX_HEIGHT = "TextBoxHeight";
         public const string CHECK_BOX_MARGIN = "CheckBoxMargin";
@@ -68,7 +79,7 @@ namespace CatanClient.UIHelpers
 
         public static string MessageDataBaseUnableToLoad(string language)
         {                                           
-            return Resources.ResourceManager.GetString("dialog_database_load_exception", new CultureInfo(language));
+            return Resources.ResourceManager.GetString("dialog_database_load_exception_message", new CultureInfo(language));
         }
         public static string TittleDataBaseUnableToLoad(string language)
         {
@@ -134,18 +145,79 @@ namespace CatanClient.UIHelpers
         {
             return Resources.ResourceManager.GetString("dialog_fail", new CultureInfo(language));
         }
+        public static string MessageGameNotFound(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_game_not_found_message", new CultureInfo(language));
+        }
+        public static string MessageRestartGame(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_restart_message", new CultureInfo(language));
+        }
+        public static string TittleRestart(string language)
+        {
+            return Resources.ResourceManager.GetString("tittle_restart", new CultureInfo(language));
+        }
         public static string MessageFailVerifyUser(string language)
         {
             return Resources.ResourceManager.GetString("dialog_fail_verify_user_message", new CultureInfo(language));
         }
         public static string MessageUnableToSaveData(string language)
         {
+            return Resources.ResourceManager.GetString("dialog_database_save_exception_message", new CultureInfo(language));
+        }
+
+        public static string TitleUnableToSaveData(string language)
+        {
             return Resources.ResourceManager.GetString("dialog_database_save_exception", new CultureInfo(language));
+        }
+
+        public static string MessageUnableToLoadData(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_database_load_exception_message", new CultureInfo(language));
+        }
+
+        public static string TitleUnableToLoadData(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_database_load_exception", new CultureInfo(language));
+        }
+        public static string MessageChangeUsernameSucces(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_change_username_succes_message", new CultureInfo(language));
+        }
+        public static string MessageChangeUsernameFail(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_change_username_fail_message", new CultureInfo(language));
+        }
+
+        public static string TitleChangeUsername(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_change_username", new CultureInfo(language));
+        }
+        public static string EnterNew(string language)
+        {
+            return Resources.ResourceManager.GetString("label_enter_new", new CultureInfo(language));
+        }
+        public static string Email(string language)
+        {
+            return Resources.ResourceManager.GetString("label_email", new CultureInfo(language));
+        }
+        public static string Username(string language)
+        {
+            return Resources.ResourceManager.GetString("label_username", new CultureInfo(language));
+        }
+        public static string PhoneNumber(string language)
+        {
+            return Resources.ResourceManager.GetString("label_phone", new CultureInfo(language));
         }
         public static string DialogWelcome(string language)
         {
             return Resources.ResourceManager.GetString("dialog_welcome", new CultureInfo(language));
         }
+        public static string MessagePasswordNotMacth(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_password_dont_match_message", new CultureInfo(language));
+        }
+
         public static string MessageUnverifiedUser(string language)
         {
             return Resources.ResourceManager.GetString("dialog_unverified_user_message", new CultureInfo(language));

@@ -22,11 +22,12 @@ namespace CatanClient.ViewModels
 
         private string newValue;
         private ProfileDto profile;
+        private readonly ServiceManager serviceManager;
 
         public string Field { get; }
 
 
-        public string PromptText => $"Ingrese su nuevo {Field}:";
+        public string PromptText => SetPrompt();
         public string NewValue
         {
             get => newValue;
@@ -40,94 +41,140 @@ namespace CatanClient.ViewModels
         public ProfileDto Profile { get => profile; set => profile = value; }
 
         public ICommand SaveCommand { get; }
-        private readonly ServiceManager serviceManager;
+        
 
         public EditProfileWindowViewModel(string field, ServiceManager serviceManager)
         {
             this.serviceManager = serviceManager;
             Field = field;
-            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
-            profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
+            AccountService.ProfileDto accountProfile = serviceManager.ProfileSingleton.Profile;
+            accountProfile.PreferredLanguage = CultureInfo.CurrentCulture.Name;
 
-            ProfileService.ProfileDto profile = new ProfileDto();
-            profile.Id = profileDto.Id;
-            profile.Name = profileDto.Name;
-            profile.PicturePath = profileDto.PicturePath;
-            profile.PreferredLanguage = CultureInfo.CurrentCulture.Name;
+            ProfileService.ProfileDto profileDto = CastAccountProfileToProfileService(accountProfile);         
 
-            Profile = profile;
+            Profile = profileDto;
 
             SaveCommand = new RelayCommand(OnSave);
+        }
+
+        private string SetPrompt()
+        {
+            string prompt = String.Empty;
+
+            switch (Field)
+            {
+               case Utilities.USERNAME:
+                    prompt = Utilities.EnterNew(CultureInfo.CurrentCulture.Name) + " " + Utilities.Username(CultureInfo.CurrentCulture.Name) + ":";
+                    break;
+                case Utilities.EMAIL:
+                    prompt = Utilities.EnterNew(CultureInfo.CurrentCulture.Name) + " " + Utilities.Email(CultureInfo.CurrentCulture.Name) + ":";
+                    break;
+                case Utilities.PHONE:
+                    prompt = Utilities.EnterNew(CultureInfo.CurrentCulture.Name) + " " + Utilities.PhoneNumber(CultureInfo.CurrentCulture.Name) + ":";
+                    break;
+            }
+            return prompt;
+
+        }
+
+        private ProfileService.ProfileDto CastAccountProfileToProfileService(AccountService.ProfileDto accountProfile)
+        {
+            ProfileService.ProfileDto profile = new ProfileDto
+            {
+                Id = accountProfile.Id,
+                Name = accountProfile.Name,
+                PicturePath = accountProfile.PicturePath,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name
+            };
+
+            return profile;
         }
 
 
         private void OnSave()
         {
-            switch (Field)
-            {
-                case "Username":
-                    SaveUsername(newValue);
 
-                    break;
-                case "Email":
-                    SaveEmail(NewValue);
-                    break;
-                case "Phone":
-                    SavePhone(NewValue);
-                    break;
+            if(!String.IsNullOrEmpty(NewValue))
+            {
+                if (Field == Utilities.USERNAME)
+                {
+                    SaveUsername(NewValue);
+                }
+                else
+                {
+                    SaveEmailOrPhone(NewValue, Field);
+                }
+            }
+            else
+            {
+                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
         public void SaveUsername(string username)
         {
-            OperationResultProfileDto result = ChangeName(Profile, username);
-            if (result.IsSuccess)
+            if (AccountUtilities.IsValidAccountName(username))
             {
-                MessageBox.Show("Username saved: " + username);
-                serviceManager.ProfileSingleton.SetName(username);
+                OperationResultProfileDto result = serviceManager.ProfileServiceClient.ChangeName(Profile, username);
+                if (result.IsSuccess)
+                {
+                    MessageBox.Show(Utilities.MessageChangeUsernameSucces(CultureInfo.CurrentCulture.Name), Utilities.TitleChangeUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    serviceManager.ProfileSingleton.SetName(username);
+
+                    Mediator.Notify(Utilities.CLOSE_EDIT_PROFILE, null);
+                    Mediator.Notify(Utilities.BACK_FROM_CREATE_ROOM, null);
+                }
+                else
+                {
+                    MessageBox.Show(Utilities.MessageChangeUsernameFail(CultureInfo.CurrentCulture.Name), Utilities.TitleChangeUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("No se pudo cambiar el nombre");
+                MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            
-            
         }
 
-        public void SaveEmail(string email)
+        public void SaveEmailOrPhone(string newValue, string type)
         {
-            AccountService.AccountDto account = new AccountService.AccountDto();
-            account.Email = email;
-            account.PhoneNumber = String.Empty;
-            account.Password = String.Empty;
-            account.Id = Profile.Id;
-            account.PreferredLanguage = CultureInfo.CurrentCulture.Name;
-           
-
-            AccountService.OperationResultChangeRegisterEmailOrPhone result;
-
-            result = serviceManager.AccountServiceClient.ChangeEmail(account);
-
-            if (result.IsSuccess)
+            if (AccountUtilities.IsValidAccountEmail(newValue) || AccountUtilities.IsValidAccountPhoneNumber(newValue))
             {
-                MessageBox.Show("Email saved: " + email);
-                ShowVerify(account);
+                AccountService.AccountDto account = new AccountService.AccountDto
+                {
+                    Email = String.Empty,
+                    PhoneNumber = String.Empty,
+                    Password = String.Empty,
+                    Id = Profile.Id,
+                    PreferredLanguage = CultureInfo.CurrentCulture.Name
+                };
+
+                if (type == Utilities.EMAIL)
+                {
+                    account.Email = newValue;
+                }
+                else
+                {
+                    account.PhoneNumber = newValue;
+                }
+
+                AccountService.OperationResultChangeRegisterEmailOrPhone result;
+                result = serviceManager.AccountServiceClient.ChangeEmailOrPhone(account);
+
+                if (result.IsSuccess)
+                {
+                    ShowVerify(account);
+                }
+                else
+                {
+                    MessageBox.Show(Utilities.MessageUnableToSaveData(CultureInfo.CurrentCulture.Name), Utilities.TitleUnableToSaveData(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("No se pudo guardar el nuevo correo");
-                MessageBox.Show(result.MessageResponse);
-                MessageBox.Show(result.StatusChangeAccountRegister.ToString());
-            }
-
-            
+                MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            } 
         }
 
-        public void SavePhone(string phone)
-        {
-            MessageBox.Show("Phone saved: " + phone);
-            ShowVerify(null);
-        }
 
         public void ShowVerify(AccountService.AccountDto account)
         {
@@ -136,38 +183,7 @@ namespace CatanClient.ViewModels
             verifyWindow.ShowDialog();
         }
 
-        public OperationResultProfileDto ChangeName(ProfileDto profile, string newName)
-        {
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
-            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
-            IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            OperationResultProfileDto result;
-
-            profile.Name = newName;
-
-            try
-            {
-                result = client.ChangeProfileName(profile);
-            }
-            catch (Exception ex)
-            {
-                result = new OperationResultProfileDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
-
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            finally
-            {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-            }
-            return result;
-        }
+        
 
 
 

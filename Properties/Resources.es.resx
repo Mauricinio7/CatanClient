@@ -519,4 +519,47 @@
   <data name="label_room" xml:space="preserve">
     <value>Sala:</value>
   </data>
+  <data name="button_modify" xml:space="preserve">
+    <value>Modificar</value>
+  </data>
+  <data name="dialog change_username_fail_message" xml:space="preserve">
+    <value>No se ha podido cambiar el nombre del usuario</value>
+  </data>
+  <data name="dialog_change_username" xml:space="preserve">
+    <value>Cambio de nombre de usuario</value>
+  </data>
+  <data name="dialog_change_username_succes_message" xml:space="preserve">
+    <value>Se ha cambiado el nombre del usuario correctamente</value>
+  </data>
+  <data name="dialog_password_dont_match_message" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+  <data name="global_modify_password" xml:space="preserve">
+    <value>Modificar contraseña</value>
+  </data>
+  <data name="label_email" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="label_enter_new" xml:space="preserve">
+    <value>Ingrese su nuevo</value>
+  </data>
+  <data name="label_phone" xml:space="preserve">
+    <value>Número de teléfono</value>
+  </data>
+  <data name="label_username" xml:space="preserve">
+    <value>Nombre de usuario</value>
+  </data>
+  <data name="dialog_restart_message" xml:space="preserve">
+    <value>Se reiniciará el juego</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Resources_es" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources.es.resx;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Resources_es_Designer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources.es.Designer.cs;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="tittle_restart" xml:space="preserve">
+    <value>Se necesita reiniciar</value>
+  </data>
 </root>

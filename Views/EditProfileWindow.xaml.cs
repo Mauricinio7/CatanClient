@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using CatanClient.AccountService;
+using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace CatanClient.Views
             this.DataContext = App.Container.Resolve<EditProfileWindowViewModel>(
                 new TypedParameter(typeof(string), field)
             );
+
+            Mediator.Register(Utilities.CLOSE_EDIT_PROFILE, _ => this.Close());
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

@@ -54,6 +54,7 @@ namespace CatanClient.ViewModels
 
 
         public ICommand CreateRoomCommand { get; }
+        public ICommand ExitCreateRoomCommand { get; }
         private readonly ServiceManager serviceManager;
 
         public CreateRoomViewModel(ServiceManager serviceManager)
@@ -66,9 +67,23 @@ namespace CatanClient.ViewModels
             };
 
             CreateRoomCommand = new RelayCommand(ExecuteCreateRoom);
+            ExitCreateRoomCommand = new RelayCommand(ExecuteExitCreateRoom);
             this.serviceManager = serviceManager;
         }
 
+        private void ExecuteExitCreateRoom(object parameter)
+        {
+            AccountService.ProfileDto profile = serviceManager.ProfileSingleton.Profile;
+
+            if (profile.IsRegistered)
+            {
+                Mediator.Notify(Utilities.BACK_FROM_CREATE_ROOM, profile);
+            }
+            else
+            {
+
+            }
+        }
 
         private void ExecuteCreateRoom(object parameter)
         {
@@ -88,7 +103,7 @@ namespace CatanClient.ViewModels
                     Name = profileDto.Name,
                     Id = profileDto.Id,
                     PicturePath = profileDto.PicturePath,
-                    PreferredLanguage = CultureInfo.CurrentCulture.Name, //TODO quit hardcode and do it whit actual culture               
+                    PreferredLanguage = CultureInfo.CurrentCulture.Name,               
                 };
                 OperationResultGameDto result = serviceManager.GameServiceClient.CreateRoomClient(gameDto, profile);
 
@@ -97,6 +112,10 @@ namespace CatanClient.ViewModels
                     GameDto game = result.GameDto;
                     Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
                 }
+            }
+            else
+            {
+                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }

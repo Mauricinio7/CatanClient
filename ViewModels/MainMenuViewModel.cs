@@ -44,12 +44,12 @@ namespace CatanClient.ViewModels
 
                 if(account != null)
                 {
-                    Mediator.Notify("ShowConfigureProfile", account);
+                    Mediator.Notify(Utilities.SHOWCONFIGUREPROFILE, account);
                 }
             }
             else
             {
-                MessageBox.Show("No se pudo mostrar perfil");
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -64,6 +64,8 @@ namespace CatanClient.ViewModels
             try
             {
                 result = client.ConsultAccounProfileInformationAsync(profile).Result;
+
+                //MessageBox.Show(result.AccountDto.PhoneNumber);
             }
             catch (Exception ex)
             {

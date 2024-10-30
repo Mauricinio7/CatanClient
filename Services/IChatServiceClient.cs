@@ -11,10 +11,10 @@ namespace CatanClient.Services
 {
     public interface IChatServiceClient
     {
-        void JoinChatClient(ChatService.GameDto game, ProfileDto profile);
+        void JoinChatClient(ChatService.GameDto game, string namePlayer);
 
-        void SendMessageToServer(ChatService.GameDto game, ProfileDto profile, string message);
+        void SendMessageToServer(ChatService.GameDto game, string namePlayer, string message);
 
-        void LeftChatClient(ChatService.GameDto game, ProfileDto profile);
+        void LeftChatClient(ChatService.GameDto game, string namePlayer);
     }
 }

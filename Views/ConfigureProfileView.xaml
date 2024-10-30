@@ -25,12 +25,12 @@
                 <TranslateTransform Y="-1200" />
             </Grid.RenderTransform>
 
-            <TextBlock Text="Configurar perfil: "
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.window_edit_profile}, StringFormat='{}{0}:'}"
                        Style="{StaticResource PrimaryTextBlockStyle}" Margin="124,72,32,1041"
                        FontSize="50"/>
             <Image HorizontalAlignment="Center" Height="264" Margin="0,158,0,0" VerticalAlignment="Top" Width="264" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
 
-            <TextBlock Text="Nombre de usuario: "
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.label_username}, StringFormat='{}{0}:'}"
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,479,111,634"
                    FontSize="23"/>
             <TextBlock Text="{Binding Username}"  
@@ -38,13 +38,13 @@
                    FontSize="30" FontWeight="Bold"/>
 
         <Button Margin="835,504,48,582" 
-                Content="Modificar"
+                Content="{x:Static properties:Resources.button_modify}" 
                 Style="{StaticResource NeonButtonStyle}"
                 Tag="Username"
                 Command="{Binding ModifyProfileCommand}"
                 CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
 
-        <TextBlock Text="Correo: "
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.label_email}, StringFormat='{}{0}:'}"
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,665,111,448"
                    FontSize="23"/>
         <TextBlock Text="{Binding Email}"  
@@ -52,13 +52,13 @@
                    FontSize="23" FontWeight="Bold"/>
 
         <Button Margin="835,674,48,412" 
-                Content="Modificar"
+                Content="{x:Static properties:Resources.button_modify}" 
                 Style="{StaticResource NeonButtonStyle}"
                 Tag="Email"
                 Command="{Binding ModifyProfileCommand}"
                 CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
 
-        <TextBlock Text="Teléfono: "
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.label_phone}, StringFormat='{}{0}:'}"
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,817,111,296"
                    FontSize="23"/>
         <TextBlock Text="{Binding Phone}"  
@@ -66,20 +66,19 @@
                    FontSize="35" FontWeight="Bold"/>
 
         <Button Margin="835,846,48,240" 
-                Content="Modificar"
+                Content="{x:Static properties:Resources.button_modify}" 
                 Style="{StaticResource NeonButtonStyle}"
                 Tag="Phone"
                 Command="{Binding ModifyProfileCommand}"
                 CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
 
             <Button Margin="710,1011,48,56" 
-                Content="Modificar contraseña"
+                Content="{x:Static properties:Resources.global_modify_password}" 
                 Style="{StaticResource NeonButtonStyle}"
-                Tag="Password"
-                Command="{Binding ModifyProfileCommand}"
-                CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
+                Command="{Binding ModifyPasswordCommand}"
+                />
             <Button Margin="45,1039,838,47" 
-                Content="Salir"
+                Content="{x:Static properties:Resources.button_exit}" 
                 Style="{StaticResource NeonButtonStyle}"
                 Command="{Binding DataContext.BackFromCreateRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"    
                 />

@@ -118,7 +118,12 @@ namespace CatanClient.GameService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> IdField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsRegisteredField;
+        
         private string NameField;
+        
+        private byte[] PictureDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PicturePathField;
@@ -148,6 +153,19 @@ namespace CatanClient.GameService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsRegistered {
+            get {
+                return this.IsRegisteredField;
+            }
+            set {
+                if ((this.IsRegisteredField.Equals(value) != true)) {
+                    this.IsRegisteredField = value;
+                    this.RaisePropertyChanged("IsRegistered");
+                }
+            }
+        }
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Name {
             get {
@@ -157,6 +175,19 @@ namespace CatanClient.GameService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public byte[] PictureData {
+            get {
+                return this.PictureDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
+                    this.PictureDataField = value;
+                    this.RaisePropertyChanged("PictureData");
                 }
             }
         }
@@ -282,6 +313,83 @@ namespace CatanClient.GameService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GuestAccountDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class GuestAccountDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PreferredLanguageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PreferredLanguage {
+            get {
+                return this.PreferredLanguageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
+                    this.PreferredLanguageField = value;
+                    this.RaisePropertyChanged("PreferredLanguage");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameService.IGameEndPoint")]
     public interface IGameEndPoint {
@@ -315,6 +423,12 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
         System.Threading.Tasks.Task StartGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest", ReplyAction="http://tempuri.org/IGameEndPoint/JoinGameAsaGuestResponse")]
+        CatanClient.GameService.OperationResultGameDto JoinGameAsaGuest(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest", ReplyAction="http://tempuri.org/IGameEndPoint/JoinGameAsaGuestResponse")]
+        System.Threading.Tasks.Task<CatanClient.GameService.OperationResultGameDto> JoinGameAsaGuestAsync(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -382,6 +496,14 @@ namespace CatanClient.GameService {
         
         public System.Threading.Tasks.Task StartGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {
             return base.Channel.StartGameAsync(gameClientDto, profileClientDto);
+        }
+        
+        public CatanClient.GameService.OperationResultGameDto JoinGameAsaGuest(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto) {
+            return base.Channel.JoinGameAsaGuest(accessKey, guestAccountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultGameDto> JoinGameAsaGuestAsync(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto) {
+            return base.Channel.JoinGameAsaGuestAsync(accessKey, guestAccountClientDto);
         }
     }
 }

@@ -78,7 +78,7 @@
             <Button 
                 Margin="38,1007,1570,73"
                 Style="{StaticResource NeonButtonStyle}"
-                Content="Listo"
+                Content="{x:Static properties:Resources.button_ready}" 
                 FontSize="25"
              />
 

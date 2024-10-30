@@ -18,6 +18,7 @@ using Serilog;
 using System.Text.RegularExpressions;
 using CatanClient.Services;
 using CatanClient.Singleton;
+using CatanClient.GuestAccountService;
 
 namespace CatanClient.ViewModels
 {
@@ -71,11 +72,37 @@ namespace CatanClient.ViewModels
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand JoinGuestCommand { get; }
 
         public LoginViewModel(ServiceManager serviceManager)
         {
             this.serviceManager = serviceManager;
             LoginCommand = new RelayCommand(ExecuteLogin);
+            JoinGuestCommand = new RelayCommand(ExecuteJoinGuest);
+        }
+
+        private void ExecuteJoinGuest(object window)
+        {
+            OperationResultGuestAccountDto result;
+            result = serviceManager.GuestAccountServiceClient.LoginAsGuest(CultureInfo.CurrentCulture.Name);
+
+            if(result.IsSuccess)
+            {
+                ProfileDto guestProfile = new ProfileDto
+                {
+                    Id = result.GuestAccount.Id,
+                    Name = result.GuestAccount.Name,
+                    PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                    IsRegistered = false
+                };
+
+                serviceManager.ProfileSingleton.SetProfile(guestProfile);
+                ShowMainMenu(window, true);
+            }
+            else
+            {
+                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void ExecuteLogin(object actualWindow) 
@@ -115,13 +142,13 @@ namespace CatanClient.ViewModels
 
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
 
-                    ShowMainMenu(window);
+                    ShowMainMenu(window, false);
                     break;
-                case AccountService.EnumAuthenticationStatus.InGame: //TODO: Sed to room
+                case AccountService.EnumAuthenticationStatus.InGame: //TODO: Send to room
 
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
 
-                    ShowMainMenu(window);
+                    ShowMainMenu(window, false);
                     break;
                 case AccountService.EnumAuthenticationStatus.NotVerified:
                     ShowVerifyAccountView(account);
@@ -129,10 +156,13 @@ namespace CatanClient.ViewModels
                 case AccountService.EnumAuthenticationStatus.Incorrect:
                     MessageBox.Show(Utilities.MessageIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), Utilities.TittleIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
+                case AccountService.EnumAuthenticationStatus.ServerNotFound:
+                    MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
             }
         }
 
-        internal void ShowMainMenu(object actualWindow)
+        internal void ShowMainMenu(object actualWindow, bool isGuest)
         {
             MessageBoxResult result = MessageBox.Show(Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + ":" + Username, Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + "!", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -145,7 +175,16 @@ namespace CatanClient.ViewModels
                         fadeOutStoryboard.Completed += (s, e) =>
                         {
                             Mediator.Notify(Utilities.SHOWMAINMENUBACKGROUND, null);
-                            Mediator.Notify(Utilities.SHOWMAINMENU, null);
+
+                            if (isGuest)
+                            {
+                                Mediator.Notify(Utilities.SHOW_GUEST_MAIN_MENU, null);
+                            }
+                            else
+                            {
+                                Mediator.Notify(Utilities.SHOWMAINMENU, null);
+                            }
+                            
                             Storyboard fadeInStoryboard = ventanaActual.FindResource(Utilities.FADEINANIMATION) as Storyboard;
                             if (fadeInStoryboard != null)
                             {

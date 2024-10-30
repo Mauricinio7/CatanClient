@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="cce02322-aa9f-4514-a8e5-04f1bbca4ba2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="3ab2fe1d-9e82-484e-b8c7-f0a0b1c9d158" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.230.207:8383/ProfileService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.144.41.3:8383/ProfileService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ProfileService.disco" MetadataType="Disco" ID="5a94b2d2-f8cb-4a24-8757-078a6f33b0ce" SourceId="1" SourceUrl="http://192.168.230.207:8383/ProfileService?disco" />
-    <MetadataFile FileName="ProfileService.xsd" MetadataType="Schema" ID="d86c37a4-4bc4-48a2-82d7-47f142b99928" SourceId="1" SourceUrl="http://192.168.230.207:8383/ProfileService?xsd=xsd2" />
-    <MetadataFile FileName="ProfileService1.xsd" MetadataType="Schema" ID="309bb6e4-fad9-4bd0-b3a4-f7234c37f363" SourceId="1" SourceUrl="http://192.168.230.207:8383/ProfileService?xsd=xsd3" />
-    <MetadataFile FileName="ProfileService2.xsd" MetadataType="Schema" ID="c1bfdb5e-b008-4ea9-a601-c651c16c8ba9" SourceId="1" SourceUrl="http://192.168.230.207:8383/ProfileService?xsd=xsd0" />
-    <MetadataFile FileName="ProfileService3.xsd" MetadataType="Schema" ID="014d09d3-5155-49d9-9ba2-7cfd5d75bd47" SourceId="1" SourceUrl="http://192.168.230.207:8383/ProfileService?xsd=xsd1" />
-    <MetadataFile FileName="ProfileServiceEndpoint.wsdl" MetadataType="Wsdl" ID="c2e6b34a-ebff-4ec1-9c3a-1f9669570e82" SourceId="1" SourceUrl="http://192.168.230.207:8383/ProfileService?wsdl" />
+    <MetadataFile FileName="ProfileService.xsd" MetadataType="Schema" ID="bb3a2767-16d6-4846-aa2c-50064f9f9e93" SourceId="1" SourceUrl="http://10.144.41.3:8383/ProfileService?xsd=xsd0" />
+    <MetadataFile FileName="ProfileServiceEndpoint.wsdl" MetadataType="Wsdl" ID="5a7b1a17-2485-48c4-9136-6f752551a8c7" SourceId="1" SourceUrl="http://10.144.41.3:8383/ProfileService?wsdl" />
+    <MetadataFile FileName="ProfileService.disco" MetadataType="Disco" ID="0f1c52ae-48fe-4a09-9688-7adac107b886" SourceId="1" SourceUrl="http://10.144.41.3:8383/ProfileService?disco" />
+    <MetadataFile FileName="ProfileService1.xsd" MetadataType="Schema" ID="c5851987-118d-4c7b-a470-474ca45ad799" SourceId="1" SourceUrl="http://10.144.41.3:8383/ProfileService?xsd=xsd3" />
+    <MetadataFile FileName="ProfileService2.xsd" MetadataType="Schema" ID="64311d39-3786-4074-b01c-2e5117a96f15" SourceId="1" SourceUrl="http://10.144.41.3:8383/ProfileService?xsd=xsd2" />
+    <MetadataFile FileName="ProfileService3.xsd" MetadataType="Schema" ID="f6db742f-6360-4d42-8d62-466d1128994b" SourceId="1" SourceUrl="http://10.144.41.3:8383/ProfileService?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

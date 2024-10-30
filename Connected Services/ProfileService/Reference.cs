@@ -25,7 +25,12 @@ namespace CatanClient.ProfileService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> IdField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsRegisteredField;
+        
         private string NameField;
+        
+        private byte[] PictureDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PicturePathField;
@@ -55,6 +60,19 @@ namespace CatanClient.ProfileService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsRegistered {
+            get {
+                return this.IsRegisteredField;
+            }
+            set {
+                if ((this.IsRegisteredField.Equals(value) != true)) {
+                    this.IsRegisteredField = value;
+                    this.RaisePropertyChanged("IsRegistered");
+                }
+            }
+        }
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Name {
             get {
@@ -64,6 +82,19 @@ namespace CatanClient.ProfileService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public byte[] PictureData {
+            get {
+                return this.PictureDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
+                    this.PictureDataField = value;
+                    this.RaisePropertyChanged("PictureData");
                 }
             }
         }
@@ -267,6 +298,12 @@ namespace CatanClient.ProfileService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/ChangeProfileName", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/ChangeProfileNameResponse")]
         System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileDto> ChangeProfileNameAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePictureResponse")]
+        CatanClient.ProfileService.OperationResultDto UploadProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePictureResponse")]
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultDto> UploadProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -302,6 +339,14 @@ namespace CatanClient.ProfileService {
         
         public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileDto> ChangeProfileNameAsync(CatanClient.ProfileService.ProfileDto profileClientDto) {
             return base.Channel.ChangeProfileNameAsync(profileClientDto);
+        }
+        
+        public CatanClient.ProfileService.OperationResultDto UploadProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes) {
+            return base.Channel.UploadProfilePicture(profileClientDto, imageInBytes);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultDto> UploadProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes) {
+            return base.Channel.UploadProfilePictureAsync(profileClientDto, imageInBytes);
         }
     }
 }

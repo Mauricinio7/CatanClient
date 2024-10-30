@@ -205,6 +205,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Change.
+        /// </summary>
+        public static string button_modify {
+            get {
+                return ResourceManager.GetString("button_modify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Play as a gest.
         /// </summary>
         public static string button_play_as_gest {
@@ -300,6 +309,33 @@ namespace CatanClient.Properties {
         public static string dialog_cancel_change_password_message {
             get {
                 return ResourceManager.GetString("dialog_cancel_change_password_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change username.
+        /// </summary>
+        public static string dialog_change_username {
+            get {
+                return ResourceManager.GetString("dialog_change_username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Failed to change username.
+        /// </summary>
+        public static string dialog_change_username_fail_message {
+            get {
+                return ResourceManager.GetString("dialog_change_username_fail_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username has been changed successfully.
+        /// </summary>
+        public static string dialog_change_username_succes_message {
+            get {
+                return ResourceManager.GetString("dialog_change_username_succes_message", resourceCulture);
             }
         }
         
@@ -574,6 +610,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Passwords do not match.
+        /// </summary>
+        public static string dialog_password_dont_match_message {
+            get {
+                return ResourceManager.GetString("dialog_password_dont_match_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The passwords do not match.
         /// </summary>
         public static string dialog_password_not_match {
@@ -624,6 +669,15 @@ namespace CatanClient.Properties {
         public static string dialog_resent_code_message {
             get {
                 return ResourceManager.GetString("dialog_resent_code_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The game will restart.
+        /// </summary>
+        public static string dialog_restart_message {
+            get {
+                return ResourceManager.GetString("dialog_restart_message", resourceCulture);
             }
         }
         
@@ -808,6 +862,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Change password.
+        /// </summary>
+        public static string global_modify_password {
+            get {
+                return ResourceManager.GetString("global_modify_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         public static string global_password {
@@ -907,6 +970,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Email.
+        /// </summary>
+        public static string label_email {
+            get {
+                return ResourceManager.GetString("label_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The email is already registered..
         /// </summary>
         public static string label_email_already_registered {
@@ -921,6 +993,15 @@ namespace CatanClient.Properties {
         public static string label_enter_lobby_code {
             get {
                 return ResourceManager.GetString("label_enter_lobby_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter you new.
+        /// </summary>
+        public static string label_enter_new {
+            get {
+                return ResourceManager.GetString("label_enter_new", resourceCulture);
             }
         }
         
@@ -1024,6 +1105,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Phone number.
+        /// </summary>
+        public static string label_phone {
+            get {
+                return ResourceManager.GetString("label_phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Player.
         /// </summary>
         public static string label_player {
@@ -1123,6 +1213,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Username.
+        /// </summary>
+        public static string label_username {
+            get {
+                return ResourceManager.GetString("label_username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Votes.
         /// </summary>
         public static string label_votes {
@@ -1200,6 +1299,15 @@ namespace CatanClient.Properties {
         public static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Restart needed.
+        /// </summary>
+        public static string tittle_restart {
+            get {
+                return ResourceManager.GetString("tittle_restart", resourceCulture);
             }
         }
         

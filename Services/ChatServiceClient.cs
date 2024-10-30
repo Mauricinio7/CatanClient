@@ -13,7 +13,7 @@ namespace CatanClient.Services
     public class ChatServiceClient : IChatServiceClient
     {
         private static ChatCallback callback = new ChatCallback();
-        public void JoinChatClient(ChatService.GameDto game, ProfileDto profile)
+        public void JoinChatClient(ChatService.GameDto game, string namePlayer)
         {
             InstanceContext instanceContext = new InstanceContext(callback);
 
@@ -26,11 +26,11 @@ namespace CatanClient.Services
 
             IChatServiceEndpoint chatService = factory.CreateChannel();
 
-            chatService.JoinChat(game, profile);
+            chatService.JoinChat(game, namePlayer);
 
         }
 
-        public void LeftChatClient(ChatService.GameDto game, ProfileDto profile)
+        public void LeftChatClient(ChatService.GameDto game, string namePlayer)
         {
             InstanceContext instanceContext = new InstanceContext(callback);
 
@@ -43,10 +43,10 @@ namespace CatanClient.Services
 
             IChatServiceEndpoint chatService = factory.CreateChannel();
 
-            chatService.LeaveChat(game, profile);
+            chatService.LeaveChat(game, namePlayer);
         }
 
-        public void SendMessageToServer(ChatService.GameDto game, ProfileDto profile, string message)
+        public void SendMessageToServer(ChatService.GameDto game, string namePlayer, string message)
         {
             InstanceContext instanceContext = new InstanceContext(callback);
 
@@ -59,7 +59,7 @@ namespace CatanClient.Services
 
             IChatServiceEndpoint chatService = factory.CreateChannel();
 
-            chatService.SendMessageToChat(game, profile, message);
+            chatService.SendMessageToChat(game, namePlayer, message);
 
         }
     }

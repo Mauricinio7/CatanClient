@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
@@ -25,7 +26,7 @@ namespace CatanClient.ViewModels
     {
         private string newMessage;
         private GameDto game;
-        private ProfileDto profile;
+        private AccountService.ProfileDto profile;
 
 
         public ObservableCollection<ChatMessage> Messages { get; set; }
@@ -55,16 +56,11 @@ namespace CatanClient.ViewModels
                 new ChatMessage { Content = game.Name, Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
             };
 
-            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
-            profile = new ProfileDto
-            {
-                Id = profileDto.Id,
-                Name = profileDto.Name,
-            };
+            profile =  serviceManager.ProfileSingleton.Profile;
 
-            Mediator.Register("ReceiveMessage", OnReceiveMessage);
+            Mediator.Register(Utilities.RECIVEMESSAGE, OnReceiveMessage);
 
-            this.serviceManager.ChatServiceClient.JoinChatClient(game, profile);
+            this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             LeftRoomCommand = new RelayCommand(ExecuteLeftRoom);
 
@@ -81,12 +77,12 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteSendMessage()
         {
-            serviceManager.ChatServiceClient.SendMessageToServer(game, profile, NewMessage);
+            serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
         }
 
         internal void ExecuteLeftRoom()
         {
-            serviceManager.ChatServiceClient.LeftChatClient(game, profile);
+            serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
 
             GameService.GameDto gameRoom = new GameService.GameDto
             {
@@ -107,13 +103,8 @@ namespace CatanClient.ViewModels
 
             serviceManager.GameServiceClient.LeftRoomClient(gameRoom, profileRoom);
 
-            Mediator.Notify(Utilities.SHOWMAINMENU, null);
+            AccountUtilities.RestartGame();
         }
-        
-
-
-
-
 
     }
     

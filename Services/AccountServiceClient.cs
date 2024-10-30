@@ -37,8 +37,7 @@ namespace CatanClient.Services
                     AunthenticationStatus = EnumAuthenticationStatus.ServerNotFound
                 };
 
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Log.Error(ex.Message);
             }
             finally
             {
@@ -66,8 +65,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Log.Error(ex.Message);
             }
             finally
             {
@@ -90,15 +88,13 @@ namespace CatanClient.Services
             {
 
                 result = await client.CreateAccountAsync(account);
-                MessageBox.Show(result.IsSuccess + Utilities.STRING_CHAR_SPACE + result.MessageResponse);
 
                 flag = result.IsSuccess;
 
             }
             catch (Exception ex)
             {
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Log.Error(ex.Message);
             }
             finally
             {
@@ -108,7 +104,7 @@ namespace CatanClient.Services
             return flag;
         }
 
-        public OperationResultChangeRegisterEmailOrPhone ChangeEmail(AccountDto account)
+        public OperationResultChangeRegisterEmailOrPhone ChangeEmailOrPhone(AccountDto account)
         {
             BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
@@ -120,8 +116,6 @@ namespace CatanClient.Services
             {
                 result = client.ChangeEmailOrPhone(account);
 
-                MessageBox.Show(result.IsSuccess.ToString());
-
             }
             catch (Exception ex)
             {
@@ -131,8 +125,7 @@ namespace CatanClient.Services
                     MessageResponse = ex.Message
                 };
 
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Log.Error(ex.Message);
             }
             finally
             {
@@ -141,7 +134,39 @@ namespace CatanClient.Services
             }
             return result;
         }
-        public OperationResultChangeRegisterEmailOrPhone ConfirmEmail(AccountDto account)
+
+        public OperationResultDto ChangePassword(AccountDto account)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            OperationResultDto result;
+
+            try
+            {
+                result = client.ChangePassword(account);
+
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+        public OperationResultChangeRegisterEmailOrPhone ConfirmEmailOrPhone(AccountDto account)
         {
             BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
@@ -153,8 +178,6 @@ namespace CatanClient.Services
             {
                 result = client.SendVerificationCodeToChangeEmailOrPhone(account);
 
-                MessageBox.Show(result.IsSuccess.ToString());
-
             }
             catch (Exception ex)
             {
@@ -164,8 +187,38 @@ namespace CatanClient.Services
                     MessageResponse = ex.Message
                 };
 
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+        public OperationResultDto ConfirmPassword(AccountDto account)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            OperationResultDto result;
+
+            try
+            {
+                result = client.SendVerificationCodeToChangePassword(account);
+
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+
+                Log.Error(ex.Message);
             }
             finally
             {
