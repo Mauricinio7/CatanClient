@@ -9,7 +9,7 @@
              d:DesignHeight="550" d:DesignWidth="900">
 
     <Viewbox Stretch="Uniform" Margin="128,70,128,70">
-        <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0.5,0.5" Width="1581" Height="900" x:Name="animatedGrid">
+        <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0.5,0.5" Width="1581" Height="972" x:Name="animatedGrid">
 
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
@@ -31,34 +31,53 @@
                        FontWeight="Bold" 
                        Foreground="White" 
                        FontFamily="{StaticResource PrimaryFontFamily}" 
-                       HorizontalAlignment="Left" 
+                       HorizontalAlignment="Center" 
                        VerticalAlignment="Top" 
-                       Margin="336,96,0,0"/>
+                       Margin="0,96,0,0"/>
 
 
-            <Button Margin="354,267,354,463"
+            <Button Margin="355,313,353,486"
                     Style="{StaticResource NeonButtonStyle}"
                     Content="{x:Static properties:Resources.button_create_game}"
                     FontSize="35"
                     Command="{Binding DataContext.ShowCreateRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                />
 
-            <Button Margin="353,510,354,209"
+            <Button Margin="354,546,353,254"
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_join_game}"
                 FontSize="35"
                 Command="{Binding DataContext.ShowLoginRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
            />
 
-            <Button Margin="30,43,1389,786"
+            <Button Margin="30,43,1363,848"
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_back}"
                 FontSize="15"
                 Command="{Binding DataContext.ShowLoginViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
             />
-            <Button Margin="1244,35,60,776"
+            <Button Margin="1269,35,60,848"
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_view_profile}"
+                FontSize="15"
+                Command="{Binding ShowConfigureProfileCommand}"
+            />
+            <Button Margin="1302,809,43,63"
+                Style="{StaticResource NeonButtonStyle}"
+                Content="{x:Static properties:Resources.global_friends}"
+                FontSize="15"
+                Command="{Binding DataContext.ShowFriendsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            />
+
+            <Button Margin="892,809,317,63"
+                Style="{StaticResource NeonButtonStyle}"
+                Content="{x:Static properties:Resources.global_friend_request}"
+                FontSize="15"
+                Command="{Binding DataContext.ShowFriendsRequestsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            />
+            <Button Margin="41,809,1181,63"
+                Style="{StaticResource NeonButtonStyle}"
+                Content="{x:Static properties:Resources.button_scoreboard}"
                 FontSize="15"
                 Command="{Binding ShowConfigureProfileCommand}"
             />

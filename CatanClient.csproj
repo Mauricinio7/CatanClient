@@ -137,6 +137,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FriendPlayerCard.xaml.cs">
+      <DependentUpon>FriendPlayerCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FriendRequestPlayerCard.xaml.cs">
+      <DependentUpon>FriendRequestPlayerCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InvitePlayerCard.xaml.cs">
+      <DependentUpon>InvitePlayerCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PlayerInRoomCard.xaml.cs">
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
@@ -155,17 +164,23 @@
     <Compile Include="Singleton\ProfileSingleton.cs" />
     <Compile Include="UIHelpers\AccountUtilities.cs" />
     <Compile Include="UIHelpers\ChatMessage.cs" />
+    <Compile Include="UIHelpers\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="UIHelpers\Mediator.cs" />
     <Compile Include="UIHelpers\Utilities.cs" />
+    <Compile Include="ViewModels\AddFriendWindowViewModel.cs" />
     <Compile Include="ViewModels\ConfigureProfileViewModel.cs" />
     <Compile Include="ViewModels\CreateRoomViewModel.cs" />
     <Compile Include="ViewModels\EditPasswordWindowViewModel.cs" />
     <Compile Include="ViewModels\EditProfileWindowViewModel.cs" />
+    <Compile Include="ViewModels\FriendsViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\LoginRoomViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountChangeWindowViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountViewModel.cs" />
+    <Compile Include="Views\AddFriendWindow.xaml.cs">
+      <DependentUpon>AddFriendWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConfigureProfileView.xaml.cs">
       <DependentUpon>ConfigureProfileView.xaml</DependentUpon>
     </Compile>
@@ -178,11 +193,20 @@
     <Compile Include="Views\EditProfileWindow.xaml.cs">
       <DependentUpon>EditProfileWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FriendRequestView.xaml.cs">
+      <DependentUpon>FriendRequestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FriendsView.xaml.cs">
+      <DependentUpon>FriendsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GuestMainMenuView.xaml.cs">
       <DependentUpon>GuestMainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InviteFriendView.xaml.cs">
+      <DependentUpon>InviteFriendView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginRoomView.xaml.cs">
       <DependentUpon>LoginRoomView.xaml</DependentUpon>
@@ -193,12 +217,27 @@
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ScoreboardView.xaml.cs">
+      <DependentUpon>ScoreboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VerifyAccountChangeWindow.xaml.cs">
       <DependentUpon>VerifyAccountChangeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VerifyAccountView.xaml.cs">
       <DependentUpon>VerifyAccountView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\FriendPlayerCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FriendRequestPlayerCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InvitePlayerCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PlaceholderTextBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +258,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddFriendWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConfigureProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,11 +278,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FriendRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FriendsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GameLobbyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GuestMainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InviteFriendView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,6 +315,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScoreboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

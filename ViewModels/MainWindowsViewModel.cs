@@ -19,8 +19,9 @@ namespace CatanClient.ViewModels
     internal class MainWindowsViewModel : ViewModelBase
     {
         private UserControl currentView;
-
         private UserControl backgroundView;
+        private UserControl overlayView;
+
         public UserControl CurrentView
         {
             get => currentView;
@@ -41,6 +42,16 @@ namespace CatanClient.ViewModels
             }
         }
 
+        public UserControl OverlayView
+        {
+            get => overlayView;
+            set
+            {
+                overlayView = value;
+                OnPropertyChanged(nameof(OverlayView));
+            }
+        }
+
         public ICommand ShowRegisterViewCommand { get; }
         public ICommand ShowLoginViewCommand { get; }
         public ICommand ShowVerifyAccountViewCommand { get; }
@@ -54,6 +65,12 @@ namespace CatanClient.ViewModels
         public ICommand BackToGuestMainMenuCommand { get; }
         public ICommand ShowGameLobbyCommand { get; }
         public ICommand ShowConfigureProfileCommand { get; }
+        public ICommand ShowFriendsViewCommand { get; }
+        public ICommand HideFriendsViewCommand { get; }
+        public ICommand ShowFriendsRequestsViewCommand { get; }
+        public ICommand HideFriendsRequestsViewCommand { get; }
+        public ICommand ShowInviteFriendsViewCommand { get; }
+        public ICommand HideInviteFriendsViewCommand { get; }
 
         public MainWindowsViewModel()
         {
@@ -68,7 +85,13 @@ namespace CatanClient.ViewModels
             ShowGuestMainMenuViewCommand = new RelayCommand(ShowGuestMainMenuView);
             ShowMainMenuBackgroundViewCommand = new RelayCommand(ShowMainMenuBackgroundView);
             ShowCreateRoomCommand = new RelayCommand(async () => await ShowCreateRoom());
-            
+            ShowFriendsViewCommand = new RelayCommand(ShowFriendsView);
+            HideFriendsViewCommand = new RelayCommand(async () => await HideFriendsView());
+            ShowFriendsRequestsViewCommand = new RelayCommand(ShowFriendsRequestsView);
+            HideFriendsRequestsViewCommand = new RelayCommand(async () => await HideFriendsRequestsView());
+            ShowInviteFriendsViewCommand = new RelayCommand(ShowInviteFriendsView);
+            HideInviteFriendsViewCommand = new RelayCommand(async () => await HideInviteFriendsView());
+
             ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
             BackToMainMenuCommand = new RelayCommand(async () => await BackToMainMenu());
             BackToGuestMainMenuCommand = new RelayCommand(async () => await BackToGuestMainMenu());
@@ -87,6 +110,59 @@ namespace CatanClient.ViewModels
 
         }
 
+        private void ShowFriendsView()
+        {
+            var friendsView = new Views.FriendsView();
+            OverlayView = friendsView;
+
+        }
+
+        private async Task HideFriendsView()
+        {
+            if (OverlayView is Views.FriendsView friendsView && friendsView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+            {
+                Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
+            }
+            OverlayView = null; 
+        }
+
+        private void ShowFriendsRequestsView()
+        {
+            var friendsView = new Views.FriendRequestView();
+            OverlayView = friendsView;
+
+        }
+
+        private async Task HideFriendsRequestsView()
+        {
+            if (OverlayView is Views.FriendRequestView friendsView && friendsView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+            {
+                Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
+            }
+            OverlayView = null;
+        }
+
+        private void ShowInviteFriendsView()
+        {
+            var friendsView = new Views.InviteFriendView();
+            OverlayView = friendsView;
+
+        }
+
+        private async Task HideInviteFriendsView()
+        {
+            if (OverlayView is Views.InviteFriendView friendsView && friendsView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+            {
+                Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
+            }
+            OverlayView = null;
+        }
 
         private async Task ShowRegisterView()
         {

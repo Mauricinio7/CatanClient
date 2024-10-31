@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="CatanClient.Views.FriendRequestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatanClient.Views"
+             xmlns:properties="clr-namespace:CatanClient.Properties"
+             mc:Ignorable="d" 
+             Height="1000" Width="1700">
+
+    <Viewbox Stretch="Fill" Margin="1000,0,0,0">
+        <Grid Background="{StaticResource PrimaryColor}"  Width="679" Height="1164" x:Name="animatedGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="249*"/>
+                <RowDefinition Height="139*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <StaticResource ResourceKey="SlideInFromRightAnimationForPanels"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <Grid.RenderTransform>
+                <TranslateTransform X="800" />
+            </Grid.RenderTransform>
+
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.global_friend_request}, StringFormat='{}{0}:'}"
+               Style="{StaticResource PrimaryTextBlockStyle}" Margin="40,51,45,645"
+               FontSize="28" RenderTransformOrigin="-1.307,0.417"
+                   Foreground = "LightGray"/>
+            <Button Margin="231,258,249,93" 
+            Content="{x:Static properties:Resources.button_close}" 
+            Style="{StaticResource NeonButtonStyle}"
+            Command="{Binding DataContext.HideFriendsRequestsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Row="1"    
+        />
+            <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="60,144,78,208"
+                 Background="Transparent"
+                 Foreground="White" Grid.RowSpan="2"/>
+
+
+        </Grid>
+    </Viewbox>
+</UserControl>

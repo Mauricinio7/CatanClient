@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="CatanClient.Views.ScoreboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatanClient.Views"
+             xmlns:properties="clr-namespace:CatanClient.Properties"
+             mc:Ignorable="d" 
+             Height="1000" Width="1700">
+
+    <Viewbox Stretch="Fill" Margin="0,0,1000,0">
+        <Grid Background="{StaticResource PrimaryColor}"  Width="679" Height="1164" x:Name="animatedGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <!-- Espacio para el título -->
+                <RowDefinition Height="*"/>
+                <!-- Espacio para el TabControl -->
+                <RowDefinition Height="100"/>
+                <!-- Espacio para el botón Cerrar -->
+            </Grid.RowDefinitions>
+
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <StaticResource ResourceKey="SlideInFromRightAnimationForPanels"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <Grid.RenderTransform>
+                <TranslateTransform X="0" />
+            </Grid.RenderTransform>
+
+            <!-- Título -->
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.button_scoreboard}, StringFormat='{}{0}:'}"
+                       Style="{StaticResource PrimaryTextBlockStyle}" Margin="26,20,0,0"
+                       FontSize="28" Foreground="LightGray" Grid.Row="0"/>
+
+            <!-- TabControl con las 3 opciones -->
+            <TabControl Grid.Row="1" Margin="20,10,20,76">
+                <TabItem Header="Amigos">
+                    <!-- Contenido de la pestaña Amigos (puedes añadir contenido aquí) -->
+                    <TextBlock Text="Contenido de Amigos" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </TabItem>
+                <TabItem Header="Mundial">
+                    <!-- Contenido de la pestaña Mundial -->
+                    <TextBlock Text="Contenido de Mundial" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </TabItem>
+                <TabItem Header="Semanal">
+                    <!-- Contenido de la pestaña Semanal -->
+                    <TextBlock Text="Contenido de Semanal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </TabItem>
+            </TabControl>
+
+            <!-- Botón de Cerrar -->
+            <Button Content="{x:Static properties:Resources.button_close}" 
+                    Style="{StaticResource NeonButtonStyle}"
+                    Command="{Binding DataContext.HideFriendsRequestsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                    Width="165" Height="64" 
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                    Grid.Row="2" Margin="240,0,0,36"/>
+        </Grid>
+    </Viewbox>
+</UserControl>

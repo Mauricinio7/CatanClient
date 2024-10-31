@@ -50,6 +50,7 @@ namespace CatanClient.UIHelpers
         public const string FADEINANIMATION = "FadeInAnimation";
         public const string SLIDEOUTFROMTOPANIMATION = "SlideOutFromTopAnimation";
         public const string SLIDEOUTFROMRIGHTANIMATION = "SlideOutFromRightAnimation";
+        public const string SLIDE_OUT_FROM_RIGHT_ANIMATION_PANELS = "SlideOutFromRightAnimationForPanels";
         public const string SYSTEM_NAME = "System";
         public const string LABEL_STYLE = "LabelStyle";
         public const string TEXT = "Text";

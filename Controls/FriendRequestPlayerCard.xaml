@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="CatanClient.Controls.FriendRequestPlayerCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CatanClient.Controls"
+             xmlns:properties="clr-namespace:CatanClient.Properties"
+             mc:Ignorable="d" 
+             Height="182" Width="381">
+
+
+    <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center" Margin="0,0,-184,0" >
+        <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
+        <TextBlock
+    Margin="10,155,10,7"
+    Text="Mauricinio7"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="13"
+    />
+
+        <Button Content="{x:Static properties:Resources.button_accept}" 
+            Style="{StaticResource NeonButtonStyle}"
+            Margin="174,58,226,57"
+            />
+        <Button Content="{x:Static properties:Resources.button_decline}" 
+    Style="{StaticResource NeonButtonStyle}"
+    Margin="363,58,0,58" HorizontalAlignment="Left" Width="173"
+    />
+
+    </Grid>
+</UserControl>
