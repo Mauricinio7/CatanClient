@@ -33,6 +33,8 @@ namespace CatanClient.ViewModels
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
 
+            MessageBox.Show(profileDto.CurrentSessionID);
+
             OperationResultAccountDto result;
             
 

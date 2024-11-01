@@ -16,7 +16,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="FinishGame">
+  <xs:element name="QuitGame">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="gameClientDto" nillable="true" type="q4:GameDto" />
@@ -24,25 +24,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="FinishGameResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="FinishGameResult" nillable="true" type="q6:OperationResultDto" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="QuitGame">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="gameClientDto" nillable="true" type="q7:GameDto" />
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q8:ProfileDto" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="QuitGameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="QuitGameResult" nillable="true" type="q9:OperationResultDto" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="QuitGameResult" nillable="true" type="q6:OperationResultDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QuitGameAsaGuestAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="gameClientDto" nillable="true" type="q7:GameDto" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="guestAccountClientDto" nillable="true" type="q8:GuestAccountDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QuitGameAsaGuestAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="QuitGameAsaGuestAccountResult" nillable="true" type="q9:OperationResultDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

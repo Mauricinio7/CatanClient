@@ -23,6 +23,9 @@ namespace CatanClient.AccountService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CurrentSessionIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -53,6 +56,19 @@ namespace CatanClient.AccountService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CurrentSessionId {
+            get {
+                return this.CurrentSessionIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentSessionIdField, value) != true)) {
+                    this.CurrentSessionIdField = value;
+                    this.RaisePropertyChanged("CurrentSessionId");
+                }
             }
         }
         
@@ -385,6 +401,8 @@ namespace CatanClient.AccountService {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        private string CurrentSessionIDField;
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> IdField;
         
@@ -393,10 +411,8 @@ namespace CatanClient.AccountService {
         
         private string NameField;
         
-        private byte[] PictureDataField;
-        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PicturePathField;
+        private byte[] PictureDataField;
         
         private string PreferredLanguageField;
         
@@ -407,6 +423,19 @@ namespace CatanClient.AccountService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string CurrentSessionID {
+            get {
+                return this.CurrentSessionIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentSessionIDField, value) != true)) {
+                    this.CurrentSessionIDField = value;
+                    this.RaisePropertyChanged("CurrentSessionID");
+                }
             }
         }
         
@@ -449,7 +478,7 @@ namespace CatanClient.AccountService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] PictureData {
             get {
                 return this.PictureDataField;
@@ -458,19 +487,6 @@ namespace CatanClient.AccountService {
                 if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
                     this.PictureDataField = value;
                     this.RaisePropertyChanged("PictureData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PicturePath {
-            get {
-                return this.PicturePathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PicturePathField, value) != true)) {
-                    this.PicturePathField = value;
-                    this.RaisePropertyChanged("PicturePath");
                 }
             }
         }

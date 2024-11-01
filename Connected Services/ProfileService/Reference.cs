@@ -22,6 +22,8 @@ namespace CatanClient.ProfileService {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        private string CurrentSessionIDField;
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> IdField;
         
@@ -30,10 +32,8 @@ namespace CatanClient.ProfileService {
         
         private string NameField;
         
-        private byte[] PictureDataField;
-        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PicturePathField;
+        private byte[] PictureDataField;
         
         private string PreferredLanguageField;
         
@@ -44,6 +44,19 @@ namespace CatanClient.ProfileService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string CurrentSessionID {
+            get {
+                return this.CurrentSessionIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentSessionIDField, value) != true)) {
+                    this.CurrentSessionIDField = value;
+                    this.RaisePropertyChanged("CurrentSessionID");
+                }
             }
         }
         
@@ -86,7 +99,7 @@ namespace CatanClient.ProfileService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] PictureData {
             get {
                 return this.PictureDataField;
@@ -95,19 +108,6 @@ namespace CatanClient.ProfileService {
                 if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
                     this.PictureDataField = value;
                     this.RaisePropertyChanged("PictureData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PicturePath {
-            get {
-                return this.PicturePathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PicturePathField, value) != true)) {
-                    this.PicturePathField = value;
-                    this.RaisePropertyChanged("PicturePath");
                 }
             }
         }
@@ -139,6 +139,7 @@ namespace CatanClient.ProfileService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultPictureDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultProfileDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -193,6 +194,29 @@ namespace CatanClient.ProfileService {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultPictureDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultPictureDto : CatanClient.ProfileService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] PictureField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Picture {
+            get {
+                return this.PictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureField, value) != true)) {
+                    this.PictureField = value;
+                    this.RaisePropertyChanged("Picture");
+                }
             }
         }
     }
@@ -300,10 +324,22 @@ namespace CatanClient.ProfileService {
         System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileDto> ChangeProfileNameAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePictureResponse")]
-        CatanClient.ProfileService.OperationResultDto UploadProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes);
+        CatanClient.ProfileService.OperationResultProfileDto UploadProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePictureResponse")]
-        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultDto> UploadProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes);
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileDto> UploadProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetProfilePictureResponse")]
+        CatanClient.ProfileService.OperationResultPictureDto GetProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetProfilePictureResponse")]
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCodeResponse")]
+        bool InviteFriendsWithCode(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCodeResponse")]
+        System.Threading.Tasks.Task<bool> InviteFriendsWithCodeAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -341,12 +377,28 @@ namespace CatanClient.ProfileService {
             return base.Channel.ChangeProfileNameAsync(profileClientDto);
         }
         
-        public CatanClient.ProfileService.OperationResultDto UploadProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes) {
+        public CatanClient.ProfileService.OperationResultProfileDto UploadProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes) {
             return base.Channel.UploadProfilePicture(profileClientDto, imageInBytes);
         }
         
-        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultDto> UploadProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes) {
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileDto> UploadProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto, byte[] imageInBytes) {
             return base.Channel.UploadProfilePictureAsync(profileClientDto, imageInBytes);
+        }
+        
+        public CatanClient.ProfileService.OperationResultPictureDto GetProfilePicture(CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.GetProfilePicture(profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.GetProfilePictureAsync(profileClientDto);
+        }
+        
+        public bool InviteFriendsWithCode(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.InviteFriendsWithCode(nameFriendToInvite, profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InviteFriendsWithCodeAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.InviteFriendsWithCodeAsync(nameFriendToInvite, profileClientDto);
         }
     }
 }

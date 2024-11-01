@@ -126,10 +126,10 @@ namespace CatanClient.ViewModels
                 {
                     AccountDto account = AccountUtilities.CreateAccount(Email, PhoneNumber, Password, String.Empty);
 
-                    //AuthenticateUser(account, actualWindow);
+                    AuthenticateUser(account, actualWindow);
 
                     //TODO just for Test WARING
-                    ShowMainMenu(actualWindow, false);
+                    //ShowMainMenu(actualWindow, false);
 
                 }
             } 
@@ -146,6 +146,8 @@ namespace CatanClient.ViewModels
                 case AccountService.EnumAuthenticationStatus.Verified:
 
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
+
+                    MessageBox.Show(result.ProfileDto.CurrentSessionID);
 
                     ShowMainMenu(window, false);
                     break;

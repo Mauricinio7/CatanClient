@@ -13,17 +13,17 @@
   <wsdl:message name="IGameEndPoint_CreateGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateGameResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameEndPoint_FinishGame_InputMessage">
-    <wsdl:part name="parameters" element="tns:FinishGame" />
-  </wsdl:message>
-  <wsdl:message name="IGameEndPoint_FinishGame_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FinishGameResponse" />
-  </wsdl:message>
   <wsdl:message name="IGameEndPoint_QuitGame_InputMessage">
     <wsdl:part name="parameters" element="tns:QuitGame" />
   </wsdl:message>
   <wsdl:message name="IGameEndPoint_QuitGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:QuitGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_QuitGameAsaGuestAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:QuitGameAsaGuestAccount" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_QuitGameAsaGuestAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QuitGameAsaGuestAccountResponse" />
   </wsdl:message>
   <wsdl:message name="IGameEndPoint_JoinGame_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinGame" />
@@ -48,13 +48,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGame" message="tns:IGameEndPoint_CreateGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGameResponse" message="tns:IGameEndPoint_CreateGame_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FinishGame">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/FinishGame" message="tns:IGameEndPoint_FinishGame_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/FinishGameResponse" message="tns:IGameEndPoint_FinishGame_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="QuitGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGame" message="tns:IGameEndPoint_QuitGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGameResponse" message="tns:IGameEndPoint_QuitGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QuitGameAsaGuestAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGameAsaGuestAccount" message="tns:IGameEndPoint_QuitGameAsaGuestAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGameAsaGuestAccountResponse" message="tns:IGameEndPoint_QuitGameAsaGuestAccount_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="JoinGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGame" message="tns:IGameEndPoint_JoinGame_InputMessage" />
@@ -80,8 +80,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FinishGame">
-      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/FinishGame" style="document" />
+    <wsdl:operation name="QuitGame">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/QuitGame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -89,8 +89,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="QuitGame">
-      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/QuitGame" style="document" />
+    <wsdl:operation name="QuitGameAsaGuestAccount">
+      <soap:operation soapAction="http://tempuri.org/IGameEndPoint/QuitGameAsaGuestAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

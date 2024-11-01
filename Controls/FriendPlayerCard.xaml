@@ -19,5 +19,17 @@
             Style="{StaticResource PrimaryButtonStyle}"
             Command="{Binding DeleteCommand}"
             Margin="196,66,53,49"/>
+        <Ellipse Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,10,0,0" RenderTransformOrigin="0.283,5.35">
+            <Ellipse.Style>
+                <Style TargetType="Ellipse">
+                    <Setter Property="Fill" Value="Red" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                            <Setter Property="Fill" Value="Green" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Ellipse.Style>
+        </Ellipse>
     </Grid>
 </UserControl>

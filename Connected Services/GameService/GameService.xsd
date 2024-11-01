@@ -4,6 +4,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="AccessKey" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdAdminGame" type="xs:int" />
       <xs:element minOccurs="0" name="MaxNumberPlayers" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -11,11 +12,11 @@
   <xs:element name="GameDto" nillable="true" type="tns:GameDto" />
   <xs:complexType name="ProfileDto">
     <xs:sequence>
+      <xs:element name="CurrentSessionID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IsRegistered" type="xs:boolean" />
       <xs:element name="Name" nillable="true" type="xs:string" />
-      <xs:element name="PictureData" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="PicturePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PictureData" nillable="true" type="xs:base64Binary" />
       <xs:element name="PreferredLanguage" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

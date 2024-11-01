@@ -83,7 +83,7 @@ namespace CatanClient.ViewModels
             {
                 Id = accountProfile.Id,
                 Name = accountProfile.Name,
-                PicturePath = accountProfile.PicturePath,
+                CurrentSessionID = accountProfile.CurrentSessionID,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name
             };
 
@@ -145,7 +145,8 @@ namespace CatanClient.ViewModels
                     PhoneNumber = String.Empty,
                     Password = String.Empty,
                     Id = Profile.Id,
-                    PreferredLanguage = CultureInfo.CurrentCulture.Name
+                    PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                    CurrentSessionId = Profile.CurrentSessionID
                 };
 
                 if (type == Utilities.EMAIL)

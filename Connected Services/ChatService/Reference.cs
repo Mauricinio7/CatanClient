@@ -29,6 +29,9 @@ namespace CatanClient.ChatService {
         private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdAdminGameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> MaxNumberPlayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -66,6 +69,19 @@ namespace CatanClient.ChatService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdAdminGame {
+            get {
+                return this.IdAdminGameField;
+            }
+            set {
+                if ((this.IdAdminGameField.Equals(value) != true)) {
+                    this.IdAdminGameField = value;
+                    this.RaisePropertyChanged("IdAdminGame");
                 }
             }
         }

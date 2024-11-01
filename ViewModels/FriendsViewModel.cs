@@ -5,9 +5,11 @@ using CatanClient.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace CatanClient.ViewModels
@@ -16,6 +18,7 @@ namespace CatanClient.ViewModels
     {
         public ICommand AddFriendCommand { get; }
         public ObservableCollection<FriendPlayerCardViewModel> Friends { get; }
+        public ICollectionView FriendsView { get; }
 
         public FriendsViewModel()
         {
@@ -23,11 +26,23 @@ namespace CatanClient.ViewModels
 
             Friends = new ObservableCollection<FriendPlayerCardViewModel>
             {
-                App.Container.Resolve<FriendPlayerCardViewModel>(new NamedParameter("playerName", "Mauricinio7")),
-                App.Container.Resolve<FriendPlayerCardViewModel>(new NamedParameter("playerName", "Carlos22")),
-                App.Container.Resolve<FriendPlayerCardViewModel>(new NamedParameter("playerName", "LunaGirl"))
+                App.Container.Resolve<FriendPlayerCardViewModel>(
+                    new NamedParameter("playerName", "TonyGamer54"), new NamedParameter("isOnline", true)),
+                App.Container.Resolve<FriendPlayerCardViewModel>(
+                    new NamedParameter("playerName", "GaboGamer81"), new NamedParameter("isOnline", false)),
+                App.Container.Resolve<FriendPlayerCardViewModel>(
+                    new NamedParameter("playerName", "YaelGamer91"), new NamedParameter("isOnline", true)),
+                App.Container.Resolve<FriendPlayerCardViewModel>(
+                    new NamedParameter("playerName", "NoelGamer761"), new NamedParameter("isOnline", false)),
+                App.Container.Resolve<FriendPlayerCardViewModel>(
+                    new NamedParameter("playerName", "BrayanGamer65"), new NamedParameter("isOnline", true))
             };
-        }
+
+
+            FriendsView = CollectionViewSource.GetDefaultView(Friends);
+            FriendsView.SortDescriptions.Add(new SortDescription(nameof(FriendPlayerCardViewModel.IsOnline), ListSortDirection.Descending));
+        
+    }
 
         private void ExecuteAddFriend(object parameter)
         {
@@ -36,10 +51,6 @@ namespace CatanClient.ViewModels
             addFriendWindow.ShowDialog();
         }
 
-        public class FriendModel
-        {
-            public string PlayerName { get; set; }
-        }
 
     }
 }

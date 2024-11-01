@@ -15,13 +15,15 @@ namespace CatanClient.Controls
     internal class FriendPlayerCardViewModel : ViewModelBase
     {
         public string PlayerName { get; set; }
+        public bool IsOnline { get; set;}
         public ICommand DeleteCommand { get; }
 
         private ServiceManager serviceManager;
 
-        public FriendPlayerCardViewModel(string playerName, ServiceManager serviceManager)
+        public FriendPlayerCardViewModel(string playerName, bool isOnline,ServiceManager serviceManager)
         {
             PlayerName = playerName;
+            IsOnline = isOnline;
 
             DeleteCommand = new RelayCommand(ExecuteDelete);
             this.serviceManager = serviceManager;

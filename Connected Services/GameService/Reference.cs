@@ -29,6 +29,9 @@ namespace CatanClient.GameService {
         private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdAdminGameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> MaxNumberPlayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -66,6 +69,19 @@ namespace CatanClient.GameService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdAdminGame {
+            get {
+                return this.IdAdminGameField;
+            }
+            set {
+                if ((this.IdAdminGameField.Equals(value) != true)) {
+                    this.IdAdminGameField = value;
+                    this.RaisePropertyChanged("IdAdminGame");
                 }
             }
         }
@@ -115,6 +131,8 @@ namespace CatanClient.GameService {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        private string CurrentSessionIDField;
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> IdField;
         
@@ -123,10 +141,8 @@ namespace CatanClient.GameService {
         
         private string NameField;
         
-        private byte[] PictureDataField;
-        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PicturePathField;
+        private byte[] PictureDataField;
         
         private string PreferredLanguageField;
         
@@ -137,6 +153,19 @@ namespace CatanClient.GameService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string CurrentSessionID {
+            get {
+                return this.CurrentSessionIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentSessionIDField, value) != true)) {
+                    this.CurrentSessionIDField = value;
+                    this.RaisePropertyChanged("CurrentSessionID");
+                }
             }
         }
         
@@ -179,7 +208,7 @@ namespace CatanClient.GameService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] PictureData {
             get {
                 return this.PictureDataField;
@@ -188,19 +217,6 @@ namespace CatanClient.GameService {
                 if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
                     this.PictureDataField = value;
                     this.RaisePropertyChanged("PictureData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PicturePath {
-            get {
-                return this.PicturePathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PicturePathField, value) != true)) {
-                    this.PicturePathField = value;
-                    this.RaisePropertyChanged("PicturePath");
                 }
             }
         }
@@ -400,17 +416,17 @@ namespace CatanClient.GameService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/CreateGame", ReplyAction="http://tempuri.org/IGameEndPoint/CreateGameResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultGameDto> CreateGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/FinishGame", ReplyAction="http://tempuri.org/IGameEndPoint/FinishGameResponse")]
-        CatanClient.GameService.OperationResultDto FinishGame(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/FinishGame", ReplyAction="http://tempuri.org/IGameEndPoint/FinishGameResponse")]
-        System.Threading.Tasks.Task<CatanClient.GameService.OperationResultDto> FinishGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/QuitGame", ReplyAction="http://tempuri.org/IGameEndPoint/QuitGameResponse")]
         CatanClient.GameService.OperationResultDto QuitGame(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/QuitGame", ReplyAction="http://tempuri.org/IGameEndPoint/QuitGameResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultDto> QuitGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/QuitGameAsaGuestAccount", ReplyAction="http://tempuri.org/IGameEndPoint/QuitGameAsaGuestAccountResponse")]
+        CatanClient.GameService.OperationResultDto QuitGameAsaGuestAccount(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.GuestAccountDto guestAccountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/QuitGameAsaGuestAccount", ReplyAction="http://tempuri.org/IGameEndPoint/QuitGameAsaGuestAccountResponse")]
+        System.Threading.Tasks.Task<CatanClient.GameService.OperationResultDto> QuitGameAsaGuestAccountAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.GuestAccountDto guestAccountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/JoinGame", ReplyAction="http://tempuri.org/IGameEndPoint/JoinGameResponse")]
         CatanClient.GameService.OperationResultGameDto JoinGame(string accessKey, CatanClient.GameService.ProfileDto profileClientDto);
@@ -466,20 +482,20 @@ namespace CatanClient.GameService {
             return base.Channel.CreateGameAsync(gameClientDto, profileClientDto);
         }
         
-        public CatanClient.GameService.OperationResultDto FinishGame(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {
-            return base.Channel.FinishGame(gameClientDto, profileClientDto);
-        }
-        
-        public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultDto> FinishGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {
-            return base.Channel.FinishGameAsync(gameClientDto, profileClientDto);
-        }
-        
         public CatanClient.GameService.OperationResultDto QuitGame(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {
             return base.Channel.QuitGame(gameClientDto, profileClientDto);
         }
         
         public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultDto> QuitGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {
             return base.Channel.QuitGameAsync(gameClientDto, profileClientDto);
+        }
+        
+        public CatanClient.GameService.OperationResultDto QuitGameAsaGuestAccount(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.GuestAccountDto guestAccountClientDto) {
+            return base.Channel.QuitGameAsaGuestAccount(gameClientDto, guestAccountClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultDto> QuitGameAsaGuestAccountAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.GuestAccountDto guestAccountClientDto) {
+            return base.Channel.QuitGameAsaGuestAccountAsync(gameClientDto, guestAccountClientDto);
         }
         
         public CatanClient.GameService.OperationResultGameDto JoinGame(string accessKey, CatanClient.GameService.ProfileDto profileClientDto) {

@@ -107,7 +107,7 @@ namespace CatanClient.ViewModels
             {
                 Name = profile.Name,
                 Id = profile.Id,
-                PicturePath = profile.PicturePath,
+                CurrentSessionID = profile.CurrentSessionID,
                 PreferredLanguage = profile.PreferredLanguage
             };
 

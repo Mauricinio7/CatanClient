@@ -144,6 +144,7 @@
     <Compile Include="Controls\FriendRequestPlayerCard.xaml.cs">
       <DependentUpon>FriendRequestPlayerCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FriendRequestPlayerCardViewModel.cs" />
     <Compile Include="Controls\InvitePlayerCard.xaml.cs">
       <DependentUpon>InvitePlayerCard.xaml</DependentUpon>
     </Compile>
@@ -176,6 +177,7 @@
     <Compile Include="ViewModels\CreateRoomViewModel.cs" />
     <Compile Include="ViewModels\EditPasswordWindowViewModel.cs" />
     <Compile Include="ViewModels\EditProfileWindowViewModel.cs" />
+    <Compile Include="ViewModels\FriendRequestViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\LoginRoomViewModel.cs" />
@@ -479,7 +481,7 @@
     <None Include="Connected Services\GuestAccountService\GuestAccountService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultDto.datasource">
+    <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultPictureDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultProfileDto.datasource">

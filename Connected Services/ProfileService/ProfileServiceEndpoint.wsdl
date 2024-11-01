@@ -20,6 +20,18 @@
   <wsdl:message name="IProfileServiceEndpoint_UploadProfilePicture_OutputMessage">
     <wsdl:part name="parameters" element="tns:UploadProfilePictureResponse" />
   </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetProfilePicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfilePicture" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetProfilePicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfilePictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_InviteFriendsWithCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriendsWithCode" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_InviteFriendsWithCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriendsWithCodeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProfileServiceEndpoint">
     <wsdl:operation name="ChangeProfileName">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/ChangeProfileName" message="tns:IProfileServiceEndpoint_ChangeProfileName_InputMessage" />
@@ -28,6 +40,14 @@
     <wsdl:operation name="UploadProfilePicture">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePicture" message="tns:IProfileServiceEndpoint_UploadProfilePicture_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePictureResponse" message="tns:IProfileServiceEndpoint_UploadProfilePicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfilePicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture" message="tns:IProfileServiceEndpoint_GetProfilePicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePictureResponse" message="tns:IProfileServiceEndpoint_GetProfilePicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InviteFriendsWithCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode" message="tns:IProfileServiceEndpoint_InviteFriendsWithCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCodeResponse" message="tns:IProfileServiceEndpoint_InviteFriendsWithCode_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProfileServiceEndpoint" type="tns:IProfileServiceEndpoint">
@@ -43,6 +63,24 @@
     </wsdl:operation>
     <wsdl:operation name="UploadProfilePicture">
       <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/UploadProfilePicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfilePicture">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InviteFriendsWithCode">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
