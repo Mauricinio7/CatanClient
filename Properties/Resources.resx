@@ -549,4 +549,10 @@
   <data name="tittle_restart" xml:space="preserve">
     <value>Restart needed</value>
   </data>
+  <data name="dialog_too_big_file_message" xml:space="preserve">
+    <value>The selected file is too large. The maximum size is 6 MB.</value>
+  </data>
+  <data name="image_selector_title" xml:space="preserve">
+    <value>Select Profile Picture</value>
+  </data>
 </root>

@@ -736,6 +736,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The selected file is too large. The maximum size is 6 MB..
+        /// </summary>
+        public static string dialog_too_big_file_message {
+            get {
+                return ResourceManager.GetString("dialog_too_big_file_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Unregistered email.
         /// </summary>
         public static string dialog_unregistered_email {
@@ -921,6 +930,15 @@ namespace CatanClient.Properties {
         public static string global_username {
             get {
                 return ResourceManager.GetString("global_username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select Profile Picture.
+        /// </summary>
+        public static string image_selector_title {
+            get {
+                return ResourceManager.GetString("image_selector_title", resourceCulture);
             }
         }
         

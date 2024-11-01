@@ -1,5 +1,6 @@
 ﻿using CatanClient.AccountService;
 using CatanClient.Commands;
+using CatanClient.Properties;
 using CatanClient.Services;
 using CatanClient.UIHelpers;
 using CatanClient.Views;
@@ -115,8 +116,8 @@ namespace CatanClient.ViewModels
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "Image Files (*.jpg;*.png)|*.jpg;*.png",
-                Title = "Seleccionar Imagen de Perfil"
+                Filter = Utilities.IMAGE_FILTER,
+                Title = Utilities.TitleImageSelector(CultureInfo.CurrentCulture.Name)
             };
 
             if (openFileDialog.ShowDialog() == true)
@@ -127,7 +128,7 @@ namespace CatanClient.ViewModels
                 FileInfo fileInfo = new FileInfo(selectedFilePath);
                 if (fileInfo.Length > 6 * 1024 * 1024) 
                 {
-                    MessageBox.Show("El archivo seleccionado es demasiado grande. El tamaño máximo es 6 MB.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Utilities.MessageTooBigFile(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -165,14 +166,14 @@ namespace CatanClient.ViewModels
 
         private void SaveImageLocally(string filePath)
         {
-            string appDirectory = Path.Combine(Environment.CurrentDirectory, "ProfilePhotos");
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
             if (!Directory.Exists(appDirectory))
             {
                 Directory.CreateDirectory(appDirectory);
             }
 
-            string fileName = $"ProfilePhoto{profile.Id}.jpg";
+            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
             string destinationPath = Path.Combine(appDirectory, fileName);
 
             File.Copy(filePath, destinationPath, overwrite: true);
@@ -180,9 +181,9 @@ namespace CatanClient.ViewModels
 
         private void LoadProfileImage()
         {
-            string appDirectory = Path.Combine(Environment.CurrentDirectory, "ProfilePhotos");
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
-            string fileName = $"ProfilePhoto{profile.Id}.jpg";
+            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
             string imagePath = Path.Combine(appDirectory, fileName);
 
             if (File.Exists(imagePath))
@@ -226,14 +227,14 @@ namespace CatanClient.ViewModels
 
         private void SaveImageBytesLocally(byte[] imageBytes)
         {
-            string appDirectory = Path.Combine(Environment.CurrentDirectory, "ProfilePhotos");
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
             if (!Directory.Exists(appDirectory))
             {
                 Directory.CreateDirectory(appDirectory);
             }
 
-            string fileName = $"ProfilePhoto{profile.Id}.jpg";
+            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
             string destinationPath = Path.Combine(appDirectory, fileName);
 
             File.WriteAllBytes(destinationPath, imageBytes);

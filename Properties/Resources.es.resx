@@ -562,4 +562,10 @@
   <data name="tittle_restart" xml:space="preserve">
     <value>Se necesita reiniciar</value>
   </data>
+  <data name="dialog_too_big_file_message" xml:space="preserve">
+    <value>El archivo seleccionado es demasiado grande. El tamaño máximo es 6 MB.</value>
+  </data>
+  <data name="image_selector_title" xml:space="preserve">
+    <value>Seleccionar Imagen de Perfil</value>
+  </data>
 </root>

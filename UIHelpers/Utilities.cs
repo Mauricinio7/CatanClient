@@ -74,7 +74,14 @@ namespace CatanClient.UIHelpers
         public const string CHECK_BOX_MARGIN = "CheckBoxMargin";
         public const string SYNTH_WAVE_BACKGROUND2_PATH = "pack://application:,,,/Resources/Gifs/SynthWaveAnimatedBackground2.gif";
         public const string SYNTH_WAVE_BACKGROUND1_PATH = "pack://application:,,,/Resources/Gifs/AnimatedBackground1.gif";
+        public const string IMAGE_FILTER = "Image Files (*.jpg;*.png)|*.jpg;*.png";
+        public const string PROFILE_IMAGE_DIRECTORY = "ProfilePhotos";
 
+
+        public static string ProfilePhotoPath(int Id)
+        {
+            return $"ProfilePhoto{Id}.jpg";
+        }
         public static string MessageDataBaseUnableToLoad(string language, Exception ex)
         {
             Log.Information(ex.Message);
@@ -148,6 +155,16 @@ namespace CatanClient.UIHelpers
         public static string TittleFail(string language)
         {
             return Resources.ResourceManager.GetString("dialog_fail", new CultureInfo(language));
+        }
+
+        public static string TitleImageSelector(string language)
+        {
+            return Resources.ResourceManager.GetString("image_selector_title", new CultureInfo(language));
+        }
+
+        public static string MessageTooBigFile(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_too_big_file_message", new CultureInfo(language));
         }
         public static string MessageGameNotFound(string language)
         {
