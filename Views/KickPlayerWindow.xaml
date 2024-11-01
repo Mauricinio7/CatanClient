@@ -1,0 +1,29 @@
+﻿<Window x:Class="CatanClient.Views.KickPlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatanClient.Views"
+        xmlns:controls="clr-namespace:CatanClient.Controls"
+        xmlns:properties="clr-namespace:CatanClient.Properties" 
+        mc:Ignorable="d" 
+        Height="700" Width="600"
+        Title="{x:Static properties:Resources.window_kick}"
+    WindowStartupLocation="CenterScreen"
+    Background="Black">
+
+    <Viewbox Stretch="Fill" Margin="0">
+        <Grid x:Name="animatedGrid" Background="{StaticResource SecondaryColor}">
+
+            <Label Content="{Binding Source={x:Static properties:Resources.global_kick_player}, StringFormat='{}{0}:'}" Margin="21,32,21,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="White" FontFamily="{StaticResource PrimaryFontFamily}" />
+
+            <Button Content="{x:Static properties:Resources.button_exit}" HorizontalAlignment="Center" Margin="0,483,0,33" Width="181"
+                Style="{StaticResource NeonButtonStyle}"
+                Click="Button_Click"
+            />
+            <ListBox HorizontalAlignment="Center" Height="344" VerticalAlignment="Center" Width="371" d:ItemsSource="{d:SampleData ItemCount=5}" Background="Transparent" Foreground="White"/>
+
+        </Grid>
+
+    </Viewbox>
+</Window>

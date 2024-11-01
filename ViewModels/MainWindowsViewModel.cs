@@ -71,6 +71,8 @@ namespace CatanClient.ViewModels
         public ICommand HideFriendsRequestsViewCommand { get; }
         public ICommand ShowInviteFriendsViewCommand { get; }
         public ICommand HideInviteFriendsViewCommand { get; }
+        public ICommand ShowScoreboardViewCommand { get; }
+        public ICommand HideScoreboardViewCommand { get; }
 
         public MainWindowsViewModel()
         {
@@ -91,6 +93,8 @@ namespace CatanClient.ViewModels
             HideFriendsRequestsViewCommand = new RelayCommand(async () => await HideFriendsRequestsView());
             ShowInviteFriendsViewCommand = new RelayCommand(ShowInviteFriendsView);
             HideInviteFriendsViewCommand = new RelayCommand(async () => await HideInviteFriendsView());
+            ShowScoreboardViewCommand = new RelayCommand(ShowScoreboardView);
+            HideScoreboardViewCommand = new RelayCommand(async () => await HideScoreboardView());
 
             ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
             BackToMainMenuCommand = new RelayCommand(async () => await BackToMainMenu());
@@ -158,6 +162,24 @@ namespace CatanClient.ViewModels
             if (OverlayView is Views.InviteFriendView friendsView && friendsView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
             {
                 Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
+            }
+            OverlayView = null;
+        }
+
+        private void ShowScoreboardView()
+        {
+            var scoreboardView = new Views.ScoreboardView();
+            OverlayView = scoreboardView;
+
+        }
+
+        private async Task HideScoreboardView()
+        {
+            if (OverlayView is Views.ScoreboardView scoreboardView && scoreboardView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+            {
+                Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMLEFTANIMATION);
                 storyboard.Begin(animatedGrid);
                 await Task.Delay(900);
             }

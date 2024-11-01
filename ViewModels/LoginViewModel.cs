@@ -125,8 +125,12 @@ namespace CatanClient.ViewModels
                 else
                 {
                     AccountDto account = AccountUtilities.CreateAccount(Email, PhoneNumber, Password, String.Empty);
-                    
-                    AuthenticateUser(account, actualWindow);
+
+                    //AuthenticateUser(account, actualWindow);
+
+                    //TODO just for Test WARING
+                    ShowMainMenu(actualWindow, false);
+
                 }
             } 
             

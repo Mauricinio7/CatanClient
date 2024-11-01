@@ -88,6 +88,12 @@
                 Content="{x:Static properties:Resources.button_ready}" 
                 FontSize="25"
              />
+            <Button Margin="1516,46,54,1034"
+                Style="{StaticResource NeonButtonStyle}"
+                Content="{x:Static properties:Resources.global_kick_player}"
+                FontSize="15"
+                Command="{Binding KickPlayerCommand}"
+/>
 
 
         </Grid>

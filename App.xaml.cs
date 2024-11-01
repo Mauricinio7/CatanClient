@@ -14,6 +14,7 @@ using CatanClient.Views;
 using CatanClient.Services;
 using CatanClient.Singleton;
 using CatanClient.ViewModels;
+using CatanClient.Controls;
 
 namespace CatanClient
 {
@@ -85,6 +86,8 @@ namespace CatanClient
             builder.RegisterType<EditPasswordWindowViewModel>().AsSelf();
             builder.RegisterType<VerifyAccountChangeWindowViewModel>().AsSelf();
             builder.RegisterType<AddFriendWindowViewModel>().AsSelf();
+            builder.RegisterType<ScoreboardViewModel>().AsSelf();
+            builder.RegisterType<FriendPlayerCardViewModel>();
             builder.RegisterType<MainMenuViewModel>().AsSelf();
 
             builder.RegisterType<CreateRoomView>().AsSelf();
@@ -99,6 +102,7 @@ namespace CatanClient
             builder.RegisterType<EditPasswordWindow>().AsSelf();
             builder.RegisterType<VerifyAccountChangeWindow>().AsSelf();
             builder.RegisterType<AddFriendWindow>().AsSelf();
+            builder.RegisterType<ScoreboardView>().AsSelf();
             builder.RegisterType<MainMenuView>().AsSelf();
         }
 

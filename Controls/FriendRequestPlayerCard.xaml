@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:CatanClient.Controls"
              xmlns:properties="clr-namespace:CatanClient.Properties"
              mc:Ignorable="d" 
-             Height="182" Width="381">
+             Height="182" Width="626">
 
 
-    <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center" Margin="0,0,-184,0" >
+    <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center" >
         <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
         <TextBlock
-    Margin="10,155,10,7"
+    Margin="10,155,40,7"
     Text="Mauricinio7"
     Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
     Foreground="White"
@@ -20,12 +20,12 @@
     />
 
         <Button Content="{x:Static properties:Resources.button_accept}" 
-            Style="{StaticResource NeonButtonStyle}"
-            Margin="174,58,226,57"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Margin="195,58,244,57"
             />
         <Button Content="{x:Static properties:Resources.button_decline}" 
-    Style="{StaticResource NeonButtonStyle}"
-    Margin="363,58,0,58" HorizontalAlignment="Left" Width="173"
+    Style="{StaticResource PrimaryButtonStyle}"
+    Margin="413,58,0,58" HorizontalAlignment="Left" Width="173"
     />
 
     </Grid>

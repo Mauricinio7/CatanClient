@@ -9,58 +9,202 @@
              Height="1000" Width="1700">
 
     <Viewbox Stretch="Fill" Margin="0,0,1000,0">
-        <Grid Background="{StaticResource PrimaryColor}"  Width="679" Height="1164" x:Name="animatedGrid">
+        <Grid Background="{StaticResource PrimaryColor}" Width="679" Height="1164" x:Name="animatedGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
-                <!-- Espacio para el título -->
                 <RowDefinition Height="*"/>
-                <!-- Espacio para el TabControl -->
                 <RowDefinition Height="100"/>
-                <!-- Espacio para el botón Cerrar -->
             </Grid.RowDefinitions>
 
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard>
                         <Storyboard>
-                            <StaticResource ResourceKey="SlideInFromRightAnimationForPanels"/>
+                            <StaticResource ResourceKey="SlideInFromLeftAnimationForPanels"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
             </Grid.Triggers>
 
             <Grid.RenderTransform>
-                <TranslateTransform X="0" />
+                <TranslateTransform X="-800" />
             </Grid.RenderTransform>
 
-            <!-- Título -->
-            <TextBlock Text="{Binding Source={x:Static properties:Resources.button_scoreboard}, StringFormat='{}{0}:'}"
-                       Style="{StaticResource PrimaryTextBlockStyle}" Margin="26,20,0,0"
-                       FontSize="28" Foreground="LightGray" Grid.Row="0"/>
 
-            <!-- TabControl con las 3 opciones -->
-            <TabControl Grid.Row="1" Margin="20,10,20,76">
-                <TabItem Header="Amigos">
-                    <!-- Contenido de la pestaña Amigos (puedes añadir contenido aquí) -->
-                    <TextBlock Text="Contenido de Amigos" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Grid.Resources>
+                <Style TargetType="TabControl">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabControl">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TabPanel x:Name="HeaderPanel" 
+                                              IsItemsHost="True" 
+                                              Background="Transparent"
+                                              Margin="0,0,0,10"
+                                              HorizontalAlignment="Stretch"/>
+                                    <ContentPresenter x:Name="ContentPanel" 
+                                                      Grid.Row="1" 
+                                                      ContentSource="SelectedContent" 
+                                                      Margin="0"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style TargetType="TabItem">
+                    <Setter Property="Foreground" Value="LightGray"/>
+                    <Setter Property="Background" Value="#FF333344"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="15,10"/>
+                    <Setter Property="MinWidth" Value="100"/>
+                    <Setter Property="MinHeight" Value="40"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#FF00FFD1"
+                        BorderThickness="2"
+                        CornerRadius="10"
+                        Margin="10,5">
+                                    <ContentPresenter x:Name="ContentSite" 
+                                      VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center"
+                                      ContentSource="Header"
+                                      Margin="60,10"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#FF00FFD1"/>
+                                        <Setter TargetName="Border" Property="BorderBrush" Value="#FF00FF9F"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#FF333344"/>
+                                        <Setter Property="Foreground" Value="LightGray"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.button_scoreboard}, StringFormat='{}{0}:'}"
+             Style="{StaticResource PrimaryTextBlockStyle}" Margin="26,36,0,948"
+             FontSize="28" Foreground="LightGray" Grid.Row="0" Grid.RowSpan="2"/>
+
+
+            <TabControl Grid.Row="1" Margin="20,10,20,58" SelectionChanged="TabControl_SelectionChanged">
+                <TabItem Header="{x:Static properties:Resources.global_friends}" Tag="Friends">
+
+                    <DataGrid ItemsSource="{Binding FriendScores}" AutoGenerateColumns="False" HeadersVisibility="Column"
+                  RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" >
+                        <DataGrid.Resources>
+
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Position}" Value="1">
+                                        <Setter Property="Background" Value="Gold"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Position}" Value="2">
+                                        <Setter Property="Background" Value="Silver"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Position}" Value="3">
+                                        <Setter Property="Background" Value="SaddleBrown"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Posición" Binding="{Binding Position}" Width="Auto"/>
+                            <DataGridTextColumn Header="Jugador" Binding="{Binding PlayerName}" Width="*"/>
+                            <DataGridTextColumn Header="Partidas ganadas" Binding="{Binding GamesWon}" Width="Auto"/>
+                            <DataGridTextColumn Header="Puntos totales" Binding="{Binding TotalPoints}" Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
-                <TabItem Header="Mundial">
-                    <!-- Contenido de la pestaña Mundial -->
-                    <TextBlock Text="Contenido de Mundial" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TabItem Header="{x:Static properties:Resources.label_world}" Tag="World">
+
+                    <DataGrid ItemsSource="{Binding WorldScores}" AutoGenerateColumns="False" HeadersVisibility="Column"
+                        RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0">
+                        <DataGrid.Resources>
+
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Position}" Value="1">
+                                        <Setter Property="Background" Value="Gold"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Position}" Value="2">
+                                        <Setter Property="Background" Value="Silver"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Position}" Value="3">
+                                        <Setter Property="Background" Value="SaddleBrown"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Posición" Binding="{Binding Position}" Width="Auto"/>
+                            <DataGridTextColumn Header="Jugador" Binding="{Binding PlayerName}" Width="*"/>
+                            <DataGridTextColumn Header="Partidas ganadas" Binding="{Binding GamesWon}" Width="Auto"/>
+                            <DataGridTextColumn Header="Puntos totales" Binding="{Binding TotalPoints}" Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
                 </TabItem>
-                <TabItem Header="Semanal">
-                    <!-- Contenido de la pestaña Semanal -->
-                    <TextBlock Text="Contenido de Semanal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TabItem Header="{x:Static properties:Resources.label_weekly}" Tag="Week">
+
+                    <DataGrid ItemsSource="{Binding WeeklyScores}" AutoGenerateColumns="False" HeadersVisibility="Column"
+                    RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0">
+                        <DataGrid.Resources>
+
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Position}" Value="1">
+                                        <Setter Property="Background" Value="Gold"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Position}" Value="2">
+                                        <Setter Property="Background" Value="Silver"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Position}" Value="3">
+                                        <Setter Property="Background" Value="SaddleBrown"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Posición" Binding="{Binding Position}" Width="Auto"/>
+                            <DataGridTextColumn Header="Jugador" Binding="{Binding PlayerName}" Width="*"/>
+                            <DataGridTextColumn Header="Partidas ganadas" Binding="{Binding GamesWon}" Width="Auto"/>
+                            <DataGridTextColumn Header="Puntos totales" Binding="{Binding TotalPoints}" Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
                 </TabItem>
             </TabControl>
 
-            <!-- Botón de Cerrar -->
+
             <Button Content="{x:Static properties:Resources.button_close}" 
                     Style="{StaticResource NeonButtonStyle}"
-                    Command="{Binding DataContext.HideFriendsRequestsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                    Command="{Binding DataContext.HideScoreboardViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                     Width="165" Height="64" 
                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                    Grid.Row="2" Margin="240,0,0,36"/>
+                    Grid.Row="1" Margin="242,0,0,50" Grid.RowSpan="2"/>
         </Grid>
     </Viewbox>
 </UserControl>

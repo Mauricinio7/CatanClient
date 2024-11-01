@@ -31,13 +31,13 @@
         <Rectangle x:Name="OverlayBlocker"
                Fill="Black" Opacity="0.3"
                Visibility="{Binding OverlayView, Converter={StaticResource NullToVisibilityConverter}}"
-               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+               Stretch="Fill"
                IsHitTestVisible="True" />
 
-        <ContentControl Content="{Binding OverlayView}"
-                    Visibility="{Binding OverlayView, Converter={StaticResource NullToVisibilityConverter}}"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Stretch" />
+        <Viewbox Stretch="Fill"
+                 Visibility="{Binding OverlayView, Converter={StaticResource NullToVisibilityConverter}}">
+            <ContentControl Content="{Binding OverlayView}" />
+        </Viewbox>
     </Grid>
 
 </Window>

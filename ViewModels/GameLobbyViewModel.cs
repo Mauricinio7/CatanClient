@@ -4,6 +4,7 @@ using CatanClient.Commands;
 using CatanClient.Services;
 using CatanClient.Singleton;
 using CatanClient.UIHelpers;
+using CatanClient.Views;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,7 @@ namespace CatanClient.ViewModels
 
         public ICommand SendMessageCommand { get; }
         public ICommand LeftRoomCommand { get; }
+        public ICommand KickPlayerCommand { get; }
         private readonly ServiceManager serviceManager;
 
         public GameLobbyViewModel(GameDto gameDto, ServiceManager serviceManager)
@@ -63,6 +65,7 @@ namespace CatanClient.ViewModels
             this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             LeftRoomCommand = new RelayCommand(ExecuteLeftRoom);
+            KickPlayerCommand = new RelayCommand(ExecuteShowKickPlayer);
 
         }
 
@@ -74,6 +77,14 @@ namespace CatanClient.ViewModels
                 Messages.Add(chatMessage);
             }
         }
+
+        internal void ExecuteShowKickPlayer()
+        {
+            var kickPlayerWindow = new KickPlayerWindow();
+
+            kickPlayerWindow.ShowDialog();
+        }
+
 
         internal void ExecuteSendMessage()
         {

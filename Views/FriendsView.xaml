@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatanClient.Views"
              xmlns:properties="clr-namespace:CatanClient.Properties"
-         mc:Ignorable="d" 
-         Height="1000" Width="1700">
+             xmlns:controls="clr-namespace:CatanClient.Controls"
+             mc:Ignorable="d" 
+             Height="1000" Width="1700">
 
     <Viewbox Stretch="Fill" Margin="1200,0,0,0">
         <Grid Background="{StaticResource PrimaryColor}"  Width="679" Height="1164" x:Name="animatedGrid">
@@ -44,9 +45,15 @@
                 Style="{StaticResource NeonButtonStyle}"
                 Command="{Binding DataContext.HideFriendsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Row="1"    
             />
-            <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="152,144,120,295"
-                     Background="Transparent"
-                     Foreground="White" Grid.RowSpan="2"/>
+            <ListBox ItemsSource="{Binding Friends}" Margin="152,144,120,295"
+             Background="Transparent"
+             Foreground="White" Grid.RowSpan="2">   
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:FriendPlayerCard />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
 
         </Grid>

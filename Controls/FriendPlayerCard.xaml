@@ -6,23 +6,18 @@
              xmlns:local="clr-namespace:CatanClient.Controls"
              xmlns:properties="clr-namespace:CatanClient.Properties"
              mc:Ignorable="d" 
-             Height="182" Width="381">
-
-
-    <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center" >
+             Height="182" Width="436">
+    
+    <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center">
         <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
-        <TextBlock
-        Margin="10,155,10,7"
-        Text="Mauricinio7"
-        Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
-        Foreground="White"
-        FontSize="13"
-        />
-
+        <TextBlock Margin="10,155,10,7"
+               Text="{Binding PlayerName}"
+               Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+               Foreground="White"
+               FontSize="13"/>
         <Button Content="{x:Static properties:Resources.button_delete}" 
-                Style="{StaticResource NeonButtonStyle}"
-                Margin="190,65,16,50"
-                />
-
+            Style="{StaticResource PrimaryButtonStyle}"
+            Command="{Binding DeleteCommand}"
+            Margin="196,66,53,49"/>
     </Grid>
 </UserControl>

@@ -140,11 +140,15 @@
     <Compile Include="Controls\FriendPlayerCard.xaml.cs">
       <DependentUpon>FriendPlayerCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FriendPlayerCardViewModel.cs" />
     <Compile Include="Controls\FriendRequestPlayerCard.xaml.cs">
       <DependentUpon>FriendRequestPlayerCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\InvitePlayerCard.xaml.cs">
       <DependentUpon>InvitePlayerCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\KickPlayerCard.xaml.cs">
+      <DependentUpon>KickPlayerCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlayerInRoomCard.xaml.cs">
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
@@ -176,6 +180,7 @@
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\LoginRoomViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\ScoreboardViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountChangeWindowViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountViewModel.cs" />
     <Compile Include="Views\AddFriendWindow.xaml.cs">
@@ -208,6 +213,9 @@
     <Compile Include="Views\InviteFriendView.xaml.cs">
       <DependentUpon>InviteFriendView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\KickPlayerWindow.xaml.cs">
+      <DependentUpon>KickPlayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginRoomView.xaml.cs">
       <DependentUpon>LoginRoomView.xaml</DependentUpon>
     </Compile>
@@ -235,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\InvitePlayerCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\KickPlayerCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -295,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InviteFriendView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KickPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

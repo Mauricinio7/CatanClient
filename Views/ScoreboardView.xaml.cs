@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using CatanClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,31 @@ namespace CatanClient.Views
         public ScoreboardView()
         {
             InitializeComponent();
+            DataContext = App.Container.Resolve<ScoreboardViewModel>();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var viewModel = (ScoreboardViewModel)DataContext;
+
+            var tabControl = sender as TabControl;
+            var selectedTab = tabControl.SelectedItem as TabItem;
+
+            if (selectedTab != null)
+            {
+                switch (selectedTab.Tag.ToString())
+                {
+                    case "Friends":
+                        viewModel.LoadFriendScores();
+                        break;
+                    case "World":
+                        viewModel.LoadWorldScores();
+                        break;
+                    case "Week":
+                        viewModel.LoadWeeklyScores();
+                        break;
+                }
+            }
         }
     }
 }
