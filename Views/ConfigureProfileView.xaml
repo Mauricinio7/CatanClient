@@ -28,7 +28,15 @@
             <TextBlock Text="{Binding Source={x:Static properties:Resources.window_edit_profile}, StringFormat='{}{0}:'}"
                        Style="{StaticResource PrimaryTextBlockStyle}" Margin="124,72,32,1041"
                        FontSize="50"/>
-            <Image HorizontalAlignment="Center" Height="264" Margin="0,158,0,0" VerticalAlignment="Top" Width="264" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
+            <Image HorizontalAlignment="Left" Height="264" Margin="382,180,0,0" VerticalAlignment="Top" Width="264" Source="{Binding ImageSource}" />
+
+            <Button Content="{x:Static properties:Resources.button_modify}" 
+                    Width="207" Height="82"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="719,272,0,0"
+                    Style="{StaticResource NeonButtonStyle}"
+                    Command="{Binding SelectImageCommand}" />
 
             <TextBlock Text="{Binding Source={x:Static properties:Resources.label_username}, StringFormat='{}{0}:'}"
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,479,111,634"
@@ -37,7 +45,7 @@
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,552,319,561"
                    FontSize="30" FontWeight="Bold"/>
 
-        <Button Margin="835,504,48,582" 
+            <Button Margin="835,504,48,582" 
                 Content="{x:Static properties:Resources.button_modify}" 
                 Style="{StaticResource NeonButtonStyle}"
                 Tag="Username"
@@ -47,11 +55,11 @@
             <TextBlock Text="{Binding Source={x:Static properties:Resources.label_email}, StringFormat='{}{0}:'}"
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,665,111,448"
                    FontSize="23"/>
-        <TextBlock Text="{Binding Email}"  
+            <TextBlock Text="{Binding Email}"  
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,721,273,392"
                    FontSize="23" FontWeight="Bold"/>
 
-        <Button Margin="835,674,48,412" 
+            <Button Margin="835,674,48,412" 
                 Content="{x:Static properties:Resources.button_modify}" 
                 Style="{StaticResource NeonButtonStyle}"
                 Tag="Email"
@@ -61,11 +69,11 @@
             <TextBlock Text="{Binding Source={x:Static properties:Resources.label_phone}, StringFormat='{}{0}:'}"
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,817,111,296"
                    FontSize="23"/>
-        <TextBlock Text="{Binding Phone}"  
+            <TextBlock Text="{Binding Phone}"  
                    Style="{StaticResource PrimaryTextBlockStyle}" Margin="45,868,294,245"
                    FontSize="35" FontWeight="Bold"/>
 
-        <Button Margin="835,846,48,240" 
+            <Button Margin="835,846,48,240" 
                 Content="{x:Static properties:Resources.button_modify}" 
                 Style="{StaticResource NeonButtonStyle}"
                 Tag="Phone"

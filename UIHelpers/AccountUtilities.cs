@@ -80,5 +80,18 @@ namespace CatanClient.UIHelpers
             Process.Start(exePath);
             Application.Current.Shutdown();
         }
+
+        public static ProfileService.ProfileDto CastAccountProfileToProfileService(AccountService.ProfileDto accountProfile)
+        {
+            ProfileService.ProfileDto profile = new ProfileService.ProfileDto
+            {
+                Id = accountProfile.Id,
+                Name = accountProfile.Name,
+                CurrentSessionID = accountProfile.CurrentSessionID,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name
+            };
+
+            return profile;
+        }
     }
 }

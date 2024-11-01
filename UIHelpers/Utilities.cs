@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CatanClient.UIHelpers
 {
@@ -238,5 +239,14 @@ namespace CatanClient.UIHelpers
             return Resources.ResourceManager.GetString("label_player_left", new CultureInfo(language));
         }
 
+        public static void ShowMessgeServerLost()
+        {
+            MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        public static void ShowMessageDataBaseUnableToLoad()
+        {
+            MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 }

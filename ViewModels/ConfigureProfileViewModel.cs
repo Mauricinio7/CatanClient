@@ -1,15 +1,19 @@
 ﻿using CatanClient.AccountService;
 using CatanClient.Commands;
 using CatanClient.Services;
+using CatanClient.UIHelpers;
 using CatanClient.Views;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace CatanClient.ViewModels
 {
@@ -17,13 +21,28 @@ namespace CatanClient.ViewModels
     {
         public ICommand ModifyProfileCommand { get; }
         public ICommand ModifyPasswordCommand { get; }
+        public ICommand SelectImageCommand { get; }
 
 
-        private string _username;
+        private string username;
         private AccountDto account;
-        private string _email;
-        private string _phone;
+        private string email;
+        private string phone;
         private ProfileDto profile;
+        private BitmapImage imageSource;
+        private readonly ServiceManager serviceManager;
+
+
+
+        public BitmapImage ImageSource
+        {
+            get => imageSource;
+            set
+            {
+                imageSource = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
+        }
 
 
         public AccountDto Account
@@ -37,10 +56,10 @@ namespace CatanClient.ViewModels
         }
         public string Username
         {
-            get => _username;
+            get => username;
             set
             {
-                _username = value;
+                username = value;
                 OnPropertyChanged(nameof(Username));  
             }
         }
@@ -48,10 +67,10 @@ namespace CatanClient.ViewModels
         public string Email
         
         {
-            get => _email;
+            get => email;
             set
             {
-                _email = value;
+                email = value;
                 OnPropertyChanged(nameof(Email));  
             }
         }
@@ -59,17 +78,17 @@ namespace CatanClient.ViewModels
 
         public string Phone
         {
-            get => _phone;
+            get => phone;
             set
             {
-                _phone = value;
+                phone = value;
                 OnPropertyChanged(nameof(Phone));  
             }
         }
 
         public ProfileDto Profile { get => profile; set => profile = value; }
 
-        private readonly ServiceManager serviceManager;
+       
         public ConfigureProfileViewModel(AccountDto account, ServiceManager serviceManager)
         {
 
@@ -80,6 +99,7 @@ namespace CatanClient.ViewModels
 
             ModifyProfileCommand = new RelayCommand(OnModifyProfile);
             ModifyPasswordCommand = new RelayCommand(OnModifyPassword);
+            SelectImageCommand = new RelayCommand(OpenFileDialog);
             this.serviceManager = serviceManager;
 
             Account = account;
@@ -87,7 +107,140 @@ namespace CatanClient.ViewModels
             Username = Profile.Name;
             Email = account.Email;
             Phone = account.PhoneNumber;
+
+            LoadProfileImage();
         }
+
+        private void OpenFileDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.jpg;*.png)|*.jpg;*.png",
+                Title = "Seleccionar Imagen de Perfil"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+
+
+                FileInfo fileInfo = new FileInfo(selectedFilePath);
+                if (fileInfo.Length > 6 * 1024 * 1024) 
+                {
+                    MessageBox.Show("El archivo seleccionado es demasiado grande. El tamaño máximo es 6 MB.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(selectedFilePath, UriKind.Absolute);
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+
+                SaveImageInServer(selectedFilePath);
+                LoadProfileImage();
+            }
+        }
+
+        private void SaveImageInServer(string filePath)
+        {
+            byte[] imageBytes = File.ReadAllBytes(filePath);
+
+            ProfileService.OperationResultProfileDto result;
+
+            ProfileService.ProfileDto profileDto = AccountUtilities.CastAccountProfileToProfileService(Profile);
+
+            result = serviceManager.ProfileServiceClient.UploadImage(profileDto, imageBytes);
+
+            if (result.IsSuccess)
+            { 
+                SaveImageLocally(filePath);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+
+        }
+
+        private void SaveImageLocally(string filePath)
+        {
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, "ProfilePhotos");
+
+            if (!Directory.Exists(appDirectory))
+            {
+                Directory.CreateDirectory(appDirectory);
+            }
+
+            string fileName = $"ProfilePhoto{profile.Id}.jpg";
+            string destinationPath = Path.Combine(appDirectory, fileName);
+
+            File.Copy(filePath, destinationPath, overwrite: true);
+        }
+
+        private void LoadProfileImage()
+        {
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, "ProfilePhotos");
+
+            string fileName = $"ProfilePhoto{profile.Id}.jpg";
+            string imagePath = Path.Combine(appDirectory, fileName);
+
+            if (File.Exists(imagePath))
+            {
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache; 
+                bitmap.EndInit();
+
+                ImageSource = bitmap;
+            }
+            else
+            {
+                ProfileService.ProfileDto profileDto = AccountUtilities.CastAccountProfileToProfileService(Profile);
+                ProfileService.OperationResultPictureDto result;
+                result = serviceManager.ProfileServiceClient.GetImage(profileDto);
+
+                if (result.IsSuccess)
+                {
+                    byte[] imageBytes = result.Picture;
+
+                    SaveImageBytesLocally(imageBytes);
+
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    bitmap.EndInit();
+
+                    ImageSource = bitmap;
+                }
+                else
+                {
+                    Utilities.ShowMessageDataBaseUnableToLoad();
+                }
+            }
+        }
+
+        private void SaveImageBytesLocally(byte[] imageBytes)
+        {
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, "ProfilePhotos");
+
+            if (!Directory.Exists(appDirectory))
+            {
+                Directory.CreateDirectory(appDirectory);
+            }
+
+            string fileName = $"ProfilePhoto{profile.Id}.jpg";
+            string destinationPath = Path.Combine(appDirectory, fileName);
+
+            File.WriteAllBytes(destinationPath, imageBytes);
+        }
+
+
+
 
         private void OnModifyProfile(object parameter)
         {

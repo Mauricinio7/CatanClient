@@ -38,8 +38,7 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteAddFriend(object parameter)
         {
-            //TODO all method
-            MessageBox.Show("Wok in progress, Name: " + PlayerName);
+            
         }
 
     }

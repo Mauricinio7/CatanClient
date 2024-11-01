@@ -147,14 +147,6 @@ namespace CatanClient.ViewModels
 
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
 
-                    MessageBox.Show(result.ProfileDto.CurrentSessionID);
-
-                    ShowMainMenu(window, false);
-                    break;
-                case AccountService.EnumAuthenticationStatus.InGame: //TODO: Send to room
-
-                    serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
-
                     ShowMainMenu(window, false);
                     break;
                 case AccountService.EnumAuthenticationStatus.NotVerified:

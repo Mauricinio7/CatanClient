@@ -45,5 +45,79 @@ namespace CatanClient.Services
             }
             return result;
         }
+
+        public OperationResultProfileDto UploadImage(ProfileDto profile, byte[] image)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            OperationResultProfileDto result;
+
+            try
+            {
+                result = client.UploadProfilePicture(profile, image);
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultProfileDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message,
+                };
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+        public OperationResultPictureDto GetImage(ProfileDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding
+            {
+                MaxReceivedMessageSize = 10485760, 
+                ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas
+                {
+                    MaxArrayLength = 10485760, 
+                    MaxStringContentLength = 8192,
+                    MaxBytesPerRead = 4096,
+                    MaxDepth = 32,
+                    MaxNameTableCharCount = 16384
+                }
+            };
+
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            OperationResultPictureDto result;
+
+            try
+            {
+                result = client.GetProfilePicture(profile);
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultPictureDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message,
+                };
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+
     }
 }

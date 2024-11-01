@@ -10,5 +10,7 @@ namespace CatanClient.Services
     internal interface IProfileServiceClient
     {
         OperationResultProfileDto ChangeName(ProfileDto profile, string newName);
+        OperationResultProfileDto UploadImage(ProfileDto profile, byte[] image);
+        OperationResultPictureDto GetImage(ProfileDto profile);
     }
 }
