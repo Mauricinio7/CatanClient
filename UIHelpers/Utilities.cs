@@ -29,7 +29,7 @@ namespace CatanClient.UIHelpers
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
         public const string IPACCOUNTSERVICE = "http://10.144.41.3:8181/AccountService";
-        public const string IP_GAME_SERVICE = "http://10.144.41.3:8191/GameService";
+        public const string IP_GAME_SERVICE = "net.tcp://10.144.41.3:8192/GameService";
         public const string IP_CHAT_SERVICE = "net.tcp://10.144.41.3:8202/ChatService";
         public const string IP_PROFILE_SERVICE = "http://10.144.41.3:8383/ProfileService";
         public const string IP_GUEST_ACCOUNT_SERVICE = "http://10.144.41.3:8484/GuestAccountService";

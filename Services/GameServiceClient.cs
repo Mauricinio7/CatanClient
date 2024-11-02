@@ -15,7 +15,16 @@ namespace CatanClient.Services
     {
         public OperationResultGameDto CreateRoomClient(GameDto game, ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None }, 
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
             ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
@@ -25,7 +34,7 @@ namespace CatanClient.Services
             {
                 result = client.CreateGame(game, profile);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 result = new OperationResultGameDto
                 {
@@ -44,7 +53,16 @@ namespace CatanClient.Services
 
         public OperationResultGameDto JoinRoomClient(string code, ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None }, 
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
             ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
@@ -52,11 +70,9 @@ namespace CatanClient.Services
 
             try
             {
-
                 result = client.JoinGame(code, profile);
-
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 result = new OperationResultGameDto
                 {
@@ -76,7 +92,16 @@ namespace CatanClient.Services
 
         public OperationResultGameDto JoinRoomAsGuestClient(string code, GuestAccountDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
             ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
@@ -84,9 +109,7 @@ namespace CatanClient.Services
 
             try
             {
-
                 result = client.JoinGameAsaGuest(code, profile);
-
             }
             catch (Exception ex)
             {
@@ -108,7 +131,16 @@ namespace CatanClient.Services
 
         public bool LeftRoomClient(GameDto game, ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
             ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
@@ -116,9 +148,7 @@ namespace CatanClient.Services
 
             try
             {
-
                 result = client.QuitGame(game, profile).IsSuccess;
-
             }
             catch (Exception ex)
             {

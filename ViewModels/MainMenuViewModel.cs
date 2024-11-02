@@ -21,22 +21,15 @@ namespace CatanClient.ViewModels
     {
         public ICommand ShowConfigureProfileCommand { get; }
         private readonly ServiceManager serviceManager;
-        public ICommand KickPlayerCommand { get; } //TODO quit
+       
 
         public MainMenuViewModel(ServiceManager serviceManager)
         {
 
             ShowConfigureProfileCommand = new RelayCommand(OnShowConfigureProfile);
-            KickPlayerCommand = new RelayCommand(ExecuteShowKickPlayer); //TODO quit
             this.serviceManager = serviceManager;
         }
 
-        internal void ExecuteShowKickPlayer() //TODO quit
-        {
-            var kickPlayerWindow = new KickPlayerWindow();
-
-            kickPlayerWindow.ShowDialog();
-        }
 
         private void OnShowConfigureProfile(object parameter)
         {
