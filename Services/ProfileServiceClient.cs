@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CatanClient.Services
 {
@@ -108,6 +109,97 @@ namespace CatanClient.Services
                     MessageResponse = ex.Message,
                 };
 
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+        public bool SendFriendRequest(string playerName, ProfileDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+                result = client.SendFriendRequest(playerName, profile);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+        public OperationResultProfileListDto GetFriendRequestList(ProfileDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding
+            {
+                MaxReceivedMessageSize = 10485760,
+                ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas
+                {
+                    MaxArrayLength = 10485760,
+                    MaxStringContentLength = 8192,
+                    MaxBytesPerRead = 4096,
+                    MaxDepth = 32,
+                    MaxNameTableCharCount = 16384
+                }
+            };
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            OperationResultProfileListDto result;
+
+            try
+            {
+                result = client.GetPendingFriendRequests(profile);
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultProfileListDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message,
+                };
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+        public bool AcceptFriendRequest(string playerName, ProfileDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+                result = client.AcceptFriendRequest(playerName, profile);
+                MessageBox.Show(result.ToString());
+            }
+            catch (Exception ex)
+            {
+                
                 Log.Error(ex.Message);
             }
             finally

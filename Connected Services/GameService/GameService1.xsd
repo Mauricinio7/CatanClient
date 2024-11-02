@@ -89,4 +89,9 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="calloo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

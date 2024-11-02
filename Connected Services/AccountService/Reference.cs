@@ -411,10 +411,10 @@ namespace CatanClient.AccountService {
         
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] PictureDataField;
-        
         private string PreferredLanguageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ProfilePictureField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -478,19 +478,6 @@ namespace CatanClient.AccountService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] PictureData {
-            get {
-                return this.PictureDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
-                    this.PictureDataField = value;
-                    this.RaisePropertyChanged("PictureData");
-                }
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string PreferredLanguage {
             get {
@@ -500,6 +487,19 @@ namespace CatanClient.AccountService {
                 if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
                     this.PreferredLanguageField = value;
                     this.RaisePropertyChanged("PreferredLanguage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ProfilePicture {
+            get {
+                return this.ProfilePictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfilePictureField, value) != true)) {
+                    this.ProfilePictureField = value;
+                    this.RaisePropertyChanged("ProfilePicture");
                 }
             }
         }

@@ -7,8 +7,8 @@
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IsRegistered" type="xs:boolean" />
       <xs:element name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PictureData" nillable="true" type="xs:base64Binary" />
       <xs:element name="PreferredLanguage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProfilePicture" nillable="true" type="xs:base64Binary" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProfileDto" nillable="true" type="tns:ProfileDto" />
@@ -41,4 +41,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="OperationResultPictureDto" nillable="true" type="tns:OperationResultPictureDto" />
+  <xs:complexType name="OperationResultProfileListDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OperationResultDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ProfileDtos" nillable="true" type="tns:ArrayOfProfileDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OperationResultProfileListDto" nillable="true" type="tns:OperationResultProfileListDto" />
+  <xs:complexType name="ArrayOfProfileDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProfileDto" nillable="true" type="tns:ProfileDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProfileDto" nillable="true" type="tns:ArrayOfProfileDto" />
 </xs:schema>

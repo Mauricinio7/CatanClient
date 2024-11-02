@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using CatanClient.Controls;
+using CatanClient.ProfileService;
+using CatanClient.Services;
+using CatanClient.UIHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,29 +16,61 @@ namespace CatanClient.ViewModels
 {
     internal class FriendRequestViewModel : ViewModelBase
     {
-        public ObservableCollection<FriendRequestPlayerCardViewModel> Friends { get; }
-        public ICollectionView FriendsView { get; }
+        public ObservableCollection<FriendRequestPlayerCardViewModel> Friends { get; set; }
 
-        public FriendRequestViewModel() 
+        public List<ProfileDto> FriendsRequestsList { get; set; }
+        public ICollectionView FriendsView { get; set; }
+        private readonly ServiceManager serviceManager;
+        private ProfileDto profile;
+
+        public FriendRequestViewModel(ServiceManager serviceManager) 
         {
+            this.serviceManager = serviceManager;
 
-            Friends = new ObservableCollection<FriendRequestPlayerCardViewModel>
+            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
+            profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
+
+            if(GetAllFriendRequests())
             {
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("playerName", "TonyGamer54"), new NamedParameter("isOnline", true)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("playerName", "GaboGamer81"), new NamedParameter("isOnline", false)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("playerName", "YaelGamer91"), new NamedParameter("isOnline", true)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("playerName", "NoelGamer761"), new NamedParameter("isOnline", false)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("playerName", "BrayanGamer65"), new NamedParameter("isOnline", true))
-            };
+                LoadFriendRequestList();
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+
+        }
+
+        public bool GetAllFriendRequests()
+        {
+            OperationResultProfileListDto result;
+            result = serviceManager.ProfileServiceClient.GetFriendRequestList(profile);
+
+            if (result.IsSuccess)
+            {
+                FriendsRequestsList = result.ProfileDtos.ToList();
+            }
+
+            return result.IsSuccess;
+        }
+
+        public void LoadFriendRequestList()
+        {
+            var profileList = serviceManager.ProfileServiceClient.GetFriendRequestList(profile).ProfileDtos.ToList();
+
+            Friends = new ObservableCollection<FriendRequestPlayerCardViewModel>();
+
+            foreach (var profileDto in profileList)
+            {
+                bool isOnline = true;
+
+                Friends.Add(App.Container.Resolve<FriendRequestPlayerCardViewModel>(
+                    new NamedParameter("profile", profileDto),
+                    new NamedParameter("isOnline", isOnline)));
+            }
 
             FriendsView = CollectionViewSource.GetDefaultView(Friends);
             FriendsView.SortDescriptions.Add(new SortDescription(nameof(FriendRequestPlayerCardViewModel.IsOnline), ListSortDirection.Descending));
-
         }
 
     }

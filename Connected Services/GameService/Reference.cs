@@ -141,10 +141,10 @@ namespace CatanClient.GameService {
         
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] PictureDataField;
-        
         private string PreferredLanguageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ProfilePictureField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -208,19 +208,6 @@ namespace CatanClient.GameService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] PictureData {
-            get {
-                return this.PictureDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
-                    this.PictureDataField = value;
-                    this.RaisePropertyChanged("PictureData");
-                }
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string PreferredLanguage {
             get {
@@ -230,6 +217,19 @@ namespace CatanClient.GameService {
                 if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
                     this.PreferredLanguageField = value;
                     this.RaisePropertyChanged("PreferredLanguage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ProfilePicture {
+            get {
+                return this.ProfilePictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfilePictureField, value) != true)) {
+                    this.ProfilePictureField = value;
+                    this.RaisePropertyChanged("ProfilePicture");
                 }
             }
         }
@@ -407,7 +407,7 @@ namespace CatanClient.GameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameService.IGameEndPoint")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameService.IGameEndPoint", CallbackContract=typeof(CatanClient.GameService.IGameEndPointCallback))]
     public interface IGameEndPoint {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/CreateGame", ReplyAction="http://tempuri.org/IGameEndPoint/CreateGameResponse")]
@@ -448,30 +448,38 @@ namespace CatanClient.GameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGameEndPointCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/calloo")]
+        void calloo();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGameEndPointChannel : CatanClient.GameService.IGameEndPoint, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GameEndPointClient : System.ServiceModel.ClientBase<CatanClient.GameService.IGameEndPoint>, CatanClient.GameService.IGameEndPoint {
+    public partial class GameEndPointClient : System.ServiceModel.DuplexClientBase<CatanClient.GameService.IGameEndPoint>, CatanClient.GameService.IGameEndPoint {
         
-        public GameEndPointClient() {
+        public GameEndPointClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public GameEndPointClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public GameEndPointClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public GameEndPointClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public GameEndPointClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public GameEndPointClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public GameEndPointClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public GameEndPointClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public GameEndPointClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public CatanClient.GameService.OperationResultGameDto CreateGame(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {

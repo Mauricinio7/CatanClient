@@ -26,11 +26,41 @@
   <wsdl:message name="IProfileServiceEndpoint_GetProfilePicture_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProfilePictureResponse" />
   </wsdl:message>
-  <wsdl:message name="IProfileServiceEndpoint_InviteFriendsWithCode_InputMessage">
-    <wsdl:part name="parameters" element="tns:InviteFriendsWithCode" />
+  <wsdl:message name="IProfileServiceEndpoint_InviteFriendsToGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriendsToGame" />
   </wsdl:message>
-  <wsdl:message name="IProfileServiceEndpoint_InviteFriendsWithCode_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InviteFriendsWithCodeResponse" />
+  <wsdl:message name="IProfileServiceEndpoint_InviteFriendsToGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriendsToGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetFriendsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsList" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetFriendsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetPendingFriendRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingFriendRequests" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetPendingFriendRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingFriendRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_SendFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_SendFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_AcceptFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_AcceptFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_RejectFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_RejectFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFriendRequestResponse" />
   </wsdl:message>
   <wsdl:portType name="IProfileServiceEndpoint">
     <wsdl:operation name="ChangeProfileName">
@@ -45,9 +75,29 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture" message="tns:IProfileServiceEndpoint_GetProfilePicture_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePictureResponse" message="tns:IProfileServiceEndpoint_GetProfilePicture_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="InviteFriendsWithCode">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode" message="tns:IProfileServiceEndpoint_InviteFriendsWithCode_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCodeResponse" message="tns:IProfileServiceEndpoint_InviteFriendsWithCode_OutputMessage" />
+    <wsdl:operation name="InviteFriendsToGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGame" message="tns:IProfileServiceEndpoint_InviteFriendsToGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGameResponse" message="tns:IProfileServiceEndpoint_InviteFriendsToGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsList" message="tns:IProfileServiceEndpoint_GetFriendsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsListResponse" message="tns:IProfileServiceEndpoint_GetFriendsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingFriendRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetPendingFriendRequests" message="tns:IProfileServiceEndpoint_GetPendingFriendRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetPendingFriendRequestsResponse" message="tns:IProfileServiceEndpoint_GetPendingFriendRequests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequest" message="tns:IProfileServiceEndpoint_SendFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequestResponse" message="tns:IProfileServiceEndpoint_SendFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequest" message="tns:IProfileServiceEndpoint_AcceptFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequestResponse" message="tns:IProfileServiceEndpoint_AcceptFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequest" message="tns:IProfileServiceEndpoint_RejectFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequestResponse" message="tns:IProfileServiceEndpoint_RejectFriendRequest_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProfileServiceEndpoint" type="tns:IProfileServiceEndpoint">
@@ -79,8 +129,53 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InviteFriendsWithCode">
-      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode" style="document" />
+    <wsdl:operation name="InviteFriendsToGame">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendsList">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingFriendRequests">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/GetPendingFriendRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

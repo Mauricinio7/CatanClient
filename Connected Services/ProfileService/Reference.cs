@@ -32,10 +32,10 @@ namespace CatanClient.ProfileService {
         
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] PictureDataField;
-        
         private string PreferredLanguageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ProfilePictureField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -99,19 +99,6 @@ namespace CatanClient.ProfileService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] PictureData {
-            get {
-                return this.PictureDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PictureDataField, value) != true)) {
-                    this.PictureDataField = value;
-                    this.RaisePropertyChanged("PictureData");
-                }
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string PreferredLanguage {
             get {
@@ -121,6 +108,19 @@ namespace CatanClient.ProfileService {
                 if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
                     this.PreferredLanguageField = value;
                     this.RaisePropertyChanged("PreferredLanguage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ProfilePicture {
+            get {
+                return this.ProfilePictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfilePictureField, value) != true)) {
+                    this.ProfilePictureField = value;
+                    this.RaisePropertyChanged("ProfilePicture");
                 }
             }
         }
@@ -140,6 +140,7 @@ namespace CatanClient.ProfileService {
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultPictureDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultProfileListDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultProfileDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -216,6 +217,29 @@ namespace CatanClient.ProfileService {
                 if ((object.ReferenceEquals(this.PictureField, value) != true)) {
                     this.PictureField = value;
                     this.RaisePropertyChanged("Picture");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultProfileListDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultProfileListDto : CatanClient.ProfileService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.ComponentModel.BindingList<CatanClient.ProfileService.ProfileDto> ProfileDtosField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.ComponentModel.BindingList<CatanClient.ProfileService.ProfileDto> ProfileDtos {
+            get {
+                return this.ProfileDtosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileDtosField, value) != true)) {
+                    this.ProfileDtosField = value;
+                    this.RaisePropertyChanged("ProfileDtos");
                 }
             }
         }
@@ -335,11 +359,41 @@ namespace CatanClient.ProfileService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetProfilePictureResponse")]
         System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCodeResponse")]
-        bool InviteFriendsWithCode(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGame", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGameResponse")]
+        bool InviteFriendsToGame(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCode", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsWithCodeResponse")]
-        System.Threading.Tasks.Task<bool> InviteFriendsWithCodeAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGame", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGameResponse")]
+        System.Threading.Tasks.Task<bool> InviteFriendsToGameAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsList", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsListResponse")]
+        CatanClient.ProfileService.OperationResultProfileListDto GetFriendsList(CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsList", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsListResponse")]
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileListDto> GetFriendsListAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetPendingFriendRequests", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetPendingFriendRequestsResponse")]
+        CatanClient.ProfileService.OperationResultProfileListDto GetPendingFriendRequests(CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetPendingFriendRequests", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetPendingFriendRequestsResponse")]
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileListDto> GetPendingFriendRequestsAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequestResponse")]
+        bool SendFriendRequest(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequestResponse")]
+        System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequestResponse")]
+        bool AcceptFriendRequest(string nameFriendToAccept, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequestResponse")]
+        System.Threading.Tasks.Task<bool> AcceptFriendRequestAsync(string nameFriendToAccept, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequestResponse")]
+        bool RejectFriendRequest(string nameFriendToReject, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequestResponse")]
+        System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(string nameFriendToReject, CatanClient.ProfileService.ProfileDto profileClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -393,12 +447,52 @@ namespace CatanClient.ProfileService {
             return base.Channel.GetProfilePictureAsync(profileClientDto);
         }
         
-        public bool InviteFriendsWithCode(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
-            return base.Channel.InviteFriendsWithCode(nameFriendToInvite, profileClientDto);
+        public bool InviteFriendsToGame(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey) {
+            return base.Channel.InviteFriendsToGame(nameFriendToInvite, profileClientDto, accessKey);
         }
         
-        public System.Threading.Tasks.Task<bool> InviteFriendsWithCodeAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
-            return base.Channel.InviteFriendsWithCodeAsync(nameFriendToInvite, profileClientDto);
+        public System.Threading.Tasks.Task<bool> InviteFriendsToGameAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey) {
+            return base.Channel.InviteFriendsToGameAsync(nameFriendToInvite, profileClientDto, accessKey);
+        }
+        
+        public CatanClient.ProfileService.OperationResultProfileListDto GetFriendsList(CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.GetFriendsList(profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileListDto> GetFriendsListAsync(CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.GetFriendsListAsync(profileClientDto);
+        }
+        
+        public CatanClient.ProfileService.OperationResultProfileListDto GetPendingFriendRequests(CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.GetPendingFriendRequests(profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileListDto> GetPendingFriendRequestsAsync(CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.GetPendingFriendRequestsAsync(profileClientDto);
+        }
+        
+        public bool SendFriendRequest(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.SendFriendRequest(nameFriendToInvite, profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.SendFriendRequestAsync(nameFriendToInvite, profileClientDto);
+        }
+        
+        public bool AcceptFriendRequest(string nameFriendToAccept, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.AcceptFriendRequest(nameFriendToAccept, profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AcceptFriendRequestAsync(string nameFriendToAccept, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.AcceptFriendRequestAsync(nameFriendToAccept, profileClientDto);
+        }
+        
+        public bool RejectFriendRequest(string nameFriendToReject, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.RejectFriendRequest(nameFriendToReject, profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(string nameFriendToReject, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.RejectFriendRequestAsync(nameFriendToReject, profileClientDto);
         }
     }
 }

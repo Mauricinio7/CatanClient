@@ -1,5 +1,7 @@
 ﻿using CatanClient.Commands;
+using CatanClient.ProfileService;
 using CatanClient.Services;
+using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,20 +21,33 @@ namespace CatanClient.Controls
         public ICommand RejectCommand { get; }
 
         private ServiceManager serviceManager;
+        public ProfileDto Profile { get; set; }
+        public ProfileDto ReciverProfile { get; set; }
 
-        public FriendRequestPlayerCardViewModel(string playerName, bool isOnline, ServiceManager serviceManager)
+        public FriendRequestPlayerCardViewModel(ProfileDto profile, bool isOnline, ServiceManager serviceManager)
         {
-            PlayerName = playerName;
+            Profile = profile;
+            PlayerName = Profile.Name;
             IsOnline = isOnline;
+            this.serviceManager = serviceManager;
+            ReciverProfile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
 
             AcceptCommand = new RelayCommand(ExecuteAccept);
-            RejectCommand = new RelayCommand(ExecuteReject);
-            this.serviceManager = serviceManager;
+            RejectCommand = new RelayCommand(ExecuteReject);     
         }
 
         private void ExecuteAccept(object parameter)
         {
-            MessageBox.Show("Aceptar " + PlayerName);
+            bool result = serviceManager.ProfileServiceClient.AcceptFriendRequest(Profile.Name, ReciverProfile);
+
+            if (result)
+            {
+                MessageBox.Show("Se ha agregado correctamente como amigo al jugador: " + PlayerName);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
         }
 
         private void ExecuteReject(object parameter)

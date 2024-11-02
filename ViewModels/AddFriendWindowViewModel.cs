@@ -1,5 +1,7 @@
 ﻿using CatanClient.Commands;
+using CatanClient.ProfileService;
 using CatanClient.Services;
+using CatanClient.UIHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace CatanClient.ViewModels
         public ICommand AddFriendCommand { get; }
         private string playerName;
         private readonly ServiceManager serviceManager;
+        private ProfileDto profile;
 
         public string PlayerName
         {
@@ -34,11 +37,26 @@ namespace CatanClient.ViewModels
         {
             AddFriendCommand = new RelayCommand(ExecuteAddFriend);
             this.serviceManager = serviceManager;
+
+            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
+            profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
         }
 
         internal void ExecuteAddFriend(object parameter)
         {
-            
+            bool result;
+
+            result = serviceManager.ProfileServiceClient.SendFriendRequest(PlayerName, profile);
+
+            if (result)
+            {
+                MessageBox.Show("Solicitud enviada a " + PlayerName);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+
         }
 
     }
