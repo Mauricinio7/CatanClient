@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CatanClient.Views"
-                      xmlns:properties="clr-namespace:CatanClient.Properties"
-     mc:Ignorable="d" 
-     Height="1000" Width="1700">
+             xmlns:properties="clr-namespace:CatanClient.Properties"
+             xmlns:controls="clr-namespace:CatanClient.Controls"
+             mc:Ignorable="d" 
+             Height="1000" Width="1700">    
 
     <Viewbox Stretch="Fill" Margin="1200,0,0,0">
         <Grid Background="{StaticResource PrimaryColor}"  Width="679" Height="1164" x:Name="animatedGrid">
@@ -38,9 +39,16 @@
             Style="{StaticResource NeonButtonStyle}"
             Command="{Binding DataContext.HideInviteFriendsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Row="1"    
         />
-            <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="152,144,120,208"
+            <ListBox ItemsSource="{Binding Friends}" Margin="129,146,77,293"
                  Background="Transparent"
-                 Foreground="White" Grid.RowSpan="2"/>
+                 Foreground="White" Grid.RowSpan="2"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:InvitePlayerCard/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
 
         </Grid>

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CatanClient.Commands;
 using CatanClient.Controls;
 using System;
 using System.Collections.Generic;
@@ -11,32 +12,31 @@ using System.Windows.Data;
 
 namespace CatanClient.ViewModels
 {
-    internal class FriendRequestViewModel : ViewModelBase
+    internal class InviteFriendViewModel : ViewModelBase
     {
-        public ObservableCollection<FriendRequestPlayerCardViewModel> Friends { get; }
+        public ObservableCollection<InvitePlayerCardViewModel> Friends { get; }
         public ICollectionView FriendsView { get; }
 
-        public FriendRequestViewModel() 
+        public InviteFriendViewModel()
         {
-
-            Friends = new ObservableCollection<FriendRequestPlayerCardViewModel>
+            Friends = new ObservableCollection<InvitePlayerCardViewModel>
             {
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("playerName", "TonyGamer54"), new NamedParameter("isOnline", true)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
+                    App.Container.Resolve<InvitePlayerCardViewModel>(
+                        new NamedParameter("playerName", "TonyGamer54"), new NamedParameter("isOnline", true)),
+                App.Container.Resolve<InvitePlayerCardViewModel>(
                     new NamedParameter("playerName", "GaboGamer81"), new NamedParameter("isOnline", false)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
+                App.Container.Resolve<InvitePlayerCardViewModel>(
                     new NamedParameter("playerName", "YaelGamer91"), new NamedParameter("isOnline", true)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
+                App.Container.Resolve<InvitePlayerCardViewModel>(
                     new NamedParameter("playerName", "NoelGamer761"), new NamedParameter("isOnline", false)),
-                App.Container.Resolve<FriendRequestPlayerCardViewModel>(
+                App.Container.Resolve<InvitePlayerCardViewModel>(
                     new NamedParameter("playerName", "BrayanGamer65"), new NamedParameter("isOnline", true))
             };
 
+
             FriendsView = CollectionViewSource.GetDefaultView(Friends);
-            FriendsView.SortDescriptions.Add(new SortDescription(nameof(FriendRequestPlayerCardViewModel.IsOnline), ListSortDirection.Descending));
+            FriendsView.SortDescriptions.Add(new SortDescription(nameof(InvitePlayerCardViewModel.IsOnline), ListSortDirection.Descending));
 
         }
-
     }
 }

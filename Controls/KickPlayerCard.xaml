@@ -6,21 +6,22 @@
              xmlns:local="clr-namespace:CatanClient.Controls"
              xmlns:properties="clr-namespace:CatanClient.Properties"
              mc:Ignorable="d" 
-             Height="182" Width="381">
+             Height="182" Width="1164">
 
-    <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center" Margin="0,0,-111,0" >
+    <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center" >
         <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
         <TextBlock
             Margin="10,155,10,7"
-            Text="Mauricinio7"
+            Text="{Binding PlayerName}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
             FontSize="13"
         />
 
         <Button Content="{x:Static properties:Resources.global_kick_player}" 
-        Style="{StaticResource NeonButtonStyle}"
-        Margin="193,68,26,47"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Margin="213,58,658,58"
+            Command="{Binding KickCommand}"
         />
 
     </Grid>

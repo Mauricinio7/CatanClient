@@ -148,9 +148,11 @@
     <Compile Include="Controls\InvitePlayerCard.xaml.cs">
       <DependentUpon>InvitePlayerCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\InvitePlayerCardViewModel.cs" />
     <Compile Include="Controls\KickPlayerCard.xaml.cs">
       <DependentUpon>KickPlayerCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\KickPlayerCardViewModel.cs" />
     <Compile Include="Controls\PlayerInRoomCard.xaml.cs">
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
@@ -180,6 +182,8 @@
     <Compile Include="ViewModels\FriendRequestViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
+    <Compile Include="ViewModels\InviteFriendViewModel.cs" />
+    <Compile Include="ViewModels\KickPlayerWindowViewModel.cs" />
     <Compile Include="ViewModels\LoginRoomViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\ScoreboardViewModel.cs" />

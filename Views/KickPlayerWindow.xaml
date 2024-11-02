@@ -9,21 +9,35 @@
         mc:Ignorable="d" 
         Height="700" Width="600"
         Title="{x:Static properties:Resources.window_kick}"
-    WindowStartupLocation="CenterScreen"
-    Background="Black">
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
 
-    <Viewbox Stretch="Fill" Margin="0">
-        <Grid x:Name="animatedGrid" Background="{StaticResource SecondaryColor}">
+    <Grid Background="{StaticResource SecondaryColor}" Margin="0,0,0,-16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="120" />
+        </Grid.RowDefinitions>
 
-            <Label Content="{Binding Source={x:Static properties:Resources.global_kick_player}, StringFormat='{}{0}:'}" Margin="21,32,21,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="White" FontFamily="{StaticResource PrimaryFontFamily}" />
+        <Label Grid.Row="0" Content="{Binding Source={x:Static properties:Resources.global_kick_player}, StringFormat='{}{0}:'}" 
+               Margin="20" FontSize="30" FontWeight="Bold" Foreground="White" 
+               HorizontalAlignment="Center" FontFamily="{StaticResource PrimaryFontFamily}" />
 
-            <Button Content="{x:Static properties:Resources.button_exit}" HorizontalAlignment="Center" Margin="0,483,0,33" Width="181"
+        <ListBox Grid.Row="1" ItemsSource="{Binding Friends}" Margin="50,31,50,48"
+                 Background="Transparent"
+                 Foreground="White"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <controls:KickPlayerCard/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Grid.Row="2" Content="{x:Static properties:Resources.button_exit}" 
+                Margin="0,25,0,43" Width="150" 
+                HorizontalAlignment="Center"
                 Style="{StaticResource NeonButtonStyle}"
-                Click="Button_Click"
-            />
-            <ListBox HorizontalAlignment="Center" Height="344" VerticalAlignment="Center" Width="371" d:ItemsSource="{d:SampleData ItemCount=5}" Background="Transparent" Foreground="White"/>
-
-        </Grid>
-
-    </Viewbox>
+                Click="Button_Click" />
+    </Grid>
 </Window>

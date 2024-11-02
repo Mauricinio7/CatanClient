@@ -2,6 +2,7 @@
 using CatanClient.Commands;
 using CatanClient.Services;
 using CatanClient.UIHelpers;
+using CatanClient.Views;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,21 @@ namespace CatanClient.ViewModels
     {
         public ICommand ShowConfigureProfileCommand { get; }
         private readonly ServiceManager serviceManager;
+        public ICommand KickPlayerCommand { get; } //TODO quit
 
         public MainMenuViewModel(ServiceManager serviceManager)
         {
 
             ShowConfigureProfileCommand = new RelayCommand(OnShowConfigureProfile);
+            KickPlayerCommand = new RelayCommand(ExecuteShowKickPlayer); //TODO quit
             this.serviceManager = serviceManager;
+        }
+
+        internal void ExecuteShowKickPlayer() //TODO quit
+        {
+            var kickPlayerWindow = new KickPlayerWindow();
+
+            kickPlayerWindow.ShowDialog();
         }
 
         private void OnShowConfigureProfile(object parameter)

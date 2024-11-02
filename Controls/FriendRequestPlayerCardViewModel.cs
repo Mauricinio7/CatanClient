@@ -37,7 +37,7 @@ namespace CatanClient.Controls
 
         private void ExecuteReject(object parameter)
         {
-            MessageBox.Show("Aceptar " + PlayerName);
+            MessageBox.Show("Rechazar: " + PlayerName);
         }
     }
 }

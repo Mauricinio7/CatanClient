@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatanClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace CatanClient.Views
         public KickPlayerWindow()
         {
             InitializeComponent();
+            DataContext = new KickPlayerWindowViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
