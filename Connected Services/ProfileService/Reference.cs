@@ -28,9 +28,15 @@ namespace CatanClient.ProfileService {
         private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsOnlineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsRegisteredField;
         
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PictureVersionField;
         
         private string PreferredLanguageField;
         
@@ -74,6 +80,19 @@ namespace CatanClient.ProfileService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsOnline {
+            get {
+                return this.IsOnlineField;
+            }
+            set {
+                if ((this.IsOnlineField.Equals(value) != true)) {
+                    this.IsOnlineField = value;
+                    this.RaisePropertyChanged("IsOnline");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsRegistered {
             get {
                 return this.IsRegisteredField;
@@ -95,6 +114,19 @@ namespace CatanClient.ProfileService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PictureVersion {
+            get {
+                return this.PictureVersionField;
+            }
+            set {
+                if ((this.PictureVersionField.Equals(value) != true)) {
+                    this.PictureVersionField = value;
+                    this.RaisePropertyChanged("PictureVersion");
                 }
             }
         }
@@ -359,6 +391,12 @@ namespace CatanClient.ProfileService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetProfilePictureResponse")]
         System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPictureResponse")]
+        CatanClient.ProfileService.OperationResultPictureDto GetFriendsPicture(string profileFriendName, string preferredLanguage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPictureResponse")]
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetFriendsPictureAsync(string profileFriendName, string preferredLanguage);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGame", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGameResponse")]
         bool InviteFriendsToGame(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey);
         
@@ -445,6 +483,14 @@ namespace CatanClient.ProfileService {
         
         public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto) {
             return base.Channel.GetProfilePictureAsync(profileClientDto);
+        }
+        
+        public CatanClient.ProfileService.OperationResultPictureDto GetFriendsPicture(string profileFriendName, string preferredLanguage) {
+            return base.Channel.GetFriendsPicture(profileFriendName, preferredLanguage);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetFriendsPictureAsync(string profileFriendName, string preferredLanguage) {
+            return base.Channel.GetFriendsPictureAsync(profileFriendName, preferredLanguage);
         }
         
         public bool InviteFriendsToGame(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey) {

@@ -44,11 +44,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetFriendsPicture">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="profileFriendName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="preferredLanguage" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFriendsPictureResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="GetFriendsPictureResult" nillable="true" type="q7:OperationResultPictureDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="InviteFriendsToGame">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nameFriendToInvite" nillable="true" type="xs:string" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q7:ProfileDto" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q8:ProfileDto" />
         <xs:element minOccurs="0" name="accessKey" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -63,28 +78,28 @@
   <xs:element name="GetFriendsList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q8:ProfileDto" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q9:ProfileDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetFriendsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="GetFriendsListResult" nillable="true" type="q9:OperationResultProfileListDto" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="GetFriendsListResult" nillable="true" type="q10:OperationResultProfileListDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPendingFriendRequests">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q10:ProfileDto" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q11:ProfileDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPendingFriendRequestsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="GetPendingFriendRequestsResult" nillable="true" type="q11:OperationResultProfileListDto" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="GetPendingFriendRequestsResult" nillable="true" type="q12:OperationResultProfileListDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -92,7 +107,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nameFriendToInvite" nillable="true" type="xs:string" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q12:ProfileDto" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q13:ProfileDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -107,7 +122,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nameFriendToAccept" nillable="true" type="xs:string" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q13:ProfileDto" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q14:ProfileDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -122,7 +137,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nameFriendToReject" nillable="true" type="xs:string" />
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q14:ProfileDto" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q15:ProfileDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

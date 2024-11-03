@@ -34,7 +34,9 @@ namespace CatanClient.Views
             {
                 Name = gameDto.Name,
                 Id = gameDto.Id,
-                MaxNumberPlayers = gameDto.MaxNumberPlayers
+                MaxNumberPlayers = gameDto.MaxNumberPlayers,
+                AccessKey = gameDto.AccessKey,
+                IdAdminGame = gameDto.IdAdminGame
             };
 
             this.DataContext = App.Container.Resolve<GameLobbyViewModel>(

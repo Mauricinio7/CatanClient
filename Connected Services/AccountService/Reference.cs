@@ -407,9 +407,15 @@ namespace CatanClient.AccountService {
         private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsOnlineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsRegisteredField;
         
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PictureVersionField;
         
         private string PreferredLanguageField;
         
@@ -453,6 +459,19 @@ namespace CatanClient.AccountService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsOnline {
+            get {
+                return this.IsOnlineField;
+            }
+            set {
+                if ((this.IsOnlineField.Equals(value) != true)) {
+                    this.IsOnlineField = value;
+                    this.RaisePropertyChanged("IsOnline");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsRegistered {
             get {
                 return this.IsRegisteredField;
@@ -474,6 +493,19 @@ namespace CatanClient.AccountService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PictureVersion {
+            get {
+                return this.PictureVersionField;
+            }
+            set {
+                if ((this.PictureVersionField.Equals(value) != true)) {
+                    this.PictureVersionField = value;
+                    this.RaisePropertyChanged("PictureVersion");
                 }
             }
         }

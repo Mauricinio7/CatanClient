@@ -275,5 +275,30 @@ namespace CatanClient.Services
             return result;
         }
 
+        public bool InviteFriendToGame(string playerName, ProfileDto profile, string accesKey)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+                result = client.InviteFriendsToGame(playerName, profile, accesKey);
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
     }
 }

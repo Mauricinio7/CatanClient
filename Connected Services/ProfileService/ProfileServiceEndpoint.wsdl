@@ -26,6 +26,12 @@
   <wsdl:message name="IProfileServiceEndpoint_GetProfilePicture_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProfilePictureResponse" />
   </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetFriendsPicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsPicture" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_GetFriendsPicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsPictureResponse" />
+  </wsdl:message>
   <wsdl:message name="IProfileServiceEndpoint_InviteFriendsToGame_InputMessage">
     <wsdl:part name="parameters" element="tns:InviteFriendsToGame" />
   </wsdl:message>
@@ -75,6 +81,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture" message="tns:IProfileServiceEndpoint_GetProfilePicture_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetProfilePictureResponse" message="tns:IProfileServiceEndpoint_GetProfilePicture_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetFriendsPicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPicture" message="tns:IProfileServiceEndpoint_GetFriendsPicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPictureResponse" message="tns:IProfileServiceEndpoint_GetFriendsPicture_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="InviteFriendsToGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGame" message="tns:IProfileServiceEndpoint_InviteFriendsToGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGameResponse" message="tns:IProfileServiceEndpoint_InviteFriendsToGame_OutputMessage" />
@@ -122,6 +132,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetProfilePicture">
       <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/GetProfilePicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendsPicture">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPicture" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

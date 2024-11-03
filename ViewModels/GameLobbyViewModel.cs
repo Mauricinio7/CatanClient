@@ -108,7 +108,7 @@ namespace CatanClient.ViewModels
                 Name = profile.Name,
                 Id = profile.Id,
                 CurrentSessionID = profile.CurrentSessionID,
-                PreferredLanguage = profile.PreferredLanguage
+                PreferredLanguage = CultureInfo.CurrentCulture.Name
             };
 
 
