@@ -26,7 +26,8 @@ namespace CatanClient.Services
                 ReceiveTimeout = TimeSpan.FromMinutes(10)
             };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            InstanceContext callbackInstance = new InstanceContext(new CallbackHandler());
+            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
             OperationResultGameDto result;
 
@@ -64,7 +65,8 @@ namespace CatanClient.Services
                 ReceiveTimeout = TimeSpan.FromMinutes(10)
             };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            InstanceContext callbackInstance = new InstanceContext(new CallbackHandler());
+            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
             OperationResultGameDto result;
 
@@ -103,7 +105,8 @@ namespace CatanClient.Services
                 ReceiveTimeout = TimeSpan.FromMinutes(10)
             };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            InstanceContext callbackInstance = new InstanceContext(new CallbackHandler());
+            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
             OperationResultGameDto result;
 
@@ -142,7 +145,8 @@ namespace CatanClient.Services
                 ReceiveTimeout = TimeSpan.FromMinutes(10)
             };
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            ChannelFactory<IGameEndPoint> channelFactory = new ChannelFactory<IGameEndPoint>(binding, endpoint);
+            InstanceContext callbackInstance = new InstanceContext(new CallbackHandler());
+            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
             IGameEndPoint client = channelFactory.CreateChannel();
             bool result = false;
 
@@ -161,5 +165,14 @@ namespace CatanClient.Services
             }
             return result;
         }
+    }
+
+    public class CallbackHandler : IGameEndPointCallback
+    {
+        public void calloo()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
