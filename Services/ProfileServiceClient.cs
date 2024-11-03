@@ -275,6 +275,32 @@ namespace CatanClient.Services
             return result;
         }
 
+        public bool DeleteFriend(string playerName, ProfileDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+                result = client.DeleteFriendProfile(playerName, profile);
+                MessageBox.Show(result.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
         public bool InviteFriendToGame(string playerName, ProfileDto profile, string accesKey)
         {
             BasicHttpBinding binding = new BasicHttpBinding();
@@ -286,9 +312,53 @@ namespace CatanClient.Services
             try
             {
                 result = client.InviteFriendsToGame(playerName, profile, accesKey);
+
+                MessageBox.Show(result.ToString());
             }
             catch (Exception ex)
             {
+
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
+
+        public OperationResultPictureDto GetFriendImage(ProfileDto profile)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding
+            {
+                MaxReceivedMessageSize = 10485760,
+                ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas
+                {
+                    MaxArrayLength = 10485760,
+                    MaxStringContentLength = 8192,
+                    MaxBytesPerRead = 4096,
+                    MaxDepth = 32,
+                    MaxNameTableCharCount = 16384
+                }
+            };
+
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
+            ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
+            IProfileServiceEndpoint client = channelFactory.CreateChannel();
+            OperationResultPictureDto result;
+
+            try
+            {
+                result = client.GetFriendsPicture(profile,CultureInfo.CurrentCulture.Name);
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultPictureDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message,
+                };
 
                 Log.Error(ex.Message);
             }

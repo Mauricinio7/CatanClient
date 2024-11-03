@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -18,19 +19,23 @@ namespace CatanClient.ViewModels
 {
     internal class InviteFriendViewModel : ViewModelBase
     {
-        public ObservableCollection<FriendPlayerCardViewModel> Friends { get; set; } = new ObservableCollection<FriendPlayerCardViewModel>();
+        public ObservableCollection<InvitePlayerCardViewModel> Friends { get; set; } = new ObservableCollection<InvitePlayerCardViewModel>();
 
         public List<ProfileDto> FriendsList { get; set; } = new List<ProfileDto>();
         public ICollectionView FriendsView { get; set; }
         private readonly ServiceManager serviceManager;
         private ProfileDto profile;
+        private string accesKey;
+        public ICommand CloseCommand { get; }   
 
-        public InviteFriendViewModel(ServiceManager serviceManager)
+        public InviteFriendViewModel(string accesKey, ServiceManager serviceManager)
         {
             this.serviceManager = serviceManager;
+            this.accesKey = accesKey;
 
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
+            CloseCommand = new RelayCommand(ExecuteClose);
 
 
             if (GetAllFriend())
@@ -41,6 +46,10 @@ namespace CatanClient.ViewModels
             {
                 Utilities.ShowMessgeServerLost();
             }
+        }
+        internal void ExecuteClose()
+        {
+            Mediator.Notify(Utilities.HIDE_INVITE_FRIENDS, null);
         }
 
         public bool GetAllFriend()
@@ -60,15 +69,16 @@ namespace CatanClient.ViewModels
         {
             foreach (var profileDto in FriendsList)
             {
-                bool isOnline = true;
+                bool isOnline = profileDto.IsOnline;
 
-                Friends.Add(App.Container.Resolve<FriendPlayerCardViewModel>(
+                Friends.Add(App.Container.Resolve<InvitePlayerCardViewModel>(
                     new NamedParameter("playerName", profileDto.Name),
-                    new NamedParameter("isOnline", isOnline)));
+                    new NamedParameter("isOnline", isOnline),
+                    new NamedParameter("accesKey", accesKey)));
             }
 
             FriendsView = CollectionViewSource.GetDefaultView(Friends);
-            FriendsView.SortDescriptions.Add(new SortDescription(nameof(FriendPlayerCardViewModel.IsOnline), ListSortDirection.Descending));
+            FriendsView.SortDescriptions.Add(new SortDescription(nameof(InvitePlayerCardViewModel.IsOnline), ListSortDirection.Descending));
         }
     }
 }

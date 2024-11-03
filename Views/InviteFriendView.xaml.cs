@@ -22,10 +22,11 @@ namespace CatanClient.Views
     /// </summary>
     public partial class InviteFriendView : UserControl
     {
-        public InviteFriendView()
+        public InviteFriendView(string accesKey)
         {
             InitializeComponent();
-            DataContext = App.Container.Resolve<InviteFriendViewModel>();
+            this.DataContext = App.Container.Resolve<InviteFriendViewModel>(
+                new TypedParameter(typeof(string), accesKey));
         }
     }
 }

@@ -68,6 +68,12 @@
   <wsdl:message name="IProfileServiceEndpoint_RejectFriendRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:RejectFriendRequestResponse" />
   </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_DeleteFriendProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendProfile" />
+  </wsdl:message>
+  <wsdl:message name="IProfileServiceEndpoint_DeleteFriendProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendProfileResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProfileServiceEndpoint">
     <wsdl:operation name="ChangeProfileName">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/ChangeProfileName" message="tns:IProfileServiceEndpoint_ChangeProfileName_InputMessage" />
@@ -108,6 +114,10 @@
     <wsdl:operation name="RejectFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequest" message="tns:IProfileServiceEndpoint_RejectFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequestResponse" message="tns:IProfileServiceEndpoint_RejectFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriendProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/DeleteFriendProfile" message="tns:IProfileServiceEndpoint_DeleteFriendProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileServiceEndpoint/DeleteFriendProfileResponse" message="tns:IProfileServiceEndpoint_DeleteFriendProfile_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProfileServiceEndpoint" type="tns:IProfileServiceEndpoint">
@@ -195,6 +205,15 @@
     </wsdl:operation>
     <wsdl:operation name="RejectFriendRequest">
       <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriendProfile">
+      <soap:operation soapAction="http://tempuri.org/IProfileServiceEndpoint/DeleteFriendProfile" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

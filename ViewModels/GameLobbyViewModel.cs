@@ -46,6 +46,7 @@ namespace CatanClient.ViewModels
         public ICommand SendMessageCommand { get; }
         public ICommand LeftRoomCommand { get; }
         public ICommand KickPlayerCommand { get; }
+        public ICommand ShowInviteFriendCommand { get; }
         private readonly ServiceManager serviceManager;
 
         public GameLobbyViewModel(GameDto gameDto, ServiceManager serviceManager)
@@ -66,6 +67,7 @@ namespace CatanClient.ViewModels
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             LeftRoomCommand = new RelayCommand(ExecuteLeftRoom);
             KickPlayerCommand = new RelayCommand(ExecuteShowKickPlayer);
+            ShowInviteFriendCommand= new RelayCommand(ExecuteShowInviteFriend);
 
         }
 
@@ -83,6 +85,11 @@ namespace CatanClient.ViewModels
             var kickPlayerWindow = new KickPlayerWindow();
 
             kickPlayerWindow.ShowDialog();
+        }
+
+        internal void ExecuteShowInviteFriend()
+        {
+            Mediator.Notify(Utilities.SHOW_INVITE_FRIENDS, game.AccessKey);
         }
 
 

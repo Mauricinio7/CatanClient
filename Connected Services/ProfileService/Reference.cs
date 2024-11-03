@@ -392,10 +392,10 @@ namespace CatanClient.ProfileService {
         System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetProfilePictureAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPictureResponse")]
-        CatanClient.ProfileService.OperationResultPictureDto GetFriendsPicture(string profileFriendName, string preferredLanguage);
+        CatanClient.ProfileService.OperationResultPictureDto GetFriendsPicture(CatanClient.ProfileService.ProfileDto profileFriendDto, string PreferredLanguage);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPicture", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/GetFriendsPictureResponse")]
-        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetFriendsPictureAsync(string profileFriendName, string preferredLanguage);
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetFriendsPictureAsync(CatanClient.ProfileService.ProfileDto profileFriendDto, string PreferredLanguage);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGame", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/InviteFriendsToGameResponse")]
         bool InviteFriendsToGame(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey);
@@ -432,6 +432,12 @@ namespace CatanClient.ProfileService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/RejectFriendRequestResponse")]
         System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(string nameFriendToReject, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/DeleteFriendProfile", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/DeleteFriendProfileResponse")]
+        bool DeleteFriendProfile(string friendName, CatanClient.ProfileService.ProfileDto profileClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/DeleteFriendProfile", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/DeleteFriendProfileResponse")]
+        System.Threading.Tasks.Task<bool> DeleteFriendProfileAsync(string friendName, CatanClient.ProfileService.ProfileDto profileClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -485,12 +491,12 @@ namespace CatanClient.ProfileService {
             return base.Channel.GetProfilePictureAsync(profileClientDto);
         }
         
-        public CatanClient.ProfileService.OperationResultPictureDto GetFriendsPicture(string profileFriendName, string preferredLanguage) {
-            return base.Channel.GetFriendsPicture(profileFriendName, preferredLanguage);
+        public CatanClient.ProfileService.OperationResultPictureDto GetFriendsPicture(CatanClient.ProfileService.ProfileDto profileFriendDto, string PreferredLanguage) {
+            return base.Channel.GetFriendsPicture(profileFriendDto, PreferredLanguage);
         }
         
-        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetFriendsPictureAsync(string profileFriendName, string preferredLanguage) {
-            return base.Channel.GetFriendsPictureAsync(profileFriendName, preferredLanguage);
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultPictureDto> GetFriendsPictureAsync(CatanClient.ProfileService.ProfileDto profileFriendDto, string PreferredLanguage) {
+            return base.Channel.GetFriendsPictureAsync(profileFriendDto, PreferredLanguage);
         }
         
         public bool InviteFriendsToGame(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto, string accessKey) {
@@ -539,6 +545,14 @@ namespace CatanClient.ProfileService {
         
         public System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(string nameFriendToReject, CatanClient.ProfileService.ProfileDto profileClientDto) {
             return base.Channel.RejectFriendRequestAsync(nameFriendToReject, profileClientDto);
+        }
+        
+        public bool DeleteFriendProfile(string friendName, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.DeleteFriendProfile(friendName, profileClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteFriendProfileAsync(string friendName, CatanClient.ProfileService.ProfileDto profileClientDto) {
+            return base.Channel.DeleteFriendProfileAsync(friendName, profileClientDto);
         }
     }
 }

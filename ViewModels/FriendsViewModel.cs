@@ -70,11 +70,10 @@ namespace CatanClient.ViewModels
         {
             foreach (var profileDto in FriendsList)
             {
-                bool isOnline = true;
+                bool isOnline = profileDto.IsOnline;
 
                 Friends.Add(App.Container.Resolve<FriendPlayerCardViewModel>(
-                    new NamedParameter("playerName", profileDto.Name),
-                    new NamedParameter("isOnline", isOnline)));
+                    new NamedParameter("profile", profileDto)));
             }
 
             FriendsView = CollectionViewSource.GetDefaultView(Friends);

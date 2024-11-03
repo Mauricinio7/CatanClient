@@ -91,7 +91,7 @@ namespace CatanClient.ViewModels
             HideFriendsViewCommand = new RelayCommand(async () => await HideFriendsView());
             ShowFriendsRequestsViewCommand = new RelayCommand(ShowFriendsRequestsView);
             HideFriendsRequestsViewCommand = new RelayCommand(async () => await HideFriendsRequestsView());
-            ShowInviteFriendsViewCommand = new RelayCommand(ShowInviteFriendsView);
+            ShowInviteFriendsViewCommand = new RelayCommand(accesKey => ShowInviteFriendsView(accesKey));
             HideInviteFriendsViewCommand = new RelayCommand(async () => await HideInviteFriendsView());
             ShowScoreboardViewCommand = new RelayCommand(ShowScoreboardView);
             HideScoreboardViewCommand = new RelayCommand(async () => await HideScoreboardView());
@@ -111,6 +111,8 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.OCULTVERIFYACCOUNT, args => OcultVerifyAccountViewCommand.Execute(null));
             Mediator.Register(Utilities.BACK_TO_MAIN_MENU_ROOM, args => BackToMainMenuCommand.Execute(null));
             Mediator.Register(Utilities.BACK_TO_GUEST_MAIN_MENU_ROOM, args => BackToGuestMainMenuCommand.Execute(null));
+            Mediator.Register(Utilities.SHOW_INVITE_FRIENDS, args => ShowInviteFriendsViewCommand.Execute(args));
+            Mediator.Register(Utilities.HIDE_INVITE_FRIENDS, args => HideInviteFriendsViewCommand.Execute(null));
 
         }
 
@@ -150,9 +152,14 @@ namespace CatanClient.ViewModels
             OverlayView = null;
         }
 
-        private void ShowInviteFriendsView()
+        private void ShowInviteFriendsView(object accesKey)
         {
-            var friendsView = new Views.InviteFriendView();
+            if (!(accesKey is string accesKeyString))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var friendsView = new Views.InviteFriendView(accesKeyString);
             OverlayView = friendsView;
 
         }

@@ -37,7 +37,7 @@
             <Button Margin="222,261,169,90" 
             Content="{x:Static properties:Resources.button_close}" 
             Style="{StaticResource NeonButtonStyle}"
-            Command="{Binding DataContext.HideInviteFriendsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Row="1"    
+            Command="{Binding CloseCommand}" Grid.Row="1"    
         />
             <ListBox ItemsSource="{Binding Friends}" Margin="129,146,77,293"
                  Background="Transparent"

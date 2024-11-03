@@ -39,7 +39,7 @@
     Style="{StaticResource NeonButtonStyle}"
     Content="{x:Static properties:Resources.button_invite}"
     FontSize="15"
-    Command="{Binding DataContext.ShowInviteFriendsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+    Command="{Binding ShowInviteFriendCommand}"
 />
 
 

@@ -41,6 +41,8 @@ namespace CatanClient.UIHelpers
         public const string OCULTVERIFYACCOUNT = "OcultVerifyAccountView";
         public const string SHOWGAMELOBBY = "ShowGameLobbyView";
         public const string SHOWCONFIGUREPROFILE = "ShowConfigureProfile";
+        public const string SHOW_INVITE_FRIENDS = "ShowInviteFriendsView";
+        public const string HIDE_INVITE_FRIENDS = "HideInviteFriendsView";
         public const string BACK_TO_MAIN_MENU_ROOM = "BackToMainMenuRoom";
         public const string BACK_TO_GUEST_MAIN_MENU_ROOM = "BackToGuestMainMenuRoom";
         public const string CLOSE_EDIT_PROFILE = "EditProfileWindow_Close";
@@ -81,6 +83,10 @@ namespace CatanClient.UIHelpers
         public static string ProfilePhotoPath(int Id)
         {
             return $"ProfilePhoto{Id}.jpg";
+        }
+        public static string ProfilePhotoPathWithVersion(int Id, int version)
+        {
+            return $"ProfilePhoto{Id}_V{version}.jpg";
         }
         public static string MessageDataBaseUnableToLoad(string language, Exception ex)
         {

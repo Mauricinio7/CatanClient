@@ -174,5 +174,9 @@ namespace CatanClient.Services
             throw new NotImplementedException();
         }
 
+        public void NotifyPlayerExpulsion(string reason)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
