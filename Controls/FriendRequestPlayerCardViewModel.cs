@@ -21,13 +21,11 @@ namespace CatanClient.Controls
         public ICommand RejectCommand { get; }
 
         private ServiceManager serviceManager;
-        public ProfileDto Profile { get; set; }
         public ProfileDto ReciverProfile { get; set; }
 
-        public FriendRequestPlayerCardViewModel(ProfileDto profile, bool isOnline, ServiceManager serviceManager)
+        public FriendRequestPlayerCardViewModel(string playerName, bool isOnline, ServiceManager serviceManager)
         {
-            Profile = profile;
-            PlayerName = Profile.Name;
+            PlayerName = playerName;
             IsOnline = isOnline;
             this.serviceManager = serviceManager;
             ReciverProfile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
@@ -38,7 +36,7 @@ namespace CatanClient.Controls
 
         private void ExecuteAccept(object parameter)
         {
-            bool result = serviceManager.ProfileServiceClient.AcceptFriendRequest(Profile.Name, ReciverProfile);
+            bool result = serviceManager.ProfileServiceClient.AcceptFriendRequest(PlayerName, ReciverProfile);
 
             if (result)
             {
@@ -52,7 +50,16 @@ namespace CatanClient.Controls
 
         private void ExecuteReject(object parameter)
         {
-            MessageBox.Show("Rechazar: " + PlayerName);
+            bool result = serviceManager.ProfileServiceClient.RejectFriendRequest(PlayerName, ReciverProfile);
+
+            if (result)
+            {
+                MessageBox.Show("Se ha rechazado correctamente como amigo al jugador: " + PlayerName);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace CatanClient.ViewModels
@@ -18,7 +19,7 @@ namespace CatanClient.ViewModels
     {
         public ObservableCollection<FriendRequestPlayerCardViewModel> Friends { get; set; }
 
-        public List<ProfileDto> FriendsRequestsList { get; set; }
+        public List<ProfileDto> FriendsRequestsList { get; set; } = new List<ProfileDto>();
         public ICollectionView FriendsView { get; set; }
         private readonly ServiceManager serviceManager;
         private ProfileDto profile;
@@ -65,7 +66,7 @@ namespace CatanClient.ViewModels
                 bool isOnline = true;
 
                 Friends.Add(App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("profile", profileDto),
+                    new NamedParameter("playerName", profileDto.Name),
                     new NamedParameter("isOnline", isOnline)));
             }
 

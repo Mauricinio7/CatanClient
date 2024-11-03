@@ -20,7 +20,7 @@ namespace CatanClient.Controls
 
         private ServiceManager serviceManager;
 
-        public FriendPlayerCardViewModel(string playerName, bool isOnline,ServiceManager serviceManager)
+        public FriendPlayerCardViewModel(string playerName, bool isOnline, ServiceManager serviceManager)
         {
             PlayerName = playerName;
             IsOnline = isOnline;

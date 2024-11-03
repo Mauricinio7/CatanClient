@@ -15,5 +15,7 @@ namespace CatanClient.Services
         bool SendFriendRequest(string playerName, ProfileDto profile);
         OperationResultProfileListDto GetFriendRequestList(ProfileDto profile);
         bool AcceptFriendRequest(string playerName, ProfileDto profile);
+        bool RejectFriendRequest(string playerName, ProfileDto profile);
+        OperationResultProfileListDto GetFriendList(ProfileDto profile);
     }
 }
