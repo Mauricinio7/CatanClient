@@ -86,7 +86,7 @@ namespace CatanClient.Controls
             else
             {
                 ProfileService.OperationResultPictureDto result;
-                result = serviceManager.ProfileServiceClient.GetFriendImage(Profile); //TODO for get FriendImage
+                result = serviceManager.ProfileServiceClient.GetFriendImage(Profile);
 
                 if (result.IsSuccess)
                 {
