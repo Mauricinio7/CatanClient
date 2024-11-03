@@ -7,20 +7,20 @@
              mc:Ignorable="d" Height="182" Width="480">
 
 
-    <Grid Background="White" Margin="0,0,0,0" Height="180" VerticalAlignment="Center" >
+    <Grid Background="{StaticResource SecondaryColor}" Margin="0,0,0,0" Height="180" VerticalAlignment="Center" >
         <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
         <TextBlock
-            Margin="166,78,0,64"
+            Margin="166,78,14,64"
             Text="Not Ready"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
-            Foreground="Black"
+            Foreground="White"
             FontSize="30"
             />
         <TextBlock
             Margin="10,155,130,7"
             Text="Mauricinio7"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
-            Foreground="Black"
+            Foreground="White"
             FontSize="13"
             />
 

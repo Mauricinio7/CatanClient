@@ -39,7 +39,7 @@ namespace CatanClient.Controls
             }
         }
 
-        public InvitePlayerCardViewModel(ProfileDto profile, string accesKey,ServiceManager serviceManager)
+        public InvitePlayerCardViewModel(ProfileDto profile, string accesKey, ServiceManager serviceManager)
         {
             Profile = profile;
             PlayerName = profile.Name;
