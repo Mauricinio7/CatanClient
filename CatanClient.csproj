@@ -156,6 +156,7 @@
     <Compile Include="Controls\PlayerInRoomCard.xaml.cs">
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PlayerInRoomCardViewModel.cs" />
     <Compile Include="Services\AccountServiceClient.cs" />
     <Compile Include="Services\ChatServiceClient.cs" />
     <Compile Include="Services\GameServiceClient.cs" />
@@ -462,6 +463,9 @@
     <None Include="Connected Services\GameService\CatanClient.GameService.OperationResultGameDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\GameService\CatanClient.GameService.OperationResultListOfPlayersInGame.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\GameService\GameService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -469,6 +473,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />

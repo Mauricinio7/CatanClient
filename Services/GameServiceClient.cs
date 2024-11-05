@@ -3,6 +3,7 @@ using CatanClient.UIHelpers;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -73,6 +74,9 @@ namespace CatanClient.Services
             try
             {
                 result = client.JoinGame(code, profile);
+                MessageBox.Show("Entro y salio");
+                MessageBox.Show(result.MessageResponse);
+                MessageBox.Show(result.IsSuccess.ToString());
             }
             catch (Exception ex)
             {
@@ -82,6 +86,7 @@ namespace CatanClient.Services
                     MessageResponse = ex.Message
                 };
 
+                MessageBox.Show("Se murio");
                 Log.Error(ex.Message);
             }
             finally
@@ -165,10 +170,54 @@ namespace CatanClient.Services
             }
             return result;
         }
+
+        public OperationResultListOfPlayersInGame GetPlayerList(GameDto game)
+        {
+            NetTcpBinding binding = new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            InstanceContext callbackInstance = new InstanceContext(new CallbackHandler());
+            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
+            IGameEndPoint client = channelFactory.CreateChannel();
+            OperationResultListOfPlayersInGame result;
+
+            try
+            {
+                result = client.GetAllPlayersInGame(game, CultureInfo.CurrentCulture.Name);
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultListOfPlayersInGame
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            return result;
+        }
     }
 
     public class CallbackHandler : IGameEndPointCallback
     {
+        public void BroadcastMessageExpel(PlayerDto playerExpeled)
+        {
+            throw new NotImplementedException();
+        }
+
         public void calloo()
         {
             throw new NotImplementedException();
@@ -178,5 +227,12 @@ namespace CatanClient.Services
         {
             throw new NotImplementedException();
         }
+
+        public void NotifyPlayerExpulsion(string message, string reason)
+        {
+            throw new NotImplementedException();
+        }
     }
+
+    
 }

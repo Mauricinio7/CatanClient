@@ -280,6 +280,7 @@ namespace CatanClient.GameService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.GameService.OperationResultListOfPlayersInGame))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.GameService.OperationResultGameDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -334,6 +335,46 @@ namespace CatanClient.GameService {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultListOfPlayersInGame", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDto" +
+        "s")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultListOfPlayersInGame : CatanClient.GameService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.GuestAccountDto[] GuestAccountDtosField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.ProfileDto[] ProfileDtosField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.GuestAccountDto[] GuestAccountDtos {
+            get {
+                return this.GuestAccountDtosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GuestAccountDtosField, value) != true)) {
+                    this.GuestAccountDtosField = value;
+                    this.RaisePropertyChanged("GuestAccountDtos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.ProfileDto[] ProfileDtos {
+            get {
+                return this.ProfileDtosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileDtosField, value) != true)) {
+                    this.ProfileDtosField = value;
+                    this.RaisePropertyChanged("ProfileDtos");
+                }
             }
         }
     }
@@ -438,6 +479,130 @@ namespace CatanClient.GameService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ExpelPlayerDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDto" +
+        "s")]
+    [System.SerializableAttribute()]
+    public partial class ExpelPlayerDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdPlayerToExpelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReasonField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdPlayerToExpel {
+            get {
+                return this.IdPlayerToExpelField;
+            }
+            set {
+                if ((this.IdPlayerToExpelField.Equals(value) != true)) {
+                    this.IdPlayerToExpelField = value;
+                    this.RaisePropertyChanged("IdPlayerToExpel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reason {
+            get {
+                return this.ReasonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReasonField, value) != true)) {
+                    this.ReasonField = value;
+                    this.RaisePropertyChanged("Reason");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDto" +
+        "s")]
+    [System.SerializableAttribute()]
+    public partial class PlayerDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.GuestAccountDto guestAccountDtoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.ProfileDto profileDtoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.GuestAccountDto guestAccountDto {
+            get {
+                return this.guestAccountDtoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.guestAccountDtoField, value) != true)) {
+                    this.guestAccountDtoField = value;
+                    this.RaisePropertyChanged("guestAccountDto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.ProfileDto profileDto {
+            get {
+                return this.profileDtoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.profileDtoField, value) != true)) {
+                    this.profileDtoField = value;
+                    this.RaisePropertyChanged("profileDto");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameService.IGameEndPoint", CallbackContract=typeof(CatanClient.GameService.IGameEndPointCallback))]
     public interface IGameEndPoint {
@@ -477,16 +642,34 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest", ReplyAction="http://tempuri.org/IGameEndPoint/JoinGameAsaGuestResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultGameDto> JoinGameAsaGuestAsync(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdmin", ReplyAction="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdminResponse")]
+        bool ExpelPlayerAsAdmin(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdmin", ReplyAction="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdminResponse")]
+        System.Threading.Tasks.Task<bool> ExpelPlayerAsAdminAsync(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/VoteExpelPlayer", ReplyAction="http://tempuri.org/IGameEndPoint/VoteExpelPlayerResponse")]
+        bool VoteExpelPlayer(CatanClient.GameService.ExpelPlayerDto playerToexpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/VoteExpelPlayer", ReplyAction="http://tempuri.org/IGameEndPoint/VoteExpelPlayerResponse")]
+        System.Threading.Tasks.Task<bool> VoteExpelPlayerAsync(CatanClient.GameService.ExpelPlayerDto playerToexpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame", ReplyAction="http://tempuri.org/IGameEndPoint/GetAllPlayersInGameResponse")]
+        CatanClient.GameService.OperationResultListOfPlayersInGame GetAllPlayersInGame(CatanClient.GameService.GameDto gameClientDto, string preferredLanguage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame", ReplyAction="http://tempuri.org/IGameEndPoint/GetAllPlayersInGameResponse")]
+        System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListOfPlayersInGame> GetAllPlayersInGameAsync(CatanClient.GameService.GameDto gameClientDto, string preferredLanguage);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGameEndPointCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/calloo")]
-        void calloo();
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion")]
-        void NotifyPlayerExpulsion(string reason);
+        void NotifyPlayerExpulsion(string message, string reason);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel")]
+        void BroadcastMessageExpel(CatanClient.GameService.PlayerDto playerExpeled);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -563,6 +746,30 @@ namespace CatanClient.GameService {
         
         public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultGameDto> JoinGameAsaGuestAsync(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto) {
             return base.Channel.JoinGameAsaGuestAsync(accessKey, guestAccountClientDto);
+        }
+        
+        public bool ExpelPlayerAsAdmin(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.ExpelPlayerAsAdmin(playerToExpel, idPlayer, gameClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ExpelPlayerAsAdminAsync(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.ExpelPlayerAsAdminAsync(playerToExpel, idPlayer, gameClientDto);
+        }
+        
+        public bool VoteExpelPlayer(CatanClient.GameService.ExpelPlayerDto playerToexpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.VoteExpelPlayer(playerToexpel, idPlayer, gameClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VoteExpelPlayerAsync(CatanClient.GameService.ExpelPlayerDto playerToexpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.VoteExpelPlayerAsync(playerToexpel, idPlayer, gameClientDto);
+        }
+        
+        public CatanClient.GameService.OperationResultListOfPlayersInGame GetAllPlayersInGame(CatanClient.GameService.GameDto gameClientDto, string preferredLanguage) {
+            return base.Channel.GetAllPlayersInGame(gameClientDto, preferredLanguage);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListOfPlayersInGame> GetAllPlayersInGameAsync(CatanClient.GameService.GameDto gameClientDto, string preferredLanguage) {
+            return base.Channel.GetAllPlayersInGameAsync(gameClientDto, preferredLanguage);
         }
     }
 }

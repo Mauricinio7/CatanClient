@@ -23,6 +23,7 @@ namespace CatanClient.Controls
         public PlayerInRoomCard()
         {
             InitializeComponent();
+            
         }
     }
 }

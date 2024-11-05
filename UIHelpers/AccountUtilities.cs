@@ -72,6 +72,18 @@ namespace CatanClient.UIHelpers
             return account;
         }
 
+        public static GameService.GameDto CastChatGameToGameServiceGame(ChatService.GameDto chatGame)
+        {
+            GameService.GameDto gameServiceGame = new GameService.GameDto();
+            gameServiceGame.Name = chatGame.Name;
+            gameServiceGame.Id = chatGame.Id;
+            gameServiceGame.IdAdminGame = chatGame.IdAdminGame;
+            gameServiceGame.AccessKey = chatGame.AccessKey;
+            gameServiceGame.MaxNumberPlayers = chatGame.MaxNumberPlayers;
+
+            return gameServiceGame;
+        }
+
         public static void RestartGame()
         {
             MessageBox.Show(Utilities.MessageRestartGame(CultureInfo.CurrentCulture.Name), Utilities.TittleRestart(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -88,6 +100,19 @@ namespace CatanClient.UIHelpers
                 Id = accountProfile.Id,
                 Name = accountProfile.Name,
                 CurrentSessionID = accountProfile.CurrentSessionID,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name
+            };
+
+            return profile;
+        }
+
+        public static ProfileService.ProfileDto CastGameProfileToProfileService(GameService.ProfileDto gameProfile)
+        {
+            ProfileService.ProfileDto profile = new ProfileService.ProfileDto
+            {
+                Id = gameProfile.Id,
+                Name = gameProfile.Name,
+                CurrentSessionID = gameProfile.CurrentSessionID,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name
             };
 

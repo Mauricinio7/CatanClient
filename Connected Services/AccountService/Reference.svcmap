@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="818aacbc-10df-4d73-bd79-226816084241" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="4df659c1-77dd-4c02-8bc3-fd3d4ac5e7a3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,12 @@
     <MetadataSource Address="http://10.144.41.3:8181/AccountService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="AccountServiceEndPoint.wsdl" MetadataType="Wsdl" ID="e6c49133-3daa-4258-b368-0ef2eab7961b" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?wsdl" />
-    <MetadataFile FileName="AccountService.xsd" MetadataType="Schema" ID="77edb3b5-9fb3-4f1f-989a-d96dabfa29f7" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd1" />
-    <MetadataFile FileName="AccountService1.xsd" MetadataType="Schema" ID="bd562993-7f10-4314-ac23-af873074c253" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd0" />
-    <MetadataFile FileName="AccountService.disco" MetadataType="Disco" ID="11be59d1-be4c-45a3-a26e-28bb8954ae0c" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?disco" />
-    <MetadataFile FileName="AccountService2.xsd" MetadataType="Schema" ID="558e1c7d-5fa5-4ca7-aab4-7c3841139bf8" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd2" />
-    <MetadataFile FileName="AccountService3.xsd" MetadataType="Schema" ID="6c5f1781-fb4c-4a01-b95d-671064319fd7" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd3" />
+    <MetadataFile FileName="AccountServiceEndPoint.wsdl" MetadataType="Wsdl" ID="70b77c6b-3473-4912-a4b6-55a3b1c73fca" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?wsdl" />
+    <MetadataFile FileName="AccountService.xsd" MetadataType="Schema" ID="0e158fe7-9215-4615-b4d8-f283231a0f5f" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd1" />
+    <MetadataFile FileName="AccountService1.xsd" MetadataType="Schema" ID="d905bf36-9f8b-44ab-ac7f-a42efd15311f" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd0" />
+    <MetadataFile FileName="AccountService.disco" MetadataType="Disco" ID="1465d435-20b8-418f-b364-d63496361d16" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?disco" />
+    <MetadataFile FileName="AccountService2.xsd" MetadataType="Schema" ID="db04ad19-58d0-4021-9431-c9da02cc8aff" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd2" />
+    <MetadataFile FileName="AccountService3.xsd" MetadataType="Schema" ID="2a299d26-6cf3-4d8d-af9d-23463a2a3937" SourceId="1" SourceUrl="http://10.144.41.3:8181/AccountService?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

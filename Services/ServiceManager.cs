@@ -16,6 +16,7 @@ namespace CatanClient.Services
         private readonly Lazy<IGuestAccountServiceClient> guestAccountServiceClient;
         private readonly Lazy<IProfileSingleton> profileSingleton;
 
+
         public ServiceManager(Lazy<IAccountServiceClient> accountServiceClient, Lazy<IGameServiceClient> gameServiceClient, Lazy<IChatServiceClient> chatServiceClient, Lazy<IProfileServiceClient> profileServiceClient, Lazy<IGuestAccountServiceClient> guestAccountServiceClient, Lazy<IProfileSingleton> profileSingleton)
         {
             this.accountServiceClient = accountServiceClient;

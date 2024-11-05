@@ -261,10 +261,10 @@ namespace CatanClient.ProfileService {
     public partial class OperationResultProfileListDto : CatanClient.ProfileService.OperationResultDto {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.ComponentModel.BindingList<CatanClient.ProfileService.ProfileDto> ProfileDtosField;
+        private CatanClient.ProfileService.ProfileDto[] ProfileDtosField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.ComponentModel.BindingList<CatanClient.ProfileService.ProfileDto> ProfileDtos {
+        public CatanClient.ProfileService.ProfileDto[] ProfileDtos {
             get {
                 return this.ProfileDtosField;
             }

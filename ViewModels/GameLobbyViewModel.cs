@@ -1,6 +1,9 @@
-﻿using CatanClient.Callbacks;
+﻿using Autofac;
+using CatanClient.Callbacks;
 using CatanClient.ChatService;
 using CatanClient.Commands;
+using CatanClient.Controls;
+using CatanClient.GameService;
 using CatanClient.Services;
 using CatanClient.Singleton;
 using CatanClient.UIHelpers;
@@ -26,8 +29,10 @@ namespace CatanClient.ViewModels
     internal class GameLobbyViewModel : ViewModelBase
     {
         private string newMessage;
-        private GameDto game;
+        private ChatService.GameDto game;
         private AccountService.ProfileDto profile;
+        public List<ProfileDto> OnlinePlayers { get; set; } = new List<ProfileDto>();
+        public ObservableCollection<PlayerInRoomCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInRoomCardViewModel>();
 
 
         public ObservableCollection<ChatMessage> Messages { get; set; }
@@ -49,7 +54,7 @@ namespace CatanClient.ViewModels
         public ICommand ShowInviteFriendCommand { get; }
         private readonly ServiceManager serviceManager;
 
-        public GameLobbyViewModel(GameDto gameDto, ServiceManager serviceManager)
+        public GameLobbyViewModel(ChatService.GameDto gameDto, ServiceManager serviceManager)
         {
             game = gameDto;
             this.serviceManager = serviceManager;
@@ -62,13 +67,36 @@ namespace CatanClient.ViewModels
             profile =  serviceManager.ProfileSingleton.Profile;
 
             Mediator.Register(Utilities.RECIVEMESSAGE, OnReceiveMessage);
+            Mediator.Register(Utilities.LOAD_PLAYER_LIST, LoadPlayerList);
 
             this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             LeftRoomCommand = new RelayCommand(ExecuteLeftRoom);
             KickPlayerCommand = new RelayCommand(ExecuteShowKickPlayer);
             ShowInviteFriendCommand= new RelayCommand(ExecuteShowInviteFriend);
+        }
 
+        internal void LoadPlayerList(object parameter)
+        {
+            OperationResultListOfPlayersInGame result;
+
+            result = serviceManager.GameServiceClient.GetPlayerList(AccountUtilities.CastChatGameToGameServiceGame(game));
+
+            if (result.IsSuccess)
+            {
+                OnlinePlayers = result.ProfileDtos.ToList();
+
+
+                foreach (var profileDto in OnlinePlayers)
+                {
+                    OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                        new NamedParameter("profile", AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                }
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
         }
 
         internal void OnReceiveMessage(object message)
@@ -120,6 +148,7 @@ namespace CatanClient.ViewModels
 
 
             serviceManager.GameServiceClient.LeftRoomClient(gameRoom, profileRoom);
+            LoadPlayerList(null);
 
             AccountUtilities.RestartGame();
         }

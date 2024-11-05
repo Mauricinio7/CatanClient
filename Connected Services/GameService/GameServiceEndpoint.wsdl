@@ -26,6 +26,8 @@
       <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -64,11 +66,29 @@
   <wsdl:message name="IGameEndPoint_JoinGameAsaGuest_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinGameAsaGuestResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameEndPoint_calloo_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:calloo" />
+  <wsdl:message name="IGameEndPoint_ExpelPlayerAsAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExpelPlayerAsAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_ExpelPlayerAsAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExpelPlayerAsAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_VoteExpelPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoteExpelPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_VoteExpelPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoteExpelPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_GetAllPlayersInGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPlayersInGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_GetAllPlayersInGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPlayersInGameResponse" />
   </wsdl:message>
   <wsdl:message name="IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerExpulsion" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_BroadcastMessageExpel_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:BroadcastMessageExpel" />
   </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
@@ -95,11 +115,23 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest" message="tns:IGameEndPoint_JoinGameAsaGuest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuestResponse" message="tns:IGameEndPoint_JoinGameAsaGuest_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="calloo">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/calloo" message="tns:IGameEndPoint_calloo_OutputCallbackMessage" />
+    <wsdl:operation name="ExpelPlayerAsAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdmin" message="tns:IGameEndPoint_ExpelPlayerAsAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdminResponse" message="tns:IGameEndPoint_ExpelPlayerAsAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VoteExpelPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/VoteExpelPlayer" message="tns:IGameEndPoint_VoteExpelPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/VoteExpelPlayerResponse" message="tns:IGameEndPoint_VoteExpelPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPlayersInGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame" message="tns:IGameEndPoint_GetAllPlayersInGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGameResponse" message="tns:IGameEndPoint_GetAllPlayersInGame_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" message="tns:IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BroadcastMessageExpel">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel" message="tns:IGameEndPoint_BroadcastMessageExpel_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -159,14 +191,41 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="calloo">
-      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/calloo" style="document" />
+    <wsdl:operation name="ExpelPlayerAsAdmin">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoteExpelPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/VoteExpelPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPlayersInGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BroadcastMessageExpel">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -229,14 +288,41 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="calloo">
-      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/calloo" style="document" />
+    <wsdl:operation name="ExpelPlayerAsAdmin">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoteExpelPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/VoteExpelPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPlayersInGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BroadcastMessageExpel">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -21,6 +21,8 @@ namespace CatanClient.Services
 
         OperationResultGameDto JoinRoomAsGuestClient(string code, GuestAccountDto profile);
 
+        OperationResultListOfPlayersInGame GetPlayerList(GameDto game);
+
         bool LeftRoomClient(GameDto game, ProfileDto profile);
 
 

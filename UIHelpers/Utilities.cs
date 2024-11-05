@@ -49,6 +49,7 @@ namespace CatanClient.UIHelpers
         public const string CLOSE_VERIFY_ACCOUNT_CHANGE = "VerifyAccountChangeWindow_Close";
         public const string CLOSE_EDIT_PASSWORD = "EditPasswordWindow_Close";
         public const string RECIVEMESSAGE = "ReceiveMessage";
+        public const string LOAD_PLAYER_LIST = "LoadPlayerList";
         public const string ANIMATEDGRID = "animatedGrid";
         public const string FADEINANIMATION = "FadeInAnimation";
         public const string SLIDEOUTFROMTOPANIMATION = "SlideOutFromTopAnimation";

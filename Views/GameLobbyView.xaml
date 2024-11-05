@@ -25,7 +25,7 @@
                 Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
                 Text="{x:Static properties:Resources.label_room}"
                 FontSize="45"
-             /> 
+             />
 
             <TextBlock 
                 Margin="286,213,672,861"
@@ -77,10 +77,17 @@
                 Content="{x:Static properties:Resources.button_send}"
                 FontSize="15"
                 Command="{Binding SendMessageCommand}" />
-            
-            <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" 
-                     Margin="1416,213,65,272"
-                     />
+
+            <ListBox ItemsSource="{Binding OnlinePlayersList}" Margin="1386,220,26,219"
+                 Background="Transparent"
+                 Foreground="White"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:PlayerInRoomCard />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <Button 
                 Margin="38,1007,1570,73"
