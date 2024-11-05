@@ -80,21 +80,21 @@ namespace CatanClient.ViewModels
             {
                 OperationResultGameDto result;
 
-                if (profile.IsRegistered)
-                {
+                //if (profile.IsRegistered)
+                //{
                     result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile);
-                }
-                else
-                {
-                    GuestAccountDto guest = new GuestAccountDto
-                    {
-                        Name = profile.Name,
-                        PreferredLanguage = profile.PreferredLanguage,
-                        Id = profile.Id
-                    };
+                //}
+                //else  
+                //{
+                //    GuestAccountDto guest = new GuestAccountDto 
+                //    {
+                //        Name = profile.Name,
+                //        PreferredLanguage = profile.PreferredLanguage,
+                //        Id = profile.Id
+                //    };
 
-                    result = serviceManager.GameServiceClient.JoinRoomAsGuestClient(roomCode, guest);
-                }
+                    //result = serviceManager.GameServiceClient.JoinRoomAsGuestClient(roomCode, guest);
+                //}
                     
                      
 
