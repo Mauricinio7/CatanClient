@@ -74,9 +74,9 @@ namespace CatanClient.ViewModels
                 Id = profileDto.Id,
                 CurrentSessionID = profileDto.CurrentSessionID,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name
-            }; 
+            };
 
-            if(!String.IsNullOrWhiteSpace(roomCode))
+            if (!String.IsNullOrWhiteSpace(roomCode))
             {
                 OperationResultGameDto result;
 
