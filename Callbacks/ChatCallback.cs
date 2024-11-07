@@ -37,6 +37,7 @@ namespace CatanClient.Callbacks
             {
                 ChatMessage systemMessage = new ChatMessage { Content = name + Utilities.MessagePlayerLeft(CultureInfo.CurrentCulture.Name), Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
                 Mediator.Notify("ReceiveMessage", systemMessage);
+                Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
             });
         }
     }

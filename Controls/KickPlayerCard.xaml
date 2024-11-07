@@ -9,7 +9,7 @@
              Height="182" Width="1164">
 
     <Grid Background="{StaticResource SecondaryColor}" Height="180" VerticalAlignment="Center" >
-        <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="pack://application:,,,/Resources/Images/ShibaTest.png"/>
+        <Image HorizontalAlignment="Left" Height="137" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="{Binding ImageSource}"/>
         <TextBlock
             Margin="10,155,10,7"
             Text="{Binding PlayerName}"
@@ -20,7 +20,7 @@
 
         <Button Content="{x:Static properties:Resources.global_kick_player}" 
             Style="{StaticResource PrimaryButtonStyle}"
-            Margin="213,58,658,58"
+            Margin="213,58,686,58"
             Command="{Binding KickCommand}"
         />
 

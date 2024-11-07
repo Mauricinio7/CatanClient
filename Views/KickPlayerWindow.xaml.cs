@@ -1,4 +1,5 @@
-﻿using CatanClient.ViewModels;
+﻿using Autofac;
+using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,12 @@ namespace CatanClient.Views
     /// </summary>
     public partial class KickPlayerWindow : Window
     {
-        public KickPlayerWindow()
+        public KickPlayerWindow(ChatService.GameDto game)
         {
             InitializeComponent();
-            DataContext = new KickPlayerWindowViewModel();
+            this.DataContext = App.Container.Resolve<KickPlayerWindowViewModel>(
+                new TypedParameter(typeof(ChatService.GameDto), game)
+            );
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

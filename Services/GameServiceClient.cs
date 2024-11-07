@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace CatanClient.Services
 {
@@ -209,13 +210,39 @@ namespace CatanClient.Services
             }
             return result;
         }
+
+        public bool ExpelPlayer(ExpelPlayerDto expelPlayer, int idPlayer, GameService.GameDto game)
+        {
+            InstanceContext callbackInstance = new InstanceContext(new CallbackHandler());
+
+            NetTcpBinding netTcpBinding = new NetTcpBinding();
+            netTcpBinding.Security.Mode = SecurityMode.None;
+
+            EndpointAddress endpointAddress = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+
+            DuplexChannelFactory<IGameEndPoint> factory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, netTcpBinding, endpointAddress);
+
+            IGameEndPoint client = factory.CreateChannel();
+            bool result;
+
+            result = client.ExpelPlayerAsAdmin(expelPlayer, idPlayer, game);
+
+            MessageBox.Show(result.ToString());
+
+            return result;
+        }
     }
 
     public class CallbackHandler : IGameEndPointCallback
     {
         public void BroadcastMessageExpel(PlayerDto playerExpeled)
         {
-            throw new NotImplementedException();
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                ChatMessage systemMessage = new ChatMessage { Content = playerExpeled.profileDto.Name + " ha sido expulsado del juego", Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
+                Mediator.Notify("ReceiveMessage", systemMessage);
+                Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
+            });
         }
 
         public void calloo()
@@ -223,14 +250,11 @@ namespace CatanClient.Services
             throw new NotImplementedException();
         }
 
-        public void NotifyPlayerExpulsion(string reason)
-        {
-            throw new NotImplementedException();
-        }
-
         public void NotifyPlayerExpulsion(string message, string reason)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(message + reason, "Ha sido expulsado del juego", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            AccountUtilities.RestartGame();
         }
     }
 

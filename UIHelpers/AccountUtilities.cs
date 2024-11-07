@@ -106,6 +106,19 @@ namespace CatanClient.UIHelpers
             return profile;
         }
 
+        public static GameService.ProfileDto CastAccountProfileToGameService(AccountService.ProfileDto accountProfile)
+        {
+            GameService.ProfileDto profile = new GameService.ProfileDto
+            {
+                Id = accountProfile.Id,
+                Name = accountProfile.Name,
+                CurrentSessionID = accountProfile.CurrentSessionID,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name
+            };
+
+            return profile;
+        }
+
         public static ProfileService.ProfileDto CastGameProfileToProfileService(GameService.ProfileDto gameProfile)
         {
             ProfileService.ProfileDto profile = new ProfileService.ProfileDto

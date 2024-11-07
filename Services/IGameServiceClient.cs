@@ -25,6 +25,8 @@ namespace CatanClient.Services
 
         bool LeftRoomClient(GameDto game, ProfileDto profile);
 
+        bool ExpelPlayer(ExpelPlayerDto expelPlayer, int idPlayer, GameService.GameDto game);
+
 
         }
 }

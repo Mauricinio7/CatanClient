@@ -23,7 +23,7 @@
                Margin="20" FontSize="30" FontWeight="Bold" Foreground="White" 
                HorizontalAlignment="Center" FontFamily="{StaticResource PrimaryFontFamily}" />
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Friends}" Margin="50,31,50,48"
+        <ListBox Grid.Row="1" ItemsSource="{Binding OnlinePlayersList}" Margin="22,24,22,35"
                  Background="Transparent"
                  Foreground="White"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">

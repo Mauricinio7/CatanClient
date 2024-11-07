@@ -84,6 +84,7 @@ namespace CatanClient.ViewModels
 
             if (result.IsSuccess)
             {
+                OnlinePlayersList.Clear();
                 OnlinePlayers = result.ProfileDtos.ToList();
 
 
@@ -110,7 +111,7 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteShowKickPlayer()
         {
-            var kickPlayerWindow = new KickPlayerWindow();
+            var kickPlayerWindow = new KickPlayerWindow(game);
 
             kickPlayerWindow.ShowDialog();
         }

@@ -644,10 +644,10 @@ namespace CatanClient.GameService {
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultGameDto> JoinGameAsaGuestAsync(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdmin", ReplyAction="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdminResponse")]
-        bool ExpelPlayerAsAdmin(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto);
+        bool ExpelPlayerAsAdmin(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idAdmin, CatanClient.GameService.GameDto gameClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdmin", ReplyAction="http://tempuri.org/IGameEndPoint/ExpelPlayerAsAdminResponse")]
-        System.Threading.Tasks.Task<bool> ExpelPlayerAsAdminAsync(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto);
+        System.Threading.Tasks.Task<bool> ExpelPlayerAsAdminAsync(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idAdmin, CatanClient.GameService.GameDto gameClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/VoteExpelPlayer", ReplyAction="http://tempuri.org/IGameEndPoint/VoteExpelPlayerResponse")]
         bool VoteExpelPlayer(CatanClient.GameService.ExpelPlayerDto playerToexpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto);
@@ -748,12 +748,12 @@ namespace CatanClient.GameService {
             return base.Channel.JoinGameAsaGuestAsync(accessKey, guestAccountClientDto);
         }
         
-        public bool ExpelPlayerAsAdmin(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
-            return base.Channel.ExpelPlayerAsAdmin(playerToExpel, idPlayer, gameClientDto);
+        public bool ExpelPlayerAsAdmin(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idAdmin, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.ExpelPlayerAsAdmin(playerToExpel, idAdmin, gameClientDto);
         }
         
-        public System.Threading.Tasks.Task<bool> ExpelPlayerAsAdminAsync(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
-            return base.Channel.ExpelPlayerAsAdminAsync(playerToExpel, idPlayer, gameClientDto);
+        public System.Threading.Tasks.Task<bool> ExpelPlayerAsAdminAsync(CatanClient.GameService.ExpelPlayerDto playerToExpel, int idAdmin, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.ExpelPlayerAsAdminAsync(playerToExpel, idAdmin, gameClientDto);
         }
         
         public bool VoteExpelPlayer(CatanClient.GameService.ExpelPlayerDto playerToexpel, int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
