@@ -359,7 +359,23 @@ namespace CatanClient.AccountService {
     public partial class OperationResultCreateAccountDto : CatanClient.AccountService.OperationResultDto {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.AccountService.ProfileDto ProfileDtoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private CatanClient.AccountService.EnumCreateAccountStatus statusField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.AccountService.ProfileDto ProfileDto {
+            get {
+                return this.ProfileDtoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileDtoField, value) != true)) {
+                    this.ProfileDtoField = value;
+                    this.RaisePropertyChanged("ProfileDto");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public CatanClient.AccountService.EnumCreateAccountStatus status {
@@ -373,23 +389,6 @@ namespace CatanClient.AccountService {
                 }
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EnumCreateAccountStatus", Namespace="http://schemas.datacontract.org/2004/07/DataTransferObject.Enums")]
-    public enum EnumCreateAccountStatus : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ExistsName = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ExistsAccount = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ErrorSaving = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        SuccessSave = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -544,6 +543,23 @@ namespace CatanClient.AccountService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EnumCreateAccountStatus", Namespace="http://schemas.datacontract.org/2004/07/DataTransferObject.Enums")]
+    public enum EnumCreateAccountStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ExistsName = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ExistsAccount = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ErrorSaving = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SuccessSave = 3,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]

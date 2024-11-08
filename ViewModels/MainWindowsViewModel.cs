@@ -76,6 +76,8 @@ namespace CatanClient.ViewModels
         public ICommand ShowLoadingScreenCommand { get; }
         public ICommand HideLoadingScreenCommand { get; }
 
+        public ICommand ShowGameScreenCommand { get; }
+
         public MainWindowsViewModel()
         {
             CurrentView = new Views.LoginView();
@@ -106,6 +108,8 @@ namespace CatanClient.ViewModels
             ShowLoadingScreenCommand = new RelayCommand(ShowLoadingScreen);
             HideLoadingScreenCommand = new RelayCommand(HideLoadingScreen);
 
+            ShowGameScreenCommand = new RelayCommand(ShowGameScreen);
+
             Mediator.Register(Utilities.SHOWCONFIGUREPROFILE, args => ShowConfigureProfileCommand.Execute(args));
             Mediator.Register(Utilities.SHOWVERIFYACCOUNT, args => ShowVerifyAccountViewCommand.Execute(args));
             Mediator.Register(Utilities.SHOWGAMELOBBY, args => ShowGameLobbyCommand.Execute(args));
@@ -120,6 +124,11 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.SHOW_LOADING_SCREEN, args => ShowLoadingScreenCommand.Execute(null));
             Mediator.Register(Utilities.HIDE_LOADING_SCREEN, args => HideLoadingScreenCommand.Execute(null));
 
+        }
+
+        private void ShowGameScreen()
+        {
+            CurrentView = new Gameplay.Views.GameFrameView();
         }
 
         private void ShowLoadingScreen()

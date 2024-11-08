@@ -81,12 +81,12 @@ namespace CatanClient.ViewModels
 
                     Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-                    bool isCreated = await serviceManager.AccountServiceClient.CreateAccountInServerAsync(account); 
+                    OperationResultCreateAccountDto result = await serviceManager.AccountServiceClient.CreateAccountInServerAsync(account); 
 
-                    if (isCreated)
+                    if (result.IsSuccess)
                     {
                         string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", "ShibaTest.png");
-                        SaveImageInServer(filePath, account);
+                        SaveImageInServer(filePath, result.ProfileDto);
 
                         Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
                     }
@@ -107,24 +107,19 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void SaveImageInServer(string filePath, AccountDto account)
+        private void SaveImageInServer(string filePath, ProfileDto profile)
         {
             byte[] imageBytes = File.ReadAllBytes(filePath);
 
             ProfileService.OperationResultProfileDto result;
 
-            ProfileService.ProfileDto profileDto = new ProfileService.ProfileDto
-            {
-                Id = account.Id,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name,
-                Name = account.Name
-            };
+            profile.IsOnline = true;
 
-            result = serviceManager.ProfileServiceClient.UploadImage(profileDto, imageBytes);
+            result = serviceManager.ProfileServiceClient.UploadImage(AccountUtilities.CastAccountProfileToProfileService(profile), imageBytes);
 
             if (result.IsSuccess)
             {
-                SaveImageLocally(filePath, account);
+                SaveImageLocally(filePath, profile);
             }
             else
             {
@@ -133,7 +128,7 @@ namespace CatanClient.ViewModels
 
         }
 
-        private void SaveImageLocally(string filePath, AccountDto account)
+        private void SaveImageLocally(string filePath, ProfileDto profile)
         {
             string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
@@ -142,7 +137,7 @@ namespace CatanClient.ViewModels
                 Directory.CreateDirectory(appDirectory);
             }
 
-            string fileName = Utilities.ProfilePhotoPath(account.Id.Value);
+            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
             string destinationPath = Path.Combine(appDirectory, fileName);
 
             File.Copy(filePath, destinationPath, overwrite: true);

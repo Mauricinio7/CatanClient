@@ -23,11 +23,11 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
+      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -54,12 +54,6 @@
   <wsdl:message name="IGameEndPoint_JoinGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinGameResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameEndPoint_StartGame_InputMessage">
-    <wsdl:part name="parameters" element="tns:StartGame" />
-  </wsdl:message>
-  <wsdl:message name="IGameEndPoint_StartGame_OutputMessage">
-    <wsdl:part name="parameters" element="tns:StartGameResponse" />
-  </wsdl:message>
   <wsdl:message name="IGameEndPoint_JoinGameAsaGuest_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinGameAsaGuest" />
   </wsdl:message>
@@ -84,11 +78,20 @@
   <wsdl:message name="IGameEndPoint_GetAllPlayersInGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllPlayersInGameResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_StartGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_StartGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  </wsdl:message>
   <wsdl:message name="IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerExpulsion" />
   </wsdl:message>
   <wsdl:message name="IGameEndPoint_BroadcastMessageExpel_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:BroadcastMessageExpel" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_StartGameForAll_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:StartGameForAll" />
   </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
@@ -107,10 +110,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGame" message="tns:IGameEndPoint_JoinGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameResponse" message="tns:IGameEndPoint_JoinGame_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="StartGame">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/StartGame" message="tns:IGameEndPoint_StartGame_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/StartGameResponse" message="tns:IGameEndPoint_StartGame_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="JoinGameAsaGuest">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest" message="tns:IGameEndPoint_JoinGameAsaGuest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuestResponse" message="tns:IGameEndPoint_JoinGameAsaGuest_OutputMessage" />
@@ -127,11 +126,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame" message="tns:IGameEndPoint_GetAllPlayersInGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGameResponse" message="tns:IGameEndPoint_GetAllPlayersInGame_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/StartGame" message="tns:IGameEndPoint_StartGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/StartGameResponse" message="tns:IGameEndPoint_StartGame_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" message="tns:IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="BroadcastMessageExpel">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel" message="tns:IGameEndPoint_BroadcastMessageExpel_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartGameForAll">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/StartGameForAll" message="tns:IGameEndPoint_StartGameForAll_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -166,15 +172,6 @@
     </wsdl:operation>
     <wsdl:operation name="JoinGame">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/JoinGame" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="StartGame">
-      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -218,6 +215,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" style="document" />
       <wsdl:output>
@@ -226,6 +232,12 @@
     </wsdl:operation>
     <wsdl:operation name="BroadcastMessageExpel">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGameForAll">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartGameForAll" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -270,15 +282,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="StartGame">
-      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartGame" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="JoinGameAsaGuest">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest" style="document" />
       <wsdl:input>
@@ -315,6 +318,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" style="document" />
       <wsdl:output>
@@ -327,18 +339,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StartGameForAll">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartGameForAll" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GameServiceEndpoint">
     <wsdl:port name="NetTcpBinding_IGameEndPoint" binding="tns:NetTcpBinding_IGameEndPoint">
-      <soap12:address location="net.tcp://10.144.41.3:8192/GameService" />
+      <soap12:address location="net.tcp://192.168.11.207:8192/GameService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://10.144.41.3:8192/GameService</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.11.207:8192/GameService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="WSDualHttpBinding_IGameEndPoint" binding="tns:WSDualHttpBinding_IGameEndPoint">
-      <soap12:address location="http://10.144.41.3:8191/GameService" />
+      <soap12:address location="http://192.168.11.207:8191/GameService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://10.144.41.3:8191/GameService</wsa10:Address>
+        <wsa10:Address>http://192.168.11.207:8191/GameService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

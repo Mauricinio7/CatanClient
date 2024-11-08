@@ -631,12 +631,6 @@ namespace CatanClient.GameService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/JoinGame", ReplyAction="http://tempuri.org/IGameEndPoint/JoinGameResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultGameDto> JoinGameAsync(string accessKey, CatanClient.GameService.ProfileDto profileClientDto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
-        void StartGame(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
-        System.Threading.Tasks.Task StartGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/JoinGameAsaGuest", ReplyAction="http://tempuri.org/IGameEndPoint/JoinGameAsaGuestResponse")]
         CatanClient.GameService.OperationResultGameDto JoinGameAsaGuest(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto);
         
@@ -660,6 +654,12 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame", ReplyAction="http://tempuri.org/IGameEndPoint/GetAllPlayersInGameResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListOfPlayersInGame> GetAllPlayersInGameAsync(CatanClient.GameService.GameDto gameClientDto, string preferredLanguage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
+        bool StartGame(int idPlayer, CatanClient.GameService.GameDto gameClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
+        System.Threading.Tasks.Task<bool> StartGameAsync(int idPlayer, CatanClient.GameService.GameDto gameClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -670,6 +670,9 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel")]
         void BroadcastMessageExpel(CatanClient.GameService.PlayerDto playerExpeled);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/StartGameForAll")]
+        void StartGameForAll();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -732,14 +735,6 @@ namespace CatanClient.GameService {
             return base.Channel.JoinGameAsync(accessKey, profileClientDto);
         }
         
-        public void StartGame(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {
-            base.Channel.StartGame(gameClientDto, profileClientDto);
-        }
-        
-        public System.Threading.Tasks.Task StartGameAsync(CatanClient.GameService.GameDto gameClientDto, CatanClient.GameService.ProfileDto profileClientDto) {
-            return base.Channel.StartGameAsync(gameClientDto, profileClientDto);
-        }
-        
         public CatanClient.GameService.OperationResultGameDto JoinGameAsaGuest(string accessKey, CatanClient.GameService.GuestAccountDto guestAccountClientDto) {
             return base.Channel.JoinGameAsaGuest(accessKey, guestAccountClientDto);
         }
@@ -770,6 +765,14 @@ namespace CatanClient.GameService {
         
         public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListOfPlayersInGame> GetAllPlayersInGameAsync(CatanClient.GameService.GameDto gameClientDto, string preferredLanguage) {
             return base.Channel.GetAllPlayersInGameAsync(gameClientDto, preferredLanguage);
+        }
+        
+        public bool StartGame(int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.StartGame(idPlayer, gameClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> StartGameAsync(int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.StartGameAsync(idPlayer, gameClientDto);
         }
     }
 }

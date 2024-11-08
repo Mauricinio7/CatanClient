@@ -20,13 +20,19 @@ namespace CatanClient.Callbacks
                     Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
                 });
             }
+        
+        public void NotifyPlayerExpulsion(string message, string reason)
+        {
+            MessageBox.Show(message + reason, "Ha sido expulsado del juego", MessageBoxButton.OK, MessageBoxImage.Warning);
 
-            public void NotifyPlayerExpulsion(string message, string reason)
-            {
-                MessageBox.Show(message + reason, "Ha sido expulsado del juego", MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                AccountUtilities.RestartGame();
-            }
+            AccountUtilities.RestartGame();
         }
+
+        public void StartGameForAll()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     
 }

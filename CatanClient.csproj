@@ -162,6 +162,9 @@
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlayerInRoomCardViewModel.cs" />
+    <Compile Include="Gameplay\Views\GameFrameView.xaml.cs">
+      <DependentUpon>GameFrameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\AccountServiceClient.cs" />
     <Compile Include="Services\ChatServiceClient.cs" />
     <Compile Include="ViewModels\ExpelPlayerWindowViewMode.cs" />
@@ -279,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ShowPasswordPlaceholderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gameplay\Views\GameFrameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -547,7 +554,6 @@
   <ItemGroup>
     <Folder Include="Enums\" />
     <Folder Include="Gameplay\ViewModels\" />
-    <Folder Include="Gameplay\Views\" />
     <Folder Include="Resources\Sounds\" />
     <Folder Include="Windows\" />
   </ItemGroup>
@@ -607,21 +613,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\GameService\GameService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\GuestAccountService\GuestAccountService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -647,6 +638,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\GameService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

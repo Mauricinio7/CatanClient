@@ -82,6 +82,15 @@
                     FontSize="11"
             Command="{Binding DataContext.ShowRegisterViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                     />
+            <Button Content="Jugar" 
+                HorizontalAlignment="Left" 
+                Margin="216,551,0,0" 
+                VerticalAlignment="Top" 
+                Height="56" 
+                Width="162"
+                Style="{StaticResource NeonButtonStyle}"
+                Command="{Binding DataContext.ShowGameScreenCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                />
 
             <Grid.RenderTransform>
                 <TranslateTransform Y="-1200" />

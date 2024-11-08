@@ -18,7 +18,7 @@ namespace CatanClient.Services
 
         Task<bool> VerifyUserAccountAsync(AccountDto account, string token);
 
-        Task<bool> CreateAccountInServerAsync(AccountDto account);
+        Task<OperationResultCreateAccountDto> CreateAccountInServerAsync(AccountDto account);
 
         Task<OperationResultChangeRegisterEmailOrPhone> ChangeEmailOrPhoneAsync(AccountDto account);
 

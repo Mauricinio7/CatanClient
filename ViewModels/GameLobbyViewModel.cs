@@ -32,6 +32,7 @@ namespace CatanClient.ViewModels
         private ChatService.GameDto game;
         private AccountService.ProfileDto profile;
         public List<ProfileDto> OnlinePlayers { get; set; } = new List<ProfileDto>();
+        public List<GuestAccountDto> OnlinePlayersGuest { get; set; } = new List<GuestAccountDto>();
         public ObservableCollection<PlayerInRoomCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInRoomCardViewModel>();
         public ICommand SendMessageCommand { get; }
         public ICommand LeftRoomCommand { get; }
@@ -86,10 +87,22 @@ namespace CatanClient.ViewModels
             {
                 OnlinePlayersList.Clear();
                 OnlinePlayers = result.ProfileDtos.ToList();
+                OnlinePlayersGuest = result.GuestAccountDtos.ToList();
 
 
                 foreach (var profileDto in OnlinePlayers)
                 {
+                    OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                        new NamedParameter("profile", AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                }
+
+                foreach (var guestProfileDto in OnlinePlayersGuest)
+                {
+                    ProfileDto profileDto = new ProfileDto();
+                    profileDto.Id = guestProfileDto.Id;
+                    profileDto.Name = guestProfileDto.Name; 
+                    profileDto.IsRegistered = false;
+
                     OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
                         new NamedParameter("profile", AccountUtilities.CastGameProfileToProfileService(profileDto))));
                 }

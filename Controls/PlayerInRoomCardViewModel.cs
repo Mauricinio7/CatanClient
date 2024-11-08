@@ -51,34 +51,19 @@ namespace CatanClient.Controls
 
         private void LoadProfileImage()
         {
-            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
-
-            string fileName = Utilities.ProfilePhotoPathWithVersion(Profile.Id.Value, Profile.PictureVersion);
-            string imagePath = Path.Combine(appDirectory, fileName);
-
-            if (File.Exists(imagePath))
+            if (!Profile.IsRegistered)
             {
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                bitmap.EndInit();
 
-                ImageSource = bitmap;
             }
             else
             {
-                ProfileService.OperationResultPictureDto result;
-                result = serviceManager.ProfileServiceClient.GetFriendImage(Profile);
+                string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
-                if (result.IsSuccess)
+                string fileName = Utilities.ProfilePhotoPathWithVersion(Profile.Id.Value, Profile.PictureVersion);
+                string imagePath = Path.Combine(appDirectory, fileName);
+
+                if (File.Exists(imagePath))
                 {
-                    byte[] imageBytes = result.Picture;
-
-                    DeleteOldVersions(Profile.Id.Value);
-                    SaveImageBytesLocally(imageBytes);
-
                     var bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
@@ -90,7 +75,29 @@ namespace CatanClient.Controls
                 }
                 else
                 {
-                    Utilities.ShowMessageDataBaseUnableToLoad();
+                    ProfileService.OperationResultPictureDto result;
+                    result = serviceManager.ProfileServiceClient.GetFriendImage(Profile);
+
+                    if (result.IsSuccess)
+                    {
+                        byte[] imageBytes = result.Picture;
+
+                        DeleteOldVersions(Profile.Id.Value);
+                        SaveImageBytesLocally(imageBytes);
+
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        bitmap.EndInit();
+
+                        ImageSource = bitmap;
+                    }
+                    else
+                    {
+                        Utilities.ShowMessageDataBaseUnableToLoad();
+                    }
                 }
             }
         }

@@ -76,7 +76,7 @@ namespace CatanClient.Services
             return flag;
         }
 
-        public async Task<bool> CreateAccountInServerAsync(AccountDto account)
+        public async Task<OperationResultCreateAccountDto> CreateAccountInServerAsync(AccountDto account)
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
@@ -84,15 +84,19 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            bool flag = false;
+            OperationResultCreateAccountDto result;
 
             try
             {
-                OperationResultDto result = await client.CreateAccountAsync(account);
-                flag = result.IsSuccess;
+                 result = await client.CreateAccountAsync(account);
             }
             catch (Exception ex)
             {
+                result = new OperationResultCreateAccountDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
                 Log.Error(ex.Message);
             }
             finally
@@ -102,7 +106,7 @@ namespace CatanClient.Services
                 
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
-            return flag;
+            return result;
         }
 
         public async Task<OperationResultChangeRegisterEmailOrPhone> ChangeEmailOrPhoneAsync(AccountDto account)
