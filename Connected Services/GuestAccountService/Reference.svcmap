@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="093d7eaf-f95b-4c7e-a692-323b288003bc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="40d6a7ad-49c6-4231-876a-d17b425681f2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.11.207:8484/GuestAccountService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.144.41.3:8484/GuestAccountService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GuestAccountService.xsd" MetadataType="Schema" ID="0709a7b5-9c94-4788-b500-67faf94d6757" SourceId="1" SourceUrl="http://192.168.11.207:8484/GuestAccountService?xsd=xsd1" />
-    <MetadataFile FileName="GuestAccountService1.xsd" MetadataType="Schema" ID="f9d2ef8b-17c1-4d77-aba3-d92122fcb42f" SourceId="1" SourceUrl="http://192.168.11.207:8484/GuestAccountService?xsd=xsd0" />
-    <MetadataFile FileName="GuestAccountService.disco" MetadataType="Disco" ID="e3ace4a7-d307-4b5c-8369-35feebc668d6" SourceId="1" SourceUrl="http://192.168.11.207:8484/GuestAccountService?disco" />
-    <MetadataFile FileName="GuestAccountEndpoint.wsdl" MetadataType="Wsdl" ID="8f82365c-8f28-4c77-9897-86a27f4ce632" SourceId="1" SourceUrl="http://192.168.11.207:8484/GuestAccountService?wsdl" />
-    <MetadataFile FileName="GuestAccountService2.xsd" MetadataType="Schema" ID="bd2c4a8a-b949-485e-adbf-0b8632bbd1bc" SourceId="1" SourceUrl="http://192.168.11.207:8484/GuestAccountService?xsd=xsd2" />
+    <MetadataFile FileName="GuestAccountService.xsd" MetadataType="Schema" ID="4145e6fa-4373-4b69-aa42-edf1e3b06a54" SourceId="1" SourceUrl="http://10.144.41.3:8484/GuestAccountService?xsd=xsd1" />
+    <MetadataFile FileName="GuestAccountService.disco" MetadataType="Disco" ID="090c64ef-a762-4fd0-adbc-cc46cc9e9aaf" SourceId="1" SourceUrl="http://10.144.41.3:8484/GuestAccountService?disco" />
+    <MetadataFile FileName="GuestAccountService1.xsd" MetadataType="Schema" ID="448f4a9c-484e-4c47-8070-77c6252c93fe" SourceId="1" SourceUrl="http://10.144.41.3:8484/GuestAccountService?xsd=xsd2" />
+    <MetadataFile FileName="GuestAccountService2.xsd" MetadataType="Schema" ID="672fa7e5-8b30-446d-9d21-fc15cede8910" SourceId="1" SourceUrl="http://10.144.41.3:8484/GuestAccountService?xsd=xsd0" />
+    <MetadataFile FileName="GuestAccountEndpoint.wsdl" MetadataType="Wsdl" ID="0eca4a9e-7add-4200-8d9b-e225a15d87de" SourceId="1" SourceUrl="http://10.144.41.3:8484/GuestAccountService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

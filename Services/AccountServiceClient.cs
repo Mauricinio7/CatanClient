@@ -16,8 +16,6 @@ namespace CatanClient.Services
     {
         public async Task<OperationResultProfileDto> IsValidAuthenticationAsync(AccountDto account)
         {
-            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-
             BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
@@ -42,9 +40,9 @@ namespace CatanClient.Services
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
-                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+                
             }
-
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
 
@@ -72,9 +70,9 @@ namespace CatanClient.Services
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
-                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+                
             }
-
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return flag;
         }
 
@@ -101,9 +99,9 @@ namespace CatanClient.Services
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
-                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+                
             }
-
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return flag;
         }
 
@@ -134,9 +132,8 @@ namespace CatanClient.Services
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
-                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             }
-
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
 
@@ -167,9 +164,9 @@ namespace CatanClient.Services
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
-                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+                
             }
-
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
 
@@ -200,9 +197,9 @@ namespace CatanClient.Services
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
-                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+                
             }
-
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
 
@@ -233,9 +230,9 @@ namespace CatanClient.Services
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
-                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+                
             }
-
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
 

@@ -642,6 +642,12 @@ namespace CatanClient.AccountService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePasswordResponse")]
         System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> SendVerificationCodeToChangePasswordAsync(CatanClient.AccountService.AccountDto accountClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithEmail", ReplyAction="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithEmailResponse")]
+        bool NeedHelpProblemWithEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithEmail", ReplyAction="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithEmailResponse")]
+        System.Threading.Tasks.Task<bool> NeedHelpProblemWithEmailAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -741,6 +747,14 @@ namespace CatanClient.AccountService {
         
         public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultDto> SendVerificationCodeToChangePasswordAsync(CatanClient.AccountService.AccountDto accountClientDto) {
             return base.Channel.SendVerificationCodeToChangePasswordAsync(accountClientDto);
+        }
+        
+        public bool NeedHelpProblemWithEmail(string email) {
+            return base.Channel.NeedHelpProblemWithEmail(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> NeedHelpProblemWithEmailAsync(string email) {
+            return base.Channel.NeedHelpProblemWithEmailAsync(email);
         }
     }
 }

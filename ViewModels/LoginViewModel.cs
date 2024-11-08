@@ -133,12 +133,12 @@ namespace CatanClient.ViewModels
 
         internal async Task AuthenticateUserAsync(AccountDto account, object window)
         {
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
             OperationResultProfileDto result = await serviceManager.AccountServiceClient.IsValidAuthenticationAsync(account);
 
             switch (result.AunthenticationStatus)
             {
                 case EnumAuthenticationStatus.Verified:
-                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
                     ShowMainMenu(window, false);
                     break;
