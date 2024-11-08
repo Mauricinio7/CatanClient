@@ -12,6 +12,7 @@ using CatanClient.UIHelpers;
 using System.IO;
 using System.Windows.Media.Imaging;
 using CatanClient.ProfileService;
+using CatanClient.Views;
 
 namespace CatanClient.Controls
 {
@@ -123,23 +124,9 @@ namespace CatanClient.Controls
 
         private void ExecuteKick(object parameter)
         {
-            MessageBox.Show("Expulsar: " + PlayerName);
+            var expelWindow = new ExpelPlayerWindow(Profile, SenderProfile, Game);
 
-            GameService.ExpelPlayerDto expelPlayer = new GameService.ExpelPlayerDto();
-            expelPlayer.IdPlayerToExpel = Profile.Id.Value;
-            expelPlayer.Reason = "Mal comportamiento";
-            bool result;
-
-            result = serviceManager.GameServiceClient.ExpelPlayer(expelPlayer, SenderProfile.Id.Value, Game);
-
-            if(result) 
-            {
-                MessageBox.Show("Jugador expulsado");
-            }
-            else
-            {
-                Utilities.ShowMessgeServerLost();
-            }
+            expelWindow.ShowDialog();
         }
     }
 }

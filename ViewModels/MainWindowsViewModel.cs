@@ -73,6 +73,8 @@ namespace CatanClient.ViewModels
         public ICommand HideInviteFriendsViewCommand { get; }
         public ICommand ShowScoreboardViewCommand { get; }
         public ICommand HideScoreboardViewCommand { get; }
+        public ICommand ShowLoadingScreenCommand { get; }
+        public ICommand HideLoadingScreenCommand { get; }
 
         public MainWindowsViewModel()
         {
@@ -101,6 +103,8 @@ namespace CatanClient.ViewModels
             BackToGuestMainMenuCommand = new RelayCommand(async () => await BackToGuestMainMenu());
             ShowGameLobbyCommand = new RelayCommand(async (object gameDto) => await ShowGameLobby(gameDto));
             ShowConfigureProfileCommand = new RelayCommand(async (object accountDto) => await ShowConfigureProfile(accountDto));
+            ShowLoadingScreenCommand = new RelayCommand(ShowLoadingScreen);
+            HideLoadingScreenCommand = new RelayCommand(HideLoadingScreen);
 
             Mediator.Register(Utilities.SHOWCONFIGUREPROFILE, args => ShowConfigureProfileCommand.Execute(args));
             Mediator.Register(Utilities.SHOWVERIFYACCOUNT, args => ShowVerifyAccountViewCommand.Execute(args));
@@ -113,7 +117,20 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.BACK_TO_GUEST_MAIN_MENU_ROOM, args => BackToGuestMainMenuCommand.Execute(null));
             Mediator.Register(Utilities.SHOW_INVITE_FRIENDS, args => ShowInviteFriendsViewCommand.Execute(args));
             Mediator.Register(Utilities.HIDE_INVITE_FRIENDS, args => HideInviteFriendsViewCommand.Execute(null));
+            Mediator.Register(Utilities.SHOW_LOADING_SCREEN, args => ShowLoadingScreenCommand.Execute(null));
+            Mediator.Register(Utilities.HIDE_LOADING_SCREEN, args => HideLoadingScreenCommand.Execute(null));
 
+        }
+
+        private void ShowLoadingScreen()
+        {
+            var loadingScreen = new Controls.LoadingScreen();
+            OverlayView = loadingScreen;
+        }
+
+        private void HideLoadingScreen()
+        {
+            OverlayView = null;
         }
 
         private void ShowFriendsView()

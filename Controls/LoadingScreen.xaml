@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="CatanClient.Controls.LoadingScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Height="600" Width="1000" Background="Transparent">
+
+    <Viewbox Stretch="Uniform" Margin="400,200,400,200">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+            <Canvas Width="160" Height="160" RenderTransformOrigin="0.5,0.5">
+                <Canvas.RenderTransform>
+                    <RotateTransform x:Name="rotateTransform" />
+                </Canvas.RenderTransform>
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="75" Canvas.Top="31" RenderTransformOrigin="0.26,1.5" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="105" Canvas.Top="41" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="120" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="110" Canvas.Top="100" />
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="75" Canvas.Top="115" RenderTransformOrigin="0.143,-0.37" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="45" Canvas.Top="105" />
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="35" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="45" Canvas.Top="41" />
+            </Canvas>
+
+            <!-- Elipse interior con animación de pulsos -->
+            <Ellipse Width="60" Height="60" Stroke="Transparent" Fill="White">
+                <Ellipse.RenderTransform>
+                    <ScaleTransform x:Name="pulseTransform" ScaleX="1" ScaleY="1" CenterX="30" CenterY="30"/>
+                </Ellipse.RenderTransform>
+                <Ellipse.OpacityMask>
+                    <RadialGradientBrush>
+                        <GradientStop Color="White" Offset="0.6" />
+                        <GradientStop Color="Transparent" Offset="1" />
+                    </RadialGradientBrush>
+                </Ellipse.OpacityMask>
+            </Ellipse>
+
+            <!-- Texto de "Cargando..." -->
+            <TextBlock Text="Cargando..." Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,159,0,0"/>
+        </Grid>
+    </Viewbox>
+
+    <!-- Animaciones para el giro y el pulso -->
+    <UserControl.Triggers>
+        <!-- Animación de giro para el círculo de bolitas -->
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard RepeatBehavior="Forever">
+                    <DoubleAnimation Storyboard.TargetName="rotateTransform"
+                                     Storyboard.TargetProperty="Angle"
+                                     From="0" To="360" Duration="0:0:1.5" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+
+        <!-- Animación de pulso para el círculo interior -->
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard RepeatBehavior="Forever">
+                    <DoubleAnimation Storyboard.TargetName="pulseTransform"
+                                     Storyboard.TargetProperty="ScaleX"
+                                     From="1" To="1.2"
+                                     Duration="0:0:0.5"
+                                     AutoReverse="True"/>
+                    <DoubleAnimation Storyboard.TargetName="pulseTransform"
+                                     Storyboard.TargetProperty="ScaleY"
+                                     From="1" To="1.2"
+                                     Duration="0:0:0.5"
+                                     AutoReverse="True"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+</UserControl>

@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 using CatanClient.UIHelpers;
 using System.Globalization;
 using CatanClient.Services;
+using System.IO;
+using CatanClient.Properties;
 
 namespace CatanClient.ViewModels
 {
@@ -76,13 +78,23 @@ namespace CatanClient.ViewModels
                     phoneNumber = AccountUtilities.IsValidAccountPhoneNumber(ContactInfo) ? ContactInfo : String.Empty;
 
                     AccountDto account = AccountUtilities.CreateAccount(email, phoneNumber, Password, Username);
-                    
+
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+
                     bool isCreated = await serviceManager.AccountServiceClient.CreateAccountInServerAsync(account); 
 
                     if (isCreated)
                     {
+                        string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", "ShibaTest.png");
+                        SaveImageInServer(filePath, account);
+
                         Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
                     }
+                    else
+                    {
+                        Utilities.ShowMessgeServerLost();
+                    }
+                        
                 }
                 else
                 {
@@ -95,7 +107,48 @@ namespace CatanClient.ViewModels
             }
         }
 
-        
+        private void SaveImageInServer(string filePath, AccountDto account)
+        {
+            byte[] imageBytes = File.ReadAllBytes(filePath);
+
+            ProfileService.OperationResultProfileDto result;
+
+            ProfileService.ProfileDto profileDto = new ProfileService.ProfileDto
+            {
+                Id = account.Id,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                Name = account.Name
+            };
+
+            result = serviceManager.ProfileServiceClient.UploadImage(profileDto, imageBytes);
+
+            if (result.IsSuccess)
+            {
+                SaveImageLocally(filePath, account);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+
+        }
+
+        private void SaveImageLocally(string filePath, AccountDto account)
+        {
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
+
+            if (!Directory.Exists(appDirectory))
+            {
+                Directory.CreateDirectory(appDirectory);
+            }
+
+            string fileName = Utilities.ProfilePhotoPath(account.Id.Value);
+            string destinationPath = Path.Combine(appDirectory, fileName);
+
+            File.Copy(filePath, destinationPath, overwrite: true);
+        }
+
+
 
         public bool IsNotNullOrEmptyAccound(string name, string ContactInfo, string password)
         {

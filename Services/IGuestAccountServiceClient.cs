@@ -10,6 +10,6 @@ namespace CatanClient.Services
 {
     internal interface IGuestAccountServiceClient
     {
-        OperationResultGuestAccountDto LoginAsGuest(string language);
+        Task<OperationResultGuestAccountDto> LoginAsGuestAsync(string language);
     }
 }

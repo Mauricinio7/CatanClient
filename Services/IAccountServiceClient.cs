@@ -14,19 +14,20 @@ namespace CatanClient.Services
 {
     public interface IAccountServiceClient
     {
+        Task<OperationResultProfileDto> IsValidAuthenticationAsync(AccountDto account);
 
-        OperationResultProfileDto IsValidAuthentication(AccountDto account);
+        Task<bool> VerifyUserAccountAsync(AccountDto account, string token);
 
-        bool VerifyUserAccount(AccountDto account, string token);
-        
         Task<bool> CreateAccountInServerAsync(AccountDto account);
 
-        OperationResultChangeRegisterEmailOrPhone ChangeEmailOrPhone(AccountDto account);
+        Task<OperationResultChangeRegisterEmailOrPhone> ChangeEmailOrPhoneAsync(AccountDto account);
 
-        OperationResultChangeRegisterEmailOrPhone ConfirmEmailOrPhone(AccountDto account);
+        Task<OperationResultChangeRegisterEmailOrPhone> ConfirmEmailOrPhoneAsync(AccountDto account);
 
-        OperationResultDto ChangePassword(AccountDto account);
+        Task<OperationResultDto> ChangePasswordAsync(AccountDto account);
 
-        OperationResultDto ConfirmPassword(AccountDto account);
+        Task<OperationResultDto> ConfirmPasswordAsync(AccountDto account);
+
+        OperationResultAccountDto GetAccount(ProfileDto profile);
     }
 }

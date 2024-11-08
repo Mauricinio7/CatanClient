@@ -112,6 +112,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Callbacks\ChatCallback.cs" />
+    <Compile Include="Callbacks\GameCallback.cs" />
+    <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Connected Services\AccountService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,12 +155,16 @@
       <DependentUpon>KickPlayerCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\KickPlayerCardViewModel.cs" />
+    <Compile Include="Controls\LoadingScreen.xaml.cs">
+      <DependentUpon>LoadingScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PlayerInRoomCard.xaml.cs">
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlayerInRoomCardViewModel.cs" />
     <Compile Include="Services\AccountServiceClient.cs" />
     <Compile Include="Services\ChatServiceClient.cs" />
+    <Compile Include="ViewModels\ExpelPlayerWindowViewMode.cs" />
     <Compile Include="Services\GameServiceClient.cs" />
     <Compile Include="Services\GuestAccountServiceClient.cs" />
     <Compile Include="Services\IAccountServiceClient.cs" />
@@ -204,6 +210,9 @@
     </Compile>
     <Compile Include="Views\EditProfileWindow.xaml.cs">
       <DependentUpon>EditProfileWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExpelPlayerWindow.xaml.cs">
+      <DependentUpon>ExpelPlayerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FriendRequestView.xaml.cs">
       <DependentUpon>FriendRequestView.xaml</DependentUpon>
@@ -257,6 +266,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\LoadingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PlaceholderTextBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -294,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditProfileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExpelPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -529,6 +546,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Gameplay\ViewModels\" />
+    <Folder Include="Gameplay\Views\" />
     <Folder Include="Resources\Sounds\" />
     <Folder Include="Windows\" />
   </ItemGroup>

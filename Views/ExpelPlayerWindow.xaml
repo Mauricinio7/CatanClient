@@ -1,0 +1,73 @@
+﻿<Window x:Class="CatanClient.Views.ExpelPlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatanClient.Views"
+        xmlns:controls="clr-namespace:CatanClient.Controls"
+        xmlns:properties="clr-namespace:CatanClient.Properties"
+        mc:Ignorable="d"
+        Title="ExpelPlayerWindow" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
+
+    <Viewbox Stretch="Fill" Margin="0,0,0,0">
+        <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0.5,0.5" Width="1576" Height="900" x:Name="animatedGrid">
+
+            <TextBlock
+                Style="{StaticResource PrimaryTextBlockStyle}"  
+                Text="¿Seguro que desea expulsar al jugador?" 
+                TextWrapping="Wrap"
+                Margin="52,83,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                LineHeight="60"
+                FontSize="50"
+                LineStackingStrategy="BlockLineHeight" Width="1490" Height="176"
+            />
+
+            <Button
+                Content="{x:Static properties:Resources.button_save}" 
+                Style="{StaticResource NeonButtonStyle}"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="208" Height="97" 
+                Margin="1268,731,0,0"
+                FontSize="18"
+                Command="{Binding KickPlayerCommand}"
+            />
+
+            <Button
+                Content="{x:Static properties:Resources.button_exit}" 
+                Style="{StaticResource NeonButtonStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="125,714,0,0"                  
+                FontSize="18"
+                FontWeight="Bold"
+                Padding="20,30"              
+                MinWidth="100"
+                MinHeight="80" Height="95" 
+                Click="ButtonExit_Click" 
+            />
+
+            <TextBlock
+                Style="{StaticResource PrimaryTextBlockStyle}"  
+                Text="Razón:" 
+                TextWrapping="Wrap"
+                Margin="61,450,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                LineHeight="60"
+                FontSize="50"
+                LineStackingStrategy="BlockLineHeight" Width="384" Height="98"
+            />
+
+            <ComboBox Margin="490,450,292,362" 
+                      ItemsSource="{Binding ExpulsionReasons}"
+                      SelectedItem="{Binding SelectedReason, Mode=TwoWay}"
+                      FontSize="24"
+            />
+        </Grid>
+    </Viewbox>
+</Window>

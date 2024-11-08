@@ -33,7 +33,11 @@ namespace CatanClient.ViewModels
         private AccountService.ProfileDto profile;
         public List<ProfileDto> OnlinePlayers { get; set; } = new List<ProfileDto>();
         public ObservableCollection<PlayerInRoomCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInRoomCardViewModel>();
-
+        public ICommand SendMessageCommand { get; }
+        public ICommand LeftRoomCommand { get; }
+        public ICommand KickPlayerCommand { get; }
+        public ICommand ShowInviteFriendCommand { get; }
+        private readonly ServiceManager serviceManager;
 
         public ObservableCollection<ChatMessage> Messages { get; set; }
 
@@ -48,11 +52,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public ICommand SendMessageCommand { get; }
-        public ICommand LeftRoomCommand { get; }
-        public ICommand KickPlayerCommand { get; }
-        public ICommand ShowInviteFriendCommand { get; }
-        private readonly ServiceManager serviceManager;
+
 
         public GameLobbyViewModel(ChatService.GameDto gameDto, ServiceManager serviceManager)
         {
@@ -71,7 +71,7 @@ namespace CatanClient.ViewModels
 
             this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
-            LeftRoomCommand = new RelayCommand(ExecuteLeftRoom);
+            LeftRoomCommand = new AsyncRelayCommand(ExecuteLeftRoomAsync);
             KickPlayerCommand = new RelayCommand(ExecuteShowKickPlayer);
             ShowInviteFriendCommand= new RelayCommand(ExecuteShowInviteFriend);
         }
@@ -127,7 +127,7 @@ namespace CatanClient.ViewModels
             serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
         }
 
-        internal void ExecuteLeftRoom()
+        internal async Task ExecuteLeftRoomAsync()
         {
             serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
 
@@ -138,17 +138,8 @@ namespace CatanClient.ViewModels
                 AccessKey = game.AccessKey,
                 MaxNumberPlayers = game.MaxNumberPlayers
             };
-
-            GameService.ProfileDto profileRoom = new GameService.ProfileDto
-            {
-                Name = profile.Name,
-                Id = profile.Id,
-                CurrentSessionID = profile.CurrentSessionID,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name
-            };
-
-
-            serviceManager.GameServiceClient.LeftRoomClient(gameRoom, profileRoom);
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+            await serviceManager.GameServiceClient.LeftRoomClientAsync(gameRoom, AccountUtilities.CastAccountProfileToGameService(profile));
             LoadPlayerList(null);
 
             AccountUtilities.RestartGame();

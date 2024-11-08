@@ -150,7 +150,7 @@ namespace CatanClient.ViewModels
             ProfileService.OperationResultProfileDto result;
 
             ProfileService.ProfileDto profileDto = AccountUtilities.CastAccountProfileToProfileService(Profile);
-
+            
             result = serviceManager.ProfileServiceClient.UploadImage(profileDto, imageBytes);
 
             if (result.IsSuccess)

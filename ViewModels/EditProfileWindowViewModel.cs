@@ -50,11 +50,11 @@ namespace CatanClient.ViewModels
             AccountService.ProfileDto accountProfile = serviceManager.ProfileSingleton.Profile;
             accountProfile.PreferredLanguage = CultureInfo.CurrentCulture.Name;
 
-            ProfileService.ProfileDto profileDto = CastAccountProfileToProfileService(accountProfile);         
+            ProfileService.ProfileDto profileDto = AccountUtilities.CastAccountProfileToProfileService(accountProfile);         
 
             Profile = profileDto;
 
-            SaveCommand = new RelayCommand(OnSave);
+            SaveCommand = new AsyncRelayCommand(OnSaveAsync);
         }
 
         private string SetPrompt()
@@ -77,24 +77,10 @@ namespace CatanClient.ViewModels
 
         }
 
-        private ProfileService.ProfileDto CastAccountProfileToProfileService(AccountService.ProfileDto accountProfile)
+
+        private async Task OnSaveAsync()
         {
-            ProfileService.ProfileDto profile = new ProfileDto
-            {
-                Id = accountProfile.Id,
-                Name = accountProfile.Name,
-                CurrentSessionID = accountProfile.CurrentSessionID,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name
-            };
-
-            return profile;
-        }
-
-
-        private void OnSave()
-        {
-
-            if(!String.IsNullOrEmpty(NewValue))
+            if (!string.IsNullOrEmpty(NewValue))
             {
                 if (Field == Utilities.USERNAME)
                 {
@@ -102,7 +88,8 @@ namespace CatanClient.ViewModels
                 }
                 else
                 {
-                    SaveEmailOrPhone(NewValue, Field);
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                    await SaveEmailOrPhoneAsync(NewValue, Field);
                 }
             }
             else
@@ -135,15 +122,15 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public void SaveEmailOrPhone(string newValue, string type)
+        public async Task SaveEmailOrPhoneAsync(string newValue, string type)
         {
             if (AccountUtilities.IsValidAccountEmail(newValue) || AccountUtilities.IsValidAccountPhoneNumber(newValue))
             {
                 AccountService.AccountDto account = new AccountService.AccountDto
                 {
-                    Email = String.Empty,
-                    PhoneNumber = String.Empty,
-                    Password = String.Empty,
+                    Email = string.Empty,
+                    PhoneNumber = string.Empty,
+                    Password = string.Empty,
                     Id = Profile.Id,
                     PreferredLanguage = CultureInfo.CurrentCulture.Name,
                     CurrentSessionId = Profile.CurrentSessionID
@@ -158,8 +145,7 @@ namespace CatanClient.ViewModels
                     account.PhoneNumber = newValue;
                 }
 
-                AccountService.OperationResultChangeRegisterEmailOrPhone result;
-                result = serviceManager.AccountServiceClient.ChangeEmailOrPhone(account);
+                AccountService.OperationResultChangeRegisterEmailOrPhone result = await serviceManager.AccountServiceClient.ChangeEmailOrPhoneAsync(account);
 
                 if (result.IsSuccess)
                 {
@@ -173,7 +159,7 @@ namespace CatanClient.ViewModels
             else
             {
                 MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-            } 
+            }
         }
 
 

@@ -13,20 +13,18 @@ namespace CatanClient.Services
 {
     public interface IGameServiceClient
     {
+        Task<OperationResultGameDto> CreateRoomClientAsync(GameDto game, ProfileDto profile);
 
-        OperationResultGameDto CreateRoomClient(GameDto game, ProfileDto profile);
-        
+        Task<OperationResultGameDto> JoinRoomClientAsync(string code, ProfileDto profile);
 
-        OperationResultGameDto JoinRoomClient(string code, ProfileDto profile);
-
-        OperationResultGameDto JoinRoomAsGuestClient(string code, GuestAccountDto profile);
+        Task<OperationResultGameDto> JoinRoomAsGuestClientAsync(string code, GuestAccountDto profile);
 
         OperationResultListOfPlayersInGame GetPlayerList(GameDto game);
 
-        bool LeftRoomClient(GameDto game, ProfileDto profile);
+        Task<bool> LeftRoomClientAsync(GameDto game, ProfileDto profile);
 
-        bool ExpelPlayer(ExpelPlayerDto expelPlayer, int idPlayer, GameService.GameDto game);
+        Task<bool> ExpelPlayerAsync(ExpelPlayerDto expelPlayer, int idPlayer, GameDto game);
 
 
-        }
+    }
 }

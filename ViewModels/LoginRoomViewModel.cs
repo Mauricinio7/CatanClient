@@ -43,7 +43,7 @@ namespace CatanClient.ViewModels
         public LoginRoomViewModel(ServiceManager serviceManager)
         {
 
-            LoginRoomCommand = new RelayCommand(ExecuteLoginRoom);
+            LoginRoomCommand = new AsyncRelayCommand(ExecuteLoginRoomAsync);
             ExitLoginRoomCommand = new RelayCommand(ExecuteExitLoginRoom);
             this.serviceManager = serviceManager;
         }
@@ -64,43 +64,35 @@ namespace CatanClient.ViewModels
 
 
 
-        private void ExecuteLoginRoom(object parameter)
-        { 
-            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
+        private async Task ExecuteLoginRoomAsync(object parameter)
+        {
+            var profile = serviceManager.ProfileSingleton.Profile;
 
-            ProfileDto profile = new ProfileDto
-            {
-                Name = profileDto.Name,
-                Id = profileDto.Id,
-                CurrentSessionID = profileDto.CurrentSessionID,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name
-            };
-
-            if (!String.IsNullOrWhiteSpace(roomCode))
+            if (!string.IsNullOrWhiteSpace(roomCode))
             {
                 OperationResultGameDto result;
 
-                //if (profile.IsRegistered)
-                //{
-                    result = serviceManager.GameServiceClient.JoinRoomClient(roomCode, profile);
-                //}
-                //else  
-                //{
-                //    GuestAccountDto guest = new GuestAccountDto 
-                //    {
-                //        Name = profile.Name,
-                //        PreferredLanguage = profile.PreferredLanguage,
-                //        Id = profile.Id
-                //    };
-
-                    //result = serviceManager.GameServiceClient.JoinRoomAsGuestClient(roomCode, guest);
-                //}
-                    
-                     
-
-                if (result.IsSuccess == true)
+                if (profile.IsRegistered)
                 {
-                    GameDto game = result.GameDto;
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                    result = await serviceManager.GameServiceClient.JoinRoomClientAsync(roomCode, AccountUtilities.CastAccountProfileToGameService(profile));
+                }
+                else
+                {
+                    var guest = new GuestAccountDto
+                    {
+                        Name = profile.Name,
+                        PreferredLanguage = profile.PreferredLanguage,
+                        Id = profile.Id
+                    };
+
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                    result = await serviceManager.GameServiceClient.JoinRoomAsGuestClientAsync(roomCode, guest);
+                }
+
+                if (result.IsSuccess)
+                {
+                    var game = result.GameDto;
                     Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
                 }
                 else

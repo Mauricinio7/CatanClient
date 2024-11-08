@@ -52,37 +52,24 @@ namespace CatanClient.ViewModels
             AccountService.ProfileDto accountProfile = serviceManager.ProfileSingleton.Profile;
             accountProfile.PreferredLanguage = CultureInfo.CurrentCulture.Name;
 
-            ProfileService.ProfileDto profileDto = CastAccountProfileToProfileService(accountProfile);
-
+            ProfileService.ProfileDto profileDto = AccountUtilities.CastAccountProfileToProfileService(accountProfile);
 
             Profile = profileDto;
 
-            SaveCommand = new RelayCommand(OnSave);
-        }
-
-        private ProfileService.ProfileDto CastAccountProfileToProfileService(AccountService.ProfileDto accountProfile)
-        {
-            ProfileService.ProfileDto profile = new ProfileDto
-            {
-                Id = accountProfile.Id,
-                Name = accountProfile.Name,
-                CurrentSessionID = accountProfile.CurrentSessionID,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name
-            };
-
-            return profile;
+            SaveCommand = new AsyncRelayCommand(OnSaveAsync);
         }
 
 
-        private void OnSave()
+
+        private async Task OnSaveAsync()
         {
-            if (!String.IsNullOrWhiteSpace(Password) && !String.IsNullOrWhiteSpace(ConfirmPassword))
+            if (!string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(ConfirmPassword))
             {
-                if(AccountUtilities.IsValidAccountPassword(Password)) 
+                if (AccountUtilities.IsValidAccountPassword(Password))
                 {
                     if (Password == ConfirmPassword)
                     {
-                        SavePassword(Password);
+                        await SavePasswordAsync(Password); 
                     }
                     else
                     {
@@ -93,32 +80,28 @@ namespace CatanClient.ViewModels
                 {
                     MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-
             }
             else
             {
                 MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
         }
 
 
-        public void SavePassword(string password)
+        public async Task SavePasswordAsync(string password)
         {
-
             AccountService.AccountDto account = new AccountService.AccountDto
             {
-                Email = String.Empty,
-                PhoneNumber = String.Empty,
+                Email = string.Empty,
+                PhoneNumber = string.Empty,
                 Password = password,
                 Id = Profile.Id,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name, 
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
                 CurrentSessionId = Profile.CurrentSessionID
             };
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            AccountService.OperationResultDto result;
-
-            result = serviceManager.AccountServiceClient.ChangePassword(account);
+            AccountService.OperationResultDto result = await serviceManager.AccountServiceClient.ChangePasswordAsync(account);
 
             if (result.IsSuccess)
             {
@@ -128,8 +111,6 @@ namespace CatanClient.ViewModels
             {
                 MessageBox.Show(Utilities.MessageUnableToSaveData(CultureInfo.CurrentCulture.Name), Utilities.TitleUnableToSaveData(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
-
         }
 
 

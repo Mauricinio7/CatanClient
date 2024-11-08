@@ -39,7 +39,7 @@ namespace CatanClient.ViewModels
             OperationResultAccountDto result;
             
 
-            result = GetAccount(profileDto);
+            result = serviceManager.AccountServiceClient.GetAccount(profileDto);
 
             if (result.IsSuccess)
             {
@@ -56,38 +56,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public OperationResultAccountDto GetAccount(ProfileDto profile)
-        {
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
-            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
-            IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultAccountDto result;
-
-            try
-            {
-                result = client.ConsultAccounProfileInformationAsync(profile).Result;
-
-                //MessageBox.Show(result.AccountDto.PhoneNumber);
-            }
-            catch (Exception ex)
-            {
-                result = new OperationResultAccountDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
-
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            finally
-            {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-            }
-            return result;
-        }
+        
 
     }
 }

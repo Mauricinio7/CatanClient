@@ -100,7 +100,9 @@ namespace CatanClient.UIHelpers
                 Id = accountProfile.Id,
                 Name = accountProfile.Name,
                 CurrentSessionID = accountProfile.CurrentSessionID,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                IsRegistered = accountProfile.IsRegistered,
+                IsOnline = accountProfile.IsOnline
             };
 
             return profile;
@@ -113,7 +115,9 @@ namespace CatanClient.UIHelpers
                 Id = accountProfile.Id,
                 Name = accountProfile.Name,
                 CurrentSessionID = accountProfile.CurrentSessionID,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                IsRegistered = accountProfile.IsRegistered,
+                IsOnline = accountProfile.IsOnline
             };
 
             return profile;
@@ -126,10 +130,14 @@ namespace CatanClient.UIHelpers
                 Id = gameProfile.Id,
                 Name = gameProfile.Name,
                 CurrentSessionID = gameProfile.CurrentSessionID,
-                PreferredLanguage = CultureInfo.CurrentCulture.Name
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                IsRegistered = gameProfile.IsRegistered,
+                IsOnline = gameProfile.IsOnline
             };
 
             return profile;
         }
+
+
     }
 }

@@ -13,7 +13,7 @@ namespace CatanClient.Services
 {
     internal class GuestAccountServiceClient : IGuestAccountServiceClient
     {
-        public OperationResultGuestAccountDto LoginAsGuest(string language)
+        public async Task<OperationResultGuestAccountDto> LoginAsGuestAsync(string language)
         {
             BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GUEST_ACCOUNT_SERVICE);
@@ -23,10 +23,7 @@ namespace CatanClient.Services
 
             try
             {
-                result = client.CreateGuestAccount(language);
-
-                MessageBox.Show(result.IsSuccess.ToString());
-                MessageBox.Show(result.MessageResponse);
+                result = await client.CreateGuestAccountAsync(language);
             }
             catch (Exception ex)
             {
@@ -37,13 +34,13 @@ namespace CatanClient.Services
                 };
 
                 Log.Error(ex.Message);
-                MessageBox.Show(result.MessageResponse);
             }
             finally
             {
                 ((IClientChannel)client).Close();
                 channelFactory.Close();
             }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
     }

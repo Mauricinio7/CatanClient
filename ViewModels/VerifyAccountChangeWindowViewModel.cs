@@ -33,12 +33,12 @@ namespace CatanClient.ViewModels
 
         public VerifyAccountChangeWindowViewModel(AccountDto account, ServiceManager serviceManager)
         {
-            VerifyChangeCommand = new RelayCommand(ExecuteVerifyChange);
+            VerifyChangeCommand = new AsyncRelayCommand(ExecuteVerifyChangeAsync);
             this.serviceManager = serviceManager;
             Account = account;
         }
 
-        private void ExecuteVerifyChange(object parameter)
+        private async Task ExecuteVerifyChangeAsync(object parameter)
         {
             if (string.IsNullOrWhiteSpace(VerificationCode))
             {
@@ -48,21 +48,23 @@ namespace CatanClient.ViewModels
             {
                 Account.TokenExpiration = DateTime.Now;
                 Account.Token = VerificationCode;
+                
 
-                if (!String.IsNullOrEmpty(Account.Password))
+                if (!string.IsNullOrEmpty(Account.Password))
                 {
-                    SendVerifyCodePassword();
+                    await SendVerifyCodePasswordAsync(); 
                 }
                 else
                 {
-                    SendVerifyCodeEmailOrPhone();
+                    await SendVerifyCodeEmailOrPhoneAsync(); 
                 }
-            }  
+            }
         }
-        private void SendVerifyCodePassword()
+        private async Task SendVerifyCodePasswordAsync()
         {
-            OperationResultDto result;
-            result = serviceManager.AccountServiceClient.ConfirmPassword(Account);
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+            var result = await serviceManager.AccountServiceClient.ConfirmPasswordAsync(Account); 
+
             if (result.IsSuccess)
             {
                 MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
@@ -74,10 +76,11 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void SendVerifyCodeEmailOrPhone()
+        private async Task SendVerifyCodeEmailOrPhoneAsync()
         {
-            OperationResultChangeRegisterEmailOrPhone result;
-            result = serviceManager.AccountServiceClient.ConfirmEmailOrPhone(Account);
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+            var result = await serviceManager.AccountServiceClient.ConfirmEmailOrPhoneAsync(Account); 
+
             if (result.IsSuccess)
             {
                 MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);

@@ -46,12 +46,12 @@ namespace CatanClient.ViewModels
 
         public VerifyAccountViewModel(AccountDto account, ServiceManager serviceManager)
         {
-            VerifyAccountCommand = new RelayCommand(ExecuteVerifyAccount);
+            VerifyAccountCommand = new AsyncRelayCommand(ExecuteVerifyAccountAsync);
             Account = account;
             this.serviceManager = serviceManager;
         }
 
-        private void ExecuteVerifyAccount(object parameter)
+        private async Task ExecuteVerifyAccountAsync(object parameter)
         {
             if (string.IsNullOrWhiteSpace(VerificationCode))
             {
@@ -59,13 +59,13 @@ namespace CatanClient.ViewModels
                 return;
             }
 
-            bool status = serviceManager.AccountServiceClient.VerifyUserAccount(Account, VerificationCode);
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+            bool status = await serviceManager.AccountServiceClient.VerifyUserAccountAsync(Account, VerificationCode);
 
             if (status)
             {
-
-               MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-               Mediator.Notify(Utilities.OCULTVERIFYACCOUNT, null);
+                MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                Mediator.Notify(Utilities.OCULTVERIFYACCOUNT, null);
             }
             else
             {
@@ -73,8 +73,8 @@ namespace CatanClient.ViewModels
             }
         }
 
-        
 
-        
+
+
     }
 }

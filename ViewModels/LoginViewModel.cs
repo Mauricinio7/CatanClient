@@ -78,18 +78,18 @@ namespace CatanClient.ViewModels
         public LoginViewModel(ServiceManager serviceManager)
         {
             this.serviceManager = serviceManager;
-            LoginCommand = new RelayCommand(ExecuteLogin);
-            JoinGuestCommand = new RelayCommand(ExecuteJoinGuest);
+            LoginCommand = new AsyncRelayCommand(ExecuteLoginAsync);
+            JoinGuestCommand = new AsyncRelayCommand(ExecuteJoinGuestAsync);
         }
 
-        private void ExecuteJoinGuest(object window)
+        private async Task ExecuteJoinGuestAsync(object window)
         {
-            OperationResultGuestAccountDto result;
-            result = serviceManager.GuestAccountServiceClient.LoginAsGuest(CultureInfo.CurrentCulture.Name);
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+            var result = await serviceManager.GuestAccountServiceClient.LoginAsGuestAsync(CultureInfo.CurrentCulture.Name);
 
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
-                ProfileDto guestProfile = new ProfileDto
+                var guestProfile = new ProfileDto
                 {
                     Id = result.GuestAccount.Id,
                     Name = result.GuestAccount.Name,
@@ -106,17 +106,18 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void ExecuteLogin(object actualWindow) 
-        {
 
+
+        private async Task ExecuteLoginAsync(object actualWindow)
+        {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
                 MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                Email = AccountUtilities.IsValidAccountEmail(Username) ? Username : String.Empty;
-                PhoneNumber = AccountUtilities.IsValidAccountPhoneNumber(Username) ? Username : String.Empty;
+                Email = AccountUtilities.IsValidAccountEmail(Username) ? Username : string.Empty;
+                PhoneNumber = AccountUtilities.IsValidAccountPhoneNumber(Username) ? Username : string.Empty;
 
                 if ((!AccountUtilities.IsValidAccountEmail(Email) && !AccountUtilities.IsValidAccountPhoneNumber(PhoneNumber)) || !AccountUtilities.IsValidAccountPassword(Password))
                 {
@@ -124,38 +125,30 @@ namespace CatanClient.ViewModels
                 }
                 else
                 {
-                    AccountDto account = AccountUtilities.CreateAccount(Email, PhoneNumber, Password, String.Empty);
-
-                    AuthenticateUser(account, actualWindow);
-
-                    //TODO just for Test WARING
-                    //ShowMainMenu(actualWindow, false);
-
+                    AccountDto account = AccountUtilities.CreateAccount(Email, PhoneNumber, Password, string.Empty);
+                    await AuthenticateUserAsync(account, actualWindow);
                 }
-            } 
-            
+            }
         }
 
-        internal void AuthenticateUser(AccountDto account, object window)
+        internal async Task AuthenticateUserAsync(AccountDto account, object window)
         {
-            OperationResultProfileDto result = serviceManager.AccountServiceClient.IsValidAuthentication(account);
-
+            OperationResultProfileDto result = await serviceManager.AccountServiceClient.IsValidAuthenticationAsync(account);
 
             switch (result.AunthenticationStatus)
             {
-                case AccountService.EnumAuthenticationStatus.Verified:
-
+                case EnumAuthenticationStatus.Verified:
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
                     serviceManager.ProfileSingleton.SetProfile(result.ProfileDto);
-
                     ShowMainMenu(window, false);
                     break;
-                case AccountService.EnumAuthenticationStatus.NotVerified:
+                case EnumAuthenticationStatus.NotVerified:
                     ShowVerifyAccountView(account);
                     break;
-                case AccountService.EnumAuthenticationStatus.Incorrect:
+                case EnumAuthenticationStatus.Incorrect:
                     MessageBox.Show(Utilities.MessageIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), Utilities.TittleIncorrectPasswordOrUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
-                case AccountService.EnumAuthenticationStatus.ServerNotFound:
+                case EnumAuthenticationStatus.ServerNotFound:
                     MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
             }

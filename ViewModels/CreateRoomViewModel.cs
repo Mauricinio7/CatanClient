@@ -66,32 +66,26 @@ namespace CatanClient.ViewModels
                 "4",
             };
 
-            CreateRoomCommand = new RelayCommand(ExecuteCreateRoom);
+            CreateRoomCommand = new AsyncRelayCommand(ExecuteCreateRoomAsync);
             this.serviceManager = serviceManager;
         }
 
 
-        private void ExecuteCreateRoom(object parameter)
+        private async Task ExecuteCreateRoomAsync(object parameter)
         {
-            if(!String.IsNullOrEmpty(RoomName) && !String.IsNullOrEmpty(SelectedOption))
+            if (!string.IsNullOrEmpty(RoomName) && !string.IsNullOrEmpty(SelectedOption))
             {
                 GameDto gameDto = new GameDto
                 {
                     MaxNumberPlayers = int.Parse(SelectedOption),
                     Name = RoomName
-
                 };
 
-                AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
+                var profileDto = serviceManager.ProfileSingleton.Profile;
 
-                ProfileDto profile = new ProfileDto
-                {
-                    Name = profileDto.Name,
-                    Id = profileDto.Id,
-                    CurrentSessionID = profileDto.CurrentSessionID,
-                    PreferredLanguage = CultureInfo.CurrentCulture.Name,               
-                };
-                OperationResultGameDto result = serviceManager.GameServiceClient.CreateRoomClient(gameDto, profile);
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+
+                OperationResultGameDto result = await serviceManager.GameServiceClient.CreateRoomClientAsync(gameDto, AccountUtilities.CastAccountProfileToGameService(profileDto));
 
                 if (result.IsSuccess)
                 {
@@ -101,14 +95,12 @@ namespace CatanClient.ViewModels
                 else
                 {
                     MessageBox.Show(result.MessageResponse);
-                    MessageBox.Show(result.IsSuccess.ToString());
                 }
             }
             else
             {
                 MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
         }
     }
 }

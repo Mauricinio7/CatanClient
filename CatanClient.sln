@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatanClient", "CatanClient.csproj", "{E27CA3A1-4E79-4B2D-84AB-CE18206FF66F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatanClient.Tests", "..\CatanClient.Tests\CatanClient.Tests.csproj", "{8C314678-78B9-49D9-BB5A-176A825143A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatanClient.Tests", "..\CatanClient.Tests\CatanClient.Tests.csproj", "{8C314678-78B9-49D9-BB5A-176A825143A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
