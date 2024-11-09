@@ -2,10 +2,7 @@
 using CatanClient.UIHelpers;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -13,9 +10,42 @@ namespace CatanClient.Services
 {
     internal class GuestAccountServiceClient : IGuestAccountServiceClient
     {
+        private NetTcpBinding GetTcpBinding()
+        {
+            return new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
+        }
+
+        private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
+        {
+            if (client != null)
+            {
+                if (client.State == CommunicationState.Faulted)
+                    client.Abort();
+                else
+                    client.Close();
+            }
+
+            if (channelFactory != null)
+            {
+                if (channelFactory.State == CommunicationState.Faulted)
+                    channelFactory.Abort();
+                else
+                    channelFactory.Close();
+            }
+        }
+
         public async Task<OperationResultGuestAccountDto> LoginAsGuestAsync(string language)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GUEST_ACCOUNT_SERVICE);
             ChannelFactory<IGuestAccountEndpoint> channelFactory = new ChannelFactory<IGuestAccountEndpoint>(binding, endpoint);
             IGuestAccountEndpoint client = channelFactory.CreateChannel();
@@ -37,8 +67,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;

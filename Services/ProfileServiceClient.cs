@@ -2,22 +2,51 @@
 using CatanClient.UIHelpers;
 using Serilog;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace CatanClient.Services
 {
     internal class ProfileServiceClient : IProfileServiceClient
     {
+        private NetTcpBinding GetTcpBinding()
+        {
+            return new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
+        }
+
+        private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
+        {
+            if (client != null)
+            {
+                if (client.State == CommunicationState.Faulted)
+                    client.Abort();
+                else
+                    client.Close();
+            }
+
+            if (channelFactory != null)
+            {
+                if (channelFactory.State == CommunicationState.Faulted)
+                    channelFactory.Abort();
+                else
+                    channelFactory.Close();
+            }
+        }
+
         public OperationResultProfileDto ChangeName(ProfileDto profile, string newName)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -36,20 +65,18 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public OperationResultProfileDto UploadImage(ProfileDto profile, byte[] image)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -66,32 +93,18 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public OperationResultPictureDto GetImage(ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding
-            {
-                MaxReceivedMessageSize = 10485760, 
-                ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas
-                {
-                    MaxArrayLength = 10485760, 
-                    MaxStringContentLength = 8192,
-                    MaxBytesPerRead = 4096,
-                    MaxDepth = 32,
-                    MaxNameTableCharCount = 16384
-                }
-            };
-
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -108,20 +121,18 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public bool SendFriendRequest(string playerName, ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -137,26 +148,14 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public OperationResultProfileListDto GetFriendRequestList(ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding
-            {
-                MaxReceivedMessageSize = 10485760,
-                ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas
-                {
-                    MaxArrayLength = 10485760,
-                    MaxStringContentLength = 8192,
-                    MaxBytesPerRead = 4096,
-                    MaxDepth = 32,
-                    MaxNameTableCharCount = 16384
-                }
-            };
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -173,31 +172,18 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public OperationResultProfileListDto GetFriendList(ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding
-            {
-                MaxReceivedMessageSize = 10485760,
-                ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas
-                {
-                    MaxArrayLength = 10485760,
-                    MaxStringContentLength = 8192,
-                    MaxBytesPerRead = 4096,
-                    MaxDepth = 32,
-                    MaxNameTableCharCount = 16384
-                }
-            };
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -214,20 +200,18 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public bool AcceptFriendRequest(string playerName, ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -239,20 +223,18 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public bool RejectFriendRequest(string playerName, ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -264,20 +246,18 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public bool DeleteFriend(string playerName, ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -286,24 +266,21 @@ namespace CatanClient.Services
             try
             {
                 result = client.DeleteFriendProfile(playerName, profile);
-                MessageBox.Show(result.ToString());
             }
             catch (Exception ex)
             {
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
-        public bool InviteFriendToGame(string playerName, ProfileDto profile, string accesKey)
+        public bool InviteFriendToGame(string playerName, ProfileDto profile, string accessKey)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -311,38 +288,22 @@ namespace CatanClient.Services
 
             try
             {
-                result = client.InviteFriendsToGame(playerName, profile, accesKey);
-
-                MessageBox.Show(result.ToString());
+                result = client.InviteFriendsToGame(playerName, profile, accessKey);
             }
             catch (Exception ex)
             {
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
 
         public OperationResultPictureDto GetFriendImage(ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding
-            {
-                MaxReceivedMessageSize = 10485760,
-                ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas
-                {
-                    MaxArrayLength = 10485760,
-                    MaxStringContentLength = 8192,
-                    MaxBytesPerRead = 4096,
-                    MaxDepth = 32,
-                    MaxNameTableCharCount = 16384
-                }
-            };
-
+            NetTcpBinding binding = GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -350,7 +311,7 @@ namespace CatanClient.Services
 
             try
             {
-                result = client.GetFriendsPicture(profile,CultureInfo.CurrentCulture.Name);
+                result = client.GetFriendsPicture(profile, CultureInfo.CurrentCulture.Name);
             }
             catch (Exception ex)
             {
@@ -359,16 +320,13 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-
                 Log.Error(ex.Message);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
         }
-
     }
 }

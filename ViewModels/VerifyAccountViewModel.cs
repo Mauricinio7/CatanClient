@@ -42,11 +42,13 @@ namespace CatanClient.ViewModels
             }
         }
         public ICommand VerifyAccountCommand { get; }
+        public ICommand ResentCodeCommand { get; }
         private readonly ServiceManager serviceManager;
 
         public VerifyAccountViewModel(AccountDto account, ServiceManager serviceManager)
         {
             VerifyAccountCommand = new AsyncRelayCommand(ExecuteVerifyAccountAsync);
+            ResentCodeCommand = new AsyncRelayCommand(ExecuteResendCodeAsync);
             Account = account;
             this.serviceManager = serviceManager;
         }
@@ -73,7 +75,19 @@ namespace CatanClient.ViewModels
             }
         }
 
+        private async Task ExecuteResendCodeAsync(object parameter)
+        {
+            bool result = await serviceManager.AccountServiceClient.ResendCodeAsync(Account);
 
+            if (result)
+            {
+                MessageBox.Show("Se ha enviado el código correctamente", Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+        }
 
 
     }

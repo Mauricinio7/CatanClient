@@ -29,11 +29,13 @@ namespace CatanClient.ViewModels
             }
         }
         public ICommand VerifyChangeCommand { get; }
+        public ICommand ResentCodeCommand { get; }
         private readonly ServiceManager serviceManager;
 
         public VerifyAccountChangeWindowViewModel(AccountDto account, ServiceManager serviceManager)
         {
             VerifyChangeCommand = new AsyncRelayCommand(ExecuteVerifyChangeAsync);
+            ResentCodeCommand = new AsyncRelayCommand(ExecuteResendCodeAsync);
             this.serviceManager = serviceManager;
             Account = account;
         }
@@ -89,6 +91,20 @@ namespace CatanClient.ViewModels
             else
             {
                 MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private async Task ExecuteResendCodeAsync(object parameter)
+        {
+            bool result = await serviceManager.AccountServiceClient.ResendCodeAsync(Account);
+
+            if (result)
+            {
+                MessageBox.Show("Se ha enviado el código correctamente", Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
             }
         }
     }

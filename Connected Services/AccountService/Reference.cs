@@ -622,10 +622,10 @@ namespace CatanClient.AccountService {
         System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
-        void ResendVerificationCode(int idAccount);
+        bool ResendVerificationCode(int idAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
-        System.Threading.Tasks.Task ResendVerificationCodeAsync(int idAccount);
+        System.Threading.Tasks.Task<bool> ResendVerificationCodeAsync(int idAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangePasswordResponse")]
         CatanClient.AccountService.OperationResultDto ChangePassword(CatanClient.AccountService.AccountDto accountClientDto);
@@ -717,11 +717,11 @@ namespace CatanClient.AccountService {
             return base.Channel.LogInAsync(accountClientDto);
         }
         
-        public void ResendVerificationCode(int idAccount) {
-            base.Channel.ResendVerificationCode(idAccount);
+        public bool ResendVerificationCode(int idAccount) {
+            return base.Channel.ResendVerificationCode(idAccount);
         }
         
-        public System.Threading.Tasks.Task ResendVerificationCodeAsync(int idAccount) {
+        public System.Threading.Tasks.Task<bool> ResendVerificationCodeAsync(int idAccount) {
             return base.Channel.ResendVerificationCodeAsync(idAccount);
         }
         

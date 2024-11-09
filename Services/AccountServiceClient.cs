@@ -2,11 +2,8 @@
 using CatanClient.UIHelpers;
 using Serilog;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -14,10 +11,43 @@ namespace CatanClient.Services
 {
     public class AccountServiceClient : IAccountServiceClient
     {
+        private NetTcpBinding GetTcpBinding()
+        {
+            return new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
+        }
+
+        private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
+        {
+            if (client != null)
+            {
+                if (client.State == CommunicationState.Faulted)
+                    client.Abort();
+                else
+                    client.Close();
+            }
+
+            if (channelFactory != null)
+            {
+                if (channelFactory.State == CommunicationState.Faulted)
+                    channelFactory.Abort();
+                else
+                    channelFactory.Close();
+            }
+        }
+
         public async Task<OperationResultProfileDto> IsValidAuthenticationAsync(AccountDto account)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultProfileDto result;
@@ -38,9 +68,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-                
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -50,8 +78,8 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             bool flag = false;
@@ -68,9 +96,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-                
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return flag;
@@ -80,15 +106,15 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultCreateAccountDto result;
 
             try
             {
-                 result = await client.CreateAccountAsync(account);
+                result = await client.CreateAccountAsync(account);
             }
             catch (Exception ex)
             {
@@ -101,9 +127,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-                
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -113,8 +137,8 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultChangeRegisterEmailOrPhone result;
@@ -134,8 +158,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -145,8 +168,8 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultDto result;
@@ -166,9 +189,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-                
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -178,8 +199,8 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultChangeRegisterEmailOrPhone result;
@@ -199,9 +220,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-                
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -211,8 +230,8 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultDto result;
@@ -232,9 +251,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-                
+                SafeClose((IClientChannel)client, channelFactory);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -242,8 +259,8 @@ namespace CatanClient.Services
 
         public OperationResultAccountDto GetAccount(ProfileDto profile)
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IPACCOUNTSERVICE);
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
             OperationResultAccountDto result;
@@ -251,8 +268,6 @@ namespace CatanClient.Services
             try
             {
                 result = client.ConsultAccounProfileInformationAsync(profile).Result;
-
-                //MessageBox.Show(result.AccountDto.PhoneNumber);
             }
             catch (Exception ex)
             {
@@ -261,16 +276,42 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-
                 Log.Information(ex.Message);
                 MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                SafeClose((IClientChannel)client, channelFactory);
             }
             return result;
+        }
+
+        public async Task<bool> ResendCodeAsync(AccountDto account)
+        {
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            bool flag = false;
+
+            try
+            {
+                int id = (int)account.Id;
+
+                flag = await client.ResendVerificationCodeAsync(id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                SafeClose((IClientChannel)client, channelFactory);
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return flag;
         }
 
     }

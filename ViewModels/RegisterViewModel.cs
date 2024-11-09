@@ -85,8 +85,11 @@ namespace CatanClient.ViewModels
 
                     if (result.IsSuccess)
                     {
+                        ProfileDto profie = result.ProfileDto;
                         string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", "ShibaTest.png");
-                        SaveImageInServer(filePath, result.ProfileDto);
+                        SaveImageInServer(filePath, profie);
+
+                        account.Id = profie.Id;
 
                         Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
                     }

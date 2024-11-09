@@ -34,17 +34,23 @@
             <Button Content="Salir" Margin="31,68,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="50" Grid.RowSpan="3" Width="145"/>
             <Button Content="Votar expulsión" Margin="31,59,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="50" Width="145" Grid.Row="2"/>
 
-            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="188,0,0,26"><Run Language="es-mx" Text="Recurso 1"/></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="129,0,0,20" Text="Piedra lunar"/>
             <ListBox Grid.Column="3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="175,0,16,428" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1"/>
             <TextBlock Grid.Column="3" Margin="227,48,0,0" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="106" Height="27" Grid.ColumnSpan="2"><Run Language="es-mx" Text="Jugadores"/><LineBreak/><Run Language="es-mx"/></TextBlock>
             <ListBox Grid.Column="3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="175,339,16,60" Grid.ColumnSpan="2" Grid.Row="2"/>
             <TextBox TextWrapping="Wrap" Text="TextBox" Margin="175,660,16,0" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="3"/>
             <TextBlock Grid.Column="3" Margin="211,297,0,0" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="106" Height="27" Grid.ColumnSpan="2" Grid.Row="2"><Run Text="Chat"/><Run Language="es-mx" Text=":"/></TextBlock>
             <Button Content="Enviar mensaje" Margin="211,18,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="32" Width="146" Grid.Row="3" Grid.Column="3"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="322,0,0,26"><Run Text="Recurso "/><Run Language="es-mx" Text="2"/></TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="439,0,0,26"><Run Text="Recurso "/><Run Language="es-mx" Text="3"/></TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="550,0,0,26"><Run Text="Recurso "/><Run Language="es-mx" Text="4"/></TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="661,0,0,26"><Run Text="Recurso "/><Run Language="es-mx" Text="5"/></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="269,0,0,20"><Run Text="Tritónium"/></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="371,55,0,0"><Run Text="Nanofibras Alpha"/></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="532,0,0,20"><Run Text="Biomasa Épsilon"/></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="688,0,0,18"><Run Text="GRX-810"/></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="167,0,0,67"><Run Language="es-mx" Text="x0"/></TextBlock>
+            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/LunarStone.png" Margin="132,639,643,43" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"/>
+            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/TritoniumWood.png" Margin="269,641,517,45" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"/>
+            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/AlphaNanofibers.png" Margin="399,641,387,45" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"/>
+            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png" Margin="553,642,233,44" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"/>
+            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/GRX-810Stone.png" Margin="684,642,102,44" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"/>
             <TextBlock Grid.Row="2" Grid.Column="2" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="88,0,0,55" RenderTransformOrigin="-0.051,0.275"><Run Text="Construir"/><Run Language="es-mx" Text=":"/></TextBlock>
             <Button Content="Poblado" Margin="812,693,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="123" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <Button Content="Carretera" Margin="103,693,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="123" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
@@ -53,6 +59,10 @@
             <Button Content="Continuar" Margin="32,0,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="50" Width="145" Grid.Row="3"/>
             <Button Content="Intercambiar" Margin="32,504,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="50" Width="144" Grid.Row="2"/>
             <Rectangle HorizontalAlignment="Left" Height="328" Margin="18,146,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="188" Grid.ColumnSpan="2"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="298,0,0,67"><Run Language="es-mx" Text="x0"/></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="429,0,0,67"><Run Language="es-mx" Text="x0"/></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="583,0,0,67"><Run Language="es-mx" Text="x0"/></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="714,0,0,67"><Run Language="es-mx" Text="x0"/></TextBlock>
         </Grid>
     </Viewbox>
 </UserControl>

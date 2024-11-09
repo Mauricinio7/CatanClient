@@ -23,11 +23,11 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
-      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
-      <xsd:import schemaLocation="http://192.168.11.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -348,15 +348,15 @@
   </wsdl:binding>
   <wsdl:service name="GameServiceEndpoint">
     <wsdl:port name="NetTcpBinding_IGameEndPoint" binding="tns:NetTcpBinding_IGameEndPoint">
-      <soap12:address location="net.tcp://192.168.11.207:8192/GameService" />
+      <soap12:address location="net.tcp://10.144.41.3:8192/GameService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.11.207:8192/GameService</wsa10:Address>
+        <wsa10:Address>net.tcp://10.144.41.3:8192/GameService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="WSDualHttpBinding_IGameEndPoint" binding="tns:WSDualHttpBinding_IGameEndPoint">
-      <soap12:address location="http://192.168.11.207:8191/GameService" />
+      <soap12:address location="http://10.144.41.3:8191/GameService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://192.168.11.207:8191/GameService</wsa10:Address>
+        <wsa10:Address>http://10.144.41.3:8191/GameService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

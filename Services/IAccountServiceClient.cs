@@ -29,5 +29,7 @@ namespace CatanClient.Services
         Task<OperationResultDto> ConfirmPasswordAsync(AccountDto account);
 
         OperationResultAccountDto GetAccount(ProfileDto profile);
+
+        Task<bool> ResendCodeAsync(AccountDto account);
     }
 }

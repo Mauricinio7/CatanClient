@@ -576,6 +576,13 @@
     <Resource Include="Resources\Images\ShibaTest.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\AlphaNanofibers.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\EpsilonGrain.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\GRX-810Stone.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\LunarStone.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\TritoniumWood.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
     <WCFMetadataStorage Include="Connected Services\GameService\" />
@@ -593,6 +600,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\AccountService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\GameService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\ChatService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -623,36 +660,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\GuestAccountService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\ChatService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\GameService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
