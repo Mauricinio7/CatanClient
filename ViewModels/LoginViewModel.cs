@@ -135,7 +135,6 @@ namespace CatanClient.ViewModels
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
             OperationResultProfileDto result = await serviceManager.AccountServiceClient.IsValidAuthenticationAsync(account);
-
             switch (result.AunthenticationStatus)
             {
                 case EnumAuthenticationStatus.Verified:
@@ -143,6 +142,7 @@ namespace CatanClient.ViewModels
                     ShowMainMenu(window, false);
                     break;
                 case EnumAuthenticationStatus.NotVerified:
+                    //TODO get Account id
                     ShowVerifyAccountView(account);
                     break;
                 case EnumAuthenticationStatus.Incorrect:

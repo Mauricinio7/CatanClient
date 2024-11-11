@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CatanClient.ViewModels
 {
@@ -41,16 +42,26 @@ namespace CatanClient.ViewModels
             {
                 OnlinePlayersList.Clear();
                 OnlinePlayers = result.ProfileDtos.ToList();
+                
 
 
                 foreach (var profileDto in OnlinePlayers)
                 {
                     OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
-                        new NamedParameter("profile", AccountUtilities.CastGameProfileToProfileService(profileDto)),
-                        new NamedParameter("senderProfile", AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastAccountProfileToGameService(profile))),
-                        new NamedParameter("game", AccountUtilities.CastChatGameToGameServiceGame(game))
+                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
+                        new NamedParameter(Utilities.SENDER_PROFILE, AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastAccountProfileToGameService(profile))),
+                        new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
                         ));
                 }
+
+                result.GuestAccountDtos.ToList().ForEach(guest =>
+                {
+                    OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
+                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastGuestAccountToGameServiceProfile(guest))),
+                        new NamedParameter(Utilities.SENDER_PROFILE, AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastAccountProfileToGameService(profile))),
+                        new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
+                    ));
+                });
             }
             else
             {

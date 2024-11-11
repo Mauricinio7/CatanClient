@@ -93,7 +93,7 @@ namespace CatanClient.ViewModels
                 foreach (var profileDto in OnlinePlayers)
                 {
                     OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                        new NamedParameter("profile", AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
                 }
 
                 foreach (var guestProfileDto in OnlinePlayersGuest)
@@ -102,9 +102,11 @@ namespace CatanClient.ViewModels
                     profileDto.Id = guestProfileDto.Id;
                     profileDto.Name = guestProfileDto.Name; 
                     profileDto.IsRegistered = false;
+                    profileDto.PictureVersion = 0;
+                    profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
 
                     OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                        new NamedParameter("profile", AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
                 }
             }
             else

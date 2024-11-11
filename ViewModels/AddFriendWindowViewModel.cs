@@ -4,6 +4,7 @@ using CatanClient.Services;
 using CatanClient.UIHelpers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel.Channels;
 using System.Text;
@@ -50,7 +51,7 @@ namespace CatanClient.ViewModels
 
             if (result)
             {
-                MessageBox.Show("Solicitud enviada a " + PlayerName);
+                MessageBox.Show(Utilities.MessageSuccesFriendRequest(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {

@@ -140,6 +140,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetScoreGameWorld">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClient" nillable="true" type="q21:ProfileDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetScoreGameWorldResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="GetScoreGameWorldResult" nillable="true" type="q22:OperationResultListScoreGame" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyPlayerExpulsion">
     <xs:complexType>
       <xs:sequence>
@@ -151,7 +165,7 @@
   <xs:element name="BroadcastMessageExpel">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerExpeled" nillable="true" type="q21:PlayerDto" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerExpeled" nillable="true" type="q23:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

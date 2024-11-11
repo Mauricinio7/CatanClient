@@ -43,6 +43,7 @@ namespace CatanClient.UIHelpers
         public const string SHOWCONFIGUREPROFILE = "ShowConfigureProfile";
         public const string SHOW_INVITE_FRIENDS = "ShowInviteFriendsView";
         public const string HIDE_INVITE_FRIENDS = "HideInviteFriendsView";
+        public const string SHOW_CHANGE_FORGOT_PASSWORD = "ShowChangeForgotPasswordView";
         public const string BACK_TO_MAIN_MENU_ROOM = "BackToMainMenuRoom";
         public const string BACK_TO_GUEST_MAIN_MENU_ROOM = "BackToGuestMainMenuRoom";
         public const string CLOSE_EDIT_PROFILE = "EditProfileWindow_Close";
@@ -81,6 +82,10 @@ namespace CatanClient.UIHelpers
         public const string SYNTH_WAVE_BACKGROUND1_PATH = "pack://application:,,,/Resources/Gifs/AnimatedBackground1.gif";
         public const string IMAGE_FILTER = "Image Files (*.jpg;*.png)|*.jpg;*.png";
         public const string PROFILE_IMAGE_DIRECTORY = "ProfilePhotos";
+        public const string PROFILE = "profile";
+        public const string ACCES_KEY = "accesKey";
+        public const string GAME = "game";
+        public const string SENDER_PROFILE = "senderProfile";
 
 
         public static string ProfilePhotoPath(int Id)
@@ -90,6 +95,14 @@ namespace CatanClient.UIHelpers
         public static string ProfilePhotoPathWithVersion(int Id, int version)
         {
             return $"ProfilePhoto{Id}_V{version}.jpg";
+        }
+        public static string ProfilePhotoPathDeleteVersion(int Id)
+        {
+            return $"ProfilePhoto{Id}_V*.jpg";
+        }
+        public static string GetDefaultPhotoPath()
+        {
+            return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", "ShibaTest.png");
         }
         public static string MessageDataBaseUnableToLoad(string language, Exception ex)
         {
@@ -264,6 +277,56 @@ namespace CatanClient.UIHelpers
         {
             return Resources.ResourceManager.GetString("label_player_left", new CultureInfo(language));
         }
+        public static string MessageGameExpel(string language)
+        {
+            return Resources.ResourceManager.GetString("global_game_expel", new CultureInfo(language));
+        }
+        public static string MessageSuccesRemoveFriend(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_remove_friend_message", new CultureInfo(language));
+        }
+        public static string MessageSuccesAddFriend(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_add_friend_message", new CultureInfo(language));
+        }
+        public static string MessageSuccesRejectFriend(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_reject_friend_message", new CultureInfo(language));
+        }
+        public static string MessageSuccesInviteFriend(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_invitation_message", new CultureInfo(language));
+        }
+        public static string MessageSuccesFriendRequest(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_friend_request_message", new CultureInfo(language));
+        }
+        public static string MessageSuccesPasswordChange(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_password_changed_message", new CultureInfo(language));
+        }
+        public static string MessageSuccesKickPlayer(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_kick_player_message", new CultureInfo(language));
+        }
+        public static string MessageSuccesSendVerificationCode(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_send_code_messagedialog_succes_send_code_message", new CultureInfo(language));
+        }
+        public static string TitleVerifyAccount(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_verify_account", new CultureInfo(language));
+        }
+        public static string MessageAccountInUse(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_account_in_use", new CultureInfo(language));
+        }
+        public static string MessageNameInUse(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_name_in_use", new CultureInfo(language));
+        }
+        
+
 
         public static void ShowMessgeServerLost()
         {

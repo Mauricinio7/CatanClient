@@ -71,7 +71,7 @@ namespace CatanClient.ViewModels
             foreach (var profileDto in FriendsList)
             {
                 Friends.Add(App.Container.Resolve<FriendPlayerCardViewModel>(
-                    new NamedParameter("profile", profileDto)));
+                    new NamedParameter(Utilities.PROFILE, profileDto)));
             }
 
             FriendsView = CollectionViewSource.GetDefaultView(Friends);

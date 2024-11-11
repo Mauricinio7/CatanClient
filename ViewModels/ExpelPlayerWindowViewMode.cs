@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -52,7 +53,7 @@ namespace CatanClient.ViewModels
 
             if (result)
             {
-                MessageBox.Show("Jugador expulsado");
+                MessageBox.Show(Utilities.MessageSuccesKickPlayer(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {

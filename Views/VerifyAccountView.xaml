@@ -57,7 +57,7 @@
 
 
             <controls:PlaceholderTextBoxControl 
-                PlaceholderText="Ingrese su código"
+                PlaceholderText="{x:Static properties:Resources.label_enter_code}"
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 HorizontalAlignment="Left" Height="111" 
                 VerticalAlignment="Top" Width="1232" Margin="99,460,0,0" 

@@ -98,6 +98,8 @@ namespace CatanClient
             builder.RegisterType<KickPlayerWindowViewModel>();
             builder.RegisterType<ExpelPlayerWindowViewModel>();
             builder.RegisterType<MainMenuViewModel>().AsSelf();
+            builder.RegisterType<NeedHelpViewModel>().AsSelf();
+            builder.RegisterType<ChangeForgotPasswordViewModel>().AsSelf();
 
             builder.RegisterType<CreateRoomView>().AsSelf();
             builder.RegisterType<GameLobbyView>().AsSelf();

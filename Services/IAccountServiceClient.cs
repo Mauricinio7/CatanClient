@@ -31,5 +31,7 @@ namespace CatanClient.Services
         OperationResultAccountDto GetAccount(ProfileDto profile);
 
         Task<bool> ResendCodeAsync(AccountDto account);
+        Task<bool> SendNeedHelpCode(string email);
+        Task<bool> ChangeForotPassword(string email, string newPassword, string verificationCode);
     }
 }

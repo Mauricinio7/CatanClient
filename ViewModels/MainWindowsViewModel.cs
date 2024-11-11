@@ -54,6 +54,8 @@ namespace CatanClient.ViewModels
 
         public ICommand ShowRegisterViewCommand { get; }
         public ICommand ShowLoginViewCommand { get; }
+        public ICommand ShowNeedHelpViewCommand { get; }
+        public ICommand ShowChangeForgotPasswordViewCommand { get; }
         public ICommand ShowVerifyAccountViewCommand { get; }
         public ICommand OcultVerifyAccountViewCommand { get; }
         public ICommand ShowMainMenuViewCommand { get; }
@@ -85,6 +87,8 @@ namespace CatanClient.ViewModels
 
             ShowRegisterViewCommand = new RelayCommand(async () => await ShowRegisterView());
             ShowLoginViewCommand = new RelayCommand(async () => await ShowLoginView());
+            ShowNeedHelpViewCommand = new RelayCommand(async () => await ShowNeedHelpView());
+            ShowChangeForgotPasswordViewCommand = new RelayCommand(async (object email) => await ShowChangeForgotPasswordView(email));
             ShowVerifyAccountViewCommand = new RelayCommand(async (object accountDto) => await ShowVerifyAccountView(accountDto));
             OcultVerifyAccountViewCommand = new RelayCommand(async () => await OcultVerifyAccountView());
             ShowMainMenuViewCommand = new RelayCommand(ShowMainMenuView);
@@ -111,6 +115,7 @@ namespace CatanClient.ViewModels
             ShowGameScreenCommand = new RelayCommand(ShowGameScreen);
 
             Mediator.Register(Utilities.SHOWCONFIGUREPROFILE, args => ShowConfigureProfileCommand.Execute(args));
+            Mediator.Register(Utilities.SHOW_CHANGE_FORGOT_PASSWORD, args => ShowChangeForgotPasswordViewCommand.Execute(args));
             Mediator.Register(Utilities.SHOWVERIFYACCOUNT, args => ShowVerifyAccountViewCommand.Execute(args));
             Mediator.Register(Utilities.SHOWGAMELOBBY, args => ShowGameLobbyCommand.Execute(args));
             Mediator.Register(Utilities.SHOWMAINMENU, args => ShowMainMenuViewCommand.Execute(null));
@@ -249,6 +254,22 @@ namespace CatanClient.ViewModels
             CurrentView = new Views.LoginView();
         }
 
+        private async Task ShowNeedHelpView()
+        {
+            if (currentView is Views.LoginView loginView)
+            {
+                if (loginView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+                {
+                    Storyboard storyboard = (Storyboard)loginView.FindResource(Utilities.SLIDEOUTFROMRIGHTANIMATION);
+                    storyboard.Begin(animatedGrid);
+                    await Task.Delay(820);
+                }
+
+
+            }
+            CurrentView = new Views.NeedHelpView();
+        }
+
 
         private async Task OcultVerifyAccountView()
         {
@@ -284,6 +305,7 @@ namespace CatanClient.ViewModels
                 }
             }
 
+
             if (currentView is Views.LoginView loginview)
             {
                 if (loginview.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
@@ -299,7 +321,29 @@ namespace CatanClient.ViewModels
             CurrentView = verifyAccountView;
         }
 
-        private async Task ShowGameLobby(object gameDtoObj)
+        private async Task ShowChangeForgotPasswordView(object emailObj)
+        {
+            if (!(emailObj is string email))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (currentView is Views.NeedHelpView needHelpView)
+            {
+                if (needHelpView.FindName(Utilities.ANIMATEDGRID) is Grid animatedGrid)
+                {
+                    Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDEOUTFROMTOPANIMATION);
+                    storyboard.Begin(animatedGrid);
+                    await Task.Delay(900);
+                }
+            }
+            ChangeForgotPasswordView changeForgotPasswordView = new Views.ChangeForgotPasswordView(email);
+
+            CurrentView = changeForgotPasswordView;
+        }
+
+            private async Task ShowGameLobby(object gameDtoObj)
         {
             if (!(gameDtoObj is GameDto gameDto))
             {

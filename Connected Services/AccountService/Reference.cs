@@ -664,6 +664,18 @@ namespace CatanClient.AccountService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithEmail", ReplyAction="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithEmailResponse")]
         System.Threading.Tasks.Task<bool> NeedHelpProblemWithEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithPassword", ReplyAction="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithPasswordResponse")]
+        bool NeedHelpProblemWithPassword(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithPassword", ReplyAction="http://tempuri.org/IAccountEndPoint/NeedHelpProblemWithPasswordResponse")]
+        System.Threading.Tasks.Task<bool> NeedHelpProblemWithPasswordAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangeForgotPassword", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangeForgotPasswordResponse")]
+        bool ChangeForgotPassword(string email, string newPassword, string token);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangeForgotPassword", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangeForgotPasswordResponse")]
+        System.Threading.Tasks.Task<bool> ChangeForgotPasswordAsync(string email, string newPassword, string token);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -771,6 +783,22 @@ namespace CatanClient.AccountService {
         
         public System.Threading.Tasks.Task<bool> NeedHelpProblemWithEmailAsync(string email) {
             return base.Channel.NeedHelpProblemWithEmailAsync(email);
+        }
+        
+        public bool NeedHelpProblemWithPassword(string email) {
+            return base.Channel.NeedHelpProblemWithPassword(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> NeedHelpProblemWithPasswordAsync(string email) {
+            return base.Channel.NeedHelpProblemWithPasswordAsync(email);
+        }
+        
+        public bool ChangeForgotPassword(string email, string newPassword, string token) {
+            return base.Channel.ChangeForgotPassword(email, newPassword, token);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ChangeForgotPasswordAsync(string email, string newPassword, string token) {
+            return base.Channel.ChangeForgotPasswordAsync(email, newPassword, token);
         }
     }
 }

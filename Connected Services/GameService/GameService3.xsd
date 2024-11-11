@@ -60,4 +60,29 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfProfileDto" nillable="true" type="tns:ArrayOfProfileDto" />
+  <xs:complexType name="OperationResultListScoreGame">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OperationResultDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ListProfileScoreDto" nillable="true" type="tns:ArrayOfProfileScoreDto" />
+          <xs:element minOccurs="0" name="ProfileScoreDto" nillable="true" type="tns:ProfileScoreDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OperationResultListScoreGame" nillable="true" type="tns:OperationResultListScoreGame" />
+  <xs:complexType name="ArrayOfProfileScoreDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProfileScoreDto" nillable="true" type="tns:ProfileScoreDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProfileScoreDto" nillable="true" type="tns:ArrayOfProfileScoreDto" />
+  <xs:complexType name="ProfileScoreDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Position" type="xs:int" />
+      <xs:element minOccurs="0" name="Score" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProfileScoreDto" nillable="true" type="tns:ProfileScoreDto" />
 </xs:schema>

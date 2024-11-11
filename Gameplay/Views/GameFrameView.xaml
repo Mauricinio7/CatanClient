@@ -30,14 +30,14 @@
             <Border Grid.Column="4" Background="{StaticResource SecondaryColor}" Grid.ColumnSpan="2" Margin="159,0,0,0" Grid.RowSpan="4"/>
 
 
-            <TextBlock Grid.Column="1" Margin="227,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"><Run Language="es-mx" Text="Puntos:"/></TextBlock>
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="227,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"><Run Language="es-mx" Text="Puntos:"/></TextBlock>
 
             <Button Style ="{StaticResource NeonButtonStyle}"  Content="Salir" Margin="26,0,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="50" Width="116"/>
             <Button Style="{StaticResource NeonButtonStyle}" Content="Votar expulsión" Margin="22,8,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="60" Width="180" Grid.Row="2"/>
 
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="115,0,0,26" Text="Piedra lunar"/>
             <ListBox Grid.Column="4" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="175,0,16,428" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1"/>
-            <TextBlock Grid.Column="4" Margin="227,48,0,0" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="106" Height="27" Grid.ColumnSpan="2"><Run Language="es-mx" Text="Jugadores"/><LineBreak/><Run Language="es-mx"/></TextBlock>
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="4" Margin="241,56,0,0" FontSize="16" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="106" Height="27" Grid.ColumnSpan="2"><Run Language="es-mx" Text="Jugadores"/><LineBreak/><Run Language="es-mx"/></TextBlock>
             <ListBox Grid.Column="4" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="175,339,16,60" Grid.ColumnSpan="2" Grid.Row="2"/>
             <TextBox TextWrapping="Wrap" Text="TextBox" Margin="175,660,16,0" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="4"/>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="4" Margin="211,297,0,0" FontSize="18" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="106" Height="27" Grid.ColumnSpan="2" Grid.Row="2"><Run Text="Chat"/><Run Language="es-mx" Text=":"/></TextBlock>

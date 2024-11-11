@@ -15,6 +15,7 @@ using System.Globalization;
 using CatanClient.Services;
 using System.IO;
 using CatanClient.Properties;
+using System.Linq.Expressions;
 
 namespace CatanClient.ViewModels
 {
@@ -83,21 +84,27 @@ namespace CatanClient.ViewModels
 
                     OperationResultCreateAccountDto result = await serviceManager.AccountServiceClient.CreateAccountInServerAsync(account); 
 
-                    if (result.IsSuccess)
+                    switch (result.status)
                     {
-                        ProfileDto profie = result.ProfileDto;
-                        string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", "ShibaTest.png");
-                        SaveImageInServer(filePath, profie);
+                        case EnumCreateAccountStatus.SuccessSave:
+                            ProfileDto profie = result.ProfileDto;
+                            string filePath = Utilities.GetDefaultPhotoPath();
+                            SaveImageInServer(filePath, profie);
 
-                        account.Id = profie.Id;
+                            account.Id = profie.Id;
 
-                        Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
-                    }
-                    else
-                    {
-                        Utilities.ShowMessgeServerLost();
-                    }
-                        
+                            Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
+                            break;
+                        case EnumCreateAccountStatus.ExistsAccount:
+                            MessageBox.Show(Utilities.MessageAccountInUse(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                            break;
+                        case EnumCreateAccountStatus.ExistsName:
+                            MessageBox.Show(Utilities.MessageNameInUse(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                            break;
+                        case EnumCreateAccountStatus.ErrorSaving:
+                            Utilities.ShowMessgeServerLost();
+                            break;
+                    }   
                 }
                 else
                 {

@@ -314,5 +314,57 @@ namespace CatanClient.Services
             return flag;
         }
 
+        public async Task<bool> SendNeedHelpCode(string email)
+        {
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+                result = await client.NeedHelpProblemWithPasswordAsync(email);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                SafeClose((IClientChannel)client, channelFactory);
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
+
+        public async Task<bool> ChangeForotPassword(string email, string newPassword, string verificationCode)
+        {
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+
+            NetTcpBinding binding = GetTcpBinding();
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
+            ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
+            IAccountEndPoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+                result = await client.ChangeForgotPasswordAsync(email, newPassword, verificationCode);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                SafeClose((IClientChannel)client, channelFactory);
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
+
     }
 }

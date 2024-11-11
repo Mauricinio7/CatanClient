@@ -167,6 +167,7 @@
     </Compile>
     <Compile Include="Services\AccountServiceClient.cs" />
     <Compile Include="Services\ChatServiceClient.cs" />
+    <Compile Include="ViewModels\ChangeForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\ExpelPlayerWindowViewMode.cs" />
     <Compile Include="Services\GameServiceClient.cs" />
     <Compile Include="Services\GuestAccountServiceClient.cs" />
@@ -196,11 +197,15 @@
     <Compile Include="ViewModels\KickPlayerWindowViewModel.cs" />
     <Compile Include="ViewModels\LoginRoomViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\NeedHelpViewModel.cs" />
     <Compile Include="ViewModels\ScoreboardViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountChangeWindowViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountViewModel.cs" />
     <Compile Include="Views\AddFriendWindow.xaml.cs">
       <DependentUpon>AddFriendWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeForgotPasswordView.xaml.cs">
+      <DependentUpon>ChangeForgotPasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfigureProfileView.xaml.cs">
       <DependentUpon>ConfigureProfileView.xaml</DependentUpon>
@@ -243,6 +248,9 @@
     </Compile>
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NeedHelpView.xaml.cs">
+      <DependentUpon>NeedHelpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScoreboardView.xaml.cs">
       <DependentUpon>ScoreboardView.xaml</DependentUpon>
@@ -298,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddFriendWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangeForgotPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -358,6 +370,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NeedHelpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -488,6 +504,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\GameService\CatanClient.GameService.OperationResultListOfPlayersInGame.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GameService\CatanClient.GameService.OperationResultListScoreGame.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\GameService\GameService.xsd">

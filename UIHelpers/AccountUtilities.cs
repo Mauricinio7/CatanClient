@@ -1,4 +1,5 @@
 ﻿using CatanClient.AccountService;
+using CatanClient.GameService;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -72,6 +73,20 @@ namespace CatanClient.UIHelpers
             return account;
         }
 
+        public static GameService.ProfileDto CastGuestAccountToGameServiceProfile(GuestAccountDto guestAccount)
+        {
+            GameService.ProfileDto profile = new GameService.ProfileDto
+            {
+                Id = guestAccount.Id,
+                Name = guestAccount.Name,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                IsRegistered = false,
+                IsOnline = true
+            };
+
+            return profile;
+        }
+
         public static GameService.GameDto CastChatGameToGameServiceGame(ChatService.GameDto chatGame)
         {
             GameService.GameDto gameServiceGame = new GameService.GameDto();
@@ -102,7 +117,8 @@ namespace CatanClient.UIHelpers
                 CurrentSessionID = accountProfile.CurrentSessionID,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name,
                 IsRegistered = accountProfile.IsRegistered,
-                IsOnline = accountProfile.IsOnline
+                IsOnline = accountProfile.IsOnline,
+                PictureVersion = accountProfile.PictureVersion
             };
 
             return profile;
@@ -117,7 +133,8 @@ namespace CatanClient.UIHelpers
                 CurrentSessionID = accountProfile.CurrentSessionID,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name,
                 IsRegistered = accountProfile.IsRegistered,
-                IsOnline = accountProfile.IsOnline
+                IsOnline = accountProfile.IsOnline,
+                PictureVersion = accountProfile.PictureVersion
             };
 
             return profile;
@@ -132,7 +149,8 @@ namespace CatanClient.UIHelpers
                 CurrentSessionID = gameProfile.CurrentSessionID,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name,
                 IsRegistered = gameProfile.IsRegistered,
-                IsOnline = gameProfile.IsOnline
+                IsOnline = gameProfile.IsOnline,
+                PictureVersion = gameProfile.PictureVersion
             };
 
             return profile;

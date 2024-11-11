@@ -5,6 +5,7 @@ using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -58,7 +59,7 @@ namespace CatanClient.Controls
 
             if (result)
             {
-                MessageBox.Show("Se ha agregado correctamente como amigo al jugador: " + PlayerName);
+                MessageBox.Show(Utilities.MessageSuccesAddFriend(CultureInfo.CurrentCulture.Name) + PlayerName, Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -72,7 +73,7 @@ namespace CatanClient.Controls
 
             if (result)
             {
-                MessageBox.Show("Se ha rechazado correctamente como amigo al jugador: " + PlayerName);
+                MessageBox.Show(Utilities.MessageSuccesRejectFriend(CultureInfo.CurrentCulture.Name) + PlayerName, Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -144,7 +145,7 @@ namespace CatanClient.Controls
         private void DeleteOldVersions(int playerId)
         {
             string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
-            string searchPattern = $"ProfilePhoto{playerId}_V*.jpg";
+            string searchPattern = Utilities.ProfilePhotoPathDeleteVersion(playerId);
             foreach (var file in Directory.GetFiles(appDirectory, searchPattern))
             {
                 File.Delete(file);

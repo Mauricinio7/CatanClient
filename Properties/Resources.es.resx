@@ -568,4 +568,34 @@
   <data name="image_selector_title" xml:space="preserve">
     <value>Seleccionar Imagen de Perfil</value>
   </data>
+  <data name="dialog_account_in_use" xml:space="preserve">
+    <value>Esta cuenta ya se encuentra en uso</value>
+  </data>
+  <data name="dialog_name_in_use" xml:space="preserve">
+    <value>Este nombre ya se encuentra en uso</value>
+  </data>
+  <data name="dialog_succes_add_friend_message" xml:space="preserve">
+    <value>Se ha agragado exitosamente como amigo al jugador:</value>
+  </data>
+  <data name="dialog_succes_friend_request_message" xml:space="preserve">
+    <value>Se ha enviado la solicitud de amistad</value>
+  </data>
+  <data name="dialog_succes_reject_friend_message" xml:space="preserve">
+    <value>Se ha rechazado como amigo al jugador:</value>
+  </data>
+  <data name="dialog_succes_send_code_message" xml:space="preserve">
+    <value>Se ha enviado un código de verificación a su correo o telefono</value>
+  </data>
+  <data name="dialog_verify_account" xml:space="preserve">
+    <value>Verificar cuenta</value>
+  </data>
+  <data name="global_game_expel" xml:space="preserve">
+    <value>Ha sido expulsado del juego</value>
+  </data>
+  <data name="label_enter_code" xml:space="preserve">
+    <value>Ingrese su código</value>
+  </data>
+  <data name="label_recover_password_email" xml:space="preserve">
+    <value>Ingrese su correo para recuperar su contraseña</value>
+  </data>
 </root>

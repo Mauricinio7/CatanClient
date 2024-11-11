@@ -66,7 +66,7 @@ namespace CatanClient.ViewModels
                 bool isOnline = profileDto.IsOnline;
 
                 Friends.Add(App.Container.Resolve<FriendRequestPlayerCardViewModel>(
-                    new NamedParameter("profile", profileDto)));
+                    new NamedParameter(Utilities.PROFILE, profileDto)));
             }
 
             FriendsView = CollectionViewSource.GetDefaultView(Friends);

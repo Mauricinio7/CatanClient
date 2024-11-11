@@ -81,7 +81,7 @@ namespace CatanClient.ViewModels
 
             if (result)
             {
-                MessageBox.Show("Se ha enviado el código correctamente", Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {

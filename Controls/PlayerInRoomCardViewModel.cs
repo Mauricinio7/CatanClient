@@ -53,7 +53,7 @@ namespace CatanClient.Controls
         {
             if (!Profile.IsRegistered)
             {
-
+                LoadGuestImage();
             }
             else
             {
@@ -102,6 +102,20 @@ namespace CatanClient.Controls
             }
         }
 
+        private void LoadGuestImage()
+        {
+            string filePath = Utilities.GetDefaultPhotoPath();
+
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(filePath, UriKind.Absolute);
+            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            bitmap.EndInit();
+
+            ImageSource = bitmap;
+        }
+
         private void SaveImageBytesLocally(byte[] imageBytes)
         {
             string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
@@ -120,7 +134,7 @@ namespace CatanClient.Controls
         private void DeleteOldVersions(int playerId)
         {
             string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
-            string searchPattern = $"ProfilePhoto{playerId}_V*.jpg";
+            string searchPattern = Utilities.ProfilePhotoPathDeleteVersion(playerId);
             foreach (var file in Directory.GetFiles(appDirectory, searchPattern))
             {
                 File.Delete(file);
