@@ -21,7 +21,12 @@ namespace CatanClient.Callbacks
                     Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
                 });
             }
-        
+
+        public void BroadcastNotifyNewAdmin(int idAdmin)
+        {
+            throw new NotImplementedException();
+        }
+
         public void NotifyPlayerExpulsion(string message, string reason)
         {
             MessageBox.Show(message + reason, Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);

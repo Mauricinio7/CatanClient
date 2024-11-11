@@ -622,10 +622,10 @@ namespace CatanClient.AccountService {
         System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultProfileDto> LogInAsync(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
-        bool ResendVerificationCode(int idAccount);
+        bool ResendVerificationCode(string emailOrPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ResendVerificationCode", ReplyAction="http://tempuri.org/IAccountEndPoint/ResendVerificationCodeResponse")]
-        System.Threading.Tasks.Task<bool> ResendVerificationCodeAsync(int idAccount);
+        System.Threading.Tasks.Task<bool> ResendVerificationCodeAsync(string emailOrPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/ChangePasswordResponse")]
         CatanClient.AccountService.OperationResultDto ChangePassword(CatanClient.AccountService.AccountDto accountClientDto);
@@ -729,12 +729,12 @@ namespace CatanClient.AccountService {
             return base.Channel.LogInAsync(accountClientDto);
         }
         
-        public bool ResendVerificationCode(int idAccount) {
-            return base.Channel.ResendVerificationCode(idAccount);
+        public bool ResendVerificationCode(string emailOrPhone) {
+            return base.Channel.ResendVerificationCode(emailOrPhone);
         }
         
-        public System.Threading.Tasks.Task<bool> ResendVerificationCodeAsync(int idAccount) {
-            return base.Channel.ResendVerificationCodeAsync(idAccount);
+        public System.Threading.Tasks.Task<bool> ResendVerificationCodeAsync(string emailOrPhone) {
+            return base.Channel.ResendVerificationCodeAsync(emailOrPhone);
         }
         
         public CatanClient.AccountService.OperationResultDto ChangePassword(CatanClient.AccountService.AccountDto accountClientDto) {

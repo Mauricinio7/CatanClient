@@ -298,9 +298,8 @@ namespace CatanClient.Services
 
             try
             {
-                int id = (int)account.Id;
 
-                flag = await client.ResendVerificationCodeAsync(id);
+                flag = await client.ResendVerificationCodeAsync(account.Email);
             }
             catch (Exception ex)
             {

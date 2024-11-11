@@ -602,6 +602,20 @@
     <Resource Include="Gameplay\Resources\Images\GameResources\TritoniumWood.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\City.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Road.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Town.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\Dice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\ContinueTurn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\TradeButton.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
     <WCFMetadataStorage Include="Connected Services\GameService\" />
@@ -619,36 +633,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\AccountService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\GameService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GameService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\ChatService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -684,18 +668,34 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\City.png" />
-    <Resource Include="Gameplay\Resources\Images\GameResources\Road.png" />
-    <Resource Include="Gameplay\Resources\Images\GameResources\Town.png" />
+    <None Include="Connected Services\GameService\GameService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\Dice.png" />
+    <None Include="Connected Services\GameService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\ContinueTurn.png" />
+    <None Include="Connected Services\GameService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\TradeButton.png" />
+    <None Include="Connected Services\GameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\ChatService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

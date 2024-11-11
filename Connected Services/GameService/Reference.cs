@@ -783,6 +783,12 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetScoreGameWorld", ReplyAction="http://tempuri.org/IGameEndPoint/GetScoreGameWorldResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListScoreGame> GetScoreGameWorldAsync(CatanClient.GameService.ProfileDto profileClient);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetScoreGameFriends", ReplyAction="http://tempuri.org/IGameEndPoint/GetScoreGameFriendsResponse")]
+        CatanClient.GameService.OperationResultListScoreGame GetScoreGameFriends(CatanClient.GameService.ProfileDto profileClient);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetScoreGameFriends", ReplyAction="http://tempuri.org/IGameEndPoint/GetScoreGameFriendsResponse")]
+        System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListScoreGame> GetScoreGameFriendsAsync(CatanClient.GameService.ProfileDto profileClient);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -796,6 +802,9 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/StartGameForAll")]
         void StartGameForAll();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/BroadcastNotifyNewAdmin")]
+        void BroadcastNotifyNewAdmin(int idAdmin);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -904,6 +913,14 @@ namespace CatanClient.GameService {
         
         public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListScoreGame> GetScoreGameWorldAsync(CatanClient.GameService.ProfileDto profileClient) {
             return base.Channel.GetScoreGameWorldAsync(profileClient);
+        }
+        
+        public CatanClient.GameService.OperationResultListScoreGame GetScoreGameFriends(CatanClient.GameService.ProfileDto profileClient) {
+            return base.Channel.GetScoreGameFriends(profileClient);
+        }
+        
+        public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListScoreGame> GetScoreGameFriendsAsync(CatanClient.GameService.ProfileDto profileClient) {
+            return base.Channel.GetScoreGameFriendsAsync(profileClient);
         }
     }
 }

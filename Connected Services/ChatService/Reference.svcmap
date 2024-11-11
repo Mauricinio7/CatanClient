@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="0a4ccc2a-a048-4363-9710-55f2dc1c1555" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="66e5a962-0a69-4c26-9f18-b1659bfaada1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://10.144.41.3:8203/ChatService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.11.207:8203/ChatService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ChatService.xsd" MetadataType="Schema" ID="e4e3df57-4281-490e-ab66-c8b21f50804d" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?xsd=xsd2" />
-    <MetadataFile FileName="ChatService1.xsd" MetadataType="Schema" ID="e2b79d6d-d0d6-4f05-96b0-ace630dcfaa4" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?xsd=xsd0" />
-    <MetadataFile FileName="ChatService2.xsd" MetadataType="Schema" ID="a9074665-601e-441c-8d13-65c12fd20cf2" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?xsd=xsd1" />
-    <MetadataFile FileName="ChatServiceEndpoint.wsdl" MetadataType="Wsdl" ID="1c85fd03-5cbc-4619-a89e-84fd634eb2f9" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?wsdl" />
-    <MetadataFile FileName="ChatService.disco" MetadataType="Disco" ID="53e9c594-bbf6-4453-b749-d6ede294aec4" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?disco" />
+    <MetadataFile FileName="ChatService.xsd" MetadataType="Schema" ID="a6333479-b4e0-4d44-929f-30a013e00fc3" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?xsd=xsd0" />
+    <MetadataFile FileName="ChatService1.xsd" MetadataType="Schema" ID="528160ce-51c9-46ca-8130-b28f290ca2a4" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?xsd=xsd2" />
+    <MetadataFile FileName="ChatService.disco" MetadataType="Disco" ID="2aa1466f-9056-48f1-bcae-47773b5c62c3" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?disco" />
+    <MetadataFile FileName="ChatService2.xsd" MetadataType="Schema" ID="5b36e865-4a22-4d61-8500-040adc2f3ec3" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?xsd=xsd1" />
+    <MetadataFile FileName="ChatServiceEndpoint.wsdl" MetadataType="Wsdl" ID="9240eee2-97a3-473d-b50e-b75622d94ac9" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -81,7 +81,7 @@ namespace CatanClient.UIHelpers
                 Name = guestAccount.Name,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name,
                 IsRegistered = false,
-                IsOnline = true
+                IsOnline = true,
             };
 
             return profile;
