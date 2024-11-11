@@ -325,8 +325,15 @@ namespace CatanClient.UIHelpers
         {
             return Resources.ResourceManager.GetString("dialog_name_in_use", new CultureInfo(language));
         }
+        public static string LogInfoStart(string language)
+        {
+            return Resources.ResourceManager.GetString("log_info_start", new CultureInfo(language));
+        }
+        public static string LogInfoEnd(string language)
+        {
+            return Resources.ResourceManager.GetString("log_info_end", new CultureInfo(language));
+        }
         
-
 
         public static void ShowMessgeServerLost()
         {

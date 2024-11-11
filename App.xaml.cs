@@ -41,7 +41,7 @@ namespace CatanClient
                 .CreateLogger();
 
 
-            Log.Information("La aplicación ha iniciado.");  
+            Log.Information(Utilities.LogInfoStart(CultureInfo.CurrentCulture.Name));  
 
             base.OnStartup(e);
 
@@ -57,7 +57,7 @@ namespace CatanClient
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Log.Information("La aplicación ha finalizado.");  
+            Log.Information(Utilities.LogInfoEnd(CultureInfo.CurrentCulture.Name));  
 
             Log.CloseAndFlush();
             base.OnExit(e);

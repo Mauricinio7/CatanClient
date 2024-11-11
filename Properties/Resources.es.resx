@@ -598,4 +598,10 @@
   <data name="label_recover_password_email" xml:space="preserve">
     <value>Ingrese su correo para recuperar su contraseña</value>
   </data>
+  <data name="log_info_end" xml:space="preserve">
+    <value>La aplicación ha finalizado</value>
+  </data>
+  <data name="log_info_start" xml:space="preserve">
+    <value>La aplicación ha iniciado</value>
+  </data>
 </root>

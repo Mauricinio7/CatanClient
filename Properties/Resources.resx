@@ -579,10 +579,16 @@
   <data name="global_game_expel" xml:space="preserve">
     <value>You have been kicked out of the game</value>
   </data>
+  <data name="label_enter_code" xml:space="preserve">
+    <value>Enter your code</value>
+  </data>
   <data name="label_recover_password_email" xml:space="preserve">
     <value>Enter your email to recover your password</value>
   </data>
-  <data name="lable_enter_code" xml:space="preserve">
-    <value>Enter your code</value>
+  <data name="log_info_end" xml:space="preserve">
+    <value>The application has ended</value>
+  </data>
+  <data name="log_info_start" xml:space="preserve">
+    <value>The application has started</value>
   </data>
 </root>

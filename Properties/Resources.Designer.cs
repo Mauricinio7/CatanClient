@@ -1078,6 +1078,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Enter your code.
+        /// </summary>
+        public static string label_enter_code {
+            get {
+                return ResourceManager.GetString("label_enter_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Enter the room code to join.
         /// </summary>
         public static string label_enter_lobby_code {
@@ -1357,11 +1366,20 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Enter your code.
+        ///   Busca una cadena traducida similar a The application has ended.
         /// </summary>
-        public static string lable_enter_code {
+        public static string log_info_end {
             get {
-                return ResourceManager.GetString("lable_enter_code", resourceCulture);
+                return ResourceManager.GetString("log_info_end", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The application has started.
+        /// </summary>
+        public static string log_info_start {
+            get {
+                return ResourceManager.GetString("log_info_start", resourceCulture);
             }
         }
         
