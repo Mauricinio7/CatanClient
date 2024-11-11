@@ -17,7 +17,7 @@ namespace CatanClient.Callbacks
                 App.Current.Dispatcher.Invoke(() =>
                 {
                     ChatMessage systemMessage = new ChatMessage { Content = playerExpeled.profileDto.Name + " " + Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
-                    Mediator.Notify(Utilities.RECIVEMESSAGE, systemMessage);
+                    Mediator.Notify(Utilities.RECIVE_MESSAGE, systemMessage);
                     Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
                 });
             }

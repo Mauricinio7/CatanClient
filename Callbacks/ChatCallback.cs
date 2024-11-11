@@ -17,7 +17,7 @@ namespace CatanClient.Callbacks
             App.Current.Dispatcher.Invoke(() =>
             {
                 ChatMessage chatMessage = new ChatMessage { Content = message, Name = name, IsUserMessage = false };
-                Mediator.Notify(Utilities.RECIVEMESSAGE, chatMessage);
+                Mediator.Notify(Utilities.RECIVE_MESSAGE, chatMessage);
             });
         }
 
@@ -26,7 +26,7 @@ namespace CatanClient.Callbacks
             App.Current.Dispatcher.Invoke(() =>
             {
                 ChatMessage systemMessage = new ChatMessage { Content = name + Utilities.MessagePlayerJoin(CultureInfo.CurrentCulture.Name), Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
-                Mediator.Notify(Utilities.RECIVEMESSAGE, systemMessage);
+                Mediator.Notify(Utilities.RECIVE_MESSAGE, systemMessage);
                 Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
             });
         }
@@ -36,7 +36,7 @@ namespace CatanClient.Callbacks
             App.Current.Dispatcher.Invoke(() =>
             {
                 ChatMessage systemMessage = new ChatMessage { Content = name + Utilities.MessagePlayerLeft(CultureInfo.CurrentCulture.Name), Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
-                Mediator.Notify(Utilities.RECIVEMESSAGE, systemMessage);
+                Mediator.Notify(Utilities.RECIVE_MESSAGE, systemMessage);
                 Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
             });
         }

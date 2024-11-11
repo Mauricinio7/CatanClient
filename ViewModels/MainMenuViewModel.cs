@@ -47,7 +47,7 @@ namespace CatanClient.ViewModels
 
                 if(account != null)
                 {
-                    Mediator.Notify(Utilities.SHOWCONFIGUREPROFILE, account);
+                    Mediator.Notify(Utilities.SHOW_CONFIGURE_PROFILE, account);
                 }
             }
             else

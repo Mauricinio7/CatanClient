@@ -67,7 +67,7 @@ namespace CatanClient.ViewModels
             if (status)
             {
                 MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-                Mediator.Notify(Utilities.OCULTVERIFYACCOUNT, null);
+                Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
             }
             else
             {

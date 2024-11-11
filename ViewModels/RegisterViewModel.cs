@@ -93,7 +93,7 @@ namespace CatanClient.ViewModels
 
                             account.Id = profie.Id;
 
-                            Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
+                            Mediator.Notify(Utilities.SHOW_VERIFY_ACCOUNT, account);
                             break;
                         case EnumCreateAccountStatus.ExistsAccount:
                             MessageBox.Show(Utilities.MessageAccountInUse(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);

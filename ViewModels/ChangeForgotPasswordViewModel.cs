@@ -87,7 +87,7 @@ namespace CatanClient.ViewModels
                             if (resutl)
                             {
                                 MessageBox.Show(Utilities.MessageSuccesPasswordChange(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-                                Mediator.Notify(Utilities.OCULTVERIFYACCOUNT, null);
+                                Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
                             }
                             else
                             {

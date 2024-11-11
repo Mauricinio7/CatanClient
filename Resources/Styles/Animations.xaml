@@ -16,7 +16,7 @@
                          From="-1200" To="0" Duration="0:0:2"/>
     </Storyboard>
 
-    <Storyboard x:Key="SlideOutFromTopAnimation">
+    <Storyboard x:Key="SLIDE_OUT_FROM_TOP_ANIMATION">
         <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                      From="0" To="-1200" Duration="0:0:1"/>
     </Storyboard>

@@ -161,12 +161,12 @@ namespace CatanClient.ViewModels
                 if (actualWindow is Window ventanaActual)
                 {
                     ventanaActual.IsEnabled = false;
-                    Storyboard fadeOutStoryboard = ventanaActual.FindResource(Utilities.FADEOUTANIMATION) as Storyboard;
+                    Storyboard fadeOutStoryboard = ventanaActual.FindResource(Utilities.FADE_OUT_ANIMATION) as Storyboard;
                     if (fadeOutStoryboard != null)
                     {
                         fadeOutStoryboard.Completed += (s, e) =>
                         {
-                            Mediator.Notify(Utilities.SHOWMAINMENUBACKGROUND, null);
+                            Mediator.Notify(Utilities.SHOW_MAIN_MENU_BACKGROUND, null);
 
                             if (isGuest)
                             {
@@ -174,10 +174,10 @@ namespace CatanClient.ViewModels
                             }
                             else
                             {
-                                Mediator.Notify(Utilities.SHOWMAINMENU, null);
+                                Mediator.Notify(Utilities.SHOW_MAIN_MENU, null);
                             }
                             
-                            Storyboard fadeInStoryboard = ventanaActual.FindResource(Utilities.FADEINANIMATION) as Storyboard;
+                            Storyboard fadeInStoryboard = ventanaActual.FindResource(Utilities.FADE_IN_ANIMATION) as Storyboard;
                             if (fadeInStoryboard != null)
                             {
                                 fadeInStoryboard.Completed += (sender, args) =>
@@ -197,7 +197,7 @@ namespace CatanClient.ViewModels
         internal void ShowVerifyAccountView(AccountDto account)
         {
             MessageBox.Show(Utilities.MessageUnverifiedUser(CultureInfo.CurrentCulture.Name), Utilities.TittleUnverifiedUser(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-            Mediator.Notify(Utilities.SHOWVERIFYACCOUNT, account);
+            Mediator.Notify(Utilities.SHOW_VERIFY_ACCOUNT, account);
         }
 
     }

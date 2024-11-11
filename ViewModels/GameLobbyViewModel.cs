@@ -67,7 +67,7 @@ namespace CatanClient.ViewModels
 
             profile =  serviceManager.ProfileSingleton.Profile;
 
-            Mediator.Register(Utilities.RECIVEMESSAGE, OnReceiveMessage);
+            Mediator.Register(Utilities.RECIVE_MESSAGE, OnReceiveMessage);
             Mediator.Register(Utilities.LOAD_PLAYER_LIST, LoadPlayerList);
 
             this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);

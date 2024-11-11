@@ -93,7 +93,7 @@ namespace CatanClient.ViewModels
                 if (result.IsSuccess)
                 {
                     var game = result.GameDto;
-                    Mediator.Notify(Utilities.SHOWGAMELOBBY, game);
+                    Mediator.Notify(Utilities.SHOW_GAME_LOBBY, game);
                 }
                 else
                 {
