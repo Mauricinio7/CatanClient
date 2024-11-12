@@ -132,9 +132,18 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteShowKickPlayer()
         {
-            var kickPlayerWindow = new KickPlayerWindow(game);
 
-            kickPlayerWindow.ShowDialog();
+            if (profile.IsRegistered)
+            {
+                var kickPlayerWindow = new KickPlayerWindow(game);
+
+                kickPlayerWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No puedes maldito");
+            }
+            
         }
 
         internal void ExecuteShowInviteFriend()
@@ -160,7 +169,15 @@ namespace CatanClient.ViewModels
                 MaxNumberPlayers = game.MaxNumberPlayers
             };
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-            await serviceManager.GameServiceClient.LeftRoomClientAsync(gameRoom, AccountUtilities.CastAccountProfileToGameService(profile));
+            if (profile.IsRegistered)
+            {
+                await serviceManager.GameServiceClient.LeftRoomClientAsync(gameRoom, AccountUtilities.CastAccountProfileToGameService(profile));
+            }
+            else
+            {
+                await serviceManager.GameServiceClient.LeftRoomGuestClientAsync(gameRoom, AccountUtilities.CastAccountProfileToGuestAccount(profile));
+            }
+           
             LoadPlayerList(null);
 
             AccountUtilities.RestartGame();

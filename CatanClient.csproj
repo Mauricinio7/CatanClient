@@ -165,6 +165,9 @@
     <Compile Include="Gameplay\Views\GameFrameView.xaml.cs">
       <DependentUpon>GameFrameView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gameplay\Views\TradeWindow.xaml.cs">
+      <DependentUpon>TradeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\AccountServiceClient.cs" />
     <Compile Include="Services\ChatServiceClient.cs" />
     <Compile Include="ViewModels\ChangeForgotPasswordViewModel.cs" />
@@ -294,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gameplay\Views\GameFrameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gameplay\Views\TradeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

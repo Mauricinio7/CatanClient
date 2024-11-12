@@ -173,6 +173,41 @@ namespace CatanClient.Services
             return result;
         }
 
+        public async Task<bool> LeftRoomGuestClientAsync(GameDto game, GuestAccountDto guest)
+        {
+            NetTcpBinding binding = new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
+            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
+            IGameEndPoint client = channelFactory.CreateChannel();
+            bool result = false;
+
+            try
+            {
+                result = (await client.QuitGameAsaGuestAccountAsync(game, guest)).IsSuccess;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            finally
+            {
+                ((IClientChannel)client).Close();
+                channelFactory.Close();
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
+
         public OperationResultListOfPlayersInGame GetPlayerList(GameDto game)
         {
             NetTcpBinding binding = new NetTcpBinding

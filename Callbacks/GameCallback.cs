@@ -38,6 +38,16 @@ namespace CatanClient.Callbacks
         {
             throw new NotImplementedException();
         }
+
+        public void StartGameForAllPlayers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTimeToStartGame(int time)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     

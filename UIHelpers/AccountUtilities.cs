@@ -156,6 +156,17 @@ namespace CatanClient.UIHelpers
             return profile;
         }
 
+        public static GameService.GuestAccountDto CastAccountProfileToGuestAccount(AccountService.ProfileDto accountProfile)
+        {
+            GameService.GuestAccountDto guestAccountDto = new GameService.GuestAccountDto
+            {
+                Id = accountProfile.Id,
+                Name = accountProfile.Name,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+            };
 
+
+            return guestAccountDto;
+        }
     }
 }

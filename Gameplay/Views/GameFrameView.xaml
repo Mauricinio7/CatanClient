@@ -131,6 +131,7 @@
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="364,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="450,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="9" TextAlignment="Center" />
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="540,423,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="5" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="2" Grid.Column="1" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="291,0,0,63"><Run Language="es-mx" Text="x0"/></TextBlock>
 
         </Grid>
     </Viewbox>

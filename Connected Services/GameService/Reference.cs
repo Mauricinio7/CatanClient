@@ -660,6 +660,84 @@ namespace CatanClient.GameService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerGameplayDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDto" +
+        "s")]
+    [System.SerializableAttribute()]
+    public partial class PlayerGameplayDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CurrentSessionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isRegisteredField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CurrentSession {
+            get {
+                return this.CurrentSessionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentSessionField, value) != true)) {
+                    this.CurrentSessionField = value;
+                    this.RaisePropertyChanged("CurrentSession");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isRegistered {
+            get {
+                return this.isRegisteredField;
+            }
+            set {
+                if ((this.isRegisteredField.Equals(value) != true)) {
+                    this.isRegisteredField = value;
+                    this.RaisePropertyChanged("isRegistered");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDto" +
         "s")]
     [System.SerializableAttribute()]
@@ -772,12 +850,6 @@ namespace CatanClient.GameService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetAllPlayersInGame", ReplyAction="http://tempuri.org/IGameEndPoint/GetAllPlayersInGameResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListOfPlayersInGame> GetAllPlayersInGameAsync(CatanClient.GameService.GameDto gameClientDto, string preferredLanguage);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
-        bool StartGame(int idPlayer, CatanClient.GameService.GameDto gameClientDto);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
-        System.Threading.Tasks.Task<bool> StartGameAsync(int idPlayer, CatanClient.GameService.GameDto gameClientDto);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetScoreGameWorld", ReplyAction="http://tempuri.org/IGameEndPoint/GetScoreGameWorldResponse")]
         CatanClient.GameService.OperationResultListScoreGame GetScoreGameWorld(CatanClient.GameService.ProfileDto profileClient);
         
@@ -789,6 +861,12 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/GetScoreGameFriends", ReplyAction="http://tempuri.org/IGameEndPoint/GetScoreGameFriendsResponse")]
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListScoreGame> GetScoreGameFriendsAsync(CatanClient.GameService.ProfileDto profileClient);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
+        bool StartGame(CatanClient.GameService.PlayerGameplayDto playerGameplayDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
+        System.Threading.Tasks.Task<bool> StartGameAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -805,6 +883,12 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/BroadcastNotifyNewAdmin")]
         void BroadcastNotifyNewAdmin(int idAdmin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/UpdateTimeToStartGame")]
+        void UpdateTimeToStartGame(int time);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/StartGameForAllPlayers")]
+        void StartGameForAllPlayers();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -899,14 +983,6 @@ namespace CatanClient.GameService {
             return base.Channel.GetAllPlayersInGameAsync(gameClientDto, preferredLanguage);
         }
         
-        public bool StartGame(int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
-            return base.Channel.StartGame(idPlayer, gameClientDto);
-        }
-        
-        public System.Threading.Tasks.Task<bool> StartGameAsync(int idPlayer, CatanClient.GameService.GameDto gameClientDto) {
-            return base.Channel.StartGameAsync(idPlayer, gameClientDto);
-        }
-        
         public CatanClient.GameService.OperationResultListScoreGame GetScoreGameWorld(CatanClient.GameService.ProfileDto profileClient) {
             return base.Channel.GetScoreGameWorld(profileClient);
         }
@@ -921,6 +997,14 @@ namespace CatanClient.GameService {
         
         public System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListScoreGame> GetScoreGameFriendsAsync(CatanClient.GameService.ProfileDto profileClient) {
             return base.Channel.GetScoreGameFriendsAsync(profileClient);
+        }
+        
+        public bool StartGame(CatanClient.GameService.PlayerGameplayDto playerGameplayDto) {
+            return base.Channel.StartGame(playerGameplayDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> StartGameAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto) {
+            return base.Channel.StartGameAsync(playerGameplayDto);
         }
     }
 }
