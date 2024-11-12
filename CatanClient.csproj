@@ -697,5 +697,21 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\PriceTable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\GameBoard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\BiomasaBiomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\FiberBiomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\GRX-81Biomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\LunarStoneBiomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\WoodBiomec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

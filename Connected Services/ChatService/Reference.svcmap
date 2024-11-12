@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.11.207:8203/ChatService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.144.41.3:8203/ChatService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ChatService.xsd" MetadataType="Schema" ID="a6333479-b4e0-4d44-929f-30a013e00fc3" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?xsd=xsd0" />
-    <MetadataFile FileName="ChatService1.xsd" MetadataType="Schema" ID="528160ce-51c9-46ca-8130-b28f290ca2a4" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?xsd=xsd2" />
-    <MetadataFile FileName="ChatService.disco" MetadataType="Disco" ID="2aa1466f-9056-48f1-bcae-47773b5c62c3" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?disco" />
-    <MetadataFile FileName="ChatService2.xsd" MetadataType="Schema" ID="5b36e865-4a22-4d61-8500-040adc2f3ec3" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?xsd=xsd1" />
-    <MetadataFile FileName="ChatServiceEndpoint.wsdl" MetadataType="Wsdl" ID="9240eee2-97a3-473d-b50e-b75622d94ac9" SourceId="1" SourceUrl="http://192.168.11.207:8203/ChatService?wsdl" />
+    <MetadataFile FileName="ChatService.xsd" MetadataType="Schema" ID="a6333479-b4e0-4d44-929f-30a013e00fc3" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?xsd=xsd0" />
+    <MetadataFile FileName="ChatService1.xsd" MetadataType="Schema" ID="528160ce-51c9-46ca-8130-b28f290ca2a4" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?xsd=xsd2" />
+    <MetadataFile FileName="ChatService.disco" MetadataType="Disco" ID="2aa1466f-9056-48f1-bcae-47773b5c62c3" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?disco" />
+    <MetadataFile FileName="ChatService2.xsd" MetadataType="Schema" ID="5b36e865-4a22-4d61-8500-040adc2f3ec3" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?xsd=xsd1" />
+    <MetadataFile FileName="ChatServiceEndpoint.wsdl" MetadataType="Wsdl" ID="9240eee2-97a3-473d-b50e-b75622d94ac9" SourceId="1" SourceUrl="http://10.144.41.3:8203/ChatService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

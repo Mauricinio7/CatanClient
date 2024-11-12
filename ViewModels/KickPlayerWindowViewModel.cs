@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CatanClient.AccountService;
 using CatanClient.Controls;
 using CatanClient.GameService;
 using CatanClient.ProfileService;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,7 @@ namespace CatanClient.ViewModels
     internal class KickPlayerWindowViewModel : ViewModelBase
     {
         public List<GameService.ProfileDto> OnlinePlayers { get; set; } = new List<GameService.ProfileDto>();
+        public List<GuestAccountDto> OnlinePlayersGuest { get; set; } = new List<GuestAccountDto>();
         public ObservableCollection<KickPlayerCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<KickPlayerCardViewModel>();
         private readonly ServiceManager serviceManager;
         private ChatService.GameDto game;
@@ -42,26 +45,30 @@ namespace CatanClient.ViewModels
             {
                 OnlinePlayersList.Clear();
                 OnlinePlayers = result.ProfileDtos.ToList();
-                
+                OnlinePlayersGuest = result.GuestAccountDtos.ToList();
 
-
-                foreach (var profileDto in OnlinePlayers)
+                if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
                 {
-                    OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
+                    foreach (var profileDto in OnlinePlayers)
+                    {
+                        OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
                         new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
-                        new NamedParameter(Utilities.SENDER_PROFILE, AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastAccountProfileToGameService(profile))),
-                        new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
-                        ));
-                }
-
-                result.GuestAccountDtos.ToList().ForEach(guest =>
-                {
-                    OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
-                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastGuestAccountToGameServiceProfile(guest))),
-                        new NamedParameter(Utilities.SENDER_PROFILE, AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastAccountProfileToGameService(profile))),
                         new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
                     ));
-                });
+                    }
+                }
+
+                if (OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
+                {
+                    foreach (var guestProfileDto in OnlinePlayersGuest)
+                    {
+                        GameService.ProfileDto profileDto = AccountUtilities.CastGuestAccountToGameServiceProfile(guestProfileDto);
+                        OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
+                         new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
+                         new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
+                     ));
+                    }
+                }
             }
             else
             {

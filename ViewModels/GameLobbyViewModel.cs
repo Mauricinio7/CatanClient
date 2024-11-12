@@ -86,28 +86,34 @@ namespace CatanClient.ViewModels
             if (result.IsSuccess)
             {
                 OnlinePlayersList.Clear();
-                OnlinePlayers = result.ProfileDtos.ToList();
+                OnlinePlayers = result.ProfileDtos.ToList();  
                 OnlinePlayersGuest = result.GuestAccountDtos.ToList();
 
-
-                foreach (var profileDto in OnlinePlayers)
+                if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
                 {
-                    OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                    foreach (var profileDto in OnlinePlayers)
+                    {
+                        OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                    }
                 }
 
-                foreach (var guestProfileDto in OnlinePlayersGuest)
+                if(OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
                 {
-                    ProfileDto profileDto = new ProfileDto();
-                    profileDto.Id = guestProfileDto.Id;
-                    profileDto.Name = guestProfileDto.Name; 
-                    profileDto.IsRegistered = false;
-                    profileDto.PictureVersion = 0;
-                    profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
+                    foreach (var guestProfileDto in OnlinePlayersGuest)
+                    {
+                        ProfileDto profileDto = new ProfileDto();
+                        profileDto.Id = guestProfileDto.Id;
+                        profileDto.Name = guestProfileDto.Name;
+                        profileDto.IsRegistered = false;
+                        profileDto.PictureVersion = 0;
+                        profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
 
-                    OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                        OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                    }
                 }
+                
             }
             else
             {

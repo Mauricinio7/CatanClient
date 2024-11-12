@@ -21,10 +21,10 @@ namespace CatanClient.ViewModels
         private readonly ProfileService.ProfileDto Profile;
         private readonly GameDto Game;
 
-        public ExpelPlayerWindowViewModel(ProfileService.ProfileDto expelPlayer, ProfileService.ProfileDto senderProfile, GameDto game, ServiceManager serviceManager)
+        public ExpelPlayerWindowViewModel(ProfileService.ProfileDto profile, GameDto game, ServiceManager serviceManager)
         {
-            this.ExpelPlayer = expelPlayer;
-            this.Profile = senderProfile;
+            this.ExpelPlayer = profile;
+            this.Profile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
             this.Game = game;
             this.serviceManager = serviceManager;
 
@@ -47,7 +47,6 @@ namespace CatanClient.ViewModels
                 IdPlayerToExpel = ExpelPlayer.Id.Value,
                 Reason = SelectedReason
             };
-
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
             bool result = await serviceManager.GameServiceClient.ExpelPlayerAsync(playerToExpel, Profile.Id.Value, Game);
 

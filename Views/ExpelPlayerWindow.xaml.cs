@@ -23,12 +23,11 @@ namespace CatanClient.Views
     /// </summary>
     public partial class ExpelPlayerWindow : Window
     {
-        public ExpelPlayerWindow(ProfileService.ProfileDto expelPlayer, ProfileService.ProfileDto senderProfile, GameDto game)
+        public ExpelPlayerWindow(ProfileService.ProfileDto profile, GameDto game)
         {
             InitializeComponent();
             this.DataContext = App.Container.Resolve<ExpelPlayerWindowViewModel>(
-            new TypedParameter(typeof(ProfileService.ProfileDto), expelPlayer),
-            new TypedParameter(typeof(ProfileService.ProfileDto), senderProfile),
+            new TypedParameter(typeof(ProfileService.ProfileDto), profile),
             new TypedParameter(typeof(GameDto), game)
         );
         }

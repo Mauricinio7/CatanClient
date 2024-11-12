@@ -37,10 +37,9 @@ namespace CatanClient.Controls
             }
         }
 
-        public KickPlayerCardViewModel(ProfileDto profile, ProfileDto senderProfile, GameService.GameDto game,ServiceManager serviceManager)
+        public KickPlayerCardViewModel(ProfileDto profile, GameService.GameDto game,ServiceManager serviceManager)
         {
             Profile = profile;
-            SenderProfile = senderProfile;
             PlayerName = profile.Name;
             Game = game;
 
@@ -146,7 +145,7 @@ namespace CatanClient.Controls
 
         private void ExecuteKick(object parameter)
         {
-            var expelWindow = new ExpelPlayerWindow(Profile, SenderProfile, Game);
+            var expelWindow = new ExpelPlayerWindow(Profile, Game);
 
             expelWindow.ShowDialog();
         }

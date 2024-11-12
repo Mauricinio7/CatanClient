@@ -77,14 +77,61 @@
                     <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/TradeButton.png" Stretch="Uniform" Width="122" Height="62" />
                 </Button.Content>
             </Button>
-            <Rectangle HorizontalAlignment="Left" Height="328" Margin="18,146,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="188" Grid.ColumnSpan="2"/>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="2" Grid.Column="1" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="298,0,0,64"><Run Language="es-mx" Text="x0"/></TextBlock>
+
+
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="2" Grid.Column="1" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="429,0,0,63"><Run Language="es-mx" Text="x0"/></TextBlock>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="2" Grid.Column="1" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="601,0,0,59"><Run Language="es-mx" Text="x0"/></TextBlock>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="2" Grid.Column="1" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="728,0,0,59"><Run Language="es-mx" Text="x0"/></TextBlock>
             <Image Source="/Gameplay/Resources/Images/GameResources/Town.png" Margin="28,633,151,57" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <Image Source="/Gameplay/Resources/Images/GameResources/City.png" Margin="230,630,150,34" Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <Image Source="/Gameplay/Resources/Images/GameResources/Road.png" Margin="88,645,19,51" Grid.Column="3" Grid.Row="2" Grid.RowSpan="2"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/PriceTable.png" Margin="12,89,684,221" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/GameBoard.png" Margin="12,2,115,113" Grid.ColumnSpan="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="43,110,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Grid.ColumnSpan="2" Grid.Row="2"><Run Language="es-mx" Text="Carretera: "/></TextBlock>
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="41,198,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Grid.ColumnSpan="2" Grid.Row="2"><Run Language="es-mx" Text="Pueblo: "/></TextBlock>
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="41,339,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Grid.ColumnSpan="2" Grid.Row="2"><Run Language="es-mx" Text="Ciudad: "/></TextBlock>
+
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="350,110,325,496" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png" Margin="434,110,241,496" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="524,110,151,496" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="308,181,367,425" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="393,182,282,424" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="479,182,196,424" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png" Margin="566,182,109,424" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="351,253,324,353" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="266,251,409,355" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="437,254,238,352" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="523,253,152,353" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="610,253,65,353" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="480,325,195,281" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="305,324,370,282" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png" Margin="393,326,282,280" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="568,324,107,282" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="349,394,326,212" RenderTransformOrigin="0.296,2.304" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="437,396,238,210" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="525,395,150,211" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="366,138,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="12" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="447,139,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="2" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="537,139,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="7" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="318,213,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="407,211,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="6" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="492,210,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="3" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="579,211,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="9" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="279,280,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="363,282,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="8" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="453,280,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="12" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="536,279,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="623,281,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="10" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="318,351,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="2" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="405,354,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="4" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="493,354,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="7" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="583,352,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="5" TextAlignment="Center"/>
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="364,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="450,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="9" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="540,423,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="5" TextAlignment="Center" />
+
         </Grid>
     </Viewbox>
 </UserControl>
