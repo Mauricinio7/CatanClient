@@ -162,6 +162,8 @@
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlayerInRoomCardViewModel.cs" />
+    <Compile Include="Gameplay\Helpers\Resource.cs" />
+    <Compile Include="Gameplay\ViewModels\TradeWindowViewModel.cs" />
     <Compile Include="Gameplay\Views\GameFrameView.xaml.cs">
       <DependentUpon>GameFrameView.xaml</DependentUpon>
     </Compile>
@@ -195,6 +197,7 @@
     <Compile Include="ViewModels\EditProfileWindowViewModel.cs" />
     <Compile Include="ViewModels\FriendRequestViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs" />
+    <Compile Include="Gameplay\ViewModels\GameFrameViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\InviteFriendViewModel.cs" />
     <Compile Include="ViewModels\KickPlayerWindowViewModel.cs" />
@@ -579,7 +582,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
-    <Folder Include="Gameplay\ViewModels\" />
     <Folder Include="Resources\Sounds\" />
     <Folder Include="Windows\" />
   </ItemGroup>

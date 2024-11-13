@@ -72,10 +72,11 @@
             </Button>
             <Button Margin="43,495,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" 
             Grid.ColumnSpan="2" Height="63" Width="122" Grid.Row="2"
-            Background="Transparent" >
+            Background="Transparent" Command="{Binding ShowTradeWindowCommand}">
                 <Button.Content>
                     <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/TradeButton.png" Stretch="Uniform" Width="122" Height="62" />
                 </Button.Content>
+                
             </Button>
 
 

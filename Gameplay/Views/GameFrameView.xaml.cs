@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using CatanClient.Gameplay.ViewModels;
+using CatanClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,7 @@ namespace CatanClient.Gameplay.Views
         public GameFrameView()
         {
             InitializeComponent();
+            DataContext = App.Container.Resolve<GameFrameViewModel>();
         }
 
 

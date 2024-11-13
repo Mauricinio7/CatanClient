@@ -4,129 +4,102 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatanClient.Gameplay.Views"
-            xmlns:properties="clr-namespace:CatanClient.Properties" 
-    xmlns:controls="clr-namespace:CatanClient.Controls"
-    mc:Ignorable="d"
-    Title="EditProfileWindow" Height="600" Width="1000"
-    WindowStartupLocation="CenterScreen"
-    Background="Black">
-
+        xmlns:properties="clr-namespace:CatanClient.Properties" 
+        xmlns:controls="clr-namespace:CatanClient.Controls"
+        mc:Ignorable="d"
+        Title="TradeWindow" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
 
     <Viewbox Stretch="Fill" Margin="0,0,0,0">
-        <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0.5,0.5" Width="1576" Height="900" x:Name="animatedGrid">
+        <Grid Background="{StaticResource SecondaryColor}" Width="1576" Height="900" x:Name="animatedGrid">
 
-            <TextBlock
-  Style="{StaticResource PrimaryTextBlockStyle}"  
-  Text="Quieres:" 
-  TextWrapping="Wrap"
-  Margin="38,38,0,0"
-  VerticalAlignment="Top"
-  HorizontalAlignment="Left"
-  LineHeight="65"
-  FontSize="30"
-  LineStackingStrategy="BlockLineHeight" Width="445" Height="101"
-/>
+            <!-- Títulos y Botones -->
+            <TextBlock Style="{StaticResource PrimaryTextBlockStyle}" Text="Quieres:" Margin="38,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="30"/>
+            <Button Content="{x:Static properties:Resources.button_send}" Style="{StaticResource NeonButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="208" Height="92" Margin="1322,38,0,0" FontSize="18" Command="{Binding SendTradeCommand}"/>
+            <Button Content="{x:Static properties:Resources.button_exit}" Style="{StaticResource NeonButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1096,38,0,0" FontSize="18" Click="ButtonExit_Click" Height="71" Width="146"/>
 
-            <Button
-        Content="{x:Static properties:Resources.button_send}" 
-        Style="{StaticResource NeonButtonStyle}"
-        HorizontalAlignment="Left" 
-        VerticalAlignment="Top" 
-        Width="208" Height="92" 
-        Margin="1322,38,0,0"
-        FontSize="18"
-        Command="{Binding SaveCommand}"
-        />
-            <Button
-        Content="{x:Static properties:Resources.button_exit}" 
-        Style="{StaticResource NeonButtonStyle}"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Margin="1122,38,0,0"                  
-        FontSize="18"
-        FontWeight="Bold"
-        Padding="20,30"              
-        MinWidth="100"
-        MinHeight="80" Height="93" 
-        Click="ButtonExit_Click" Width="161" 
-        />
-            <TextBlock
-                Style="{StaticResource PrimaryTextBlockStyle}" 
-                TextWrapping="Wrap"
-                Margin="38,469,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                LineHeight="65"
-                FontSize="30"
-                LineStackingStrategy="BlockLineHeight" Width="445" Height="101"
-                ><Run Language="es-mx" Text="Ofreces:"/></TextBlock>
+            <!-- Lista de Recursos para Solicitar -->
+            <ItemsControl ItemsSource="{Binding ResourcesToRequest}" HorizontalAlignment="Left" Margin="38,123,0,456" Width="1506">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="407,0,0,436"><Run Text="Tritónium"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="1001,454,0,0"><Run Text="Nanofibras Alpha"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="686,0,0,436"><Run Text="Biomasa Épsilon"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="1364,0,0,436"><Run Text="GRX-810"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="90,0,0,436" Text="Piedra lunar"/>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="250" Height="300" Margin="15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="132,0,0,693"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="1398,0,0,693"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="1058,0,0,693"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="743,0,0,693"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="434,0,0,693"><Run Language="es-mx" Text="x0"/></TextBlock>
+                            <!-- Cantidad del recurso encima de la imagen -->
+                            <TextBlock Text="{Binding Quantity}" FontSize="34" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
 
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/LunarStone.png" Margin="46,227,1323,455"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/TritoniumWood.png" Margin="349,227,1021,459"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/AlphaNanofibers.png" Margin="979,227,404,459"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png" Margin="641,227,705,459"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/GRX-810Stone.png" Margin="1322,227,99,465" RenderTransformOrigin="0.918,0.483"/>
+                            <!-- Imagen del recurso -->
+                            <Image Source="{Binding ImageSource}" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
 
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="250,269,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="250,349,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="550,262,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="550,342,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="853,268,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="853,348,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="1175,274,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="1175,354,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="1498,258,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="1498,338,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
+                            <!-- Nombre del recurso debajo de la imagen -->
+                            <TextBlock Text="{Binding Name}" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="2" Grid.Column="0" Margin="0,10,0,0"/>
 
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="393,0,0,56"><Run Text="Tritónium"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="1001,834,0,0"><Run Text="Nanofibras Alpha"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="663,0,0,56"><Run Text="Biomasa Épsilon"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="1364,0,0,56"><Run Text="GRX-810"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="72,0,0,61" Text="Piedra lunar"/>
+                            <!-- Botones de incremento/decremento a la derecha de la imagen, centrados verticalmente -->
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0">
+                                <Button Content="+" Command="{Binding IncreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
+                                <Button Content="-" Command="{Binding DecreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="114,0,0,326"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="1398,0,0,310"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="1058,0,0,319"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="725,0,0,315"><Run Language="es-mx" Text="x0"/></TextBlock>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="416,0,0,319" Height="28" RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBlock.RenderTransform><Run Language="es-mx" Text="x0"/></TextBlock>
+            <!-- Lista de Recursos para Ofrecer -->
+            <ItemsControl ItemsSource="{Binding ResourcesToOffer}" HorizontalAlignment="Left" Margin="38,520,0,48" Width="1492">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/LunarStone.png" Margin="28,595,1340,87"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/TritoniumWood.png" Margin="331,599,1039,87"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/AlphaNanofibers.png" Margin="979,599,404,87"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png" Margin="623,599,723,87"/>
-            <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/GRX-810Stone.png" Margin="1321,605,100,87" RenderTransformOrigin="0.918,0.483"/>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="250" Height="300" Margin="15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="232,646,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="232,726,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56" RenderTransformOrigin="0.648,6.25"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="532,646,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="532,726,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="835,652,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="56" RenderTransformOrigin="0.856,7.741"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="835,732,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="1175,657,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="1175,738,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="+" Margin="1498,657,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="33" Content="-" Margin="1498,744,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="56"/>
+                            <!-- Cantidad del recurso encima de la imagen -->
+                            <TextBlock Text="{Binding Quantity}" FontSize="34" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
 
+                            <!-- Imagen del recurso -->
+                            <Image Source="{Binding ImageSource}" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+
+                            <!-- Nombre del recurso debajo de la imagen -->
+                            <TextBlock Text="{Binding Name}" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="2" Grid.Column="0" Margin="0,10,0,0"/>
+
+                            <!-- Botones de incremento/decremento a la derecha de la imagen, centrados verticalmente -->
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0">
+                                <Button Content="+" Command="{Binding IncreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
+                                <Button Content="-" Command="{Binding DecreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Style="{StaticResource PrimaryTextBlockStyle}" Margin="71,486,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="30"><Run Language="es-mx" Text="Ofreces:"/></TextBlock>
         </Grid>
     </Viewbox>
 </Window>

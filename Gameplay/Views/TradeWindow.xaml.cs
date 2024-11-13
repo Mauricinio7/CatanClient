@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Autofac;
+using CatanClient.Gameplay.ViewModels;
+using CatanClient.Services;
+using CatanClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +26,7 @@ namespace CatanClient.Gameplay.Views
         public TradeWindow()
         {
             InitializeComponent();
+            DataContext = App.Container.Resolve<TradeWindowViewModel>();
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

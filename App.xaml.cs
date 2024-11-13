@@ -15,6 +15,7 @@ using CatanClient.Services;
 using CatanClient.Singleton;
 using CatanClient.ViewModels;
 using CatanClient.Controls;
+using CatanClient.Gameplay.ViewModels;
 
 namespace CatanClient
 {
@@ -100,6 +101,8 @@ namespace CatanClient
             builder.RegisterType<MainMenuViewModel>().AsSelf();
             builder.RegisterType<NeedHelpViewModel>().AsSelf();
             builder.RegisterType<ChangeForgotPasswordViewModel>().AsSelf();
+            builder.RegisterType<GameFrameViewModel>().AsSelf();
+            builder.RegisterType<TradeWindowViewModel>().AsSelf();
 
             builder.RegisterType<CreateRoomView>().AsSelf();
             builder.RegisterType<GameLobbyView>().AsSelf();
