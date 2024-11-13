@@ -58,7 +58,9 @@
             <Button Style="{StaticResource PrimaryButtonStyle}" Content="Ciudad" Margin="10,50,0,0" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="123" Grid.Row="3" Grid.Column="4"/>
             <Button Margin="48,577,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" 
                 Grid.ColumnSpan="2" Height="122" Width="122" Grid.Row="2"
-                    Background="Transparent">
+                    Background="Transparent"
+                    Command="{Binding DataContext.ShowDiceAnimationCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                    >
                 <Button.Content>
                     <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/Dice.png" Stretch="Uniform" Width="121" />
                 </Button.Content>

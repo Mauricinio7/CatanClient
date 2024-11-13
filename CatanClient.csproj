@@ -164,6 +164,9 @@
     <Compile Include="Controls\PlayerInRoomCardViewModel.cs" />
     <Compile Include="Gameplay\Helpers\Resource.cs" />
     <Compile Include="Gameplay\ViewModels\TradeWindowViewModel.cs" />
+    <Compile Include="Gameplay\Views\DiceRollAnimationView.xaml.cs">
+      <DependentUpon>DiceRollAnimationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gameplay\Views\GameFrameView.xaml.cs">
       <DependentUpon>GameFrameView.xaml</DependentUpon>
     </Compile>
@@ -296,6 +299,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ShowPasswordPlaceholderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gameplay\Views\DiceRollAnimationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -721,6 +728,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Animations\dice_roll_animation_dual.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using CatanClient.AccountService;
 using CatanClient.Commands;
+using CatanClient.Gameplay.Views;
 using CatanClient.GameService;
 using CatanClient.UIHelpers;
 using CatanClient.Views;
@@ -77,6 +78,7 @@ namespace CatanClient.ViewModels
         public ICommand HideScoreboardViewCommand { get; }
         public ICommand ShowLoadingScreenCommand { get; }
         public ICommand HideLoadingScreenCommand { get; }
+        public ICommand ShowDiceAnimationCommand { get; }
 
         public ICommand ShowGameScreenCommand { get; }
 
@@ -103,6 +105,7 @@ namespace CatanClient.ViewModels
             HideInviteFriendsViewCommand = new RelayCommand(async () => await HideInviteFriendsView());
             ShowScoreboardViewCommand = new RelayCommand(ShowScoreboardView);
             HideScoreboardViewCommand = new RelayCommand(async () => await HideScoreboardView());
+            ShowDiceAnimationCommand = new RelayCommand(ShowDiceAnimation);
 
             ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
             BackToMainMenuCommand = new RelayCommand(async () => await BackToMainMenu());
@@ -130,6 +133,20 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.HIDE_LOADING_SCREEN, args => HideLoadingScreenCommand.Execute(null));
 
         }
+
+        private void ShowDiceAnimation()
+        {
+            var diceAnimationView = new DiceRollAnimationView();
+            diceAnimationView.AnimationCompleted += DiceAnimationView_AnimationCompleted;
+            OverlayView = diceAnimationView;
+        }
+
+        private void DiceAnimationView_AnimationCompleted(object sender, EventArgs e)
+        {
+            OverlayView = null;
+        }
+
+
 
         private void ShowGameScreen()
         {
