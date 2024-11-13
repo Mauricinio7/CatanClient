@@ -604,4 +604,28 @@
   <data name="log_info_start" xml:space="preserve">
     <value>La aplicación ha iniciado</value>
   </data>
+  <data name="global_city" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="global_road" xml:space="preserve">
+    <value>Carretera</value>
+  </data>
+  <data name="global_town" xml:space="preserve">
+    <value>Pueblo</value>
+  </data>
+  <data name="label_alpha_nanofibers" xml:space="preserve">
+    <value>Nanofibra Alpha</value>
+  </data>
+  <data name="label_build" xml:space="preserve">
+    <value>Construir</value>
+  </data>
+  <data name="label_epsilon_biomass" xml:space="preserve">
+    <value>Biomasa Épsilon</value>
+  </data>
+  <data name="label_lunar_stone" xml:space="preserve">
+    <value>Piedra lunar</value>
+  </data>
+  <data name="label_points" xml:space="preserve">
+    <value>Puntos</value>
+  </data>
 </root>

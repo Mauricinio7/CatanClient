@@ -80,12 +80,14 @@ namespace CatanClient.UIHelpers
         public const string CHECK_BOX_MARGIN = "CheckBoxMargin";
         public const string SYNTH_WAVE_BACKGROUND2_PATH = "pack://application:,,,/Resources/Gifs/SynthWaveAnimatedBackground2.gif";
         public const string SYNTH_WAVE_BACKGROUND1_PATH = "pack://application:,,,/Resources/Gifs/AnimatedBackground1.gif";
+        public const string DICE_ROLL_ANIMATION = "pack://application:,,,/Gameplay/Resources/Animations/dice_roll_animation_dual.gif";
         public const string IMAGE_FILTER = "Image Files (*.jpg;*.png)|*.jpg;*.png";
         public const string PROFILE_IMAGE_DIRECTORY = "ProfilePhotos";
         public const string PROFILE = "profile";
         public const string ACCES_KEY = "accesKey";
         public const string GAME = "game";
         public const string SENDER_PROFILE = "senderProfile";
+
 
 
         public static string ProfilePhotoPath(int Id)

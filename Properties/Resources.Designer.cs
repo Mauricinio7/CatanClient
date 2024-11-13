@@ -880,6 +880,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a City.
+        /// </summary>
+        public static string global_city {
+            get {
+                return ResourceManager.GetString("global_city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create New Game.
         /// </summary>
         public static string global_create_new_game {
@@ -988,11 +997,29 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Road.
+        /// </summary>
+        public static string global_road {
+            get {
+                return ResourceManager.GetString("global_road", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Start Game.
         /// </summary>
         public static string global_start_game {
             get {
                 return ResourceManager.GetString("global_start_game", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Town.
+        /// </summary>
+        public static string global_town {
+            get {
+                return ResourceManager.GetString("global_town", resourceCulture);
             }
         }
         
@@ -1020,6 +1047,24 @@ namespace CatanClient.Properties {
         public static string label_access_code {
             get {
                 return ResourceManager.GetString("label_access_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Alpha Nanofiber.
+        /// </summary>
+        public static string label_alpha_nanofibers {
+            get {
+                return ResourceManager.GetString("label_alpha_nanofibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Build.
+        /// </summary>
+        public static string label_build {
+            get {
+                return ResourceManager.GetString("label_build", resourceCulture);
             }
         }
         
@@ -1114,6 +1159,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Epsilon Biomass.
+        /// </summary>
+        public static string label_epsilon_biomass {
+            get {
+                return ResourceManager.GetString("label_epsilon_biomass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Games won.
         /// </summary>
         public static string label_games_won {
@@ -1137,6 +1191,15 @@ namespace CatanClient.Properties {
         public static string label_invalid_email_message {
             get {
                 return ResourceManager.GetString("label_invalid_email_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lunar Stone.
+        /// </summary>
+        public static string label_lunar_stone {
+            get {
+                return ResourceManager.GetString("label_lunar_stone", resourceCulture);
             }
         }
         
@@ -1236,6 +1299,15 @@ namespace CatanClient.Properties {
         public static string label_player_left {
             get {
                 return ResourceManager.GetString("label_player_left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Points.
+        /// </summary>
+        public static string label_points {
+            get {
+                return ResourceManager.GetString("label_points", resourceCulture);
             }
         }
         

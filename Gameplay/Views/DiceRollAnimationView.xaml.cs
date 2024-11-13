@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatanClient.UIHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace CatanClient.Gameplay.Views
         }
         private void StartDiceAnimation()
         {
-            string diceGifPath = "pack://application:,,,/Gameplay/Resources/Animations/dice_roll_animation_dual.gif";
+            string diceGifPath = Utilities.DICE_ROLL_ANIMATION;
             var imageUri = new Uri(diceGifPath, UriKind.Absolute);
             var imageSource = new BitmapImage(imageUri);
 

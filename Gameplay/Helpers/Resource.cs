@@ -10,18 +10,18 @@ namespace CatanClient.Gameplay.Helpers
 {
     internal class Resource : ViewModelBase
     {
-        private int _quantity;
+        private int quantity;
         public string Name { get; set; }
         public string ImageSource { get; set; }
 
         public int Quantity
         {
-            get => _quantity;
+            get => quantity;
             set
             {
-                if (_quantity != value)
+                if (quantity != value)
                 {
-                    _quantity = value;
+                    quantity = value;
                     OnPropertyChanged(nameof(Quantity)); 
                     IncreaseCommand.RaiseCanExecuteChanged();
                     DecreaseCommand.RaiseCanExecuteChanged();
@@ -34,7 +34,6 @@ namespace CatanClient.Gameplay.Helpers
 
         public Resource()
         {
-            // Usamos RelayCommand con los métodos OnIncrease y OnDecrease, y sus condiciones.
             IncreaseCommand = new RelayCommand(_ => OnIncrease(), _ => CanIncrease());
             DecreaseCommand = new RelayCommand(_ => OnDecrease(), _ => CanDecrease());
         }

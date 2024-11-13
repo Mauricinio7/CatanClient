@@ -73,8 +73,16 @@ namespace CatanClient.ViewModels
             this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             LeftRoomCommand = new AsyncRelayCommand(ExecuteLeftRoomAsync);
-            KickPlayerCommand = new RelayCommand(ExecuteShowKickPlayer);
-            ShowInviteFriendCommand= new RelayCommand(ExecuteShowInviteFriend);
+            KickPlayerCommand = new RelayCommand(_ => ExecuteShowKickPlayer(), _ => CanKickPlayer());
+            ShowInviteFriendCommand = new RelayCommand(_ => ExecuteShowInviteFriend(), _ => CanInviteFriends());
+
+            UpdateCanExecuteCommands();
+        }
+
+        private void UpdateCanExecuteCommands()
+        {
+            (KickPlayerCommand as RelayCommand)?.RaiseCanExecuteChanged();
+            (ShowInviteFriendCommand as RelayCommand)?.RaiseCanExecuteChanged();
         }
 
         internal void LoadPlayerList(object parameter)
@@ -130,27 +138,25 @@ namespace CatanClient.ViewModels
             }
         }
 
-        internal void ExecuteShowKickPlayer()
-        {
-
-            if (profile.IsRegistered)
-            {
-                var kickPlayerWindow = new KickPlayerWindow(game);
-
-                kickPlayerWindow.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("No puedes maldito");
-            }
-            
-        }
-
         internal void ExecuteShowInviteFriend()
         {
             Mediator.Notify(Utilities.SHOW_INVITE_FRIENDS, game.AccessKey);
         }
 
+        private bool CanInviteFriends()
+        {
+            return profile.IsRegistered;
+        }
+        internal void ExecuteShowKickPlayer()
+        {
+            var kickPlayerWindow = new KickPlayerWindow(game);
+            kickPlayerWindow.ShowDialog();
+        }
+
+        private bool CanKickPlayer()
+        {
+            return profile.IsRegistered && game.IdAdminGame == profile.Id;
+        }
 
         internal void ExecuteSendMessage()
         {
