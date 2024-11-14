@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using CatanClient.GameService;
 using CatanClient.Services;
+using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace CatanClient.Views
             new TypedParameter(typeof(ProfileService.ProfileDto), profile),
             new TypedParameter(typeof(GameDto), game)
         );
+
+            Mediator.Register(Utilities.CLOSE_EXPEL_PLAYER, _ => this.Close());
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

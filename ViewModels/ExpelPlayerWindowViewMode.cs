@@ -53,6 +53,8 @@ namespace CatanClient.ViewModels
             if (result)
             {
                 MessageBox.Show(Utilities.MessageSuccesKickPlayer(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                Mediator.Notify(Utilities.CLOSE_EXPEL_PLAYER, null);
+                Mediator.Notify(Utilities.CLOSE_KICK_PLAYER, null);
             }
             else
             {

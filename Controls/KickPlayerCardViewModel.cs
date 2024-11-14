@@ -43,7 +43,8 @@ namespace CatanClient.Controls
             PlayerName = profile.Name;
             Game = game;
 
-            KickCommand = new RelayCommand(ExecuteKick);
+            KickCommand = new RelayCommand(_ => ExecuteKick(null), _ => CanKickPlayer(null));
+
             this.serviceManager = serviceManager;
             SenderProfile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
 
@@ -141,6 +142,11 @@ namespace CatanClient.Controls
             {
                 File.Delete(file);
             }
+        }
+
+        private bool CanKickPlayer(object parameter)
+        {
+            return Profile.Id != SenderProfile.Id;
         }
 
         private void ExecuteKick(object parameter)

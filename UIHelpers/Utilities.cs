@@ -28,11 +28,11 @@ namespace CatanClient.UIHelpers
         public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/repos/CatanClient/logs/errorlog.txt";
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
-        public const string IP_ACCOUNT_SERVICE = "net.tcp://192.168.11.207:8181/AccountService";
-        public const string IP_GAME_SERVICE = "net.tcp://192.168.11.207:8192/GameService";
-        public const string IP_CHAT_SERVICE = "net.tcp://192.168.11.207:8202/ChatService";
-        public const string IP_PROFILE_SERVICE = "net.tcp://192.168.11.207:8383/ProfileService";
-        public const string IP_GUEST_ACCOUNT_SERVICE = "net.tcp://192.168.11.207:8484/GuestAccountService";
+        public const string IP_ACCOUNT_SERVICE = "net.tcp://10.144.41.3:8181/AccountService";
+        public const string IP_GAME_SERVICE = "net.tcp://10.144.41.3:8192/GameService";
+        public const string IP_CHAT_SERVICE = "net.tcp://10.144.41.3:8202/ChatService";
+        public const string IP_PROFILE_SERVICE = "net.tcp://10.144.41.3:8383/ProfileService";
+        public const string IP_GUEST_ACCOUNT_SERVICE = "net.tcp://10.144.41.3:8484/GuestAccountService";
         public const string FADE_OUT_ANIMATION = "FadeOutAnimation";
         public const string SHOW_MAIN_MENU_BACKGROUND = "ShowMainMenuBackgroundView";
         public const string SHOW_MAIN_MENU = "ShowMainMenuView";
@@ -51,6 +51,7 @@ namespace CatanClient.UIHelpers
         public const string CLOSE_EDIT_PASSWORD = "EditPasswordWindow_Close";
         public const string SHOW_LOADING_SCREEN = "ShowLoadingScreen";
         public const string HIDE_LOADING_SCREEN = "HideLoadingScreen";
+        public const string SHOW_GAME_SCREEN = "ShowGameScreen";
         public const string RECIVE_MESSAGE = "ReceiveMessage";
         public const string LOAD_PLAYER_LIST = "LoadPlayerList";
         public const string ANIMATED_GRID = "animatedGrid";
@@ -87,6 +88,8 @@ namespace CatanClient.UIHelpers
         public const string ACCES_KEY = "accesKey";
         public const string GAME = "game";
         public const string SENDER_PROFILE = "senderProfile";
+        public const string CLOSE_EXPEL_PLAYER = "CloseExpelPlayer";
+        public const string CLOSE_KICK_PLAYER = "CloseKickPlayer";
 
 
 

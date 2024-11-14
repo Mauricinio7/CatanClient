@@ -12,15 +12,32 @@ namespace CatanClient.Callbacks
 {
     public class GameCallback : IGameEndPointCallback
     {
-            public void BroadcastMessageExpel(PlayerDto playerExpeled)
+        public void BroadcastMessageExpel(PlayerDto playerExpeled)
+        {
+            App.Current.Dispatcher.InvokeAsync(async () =>
             {
-                App.Current.Dispatcher.Invoke(() =>
+                string playerName = playerExpeled.profileDto?.Name ?? playerExpeled.guestAccountDto?.Name;
+
+                if (!string.IsNullOrEmpty(playerName))
                 {
-                    ChatMessage systemMessage = new ChatMessage { Content = playerExpeled.profileDto.Name + " " + Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
+                    string messageContent = playerName + " " + Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name);
+                    ChatMessage systemMessage = new ChatMessage
+                    {
+                        Content = messageContent,
+                        Name = Utilities.SYSTEM_NAME,
+                        IsUserMessage = false
+                    };
+
                     Mediator.Notify(Utilities.RECIVE_MESSAGE, systemMessage);
+                    await Task.Delay(3000);
                     Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
-                });
-            }
+                }
+                else
+                {
+                    Console.WriteLine("No se pudo obtener el nombre del jugador expulsado.");
+                }
+            });
+        }
 
         public void BroadcastNotifyNewAdmin(int idAdmin)
         {
@@ -29,9 +46,21 @@ namespace CatanClient.Callbacks
 
         public void NotifyPlayerExpulsion(string message, string reason)
         {
-            MessageBox.Show(message + reason, Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                var mainWindow = Application.Current.MainWindow;
+                mainWindow.IsEnabled = false;
 
-            AccountUtilities.RestartGame();
+                try
+                {
+                    MessageBox.Show(mainWindow, message + reason, Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                finally
+                {
+                    mainWindow.IsEnabled = true;
+                    AccountUtilities.RestartGame();
+                }
+            });
         }
 
         public void StartGameForAll()
@@ -41,12 +70,19 @@ namespace CatanClient.Callbacks
 
         public void StartGameForAllPlayers()
         {
-            throw new NotImplementedException();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Mediator.Notify(Utilities.SHOW_GAME_SCREEN, null);
+            });
+
+            
         }
 
         public void UpdateTimeToStartGame(int time)
         {
-            throw new NotImplementedException();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+            });
         }
     }
 

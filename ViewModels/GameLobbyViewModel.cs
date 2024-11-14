@@ -31,6 +31,9 @@ namespace CatanClient.ViewModels
         private string newMessage;
         private ChatService.GameDto game;
         private AccountService.ProfileDto profile;
+
+        public string RoomName => game.Name;
+        public string AccessCode => game.AccessKey;
         public List<ProfileDto> OnlinePlayers { get; set; } = new List<ProfileDto>();
         public List<GuestAccountDto> OnlinePlayersGuest { get; set; } = new List<GuestAccountDto>();
         public ObservableCollection<PlayerInRoomCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInRoomCardViewModel>();
@@ -38,10 +41,23 @@ namespace CatanClient.ViewModels
         public ICommand LeftRoomCommand { get; }
         public ICommand KickPlayerCommand { get; }
         public ICommand ShowInviteFriendCommand { get; }
+        public ICommand ToggleReadyCommand { get; }
         private readonly ServiceManager serviceManager;
-
+        private bool isReady;
         public ObservableCollection<ChatMessage> Messages { get; set; }
 
+        public bool IsReady
+        {
+            get => isReady;
+            set
+            {
+                isReady = value;
+                OnPropertyChanged(nameof(IsReady));
+                OnPropertyChanged(nameof(ReadyButtonText)); 
+            }
+        }
+
+        public string ReadyButtonText => IsReady ? "No Listo" : "Listo";
 
         public string NewMessage
         {
@@ -75,8 +91,39 @@ namespace CatanClient.ViewModels
             LeftRoomCommand = new AsyncRelayCommand(ExecuteLeftRoomAsync);
             KickPlayerCommand = new RelayCommand(_ => ExecuteShowKickPlayer(), _ => CanKickPlayer());
             ShowInviteFriendCommand = new RelayCommand(_ => ExecuteShowInviteFriend(), _ => CanInviteFriends());
+            ToggleReadyCommand = new RelayCommand(ToggleReady);
+
+
 
             UpdateCanExecuteCommands();
+        }
+
+        private void ToggleReady()
+        {
+            IsReady = !IsReady;
+            if (IsReady)
+            {
+                ExecuteIsReady();
+            }
+            else
+            {
+                ExecuteIsNotReady();
+            }
+        }
+
+        private void ExecuteIsReady()
+        {
+            ExecuteIsReady(serviceManager);
+        }
+
+        private void ExecuteIsReady(ServiceManager serviceManager)
+        {
+           //bool result = serviceManager.GameServiceClient.StartGameAsync(AccountUtilities.CastAccountProfileToPlayerGameplay(profile), AccountUtilities.CastChatGameToGameServiceGame(game));
+        }
+
+        private void ExecuteIsNotReady()
+        {
+            MessageBox.Show("Cancelando estar listo");
         }
 
         private void UpdateCanExecuteCommands()

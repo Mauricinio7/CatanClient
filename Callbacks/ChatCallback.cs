@@ -33,10 +33,18 @@ namespace CatanClient.Callbacks
 
         public void ReceiveMessageLeftPlayerToChat(string name)
         {
-            App.Current.Dispatcher.Invoke(() =>
+            App.Current.Dispatcher.InvokeAsync(async () =>
             {
-                ChatMessage systemMessage = new ChatMessage { Content = name + Utilities.MessagePlayerLeft(CultureInfo.CurrentCulture.Name), Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
+                ChatMessage systemMessage = new ChatMessage
+                {
+                    Content = name + Utilities.MessagePlayerLeft(CultureInfo.CurrentCulture.Name),
+                    Name = Utilities.SYSTEM_NAME,
+                    IsUserMessage = false
+                };
+
                 Mediator.Notify(Utilities.RECIVE_MESSAGE, systemMessage);
+                await Task.Delay(3000);
+
                 Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
             });
         }

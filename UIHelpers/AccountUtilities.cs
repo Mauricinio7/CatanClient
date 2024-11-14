@@ -67,7 +67,7 @@ namespace CatanClient.UIHelpers
                 PhoneNumber = phoneNumber,
                 Password = password,
                 PreferredLanguage = CultureInfo.CurrentCulture.Name
-                
+
             };
 
             return account;
@@ -138,6 +138,17 @@ namespace CatanClient.UIHelpers
             };
 
             return profile;
+        }
+        public static PlayerGameplayDto CastAccountProfileToPlayerGameplay(AccountService.ProfileDto accountProfile)
+        {
+            PlayerGameplayDto playerGameplay = new PlayerGameplayDto
+            {
+                Id = (int)accountProfile.Id,
+                isRegistered = accountProfile.IsRegistered,
+                CurrentSession = accountProfile.CurrentSessionID
+            };
+
+            return playerGameplay;
         }
 
         public static ProfileService.ProfileDto CastGameProfileToProfileService(GameService.ProfileDto gameProfile)

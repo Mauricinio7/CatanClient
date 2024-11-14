@@ -863,10 +863,10 @@ namespace CatanClient.GameService {
         System.Threading.Tasks.Task<CatanClient.GameService.OperationResultListScoreGame> GetScoreGameFriendsAsync(CatanClient.GameService.ProfileDto profileClient);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
-        bool StartGame(CatanClient.GameService.PlayerGameplayDto playerGameplayDto);
+        bool StartGame(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/StartGame", ReplyAction="http://tempuri.org/IGameEndPoint/StartGameResponse")]
-        System.Threading.Tasks.Task<bool> StartGameAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto);
+        System.Threading.Tasks.Task<bool> StartGameAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -877,9 +877,6 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/BroadcastMessageExpel")]
         void BroadcastMessageExpel(CatanClient.GameService.PlayerDto playerExpeled);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/StartGameForAll")]
-        void StartGameForAll();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/BroadcastNotifyNewAdmin")]
         void BroadcastNotifyNewAdmin(int idAdmin);
@@ -999,12 +996,12 @@ namespace CatanClient.GameService {
             return base.Channel.GetScoreGameFriendsAsync(profileClient);
         }
         
-        public bool StartGame(CatanClient.GameService.PlayerGameplayDto playerGameplayDto) {
-            return base.Channel.StartGame(playerGameplayDto);
+        public bool StartGame(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.StartGame(playerGameplayDto, gameClientDto);
         }
         
-        public System.Threading.Tasks.Task<bool> StartGameAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto) {
-            return base.Channel.StartGameAsync(playerGameplayDto);
+        public System.Threading.Tasks.Task<bool> StartGameAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.StartGameAsync(playerGameplayDto, gameClientDto);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace CatanClient.Views
             this.DataContext = App.Container.Resolve<KickPlayerWindowViewModel>(
                 new TypedParameter(typeof(ChatService.GameDto), game)
             );
+            Mediator.Register(Utilities.CLOSE_KICK_PLAYER, _ => this.Close());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

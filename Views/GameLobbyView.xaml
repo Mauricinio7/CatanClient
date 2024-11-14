@@ -9,6 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
 
+
     <Viewbox Stretch="Uniform" Margin="0,0,0,0">
         <Grid Background="{StaticResource SecondaryColor}" RenderTransformOrigin="0,0" Width="1905" Height="1164" x:Name="animatedGrid">
 
@@ -21,14 +22,14 @@
                 />
 
             <TextBlock 
-                Margin="354,75,481,987"
+                Margin="354,75,1318,1020"
                 Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
                 Text="{x:Static properties:Resources.label_room}"
                 FontSize="45"
              />
 
             <TextBlock 
-                Margin="286,213,672,861"
+                Margin="501,1012,457,62"
                 Style="{StaticResource PrimaryTextBlockStyle}"
                 Text="{Binding Source={x:Static properties:Resources.label_waiting_players}, StringFormat='{}{0}...'}"
                 FontSize="40"
@@ -36,11 +37,11 @@
              />
 
             <Button Margin="1578,1012,102,68"
-    Style="{StaticResource NeonButtonStyle}"
-    Content="{x:Static properties:Resources.button_invite}"
-    FontSize="15"
-    Command="{Binding ShowInviteFriendCommand}"
-/>
+                Style="{StaticResource NeonButtonStyle}"
+                Content="{x:Static properties:Resources.button_invite}"
+                FontSize="15"
+                Command="{Binding ShowInviteFriendCommand}"
+            />
 
 
             <ListBox ItemsSource="{Binding Messages}"
@@ -90,17 +91,36 @@
             </ListBox>
 
             <Button 
-                Margin="38,1007,1570,73"
+                Margin="25,1018,1621,62"
                 Style="{StaticResource NeonButtonStyle}"
-                Content="{x:Static properties:Resources.button_ready}" 
                 FontSize="25"
-             />
+                Command="{Binding ToggleReadyCommand}"
+                Content="{Binding ReadyButtonText}"  />
+            
             <Button Margin="1516,46,54,1034"
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.global_kick_player}"
                 FontSize="15"
                 Command="{Binding KickPlayerCommand}"
 />
+            <TextBlock 
+                Margin="56,220,1209,892"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Text="{Binding Source={x:Static properties:Resources.label_access_code}, StringFormat='{}{0}:'}"
+                FontSize="35"
+             />
+            <TextBlock 
+                Margin="587,74,442,1020"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Text="{Binding RoomName}"
+                FontSize="35"
+             />
+            <TextBlock 
+                Margin="680,220,577,874"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Text="{Binding AccessCode}"
+                FontSize="35"
+             />
 
 
         </Grid>

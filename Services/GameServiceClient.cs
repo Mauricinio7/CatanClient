@@ -1,24 +1,32 @@
-﻿using CatanClient.Callbacks;
+﻿using Autofac;
+using CatanClient.Callbacks;
 using CatanClient.GameService;
 using CatanClient.UIHelpers;
 using Serilog;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Xml.Linq;
 
 namespace CatanClient.Services
 {
     public class GameServiceClient : IGameServiceClient
     {
-        public async Task<OperationResultGameDto> CreateRoomClientAsync(GameDto game, ProfileDto profile)
+        private DuplexChannelFactory<IGameEndPoint> channelFactory;
+        private IGameEndPoint client;
+        private InstanceContext callbackInstance;
+
+        public GameServiceClient()
         {
-            NetTcpBinding binding = new NetTcpBinding
+            callbackInstance = new InstanceContext(new GameCallback());
+        }
+
+        private void OpenConnection()
+        {
+            if (client != null) return;
+
+            var binding = new NetTcpBinding
             {
                 Security = { Mode = SecurityMode.None },
                 MaxBufferSize = 10485760,
@@ -28,12 +36,37 @@ namespace CatanClient.Services
                 SendTimeout = TimeSpan.FromMinutes(2),
                 ReceiveTimeout = TimeSpan.FromMinutes(10)
             };
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
-            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
-            IGameEndPoint client = channelFactory.CreateChannel();
-            OperationResultGameDto result;
 
+            var endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
+            client = channelFactory.CreateChannel();
+        }
+
+        private void CloseConnection()
+        {
+            if (client != null)
+            {
+                try
+                {
+                    ((ICommunicationObject)client).Close();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Error al cerrar la conexión: {ex.Message}");
+                    ((ICommunicationObject)client).Abort();
+                }
+                finally
+                {
+                    client = null;
+                    channelFactory = null;
+                }
+            }
+        }
+
+        public async Task<OperationResultGameDto> CreateRoomClientAsync(GameDto game, ProfileDto profile)
+        {
+            OpenConnection();
+            OperationResultGameDto result;
             try
             {
                 result = await client.CreateGameAsync(game, profile);
@@ -47,10 +80,22 @@ namespace CatanClient.Services
                 };
                 Log.Error(ex.Message);
             }
-            finally
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
+
+        public async Task<bool> StartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
+        {
+            OpenConnection();
+            bool result = false;
+            try
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                result = await client.StartGameAsync(playerGameplayDto, gameClientDto);
+            }
+            catch (Exception ex)
+            {
+                
+                Log.Error(ex.Message);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -58,22 +103,8 @@ namespace CatanClient.Services
 
         public async Task<OperationResultGameDto> JoinRoomClientAsync(string code, ProfileDto profile)
         {
-            NetTcpBinding binding = new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
-            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
-            IGameEndPoint client = channelFactory.CreateChannel();
+            OpenConnection();
             OperationResultGameDto result;
-
             try
             {
                 result = await client.JoinGameAsync(code, profile);
@@ -85,13 +116,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-
                 Log.Error(ex.Message);
-            }
-            finally
-            {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -99,22 +124,8 @@ namespace CatanClient.Services
 
         public async Task<OperationResultGameDto> JoinRoomAsGuestClientAsync(string code, GuestAccountDto profile)
         {
-            NetTcpBinding binding = new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
-            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
-            IGameEndPoint client = channelFactory.CreateChannel();
+            OpenConnection();
             OperationResultGameDto result;
-
             try
             {
                 result = await client.JoinGameAsaGuestAsync(code, profile);
@@ -126,13 +137,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-
                 Log.Error(ex.Message);
-            }
-            finally
-            {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -140,22 +145,8 @@ namespace CatanClient.Services
 
         public async Task<bool> LeftRoomClientAsync(GameDto game, ProfileDto profile)
         {
-            NetTcpBinding binding = new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
-            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
-            IGameEndPoint client = channelFactory.CreateChannel();
+            OpenConnection();
             bool result = false;
-
             try
             {
                 result = (await client.QuitGameAsync(game, profile)).IsSuccess;
@@ -166,8 +157,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                CloseConnection();
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -175,22 +165,8 @@ namespace CatanClient.Services
 
         public async Task<bool> LeftRoomGuestClientAsync(GameDto game, GuestAccountDto guest)
         {
-            NetTcpBinding binding = new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
-            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
-            IGameEndPoint client = channelFactory.CreateChannel();
+            OpenConnection();
             bool result = false;
-
             try
             {
                 result = (await client.QuitGameAsaGuestAccountAsync(game, guest)).IsSuccess;
@@ -201,8 +177,7 @@ namespace CatanClient.Services
             }
             finally
             {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
+                CloseConnection();
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -210,22 +185,8 @@ namespace CatanClient.Services
 
         public OperationResultListOfPlayersInGame GetPlayerList(GameDto game)
         {
-            NetTcpBinding binding = new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
-            DuplexChannelFactory<IGameEndPoint> channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
-            IGameEndPoint client = channelFactory.CreateChannel();
+            OpenConnection();
             OperationResultListOfPlayersInGame result;
-
             try
             {
                 result = client.GetAllPlayersInGame(game, CultureInfo.CurrentCulture.Name);
@@ -239,48 +200,24 @@ namespace CatanClient.Services
                 };
                 Log.Error(ex.Message);
             }
-            finally
-            {
-                ((IClientChannel)client).Close();
-                channelFactory.Close();
-            }
             return result;
         }
 
         public async Task<bool> ExpelPlayerAsync(ExpelPlayerDto expelPlayer, int idPlayer, GameDto game)
         {
-            InstanceContext callbackInstance = new InstanceContext(new GameCallback());
-            NetTcpBinding netTcpBinding = new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None }
-            };
-
-            EndpointAddress endpointAddress = new EndpointAddress(Utilities.IP_GAME_SERVICE);
-            DuplexChannelFactory<IGameEndPoint> factory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, netTcpBinding, endpointAddress);
-            IGameEndPoint client = factory.CreateChannel();
+            OpenConnection();
             bool result;
-
             try
             {
                 result = await client.ExpelPlayerAsAdminAsync(expelPlayer, idPlayer, game);
-                MessageBox.Show(result.ToString());
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 result = false;
             }
-            finally
-            {
-                ((IClientChannel)client).Close();
-                factory.Close();
-            }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
     }
-
-    
-
-    
 }
