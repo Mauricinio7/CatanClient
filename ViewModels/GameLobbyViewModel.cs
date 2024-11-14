@@ -91,19 +91,19 @@ namespace CatanClient.ViewModels
             LeftRoomCommand = new AsyncRelayCommand(ExecuteLeftRoomAsync);
             KickPlayerCommand = new RelayCommand(_ => ExecuteShowKickPlayer(), _ => CanKickPlayer());
             ShowInviteFriendCommand = new RelayCommand(_ => ExecuteShowInviteFriend(), _ => CanInviteFriends());
-            ToggleReadyCommand = new RelayCommand(ToggleReady);
+            ToggleReadyCommand = new AsyncRelayCommand(ToggleReady);
 
 
 
             UpdateCanExecuteCommands();
         }
 
-        private void ToggleReady()
+        private async Task ToggleReady()
         {
             IsReady = !IsReady;
             if (IsReady)
             {
-                ExecuteIsReady();
+                await ExecuteIsReady();
             }
             else
             {
@@ -111,14 +111,9 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void ExecuteIsReady()
+        private async Task ExecuteIsReady()
         {
-            ExecuteIsReady(serviceManager);
-        }
-
-        private void ExecuteIsReady(ServiceManager serviceManager)
-        {
-           //bool result = serviceManager.GameServiceClient.StartGameAsync(AccountUtilities.CastAccountProfileToPlayerGameplay(profile), AccountUtilities.CastChatGameToGameServiceGame(game));
+            bool result = await serviceManager.GameServiceClient.StartGameAsync(AccountUtilities.CastAccountProfileToPlayerGameplay(profile), AccountUtilities.CastChatGameToGameServiceGame(game));
         }
 
         private void ExecuteIsNotReady()

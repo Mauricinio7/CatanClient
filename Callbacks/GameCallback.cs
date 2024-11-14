@@ -63,11 +63,6 @@ namespace CatanClient.Callbacks
             });
         }
 
-        public void StartGameForAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public void StartGameForAllPlayers()
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -82,6 +77,7 @@ namespace CatanClient.Callbacks
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+
             });
         }
     }
