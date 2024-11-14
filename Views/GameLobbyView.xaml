@@ -31,7 +31,7 @@
             <TextBlock 
                 Margin="501,1012,457,62"
                 Style="{StaticResource PrimaryTextBlockStyle}"
-                Text="{Binding Source={x:Static properties:Resources.label_waiting_players}, StringFormat='{}{0}...'}"
+                Text="{Binding TimeText}"
                 FontSize="40"
                 
              />

@@ -97,7 +97,6 @@ namespace CatanClient.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show(result.MessageResponse);
                     MessageBox.Show(Utilities.MessageGameNotFound(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }

@@ -101,6 +101,23 @@ namespace CatanClient.Services
             return result;
         }
 
+        public async Task<bool> CancelStartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
+        {
+            OpenConnection();
+            bool result = false;
+            try
+            {
+                result = await client.VoteCancelGameAsync(playerGameplayDto, gameClientDto);
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex.Message);
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
+
         public async Task<OperationResultGameDto> JoinRoomClientAsync(string code, ProfileDto profile)
         {
             OpenConnection();

@@ -10,9 +10,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://10.144.41.3:8203/ChatService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://10.144.41.3:8203/ChatService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://10.144.41.3:8203/ChatService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://192.168.217.207:8203/ChatService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.217.207:8203/ChatService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.217.207:8203/ChatService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IChatServiceEndpoint_JoinChat_InputMessage">
@@ -95,9 +95,9 @@
   </wsdl:binding>
   <wsdl:service name="ChatServiceEndpoint">
     <wsdl:port name="NetTcpBinding_IChatServiceEndpoint" binding="tns:NetTcpBinding_IChatServiceEndpoint">
-      <soap12:address location="net.tcp://10.144.41.3:8202/ChatService" />
+      <soap12:address location="net.tcp://192.168.217.207:8202/ChatService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://10.144.41.3:8202/ChatService</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.217.207:8202/ChatService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
-  <xs:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
-  <xs:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
+  <xs:import schemaLocation="http://192.168.217.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+  <xs:import schemaLocation="http://192.168.217.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+  <xs:import schemaLocation="http://192.168.217.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
   <xs:element name="CreateGame">
     <xs:complexType>
       <xs:sequence>
@@ -168,6 +168,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="VoteCancelGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerGameplayDto" nillable="true" type="q26:PlayerGameplayDto" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="gameClientDto" nillable="true" type="q27:GameDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VoteCancelGameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VoteCancelGameResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyPlayerExpulsion">
     <xs:complexType>
       <xs:sequence>
@@ -179,7 +194,7 @@
   <xs:element name="BroadcastMessageExpel">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerExpeled" nillable="true" type="q26:PlayerDto" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerExpeled" nillable="true" type="q28:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -191,6 +206,13 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTimeToStartGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="time" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTimeWhenJoinGame">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="time" type="xs:int" />

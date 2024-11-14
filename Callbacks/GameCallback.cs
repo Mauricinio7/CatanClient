@@ -77,8 +77,13 @@ namespace CatanClient.Callbacks
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-
+                Mediator.Notify(Utilities.UPDATE_TIME, time);
             });
+        }
+
+        public void UpdateTimeWhenJoinGame(int time)
+        {
+            throw new NotImplementedException();
         }
     }
 

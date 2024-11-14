@@ -23,6 +23,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace CatanClient.ViewModels
 {
@@ -31,6 +32,9 @@ namespace CatanClient.ViewModels
         private string newMessage;
         private ChatService.GameDto game;
         private AccountService.ProfileDto profile;
+        private int remainingTimeInSeconds;
+        private DispatcherTimer countdownTimer;
+
 
         public string RoomName => game.Name;
         public string AccessCode => game.AccessKey;
@@ -45,6 +49,10 @@ namespace CatanClient.ViewModels
         private readonly ServiceManager serviceManager;
         private bool isReady;
         public ObservableCollection<ChatMessage> Messages { get; set; }
+
+        public string TimeText => remainingTimeInSeconds > 0
+       ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
+       : "Esperando jugadores ...";
 
         public bool IsReady
         {
@@ -93,10 +101,14 @@ namespace CatanClient.ViewModels
             ShowInviteFriendCommand = new RelayCommand(_ => ExecuteShowInviteFriend(), _ => CanInviteFriends());
             ToggleReadyCommand = new AsyncRelayCommand(ToggleReady);
 
+            countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            countdownTimer.Tick += CountdownTimer_Tick;
+            Mediator.Register(Utilities.UPDATE_TIME, SetCountdownTime);
 
 
             UpdateCanExecuteCommands();
         }
+
 
         private async Task ToggleReady()
         {
@@ -107,7 +119,7 @@ namespace CatanClient.ViewModels
             }
             else
             {
-                ExecuteIsNotReady();
+                await ExecuteIsNotReady();
             }
         }
 
@@ -116,9 +128,34 @@ namespace CatanClient.ViewModels
             bool result = await serviceManager.GameServiceClient.StartGameAsync(AccountUtilities.CastAccountProfileToPlayerGameplay(profile), AccountUtilities.CastChatGameToGameServiceGame(game));
         }
 
-        private void ExecuteIsNotReady()
+        private async Task ExecuteIsNotReady()
         {
-            MessageBox.Show("Cancelando estar listo");
+            bool result = await serviceManager.GameServiceClient.CancelStartGameAsync(AccountUtilities.CastAccountProfileToPlayerGameplay(profile), AccountUtilities.CastChatGameToGameServiceGame(game));
+        }
+
+        public void SetCountdownTime(object timeInSeconds)
+        {
+            remainingTimeInSeconds = (int)timeInSeconds;
+            OnPropertyChanged(nameof(TimeText));
+            StartCountdown();
+        }
+
+        private void StartCountdown()
+        {
+            countdownTimer.Start();
+        }
+
+        private void CountdownTimer_Tick(object sender, EventArgs e)
+        {
+            if (remainingTimeInSeconds > 0)
+            {
+                remainingTimeInSeconds--;
+                OnPropertyChanged(nameof(TimeText));
+            }
+            else
+            {
+                countdownTimer.Stop();
+            }
         }
 
         private void UpdateCanExecuteCommands()
