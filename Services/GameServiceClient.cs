@@ -29,8 +29,8 @@ namespace CatanClient.Services
             var binding = new NetTcpBinding
             {
                 Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
+                MaxBufferSize = 485760,
+                MaxReceivedMessageSize = 485760,
                 OpenTimeout = TimeSpan.FromMinutes(1),
                 CloseTimeout = TimeSpan.FromMinutes(1),
                 SendTimeout = TimeSpan.FromMinutes(2),

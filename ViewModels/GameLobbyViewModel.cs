@@ -275,11 +275,12 @@ namespace CatanClient.ViewModels
             App.Current.Dispatcher.InvokeAsync(async () =>
             {
                 serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
-                await Task.Delay(5000);
+                Random random = new Random();
+                int delay = 3000 + (random.Next(0, 15) * 500); 
+
+                await Task.Delay(delay);
                 Mediator.Notify(Utilities.SHOW_GAME_SCREEN, game);
             });
-            
-            
         }
 
 
