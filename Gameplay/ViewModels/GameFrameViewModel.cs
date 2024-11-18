@@ -30,6 +30,7 @@ namespace CatanClient.ViewModels
         private AccountService.ProfileDto profile;
         private int remainingTimeInSeconds;
         private bool turn;
+
         private DispatcherTimer countdownTimer;
         public ICommand ShowTradeWindowCommand { get; }
         public ICommand RollDiceCommand { get; }
@@ -56,6 +57,23 @@ namespace CatanClient.ViewModels
 
 
         private bool isTradeGridVisible;
+
+        public bool Turn
+        {
+            get => turn;
+            set
+            {
+                if (turn != value)
+                {
+                    turn = value;
+                    OnPropertyChanged(nameof(Turn)); // Notifica que la propiedad ha cambiado
+
+                    // Actualiza los comandos relacionados con el turno
+                    ((RelayCommand)RollDiceCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)NextTurnCommand).RaiseCanExecuteChanged();
+                }
+            }
+        }
 
         public bool IsTradeGridVisible
         {
@@ -174,20 +192,20 @@ namespace CatanClient.ViewModels
             return turn == true;
         }
 
-        public void ExecuteShowTradeWindow() //TODO do can execute
+        public void ExecuteShowTradeWindow() 
         {
             TradeWindow tradeWindow = new TradeWindow();
             tradeWindow.ShowDialog();
         }
 
-        public void ExecuteRollDice() //TODO do can execute
+        public void ExecuteRollDice() 
         {
               Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, null);
         }
 
-        public void ExecuteNextTurn() //TODO do can execute
+        public void ExecuteNextTurn() 
         {
-
+            MessageBox.Show("Siguiente turno");
         }
 
         public void ExecuteHideTradeControl()
@@ -218,8 +236,7 @@ namespace CatanClient.ViewModels
                     {
                         if(profile.Id == player.Profile.Id)
                         {
-                            MessageBox.Show("Turno: " + player.IsTurn.ToString());
-                            turn = player.IsTurn;
+                            Turn = player.IsTurn;
                         }
                         OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
                             new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(player.Profile)),
@@ -239,7 +256,7 @@ namespace CatanClient.ViewModels
                         };
                         if (profile.Id == profileDto.Id)
                         {
-                            turn = player.IsTurn;
+                            Turn = player.IsTurn;
                         }
                         OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
                             new NamedParameter(Utilities.PROFILE, profileDto),
