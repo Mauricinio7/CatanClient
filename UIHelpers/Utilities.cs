@@ -53,6 +53,7 @@ namespace CatanClient.UIHelpers
         public const string SHOW_LOADING_SCREEN = "ShowLoadingScreen";
         public const string HIDE_LOADING_SCREEN = "HideLoadingScreen";
         public const string SHOW_GAME_SCREEN = "ShowGameScreen";
+        public const string SHOW_ROLL_DICE_ANIMATION = "ShowRollDiceAnimation";
         public const string RECIVE_MESSAGE = "ReceiveMessage";
         public const string RECIVE_MESSAGE_GAME = "ReceiveMessageGame";
         public const string LOAD_PLAYER_LIST = "LoadPlayerList";
@@ -96,6 +97,7 @@ namespace CatanClient.UIHelpers
         public const string CLOSE_KICK_PLAYER = "CloseKickPlayer";
         public const string UPDATE_TIME = "UpdateTime";
         public const string UPDATE_TIME_GAME = "UpdateTimeGame";
+        public const string TURN = "turn";
 
 
 

@@ -29,8 +29,11 @@ namespace CatanClient.ViewModels
         private ChatService.GameDto game;
         private AccountService.ProfileDto profile;
         private int remainingTimeInSeconds;
+        private bool turn;
         private DispatcherTimer countdownTimer;
         public ICommand ShowTradeWindowCommand { get; }
+        public ICommand RollDiceCommand { get; }
+        public ICommand NextTurnCommand { get; }
         public ICommand HideTradeControlCommand { get; }
         public ICommand ShowTradeControlCommand { get; }
         public ICommand SendMessageCommand { get; }
@@ -92,7 +95,9 @@ namespace CatanClient.ViewModels
             this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
 
             Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
-            ShowTradeWindowCommand = new RelayCommand(ExecuteShowTradeWindow);
+            ShowTradeWindowCommand = new RelayCommand(_ => ExecuteShowTradeWindow(), _ => CanPlayTurn());
+            RollDiceCommand = new RelayCommand(_ => ExecuteRollDice(), _ => CanPlayTurn()); 
+            NextTurnCommand = new RelayCommand(_ => ExecuteNextTurn(), _ => CanPlayTurn()); 
             HideTradeControlCommand = new RelayCommand(ExecuteHideTradeControl);
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
@@ -164,12 +169,25 @@ namespace CatanClient.ViewModels
             });
         }
 
-        
+        private bool CanPlayTurn()
+        {
+            return turn == true;
+        }
 
-        public void ExecuteShowTradeWindow()
+        public void ExecuteShowTradeWindow() //TODO do can execute
         {
             TradeWindow tradeWindow = new TradeWindow();
             tradeWindow.ShowDialog();
+        }
+
+        public void ExecuteRollDice() //TODO do can execute
+        {
+              Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, null);
+        }
+
+        public void ExecuteNextTurn() //TODO do can execute
+        {
+
         }
 
         public void ExecuteHideTradeControl()
@@ -198,9 +216,15 @@ namespace CatanClient.ViewModels
                 {
                     if (player.Profile != null)
                     {
+                        if(profile.Id == player.Profile.Id)
+                        {
+                            MessageBox.Show("Turno: " + player.IsTurn.ToString());
+                            turn = player.IsTurn;
+                        }
                         OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
                             new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(player.Profile)),
-                            new NamedParameter(Utilities.POINTS, player.Points)
+                            new NamedParameter(Utilities.POINTS, player.Points),
+                            new NamedParameter(Utilities.TURN, player.IsTurn)
                             ));
                     }
                     else
@@ -213,10 +237,14 @@ namespace CatanClient.ViewModels
                             PictureVersion = 0,
                             PreferredLanguage = CultureInfo.CurrentCulture.Name
                         };
-
+                        if (profile.Id == profileDto.Id)
+                        {
+                            turn = player.IsTurn;
+                        }
                         OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
                             new NamedParameter(Utilities.PROFILE, profileDto),
-                            new NamedParameter(Utilities.POINTS, player.Points)
+                            new NamedParameter(Utilities.POINTS, player.Points),
+                            new NamedParameter(Utilities.TURN, player.IsTurn)
                             ));
                     }
                 }

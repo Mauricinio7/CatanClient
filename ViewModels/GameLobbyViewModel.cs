@@ -272,8 +272,14 @@ namespace CatanClient.ViewModels
 
         private void ShowGameScreen(object args)
         {
-            serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
-            Mediator.Notify(Utilities.SHOW_GAME_SCREEN, game);
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
+                await Task.Delay(5000);
+                Mediator.Notify(Utilities.SHOW_GAME_SCREEN, game);
+            });
+            
+            
         }
 
 

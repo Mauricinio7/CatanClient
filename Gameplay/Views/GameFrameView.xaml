@@ -108,7 +108,7 @@
             <Button Margin="48,577,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" 
                 Grid.ColumnSpan="2" Height="122" Width="122" Grid.Row="2"
                     Background="Transparent"
-                    Command="{Binding DataContext.ShowDiceAnimationCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                    Command="{Binding RollDiceCommand}"
                     >
                 <Button.Content>
                     <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/Dice.png" Stretch="Uniform" Width="121" />
@@ -116,7 +116,7 @@
             </Button>
             <Button Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" 
                 Grid.ColumnSpan="2" Height="58" Width="112" Grid.Row="3"
-                Background="Transparent" >
+                Background="Transparent" Command="{Binding NextTurnCommand}">
                 <Button.Content>
                     <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/ContinueTurn.png" Stretch="Uniform" Width="112" Height="54" RenderTransformOrigin="0.543,-1.078" />
                 </Button.Content>
