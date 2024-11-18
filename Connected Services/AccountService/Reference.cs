@@ -421,6 +421,9 @@ namespace CatanClient.AccountService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] ProfilePictureField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isReadyToPlayField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -531,6 +534,19 @@ namespace CatanClient.AccountService {
                 if ((object.ReferenceEquals(this.ProfilePictureField, value) != true)) {
                     this.ProfilePictureField = value;
                     this.RaisePropertyChanged("ProfilePicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isReadyToPlay {
+            get {
+                return this.isReadyToPlayField;
+            }
+            set {
+                if ((this.isReadyToPlayField.Equals(value) != true)) {
+                    this.isReadyToPlayField = value;
+                    this.RaisePropertyChanged("isReadyToPlay");
                 }
             }
         }

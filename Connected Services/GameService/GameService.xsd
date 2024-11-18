@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.217.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+  <xs:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
   <xs:complexType name="ExpelPlayerDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="IdPlayerToExpel" type="xs:int" />
@@ -23,4 +23,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerDto" nillable="true" type="tns:PlayerDto" />
+  <xs:complexType name="ArrayOfPlayerTurnStatusDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerTurnStatusDto" nillable="true" type="tns:PlayerTurnStatusDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerTurnStatusDto" nillable="true" type="tns:ArrayOfPlayerTurnStatusDto" />
+  <xs:complexType name="PlayerTurnStatusDto">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="GuestAccount" nillable="true" type="q3:GuestAccountDto" />
+      <xs:element minOccurs="0" name="IsTurn" type="xs:boolean" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="Profile" nillable="true" type="q4:ProfileDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerTurnStatusDto" nillable="true" type="tns:PlayerTurnStatusDto" />
 </xs:schema>

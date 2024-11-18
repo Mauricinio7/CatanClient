@@ -85,6 +85,11 @@ namespace CatanClient.Callbacks
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateTurnStatus(PlayerTurnStatusDto[] playersTurnStatus)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     

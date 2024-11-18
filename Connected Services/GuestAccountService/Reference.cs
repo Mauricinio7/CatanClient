@@ -116,6 +116,9 @@ namespace CatanClient.GuestAccountService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PreferredLanguageField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isReadyToPlayField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -161,6 +164,19 @@ namespace CatanClient.GuestAccountService {
                 if ((object.ReferenceEquals(this.PreferredLanguageField, value) != true)) {
                     this.PreferredLanguageField = value;
                     this.RaisePropertyChanged("PreferredLanguage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isReadyToPlay {
+            get {
+                return this.isReadyToPlayField;
+            }
+            set {
+                if ((this.isReadyToPlayField.Equals(value) != true)) {
+                    this.isReadyToPlayField = value;
+                    this.RaisePropertyChanged("isReadyToPlay");
                 }
             }
         }

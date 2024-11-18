@@ -14,12 +14,10 @@
     <Viewbox Stretch="Fill" Margin="0,0,0,0">
         <Grid Background="{StaticResource SecondaryColor}" Width="1576" Height="900" x:Name="animatedGrid">
 
-            <!-- Títulos y Botones -->
             <TextBlock Style="{StaticResource PrimaryTextBlockStyle}" Text="Quieres:" Margin="38,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="30"/>
             <Button Content="{x:Static properties:Resources.button_send}" Style="{StaticResource NeonButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="208" Height="92" Margin="1322,38,0,0" FontSize="18" Command="{Binding SendTradeCommand}"/>
             <Button Content="{x:Static properties:Resources.button_exit}" Style="{StaticResource NeonButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1096,38,0,0" FontSize="18" Click="ButtonExit_Click" Height="71" Width="146"/>
 
-            <!-- Lista de Recursos para Solicitar -->
             <ItemsControl ItemsSource="{Binding ResourcesToRequest}" HorizontalAlignment="Left" Margin="38,123,0,456" Width="1506">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -40,16 +38,12 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <!-- Cantidad del recurso encima de la imagen -->
                             <TextBlock Text="{Binding Quantity}" FontSize="34" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
 
-                            <!-- Imagen del recurso -->
                             <Image Source="{Binding ImageSource}" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
 
-                            <!-- Nombre del recurso debajo de la imagen -->
                             <TextBlock Text="{Binding Name}" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="2" Grid.Column="0" Margin="0,10,0,0"/>
 
-                            <!-- Botones de incremento/decremento a la derecha de la imagen, centrados verticalmente -->
                             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0">
                                 <Button Content="+" Command="{Binding IncreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
                                 <Button Content="-" Command="{Binding DecreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
@@ -59,7 +53,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <!-- Lista de Recursos para Ofrecer -->
             <ItemsControl ItemsSource="{Binding ResourcesToOffer}" HorizontalAlignment="Left" Margin="38,520,0,48" Width="1492">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -80,16 +73,12 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <!-- Cantidad del recurso encima de la imagen -->
                             <TextBlock Text="{Binding Quantity}" FontSize="34" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
 
-                            <!-- Imagen del recurso -->
                             <Image Source="{Binding ImageSource}" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
 
-                            <!-- Nombre del recurso debajo de la imagen -->
                             <TextBlock Text="{Binding Name}" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Grid.Row="2" Grid.Column="0" Margin="0,10,0,0"/>
 
-                            <!-- Botones de incremento/decremento a la derecha de la imagen, centrados verticalmente -->
                             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0">
                                 <Button Content="+" Command="{Binding IncreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
                                 <Button Content="-" Command="{Binding DecreaseCommand}" Width="60" Height="60" Margin="0,5" Style="{StaticResource PrimaryButtonStyle}" FontSize="34"/>
