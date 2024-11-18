@@ -54,6 +54,7 @@ namespace CatanClient.UIHelpers
         public const string SHOW_GAME_SCREEN = "ShowGameScreen";
         public const string RECIVE_MESSAGE = "ReceiveMessage";
         public const string LOAD_PLAYER_LIST = "LoadPlayerList";
+        public const string LOAD_GAME_PLAYER_LIST = "LoadGamePlayerList";
         public const string ANIMATED_GRID = "animatedGrid";
         public const string FADE_IN_ANIMATION = "FadeInAnimation";
         public const string SLIDE_OUT_FROM_TOP_ANIMATION = "SLIDE_OUT_FROM_TOP_ANIMATION";
@@ -85,6 +86,7 @@ namespace CatanClient.UIHelpers
         public const string IMAGE_FILTER = "Image Files (*.jpg;*.png)|*.jpg;*.png";
         public const string PROFILE_IMAGE_DIRECTORY = "ProfilePhotos";
         public const string PROFILE = "profile";
+        public const string POINTS = "points";
         public const string ACCES_KEY = "accesKey";
         public const string GAME = "game";
         public const string SENDER_PROFILE = "senderProfile";

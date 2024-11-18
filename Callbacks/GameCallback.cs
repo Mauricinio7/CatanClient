@@ -88,6 +88,11 @@ namespace CatanClient.Callbacks
 
         public void UpdateTurnStatus(PlayerTurnStatusDto[] playersTurnStatus)
         {
+            Mediator.Notify(Utilities.LOAD_GAME_PLAYER_LIST, playersTurnStatus);
+        }
+
+        public void UpdateTurnTimeRemaining(int remainingTime)
+        {
             throw new NotImplementedException();
         }
     }

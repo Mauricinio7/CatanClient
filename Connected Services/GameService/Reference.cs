@@ -847,6 +847,9 @@ namespace CatanClient.GameService {
         private bool IsTurnField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private CatanClient.GameService.ProfileDto ProfileField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -881,6 +884,19 @@ namespace CatanClient.GameService {
                 if ((this.IsTurnField.Equals(value) != true)) {
                     this.IsTurnField = value;
                     this.RaisePropertyChanged("IsTurn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Points {
+            get {
+                return this.PointsField;
+            }
+            set {
+                if ((this.PointsField.Equals(value) != true)) {
+                    this.PointsField = value;
+                    this.RaisePropertyChanged("Points");
                 }
             }
         }
@@ -1014,6 +1030,9 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/UpdateTurnStatus")]
         void UpdateTurnStatus(CatanClient.GameService.PlayerTurnStatusDto[] playersTurnStatus);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/UpdateTurnTimeRemaining")]
+        void UpdateTurnTimeRemaining(int remainingTime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

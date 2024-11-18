@@ -47,15 +47,27 @@
             <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.global_kick_player}" Margin="22,8,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="60" Width="180" Grid.Row="2"/>
 
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="115,0,0,26" Text="{x:Static properties:Resources.label_lunar_stone}"/>
-            <ListBox Grid.Column="4" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="176,22,15,456" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
-            <ListBox Grid.Column="4" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="175,339,16,60" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <ListBox ItemsSource="{Binding OnlinePlayersList}" Margin="175,28,16,425"
+                 Background="Transparent"
+                 Foreground="White"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:PlayerInGameCard />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <controls:PlaceholderTextBoxControl x:Name="TextBoxChat"
                 FontSizeValue="11"
                 PlaceholderText="{x:Static properties:Resources.label_message_field}"
                 Margin="175,650,16,12"
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 Text="{Binding NewMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
+
+
+
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="4" Margin="211,297,0,0" FontSize="18" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="106" Height="27" Grid.ColumnSpan="2" Grid.Row="2"><Run Text="{x:Static properties:Resources.label_chat}" /><Run Language="es-mx" Text=":"/></TextBlock>
+            
             <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_send}"  Margin="211,14,0,0" FontSize="7" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="45" Width="140" Grid.Row="3" Grid.Column="4"/>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="257,0,0,26"><Run Text="Tritónium"/></TextBlock>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="370,64,0,0"><Run Text="{x:Static properties:Resources.label_alpha_nanofibers}"/></TextBlock>

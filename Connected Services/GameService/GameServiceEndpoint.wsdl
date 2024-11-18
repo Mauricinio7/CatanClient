@@ -116,6 +116,9 @@
   <wsdl:message name="IGameEndPoint_UpdateTurnStatus_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateTurnStatus" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_UpdateTurnTimeRemaining_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTurnTimeRemaining" />
+  </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGame" message="tns:IGameEndPoint_CreateGame_InputMessage" />
@@ -189,6 +192,9 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTurnStatus">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/UpdateTurnStatus" message="tns:IGameEndPoint_UpdateTurnStatus_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTurnTimeRemaining">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/UpdateTurnTimeRemaining" message="tns:IGameEndPoint_UpdateTurnTimeRemaining_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -349,6 +355,12 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTurnStatus">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/UpdateTurnStatus" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTurnTimeRemaining">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/UpdateTurnTimeRemaining" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

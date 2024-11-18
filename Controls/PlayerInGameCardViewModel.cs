@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace CatanClient.Controls
@@ -33,7 +34,7 @@ namespace CatanClient.Controls
             }
         }
 
-        public PlayerInGameCardViewModel(ProfileDto profile, int points,ServiceManager serviceManager)
+        public PlayerInGameCardViewModel(ProfileDto profile, int points, ServiceManager serviceManager)
         {
             Profile = profile;
             PlayerName = profile.Name;
