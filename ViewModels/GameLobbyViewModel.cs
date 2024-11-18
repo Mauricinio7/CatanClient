@@ -104,6 +104,7 @@ namespace CatanClient.ViewModels
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
             Mediator.Register(Utilities.UPDATE_TIME, SetCountdownTime);
+            Mediator.Register(Utilities.GET_GAME_FOR_SCREEN, ShowGameScreen);
 
 
             UpdateCanExecuteCommands();
@@ -245,6 +246,7 @@ namespace CatanClient.ViewModels
         internal async Task ExecuteLeftRoomAsync()
         {
             serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
+            serviceManager.ChatServiceClient.Dispose();
 
             GameService.GameDto gameRoom = new GameService.GameDto
             {
@@ -260,13 +262,20 @@ namespace CatanClient.ViewModels
             }
             else
             {
-                await serviceManager.GameServiceClient.LeftRoomGuestClientAsync(gameRoom, AccountUtilities.CastAccountProfileToGuestAccount(profile));
+                 await serviceManager.GameServiceClient.LeftRoomGuestClientAsync(gameRoom, AccountUtilities.CastAccountProfileToGuestAccount(profile));
             }
-           
+
             LoadPlayerList(null);
 
             AccountUtilities.RestartGame();
         }
+
+        private void ShowGameScreen(object args)
+        {
+            serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
+            Mediator.Notify(Utilities.SHOW_GAME_SCREEN, game);
+        }
+
 
     }
     

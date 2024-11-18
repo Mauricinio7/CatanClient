@@ -115,7 +115,7 @@ namespace CatanClient.ViewModels
             ShowLoadingScreenCommand = new RelayCommand(ShowLoadingScreen);
             HideLoadingScreenCommand = new RelayCommand(HideLoadingScreen);
 
-            ShowGameScreenCommand = new RelayCommand(ShowGameScreen);
+            ShowGameScreenCommand = new RelayCommand(gameDto => ShowGameScreen(gameDto));
 
             Mediator.Register(Utilities.SHOW_CONFIGURE_PROFILE, args => ShowConfigureProfileCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_CHANGE_FORGOT_PASSWORD, args => ShowChangeForgotPasswordViewCommand.Execute(args));
@@ -131,7 +131,7 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.HIDE_INVITE_FRIENDS, args => HideInviteFriendsViewCommand.Execute(null));
             Mediator.Register(Utilities.SHOW_LOADING_SCREEN, args => ShowLoadingScreenCommand.Execute(null));
             Mediator.Register(Utilities.HIDE_LOADING_SCREEN, args => HideLoadingScreenCommand.Execute(null));
-            Mediator.Register(Utilities.SHOW_GAME_SCREEN, args => ShowGameScreenCommand.Execute(null));
+            Mediator.Register(Utilities.SHOW_GAME_SCREEN, args => ShowGameScreenCommand.Execute(args));
 
         }
 
@@ -145,13 +145,6 @@ namespace CatanClient.ViewModels
         private void DiceAnimationView_AnimationCompleted(object sender, EventArgs e)
         {
             OverlayView = null;
-        }
-
-
-
-        private void ShowGameScreen()
-        {
-            CurrentView = new Gameplay.Views.GameFrameView();
         }
 
         private void ShowLoadingScreen()
@@ -382,6 +375,17 @@ namespace CatanClient.ViewModels
             GameLobbyView lobbyRoomView = new Views.GameLobbyView(gameDto);
 
             CurrentView = lobbyRoomView;
+        }
+
+
+        private void ShowGameScreen(object gameDtoObj)
+        {
+            if (!(gameDtoObj is ChatService.GameDto gameDto))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            CurrentView = new Gameplay.Views.GameFrameView(gameDto);
         }
 
         private void ShowMainMenuView()

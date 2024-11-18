@@ -16,5 +16,6 @@ namespace CatanClient.Services
         void SendMessageToServer(ChatService.GameDto game, string namePlayer, string message);
 
         void LeftChatClient(ChatService.GameDto game, string namePlayer);
+        void Dispose();
     }
 }

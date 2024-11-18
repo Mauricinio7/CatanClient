@@ -18,6 +18,7 @@ namespace CatanClient.Controls
 
         public string PlayerName { get; set; }
         public string Points { get; set; }
+        public bool Turn { get; set; }
 
         private ServiceManager serviceManager;
 
@@ -34,10 +35,11 @@ namespace CatanClient.Controls
             }
         }
 
-        public PlayerInGameCardViewModel(ProfileDto profile, int points, ServiceManager serviceManager)
+        public PlayerInGameCardViewModel(ProfileDto profile, int points, bool turn, ServiceManager serviceManager)
         {
             Profile = profile;
             PlayerName = profile.Name;
+            Turn = turn;
             this.serviceManager = serviceManager;
 
             Points = "Puntos: " + points.ToString(); //TODO quit hardcode and do a real method

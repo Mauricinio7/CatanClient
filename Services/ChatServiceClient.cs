@@ -1,66 +1,111 @@
 ﻿using CatanClient.Callbacks;
 using CatanClient.ChatService;
 using CatanClient.UIHelpers;
+using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace CatanClient.Services
 {
     public class ChatServiceClient : IChatServiceClient
     {
-        private static ChatCallback callback = new ChatCallback();
-        public void JoinChatClient(ChatService.GameDto game, string namePlayer)
+        private DuplexChannelFactory<IChatServiceEndpoint> channelFactory;
+        private IChatServiceEndpoint client;
+        private InstanceContext callbackInstance;
+
+        public ChatServiceClient()
         {
-            InstanceContext instanceContext = new InstanceContext(callback);
-
-            NetTcpBinding netTcpBinding = new NetTcpBinding();
-            netTcpBinding.Security.Mode = SecurityMode.None;
-
-            EndpointAddress endpointAddress = new EndpointAddress(Utilities.IP_CHAT_SERVICE);
-
-            DuplexChannelFactory<IChatServiceEndpoint> factory = new DuplexChannelFactory<IChatServiceEndpoint>(instanceContext, netTcpBinding, endpointAddress);
-
-            IChatServiceEndpoint chatService = factory.CreateChannel();
-
-            chatService.JoinChat(game, namePlayer);
-
+            callbackInstance = new InstanceContext(new ChatCallback());
         }
 
-        public void LeftChatClient(ChatService.GameDto game, string namePlayer)
+        private void OpenConnection()
         {
-            InstanceContext instanceContext = new InstanceContext(callback);
+            if (client != null) return;
 
-            NetTcpBinding netTcpBinding = new NetTcpBinding();
-            netTcpBinding.Security.Mode = SecurityMode.None;
+            var binding = new NetTcpBinding
+            {
+                Security = { Mode = SecurityMode.None },
+                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = 10485760,
+                OpenTimeout = TimeSpan.FromMinutes(1),
+                CloseTimeout = TimeSpan.FromMinutes(1),
+                SendTimeout = TimeSpan.FromMinutes(2),
+                ReceiveTimeout = TimeSpan.FromMinutes(10)
+            };
 
-            EndpointAddress endpointAddress = new EndpointAddress(Utilities.IP_CHAT_SERVICE);
-
-            DuplexChannelFactory<IChatServiceEndpoint> factory = new DuplexChannelFactory<IChatServiceEndpoint>(instanceContext, netTcpBinding, endpointAddress);
-
-            IChatServiceEndpoint chatService = factory.CreateChannel();
-
-            chatService.LeaveChat(game, namePlayer);
+            var endpoint = new EndpointAddress(Utilities.IP_CHAT_SERVICE);
+            channelFactory = new DuplexChannelFactory<IChatServiceEndpoint>(callbackInstance, binding, endpoint);
+            client = channelFactory.CreateChannel();
         }
 
-        public void SendMessageToServer(ChatService.GameDto game, string namePlayer, string message)
+        private void CloseConnection()
         {
-            InstanceContext instanceContext = new InstanceContext(callback);
+            if (client != null)
+            {
+                try
+                {
+                    ((ICommunicationObject)client).Close();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Error al cerrar la conexión: {ex.Message}");
+                    ((ICommunicationObject)client).Abort();
+                }
+                finally
+                {
+                    client = null;
+                    channelFactory = null;
+                }
+            }
+        }
 
-            NetTcpBinding netTcpBinding = new NetTcpBinding();
-            netTcpBinding.Security.Mode = SecurityMode.None;
+        public void JoinChatClient(GameDto game, string namePlayer)
+        {
+            OpenConnection();
+            try
+            {
+                client.JoinChat(game, namePlayer);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error al unirse al chat: {ex.Message}");
+            }
+        }
 
-            EndpointAddress endpointAddress = new EndpointAddress(Utilities.IP_CHAT_SERVICE);
+        public void LeftChatClient(GameDto game, string namePlayer)
+        {
+            OpenConnection();
+            try
+            {
+                client.LeaveChat(game, namePlayer);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error al salir del chat: {ex.Message}");
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
 
-            DuplexChannelFactory<IChatServiceEndpoint> factory = new DuplexChannelFactory<IChatServiceEndpoint>(instanceContext, netTcpBinding, endpointAddress);
+        public void SendMessageToServer(GameDto game, string namePlayer, string message)
+        {
+            try
+            {
+                client.SendMessageToChat(game, namePlayer, message);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error al enviar mensaje al chat: {ex.Message}");
+            }
+        }
 
-            IChatServiceEndpoint chatService = factory.CreateChannel();
-
-            chatService.SendMessageToChat(game, namePlayer, message);
-
+        public void Dispose()
+        {
+            MessageBox.Show("Se ha cerrado el chat");
+            CloseConnection();
         }
     }
 }

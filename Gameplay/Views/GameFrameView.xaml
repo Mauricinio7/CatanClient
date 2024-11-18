@@ -42,6 +42,12 @@
 
 
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="227,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"><Run Text="{x:Static properties:Resources.label_points}" /><Run Language="es-mx" Text=":"/></TextBlock>
+            <TextBlock 
+                Margin="680,43,184,24"
+                Style="{StaticResource PrimaryTextBlockStyle}"
+                Text="{Binding TimeText}"
+                FontSize="20" Grid.Column="1" Grid.ColumnSpan="4"
+             />
 
             <Button Style ="{StaticResource NeonButtonStyle}"  Content="{x:Static properties:Resources.button_exit}" Margin="26,0,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="50" Width="116"/>
             <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.global_kick_player}" Margin="22,8,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="60" Width="180" Grid.Row="2"/>
@@ -62,13 +68,29 @@
                 PlaceholderText="{x:Static properties:Resources.label_message_field}"
                 Margin="175,650,16,12"
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
-                Text="{Binding NewMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
+                Text ="{Binding NewMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
 
 
 
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="4" Margin="211,297,0,0" FontSize="18" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="106" Height="27" Grid.ColumnSpan="2" Grid.Row="2"><Run Text="{x:Static properties:Resources.label_chat}" /><Run Language="es-mx" Text=":"/></TextBlock>
-            
-            <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_send}"  Margin="211,14,0,0" FontSize="7" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="45" Width="140" Grid.Row="3" Grid.Column="4"/>
+            <ListBox ItemsSource="{Binding Messages}"
+                Grid.Column="4" Margin="174,344,16,76"
+                Background="white"
+                BorderThickness="0"
+                ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.ColumnSpan="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10">
+                            <Border Background="LightGray" Padding="10" CornerRadius="10"
+       >
+                                <TextBlock Text="{Binding Content, Mode=TwoWay}" TextWrapping="Wrap" FontSize="10"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_send}"  Margin="211,14,0,0" FontSize="7" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="45" Width="140" Grid.Row="3" Grid.Column="4"
+                    Command="{Binding SendMessageCommand}"/>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="257,0,0,26"><Run Text="Tritónium"/></TextBlock>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="370,64,0,0"><Run Text="{x:Static properties:Resources.label_alpha_nanofibers}"/></TextBlock>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="531,0,0,26"><Run Text="{x:Static properties:Resources.label_epsilon_biomass}"/></TextBlock>

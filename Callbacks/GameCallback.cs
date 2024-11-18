@@ -41,7 +41,6 @@ namespace CatanClient.Callbacks
 
         public void BroadcastNotifyNewAdmin(int idAdmin)
         {
-            throw new NotImplementedException();
         }
 
         public void NotifyPlayerExpulsion(string message, string reason)
@@ -67,7 +66,7 @@ namespace CatanClient.Callbacks
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Mediator.Notify(Utilities.SHOW_GAME_SCREEN, null);
+                Mediator.Notify(Utilities.GET_GAME_FOR_SCREEN, null);
             });
 
             
@@ -83,7 +82,6 @@ namespace CatanClient.Callbacks
 
         public void UpdateTimeWhenJoinGame(int time)
         {
-            throw new NotImplementedException();
         }
 
         public void UpdateTurnStatus(PlayerTurnStatusDto[] playersTurnStatus)
@@ -93,7 +91,7 @@ namespace CatanClient.Callbacks
 
         public void UpdateTurnTimeRemaining(int remainingTime)
         {
-            throw new NotImplementedException();
+            Mediator.Notify(Utilities.UPDATE_TIME_GAME, remainingTime);
         }
     }
 

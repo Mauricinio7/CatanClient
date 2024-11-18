@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CatanClient.ChatService;
 using CatanClient.Gameplay.ViewModels;
 using CatanClient.ViewModels;
 using System;
@@ -23,10 +24,12 @@ namespace CatanClient.Gameplay.Views
     /// </summary>
     public partial class GameFrameView : UserControl
     {
-        public GameFrameView()
+        public GameFrameView(GameDto game)
         {
             InitializeComponent();
-            DataContext = App.Container.Resolve<GameFrameViewModel>();
+            this.DataContext = App.Container.Resolve<GameFrameViewModel>(
+               new TypedParameter(typeof(ChatService.GameDto), game)
+           );
         }
 
 

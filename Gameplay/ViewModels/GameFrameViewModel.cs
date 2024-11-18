@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CatanClient.ChatService;
 using CatanClient.Commands;
 using CatanClient.Controls;
 using CatanClient.Gameplay.Helpers;
@@ -6,25 +7,37 @@ using CatanClient.Gameplay.Views;
 using CatanClient.GameService;
 using CatanClient.Services;
 using CatanClient.UIHelpers;
+using CatanClient.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace CatanClient.ViewModels
 {
     internal class GameFrameViewModel : ViewModelBase
     {
+        private string newMessage;
+        private ChatService.GameDto game;
+        private AccountService.ProfileDto profile;
+        private int remainingTimeInSeconds;
+        private DispatcherTimer countdownTimer;
         public ICommand ShowTradeWindowCommand { get; }
         public ICommand HideTradeControlCommand { get; }
         public ICommand ShowTradeControlCommand { get; }
+        public ICommand SendMessageCommand { get; }
+        public ICollectionView PlayersView { get; set; }
 
         private readonly ServiceManager serviceManager;
+        public ObservableCollection<ChatMessage> Messages { get; set; }
         public ObservableCollection<PlayerInGameCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInGameCardViewModel>();
         public ObservableCollection<Resource> ResourcesToRequest { get; set; }
         public ObservableCollection<Resource> ResourcesToOffer { get; set; }
@@ -33,6 +46,11 @@ namespace CatanClient.ViewModels
 
         public ObservableCollection<Resource> FilteredResourcesToOffer =>
             new ObservableCollection<Resource>(ResourcesToOffer.Where(r => r.Quantity > 0));
+
+        public string TimeText => remainingTimeInSeconds > 0
+       ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
+       : "Aun no es tu turno";
+
 
         private bool isTradeGridVisible;
 
@@ -46,21 +64,75 @@ namespace CatanClient.ViewModels
             }
         }
 
-
-
-        public GameFrameViewModel(ServiceManager serviceManager)
+        public string NewMessage
         {
+            get { return newMessage; }
+            set
+            {
+                newMessage = value;
+                OnPropertyChanged(nameof(NewMessage));
+            }
+        }
+
+
+
+
+        public GameFrameViewModel(ChatService.GameDto gameDto, ServiceManager serviceManager)
+        {
+            game = gameDto;
             this.serviceManager = serviceManager;
+
+            Messages = new ObservableCollection<ChatMessage>
+            {
+                new ChatMessage { Content = "El juego ha iniciado", Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
+            };
+
+            profile = serviceManager.ProfileSingleton.Profile;
+
+            this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
+
+            Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
             ShowTradeWindowCommand = new RelayCommand(ExecuteShowTradeWindow);
             HideTradeControlCommand = new RelayCommand(ExecuteHideTradeControl);
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
+            SendMessageCommand = new RelayCommand(ExecuteSendMessage);
+
+            countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            countdownTimer.Tick += CountdownTimer_Tick;
+            Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
+
 
             LoadResources(); //TODO quit this
 
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
 
             IsTradeGridVisible = true;
-            //UpdateTradeWindow();
+            UpdateTradeWindow();
+        }
+
+        public void SetCountdownTime(object timeInSeconds)
+        {
+            remainingTimeInSeconds = (int)timeInSeconds;
+            OnPropertyChanged(nameof(TimeText));
+            StartCountdown();
+        }
+
+        private void StartCountdown()
+        {
+            countdownTimer.Start();
+        }
+
+        private void CountdownTimer_Tick(object sender, EventArgs e)
+        {
+            if (remainingTimeInSeconds > 0)
+            {
+                remainingTimeInSeconds--;
+                OnPropertyChanged(nameof(TimeText));
+            }
+            else
+            {
+                countdownTimer.Stop();
+            }
         }
 
         private void LoadResources()
@@ -148,9 +220,28 @@ namespace CatanClient.ViewModels
                             ));
                     }
                 }
+
+                PlayersView = CollectionViewSource.GetDefaultView(OnlinePlayersList);
+                PlayersView.SortDescriptions.Add(new SortDescription(nameof(PlayerInGameCardViewModel.Turn), ListSortDirection.Descending));
             }
             
         }
+
+        internal void OnReceiveMessage(object message)
+        {
+            ChatMessage chatMessage = message as ChatMessage;
+            if (chatMessage != null)
+            {
+                Messages.Add(chatMessage);
+            }
+        }
+
+        internal void ExecuteSendMessage()
+        {
+            serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
+        }
+
+
 
     }
 }

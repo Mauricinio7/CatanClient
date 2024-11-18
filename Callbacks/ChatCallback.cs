@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CatanClient.Callbacks
 {
@@ -18,6 +19,7 @@ namespace CatanClient.Callbacks
             {
                 ChatMessage chatMessage = new ChatMessage { Content = message, Name = name, IsUserMessage = false };
                 Mediator.Notify(Utilities.RECIVE_MESSAGE, chatMessage);
+                Mediator.Notify(Utilities.RECIVE_MESSAGE_GAME, chatMessage);
             });
         }
 
@@ -27,6 +29,7 @@ namespace CatanClient.Callbacks
             {
                 ChatMessage systemMessage = new ChatMessage { Content = name + Utilities.MessagePlayerJoin(CultureInfo.CurrentCulture.Name), Name = Utilities.SYSTEM_NAME, IsUserMessage = false };
                 Mediator.Notify(Utilities.RECIVE_MESSAGE, systemMessage);
+                Mediator.Notify(Utilities.RECIVE_MESSAGE_GAME, systemMessage);
                 Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
             });
         }
@@ -43,6 +46,7 @@ namespace CatanClient.Callbacks
                 };
 
                 Mediator.Notify(Utilities.RECIVE_MESSAGE, systemMessage);
+                Mediator.Notify(Utilities.RECIVE_MESSAGE_GAME, systemMessage);
                 await Task.Delay(3000);
 
                 Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);

@@ -40,6 +40,7 @@ namespace CatanClient.UIHelpers
         public const string SHOW_VERIFY_ACCOUNT = "ShowVerifyAccountView";
         public const string OCULT_VERIFY_ACCOUNT = "OcultVerifyAccountView";
         public const string SHOW_GAME_LOBBY = "ShowGameLobbyView";
+        public const string GET_GAME_FOR_SCREEN = "GetGameForScreen";
         public const string SHOW_CONFIGURE_PROFILE = "ShowConfigureProfile";
         public const string SHOW_INVITE_FRIENDS = "ShowInviteFriendsView";
         public const string HIDE_INVITE_FRIENDS = "HideInviteFriendsView";
@@ -53,6 +54,7 @@ namespace CatanClient.UIHelpers
         public const string HIDE_LOADING_SCREEN = "HideLoadingScreen";
         public const string SHOW_GAME_SCREEN = "ShowGameScreen";
         public const string RECIVE_MESSAGE = "ReceiveMessage";
+        public const string RECIVE_MESSAGE_GAME = "ReceiveMessageGame";
         public const string LOAD_PLAYER_LIST = "LoadPlayerList";
         public const string LOAD_GAME_PLAYER_LIST = "LoadGamePlayerList";
         public const string ANIMATED_GRID = "animatedGrid";
@@ -93,6 +95,7 @@ namespace CatanClient.UIHelpers
         public const string CLOSE_EXPEL_PLAYER = "CloseExpelPlayer";
         public const string CLOSE_KICK_PLAYER = "CloseKickPlayer";
         public const string UPDATE_TIME = "UpdateTime";
+        public const string UPDATE_TIME_GAME = "UpdateTimeGame";
 
 
 
