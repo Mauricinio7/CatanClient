@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,7 +39,8 @@ namespace CatanClient.Gameplay.Views
             RenderOptions.SetBitmapScalingMode(DiceImage, BitmapScalingMode.NearestNeighbor);
 
             ImageBehavior.SetAnimatedSource(DiceImage, imageSource);
-            ImageBehavior.SetRepeatBehavior(DiceImage, new RepeatBehavior(5)); 
+
+            ImageBehavior.SetRepeatBehavior(DiceImage, new RepeatBehavior(5));
 
             ImageBehavior.AddAnimationCompletedHandler(DiceImage, async (s, e) =>
             {

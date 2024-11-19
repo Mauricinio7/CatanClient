@@ -237,21 +237,31 @@ namespace CatanClient.Services
             return result;
         }
 
-        public async Task<bool> ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
+        public async Task ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto, int diceValue)
         {
             OpenConnection();
-            bool result;
             try
             {
-                result = await client.ThrowDiceAsync(playerGameplayDto, gameClientDto);
+                await client.ThrowDiceAsync(playerGameplayDto, gameClientDto, diceValue);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                result = false;
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
-            return result;
+           
+        }
+        public void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
+        {
+            OpenConnection();
+            try
+            {
+                client.QuitGamePlay(playerGameplayDto, gameClientDto);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+
         }
     }
 }

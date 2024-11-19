@@ -40,12 +40,24 @@ namespace CatanClient.Controls
         {
             Profile = profile;
             PlayerName = profile.Name;
-            Ready = "No listo"; //TODO quit hardcode and do a real method
+            SetReady();
             this.serviceManager = serviceManager;
 
 
                 LoadProfileImage();
             
+        }
+
+        internal void SetReady()
+        {
+            if (Profile.isReadyToPlay) 
+            {
+                Ready = "Listo";
+            }
+            else
+            {
+                Ready = "No listo";
+            }
         }
 
 

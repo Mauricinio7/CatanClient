@@ -249,7 +249,6 @@ namespace CatanClient.ViewModels
         internal async Task ExecuteLeftRoomAsync()
         {
             serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
-            serviceManager.ChatServiceClient.Dispose();
 
             GameService.GameDto gameRoom = new GameService.GameDto
             {

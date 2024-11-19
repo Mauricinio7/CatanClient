@@ -32,10 +32,6 @@ namespace CatanClient.Callbacks
                     await Task.Delay(3000);
                     Mediator.Notify(Utilities.LOAD_PLAYER_LIST, null);
                 }
-                else
-                {
-                    Console.WriteLine("No se pudo obtener el nombre del jugador expulsado.");
-                }
             });
         }
 
@@ -64,7 +60,7 @@ namespace CatanClient.Callbacks
 
         public void SendDiceResult(int diceResult)
         {
-            Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceResult);
+                Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceResult);
         }
 
         public void StartGameForAllPlayers()

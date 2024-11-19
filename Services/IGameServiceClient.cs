@@ -28,7 +28,8 @@ namespace CatanClient.Services
         Task<bool> LeftRoomGuestClientAsync(GameDto game, GuestAccountDto guest);
         Task<bool> StartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task<bool> CancelStartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
-        Task<bool> ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
+        Task ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto, int diceValue);
+        void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
 
     }
 }

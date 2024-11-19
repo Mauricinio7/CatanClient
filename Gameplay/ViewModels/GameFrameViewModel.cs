@@ -38,7 +38,9 @@ namespace CatanClient.ViewModels
         public ICommand HideTradeControlCommand { get; }
         public ICommand ShowTradeControlCommand { get; }
         public ICommand SendMessageCommand { get; }
+        public ICommand ExitCommand { get; }
         public ICollectionView PlayersView { get; set; }
+
 
         private readonly ServiceManager serviceManager;
         public ObservableCollection<ChatMessage> Messages { get; set; }
@@ -67,7 +69,6 @@ namespace CatanClient.ViewModels
                 {
                     turn = value;
                     OnPropertyChanged(nameof(Turn)); 
-
                     ((RelayCommand)RollDiceCommand).RaiseCanExecuteChanged();
                     ((RelayCommand)NextTurnCommand).RaiseCanExecuteChanged();
                     ((RelayCommand)ShowTradeWindowCommand).RaiseCanExecuteChanged();
@@ -110,21 +111,23 @@ namespace CatanClient.ViewModels
 
             profile = serviceManager.ProfileSingleton.Profile;
 
-            Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
+            
             ShowTradeWindowCommand = new RelayCommand(_ => ExecuteShowTradeWindow(), _ => CanPlayTurn());
             RollDiceCommand = new RelayCommand(_ => ExecuteRollDiceAsync(), _ => CanPlayTurn()); 
             NextTurnCommand = new RelayCommand(_ => ExecuteNextTurn(), _ => CanPlayTurn()); 
             HideTradeControlCommand = new RelayCommand(ExecuteHideTradeControl);
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
+            ExitCommand = new RelayCommand(ExecuteExit);
 
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
-            Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
+            
 
 
             LoadResources(); //TODO quit this
-
+            Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
+            Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
 
             IsTradeGridVisible = true;
@@ -196,14 +199,30 @@ namespace CatanClient.ViewModels
             tradeWindow.ShowDialog();
         }
 
-        public async void ExecuteRollDiceAsync() 
+        public async void ExecuteRollDiceAsync()
         {
-            PlayerGameplayDto playerGameplay = new PlayerGameplayDto();
-            playerGameplay.CurrentSession = profile.CurrentSessionID;
-            playerGameplay.isRegistered = profile.IsRegistered;
-            playerGameplay.Id = profile.Id.Value;
+            PlayerGameplayDto playerGameplay = new PlayerGameplayDto
+            {
+                CurrentSession = profile.CurrentSessionID,
+                isRegistered = profile.IsRegistered,
+                Id = profile.Id.Value
+            };
 
-            await serviceManager.GameServiceClient.ThrowDiceAsync(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+            int diceValue = DiceRollNumbers();
+
+            Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceValue);
+
+            await serviceManager.GameServiceClient.ThrowDiceAsync(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game), diceValue);
+        }
+
+        public int DiceRollNumbers()
+        {
+            Random random = new Random();
+            int dice1 = random.Next(1, 7); 
+            int dice2 = random.Next(1, 7);
+            int total = dice1 + dice2;
+
+            return total;
         }
 
         public void ExecuteNextTurn() 
@@ -287,6 +306,24 @@ namespace CatanClient.ViewModels
         internal void ExecuteSendMessage()
         {
             serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
+        }
+
+        internal void ExecuteExit()
+        {
+            PlayerGameplayDto playerGameplay = new PlayerGameplayDto
+            {
+                CurrentSession = profile.CurrentSessionID,
+                isRegistered = profile.IsRegistered,
+                Id = profile.Id.Value
+            };
+
+            serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
+
+            serviceManager.GameServiceClient.ExitGame(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+
+
+
+            AccountUtilities.RestartGame();
         }
 
 

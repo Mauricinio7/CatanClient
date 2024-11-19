@@ -104,7 +104,6 @@ namespace CatanClient.Services
 
         public void Dispose()
         {
-            MessageBox.Show("Se ha cerrado el chat");
             CloseConnection();
         }
     }
