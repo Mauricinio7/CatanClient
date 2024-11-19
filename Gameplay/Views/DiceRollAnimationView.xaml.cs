@@ -24,12 +24,12 @@ namespace CatanClient.Gameplay.Views
     public partial class DiceRollAnimationView : UserControl
     {
         public event EventHandler AnimationCompleted;
-        public DiceRollAnimationView()
+        public DiceRollAnimationView(int result)
         {
             InitializeComponent();
-            StartDiceAnimation();
+            StartDiceAnimation(result);
         }
-        private void StartDiceAnimation()
+        private void StartDiceAnimation(int result)
         {
             string diceGifPath = Utilities.DICE_ROLL_ANIMATION;
             var imageUri = new Uri(diceGifPath, UriKind.Absolute);
@@ -44,15 +44,13 @@ namespace CatanClient.Gameplay.Views
             {
                 AnimationCompleted?.Invoke(this, EventArgs.Empty);
                 await Task.Delay(500);
-                ShowDiceResult();
+                ShowDiceResult(result);
             });
         }
 
-        private void ShowDiceResult()
+        private void ShowDiceResult(int result)
         {
-            Random random = new Random();
-            int diceResult = random.Next(2, 13); 
-            MessageBox.Show($"El resultado de los dados es: {diceResult}");
+            MessageBox.Show($"El resultado de los dados es: {result}");
         }
     }
 }

@@ -34,6 +34,7 @@ namespace CatanClient.ViewModels
         private AccountService.ProfileDto profile;
         private int remainingTimeInSeconds;
         private DispatcherTimer countdownTimer;
+        private bool isJoiningGame;
 
 
         public string RoomName => game.Name;
@@ -50,9 +51,11 @@ namespace CatanClient.ViewModels
         private bool isReady;
         public ObservableCollection<ChatMessage> Messages { get; set; }
 
-        public string TimeText => remainingTimeInSeconds > 0
-       ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
-       : "Esperando jugadores ...";
+        public string TimeText => isJoiningGame
+        ? "Uniendo a juego..."
+        : remainingTimeInSeconds > 0
+            ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
+            : "Esperando jugadores ...";
 
         public bool IsReady
         {
@@ -274,11 +277,14 @@ namespace CatanClient.ViewModels
         {
             App.Current.Dispatcher.InvokeAsync(async () =>
             {
-                serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
+                isJoiningGame = true; 
+                OnPropertyChanged(nameof(TimeText)); 
+
                 Random random = new Random();
-                int delay = 3000 + (random.Next(0, 15) * 500); 
+                int delay = 3000 + (random.Next(0, 15) * 500);
 
                 await Task.Delay(delay);
+
                 Mediator.Notify(Utilities.SHOW_GAME_SCREEN, game);
             });
         }

@@ -1005,6 +1005,12 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/NextTurnAync", ReplyAction="http://tempuri.org/IGameEndPoint/NextTurnAyncResponse")]
         System.Threading.Tasks.Task<bool> NextTurnAyncAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/ThrowDice", ReplyAction="http://tempuri.org/IGameEndPoint/ThrowDiceResponse")]
+        bool ThrowDice(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameEndPoint/ThrowDice", ReplyAction="http://tempuri.org/IGameEndPoint/ThrowDiceResponse")]
+        System.Threading.Tasks.Task<bool> ThrowDiceAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1033,6 +1039,9 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/UpdateTurnTimeRemaining")]
         void UpdateTurnTimeRemaining(int remainingTime);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/SendDiceResult")]
+        void SendDiceResult(int diceResult);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1165,6 +1174,14 @@ namespace CatanClient.GameService {
         
         public System.Threading.Tasks.Task<bool> NextTurnAyncAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto) {
             return base.Channel.NextTurnAyncAsync(playerGameplayDto, gameClientDto);
+        }
+        
+        public bool ThrowDice(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.ThrowDice(playerGameplayDto, gameClientDto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ThrowDiceAsync(CatanClient.GameService.PlayerGameplayDto playerGameplayDto, CatanClient.GameService.GameDto gameClientDto) {
+            return base.Channel.ThrowDiceAsync(playerGameplayDto, gameClientDto);
         }
     }
 }

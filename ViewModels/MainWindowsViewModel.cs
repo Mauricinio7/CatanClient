@@ -105,7 +105,7 @@ namespace CatanClient.ViewModels
             HideInviteFriendsViewCommand = new RelayCommand(async () => await HideInviteFriendsView());
             ShowScoreboardViewCommand = new RelayCommand(ShowScoreboardView);
             HideScoreboardViewCommand = new RelayCommand(async () => await HideScoreboardView());
-            ShowDiceAnimationCommand = new RelayCommand(ShowDiceAnimation);
+            ShowDiceAnimationCommand = new RelayCommand(result => ShowDiceAnimation(result));
 
             ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
             BackToMainMenuCommand = new RelayCommand(async () => await BackToMainMenu());
@@ -132,13 +132,18 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.SHOW_LOADING_SCREEN, args => ShowLoadingScreenCommand.Execute(null));
             Mediator.Register(Utilities.HIDE_LOADING_SCREEN, args => HideLoadingScreenCommand.Execute(null));
             Mediator.Register(Utilities.SHOW_GAME_SCREEN, args => ShowGameScreenCommand.Execute(args));
-            Mediator.Register(Utilities.SHOW_ROLL_DICE_ANIMATION, args => ShowDiceAnimationCommand.Execute(null));
+            Mediator.Register(Utilities.SHOW_ROLL_DICE_ANIMATION, args => ShowDiceAnimationCommand.Execute(args));
 
         }
 
-        private void ShowDiceAnimation()
+        private void ShowDiceAnimation(object result)
         {
-            var diceAnimationView = new DiceRollAnimationView();
+            if (!(result is int diceResult))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var diceAnimationView = new DiceRollAnimationView(diceResult);
             diceAnimationView.AnimationCompleted += DiceAnimationView_AnimationCompleted;
             OverlayView = diceAnimationView;
         }

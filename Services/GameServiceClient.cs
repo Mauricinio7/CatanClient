@@ -236,5 +236,22 @@ namespace CatanClient.Services
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
+
+        public bool ThrowDice(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
+        {
+            OpenConnection();
+            bool result;
+            try
+            {
+                result = client.ThrowDice(playerGameplayDto, gameClientDto);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                result = false;
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
     }
 }

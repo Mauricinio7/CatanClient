@@ -53,7 +53,7 @@ namespace CatanClient.ViewModels
 
         public string TimeText => remainingTimeInSeconds > 0
        ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
-       : "Aun no es tu turno";
+       : "Asignando turno...";
 
 
         private bool isTradeGridVisible;
@@ -66,11 +66,11 @@ namespace CatanClient.ViewModels
                 if (turn != value)
                 {
                     turn = value;
-                    OnPropertyChanged(nameof(Turn)); // Notifica que la propiedad ha cambiado
+                    OnPropertyChanged(nameof(Turn)); 
 
-                    // Actualiza los comandos relacionados con el turno
                     ((RelayCommand)RollDiceCommand).RaiseCanExecuteChanged();
                     ((RelayCommand)NextTurnCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)ShowTradeWindowCommand).RaiseCanExecuteChanged();
                 }
             }
         }
@@ -110,11 +110,9 @@ namespace CatanClient.ViewModels
 
             profile = serviceManager.ProfileSingleton.Profile;
 
-            this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
-
             Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
             ShowTradeWindowCommand = new RelayCommand(_ => ExecuteShowTradeWindow(), _ => CanPlayTurn());
-            RollDiceCommand = new RelayCommand(_ => ExecuteRollDice(), _ => CanPlayTurn()); 
+            RollDiceCommand = new RelayCommand(_ => ExecuteRollDiceAsync(), _ => CanPlayTurn()); 
             NextTurnCommand = new RelayCommand(_ => ExecuteNextTurn(), _ => CanPlayTurn()); 
             HideTradeControlCommand = new RelayCommand(ExecuteHideTradeControl);
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
@@ -198,9 +196,16 @@ namespace CatanClient.ViewModels
             tradeWindow.ShowDialog();
         }
 
-        public void ExecuteRollDice() 
+        public void ExecuteRollDiceAsync() 
         {
-              Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, null);
+            PlayerGameplayDto playerGameplay = new PlayerGameplayDto();
+            playerGameplay.CurrentSession = profile.CurrentSessionID;
+            playerGameplay.isRegistered = profile.IsRegistered;
+            playerGameplay.Id = profile.Id.Value;
+
+            bool result = serviceManager.GameServiceClient.ThrowDice(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+
+            MessageBox.Show(result.ToString());
         }
 
         public void ExecuteNextTurn() 

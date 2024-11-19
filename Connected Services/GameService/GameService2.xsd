@@ -198,6 +198,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ThrowDice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerGameplayDto" nillable="true" type="q30:PlayerGameplayDto" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="gameClientDto" nillable="true" type="q31:GameDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ThrowDiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ThrowDiceResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyPlayerExpulsion">
     <xs:complexType>
       <xs:sequence>
@@ -209,7 +224,7 @@
   <xs:element name="BroadcastMessageExpel">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerExpeled" nillable="true" type="q30:PlayerDto" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerExpeled" nillable="true" type="q32:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -242,7 +257,7 @@
   <xs:element name="UpdateTurnStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playersTurnStatus" nillable="true" type="q31:ArrayOfPlayerTurnStatusDto" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playersTurnStatus" nillable="true" type="q33:ArrayOfPlayerTurnStatusDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -250,6 +265,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="remainingTime" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDiceResult">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="diceResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -62,6 +62,12 @@ namespace CatanClient.Callbacks
             });
         }
 
+        public void SendDiceResult(int diceResult)
+        {
+            MessageBox.Show("Llamo al callback numero: " + diceResult);
+            Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceResult);
+        }
+
         public void StartGameForAllPlayers()
         {
             Application.Current.Dispatcher.Invoke(() =>

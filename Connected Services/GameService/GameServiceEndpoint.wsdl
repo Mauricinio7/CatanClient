@@ -95,6 +95,12 @@
   <wsdl:message name="IGameEndPoint_NextTurnAync_OutputMessage">
     <wsdl:part name="parameters" element="tns:NextTurnAyncResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_ThrowDice_InputMessage">
+    <wsdl:part name="parameters" element="tns:ThrowDice" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_ThrowDice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ThrowDiceResponse" />
+  </wsdl:message>
   <wsdl:message name="IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerExpulsion" />
   </wsdl:message>
@@ -118,6 +124,9 @@
   </wsdl:message>
   <wsdl:message name="IGameEndPoint_UpdateTurnTimeRemaining_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateTurnTimeRemaining" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_SendDiceResult_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendDiceResult" />
   </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
@@ -172,6 +181,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/NextTurnAync" message="tns:IGameEndPoint_NextTurnAync_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NextTurnAyncResponse" message="tns:IGameEndPoint_NextTurnAync_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ThrowDice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/ThrowDice" message="tns:IGameEndPoint_ThrowDice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/ThrowDiceResponse" message="tns:IGameEndPoint_ThrowDice_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" message="tns:IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage" />
     </wsdl:operation>
@@ -195,6 +208,9 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTurnTimeRemaining">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/UpdateTurnTimeRemaining" message="tns:IGameEndPoint_UpdateTurnTimeRemaining_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDiceResult">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/SendDiceResult" message="tns:IGameEndPoint_SendDiceResult_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -317,6 +333,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ThrowDice">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/ThrowDice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" style="document" />
       <wsdl:output>
@@ -361,6 +386,12 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTurnTimeRemaining">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/UpdateTurnTimeRemaining" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDiceResult">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/SendDiceResult" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
