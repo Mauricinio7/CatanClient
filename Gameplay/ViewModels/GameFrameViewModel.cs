@@ -196,16 +196,14 @@ namespace CatanClient.ViewModels
             tradeWindow.ShowDialog();
         }
 
-        public void ExecuteRollDiceAsync() 
+        public async void ExecuteRollDiceAsync() 
         {
             PlayerGameplayDto playerGameplay = new PlayerGameplayDto();
             playerGameplay.CurrentSession = profile.CurrentSessionID;
             playerGameplay.isRegistered = profile.IsRegistered;
             playerGameplay.Id = profile.Id.Value;
 
-            bool result = serviceManager.GameServiceClient.ThrowDice(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
-
-            MessageBox.Show(result.ToString());
+            await serviceManager.GameServiceClient.ThrowDiceAsync(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
         }
 
         public void ExecuteNextTurn() 

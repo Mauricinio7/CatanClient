@@ -237,13 +237,13 @@ namespace CatanClient.Services
             return result;
         }
 
-        public bool ThrowDice(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
+        public async Task<bool> ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
         {
             OpenConnection();
             bool result;
             try
             {
-                result = client.ThrowDice(playerGameplayDto, gameClientDto);
+                result = await client.ThrowDiceAsync(playerGameplayDto, gameClientDto);
             }
             catch (Exception ex)
             {
