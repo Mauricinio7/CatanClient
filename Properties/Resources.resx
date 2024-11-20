@@ -151,7 +151,7 @@
     <value>Main Menu</value>
   </data>
   <data name="label_waiting_players" xml:space="preserve">
-    <value>Waiting for players</value>
+    <value>Waiting for players...</value>
   </data>
   <data name="label_catan_spacen" xml:space="preserve">
     <value>CATAN SPACE</value>
@@ -615,7 +615,25 @@
   <data name="label_points" xml:space="preserve">
     <value>Points</value>
   </data>
-  <data name="button_vote_kick" xml:space="preserve">
+  <data name="global_vote_kick" xml:space="preserve">
     <value>Vote for kick</value>
+  </data>
+  <data name="label_joining_game" xml:space="preserve">
+    <value>Joing Game...</value>
+  </data>
+  <data name="label_time_remaining" xml:space="preserve">
+    <value>Time remaining: </value>
+  </data>
+  <data name="option_bad_conduct" xml:space="preserve">
+    <value>Bad conduct</value>
+  </data>
+  <data name="option_exploits" xml:space="preserve">
+    <value>Exploits</value>
+  </data>
+  <data name="option_inactivity" xml:space="preserve">
+    <value>Inactivity</value>
+  </data>
+  <data name="option_offensive_language" xml:space="preserve">
+    <value>Offensive language</value>
   </data>
 </root>

@@ -151,7 +151,7 @@
     <value>Menú Principal</value>
   </data>
   <data name="label_waiting_players" xml:space="preserve">
-    <value>Esperando jugadores</value>
+    <value>Esperando jugadores...</value>
   </data>
   <data name="label_catan_spacen" xml:space="preserve">
     <value>CATAN ESPACIAL</value>
@@ -168,7 +168,7 @@
   <data name="global_ready" xml:space="preserve">
     <value>Listo</value>
   </data>
-  <data name="label_no_ready" xml:space="preserve">
+  <data name="global_no_ready" xml:space="preserve">
     <value>No listo</value>
   </data>
   <data name="button_view_profile" xml:space="preserve">
@@ -628,7 +628,25 @@
   <data name="label_points" xml:space="preserve">
     <value>Puntos</value>
   </data>
-  <data name="button_vote_kick" xml:space="preserve">
+  <data name="global_vote_kick" xml:space="preserve">
     <value>Votar para expulsar</value>
+  </data>
+  <data name="label_joining_game" xml:space="preserve">
+    <value>Uniendose a juego...</value>
+  </data>
+  <data name="label_time_remaining" xml:space="preserve">
+    <value>Tiempo restante:</value>
+  </data>
+  <data name="option_bad_conduct" xml:space="preserve">
+    <value>Conducta inapropiada</value>
+  </data>
+  <data name="option_exploits" xml:space="preserve">
+    <value>Trampas detectadas</value>
+  </data>
+  <data name="option_inactivity" xml:space="preserve">
+    <value>Inactividad</value>
+  </data>
+  <data name="option_offensive_language" xml:space="preserve">
+    <value>Lenguaje ofensivo</value>
   </data>
 </root>

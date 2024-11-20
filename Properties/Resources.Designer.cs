@@ -286,15 +286,6 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Vote for kick.
-        /// </summary>
-        public static string button_vote_kick {
-            get {
-                return ResourceManager.GetString("button_vote_kick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Show Password.
         /// </summary>
         public static string check_box_show_password {
@@ -1042,6 +1033,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Vote for kick.
+        /// </summary>
+        public static string global_vote_kick {
+            get {
+                return ResourceManager.GetString("global_vote_kick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Select Profile Picture.
         /// </summary>
         public static string image_selector_title {
@@ -1200,6 +1200,15 @@ namespace CatanClient.Properties {
         public static string label_invalid_email_message {
             get {
                 return ResourceManager.GetString("label_invalid_email_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Joing Game....
+        /// </summary>
+        public static string label_joining_game {
+            get {
+                return ResourceManager.GetString("label_joining_game", resourceCulture);
             }
         }
         
@@ -1384,6 +1393,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Time remaining: .
+        /// </summary>
+        public static string label_time_remaining {
+            get {
+                return ResourceManager.GetString("label_time_remaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Total points.
         /// </summary>
         public static string label_total_points {
@@ -1420,7 +1438,7 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Waiting for players.
+        ///   Busca una cadena traducida similar a Waiting for players....
         /// </summary>
         public static string label_waiting_players {
             get {
@@ -1483,11 +1501,47 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Bad conduct.
+        /// </summary>
+        public static string option_bad_conduct {
+            get {
+                return ResourceManager.GetString("option_bad_conduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Exploits.
+        /// </summary>
+        public static string option_exploits {
+            get {
+                return ResourceManager.GetString("option_exploits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inactivity.
+        /// </summary>
+        public static string option_inactivity {
+            get {
+                return ResourceManager.GetString("option_inactivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Misuse of the game.
         /// </summary>
         public static string option_misuse_game {
             get {
                 return ResourceManager.GetString("option_misuse_game", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Offensive language.
+        /// </summary>
+        public static string option_offensive_language {
+            get {
+                return ResourceManager.GetString("option_offensive_language", resourceCulture);
             }
         }
         

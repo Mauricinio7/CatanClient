@@ -34,10 +34,10 @@
         />  
 
 
-        <Button Content="{x:Static properties:Resources.button_vote_kick}" 
+        <Button Content="{x:Static properties:Resources.global_vote_kick}" 
         Style="{StaticResource PrimaryButtonStyle}"
         Margin="214,26,685,90"
-        Command="{Binding KickCommand}"
+        Command="{Binding VoteKickCommand}"
     />
 
     </Grid>

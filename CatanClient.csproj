@@ -219,6 +219,7 @@
     <Compile Include="ViewModels\ScoreboardViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountChangeWindowViewModel.cs" />
     <Compile Include="ViewModels\VerifyAccountViewModel.cs" />
+    <Compile Include="ViewModels\VoteKickPlayerWindowViewModel.cs" />
     <Compile Include="Views\AddFriendWindow.xaml.cs">
       <DependentUpon>AddFriendWindow.xaml</DependentUpon>
     </Compile>
@@ -278,6 +279,9 @@
     </Compile>
     <Compile Include="Views\VerifyAccountView.xaml.cs">
       <DependentUpon>VerifyAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VoteKickPlayerWindow.xaml.cs">
+      <DependentUpon>VoteKickPlayerWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\FriendPlayerCard.xaml">
       <SubType>Designer</SubType>
@@ -465,6 +469,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\VerifyAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VoteKickPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

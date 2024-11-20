@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -18,7 +19,7 @@ namespace CatanClient.Controls
     internal class VoteKickPlayerCardViewModel : ViewModelBase
     {
         public string PlayerName { get; set; }
-        public ICommand KickCommand { get; }
+        public ICommand VoteKickCommand { get; }
 
         private ServiceManager serviceManager;
         public ProfileDto SenderProfile { get; set; }
@@ -42,7 +43,7 @@ namespace CatanClient.Controls
             PlayerName = profile.Name;
             Game = game;
 
-            KickCommand = new RelayCommand(_ => ExecuteKick(null), _ => CanKickPlayer(null));
+            VoteKickCommand = new RelayCommand(_ => ExecuteVoteKick(null), _ => CanKickPlayer(null));
 
             this.serviceManager = serviceManager;
             SenderProfile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
@@ -148,11 +149,9 @@ namespace CatanClient.Controls
             return Profile.Id != SenderProfile.Id;
         }
 
-        private void ExecuteKick(object parameter)
+        private void ExecuteVoteKick(object parameter)
         {
-            var expelWindow = new ExpelPlayerWindow(Profile, Game);
-
-            expelWindow.ShowDialog();
+                MessageBox.Show("Quiere expulsar al pana: " + Profile.Name);
         }
     }
 }

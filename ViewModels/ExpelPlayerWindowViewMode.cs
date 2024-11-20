@@ -30,10 +30,10 @@ namespace CatanClient.ViewModels
 
             ExpulsionReasons = new ObservableCollection<string>
             {
-                "Conducta inapropiada",
-                "Inactividad",
-                "Lenguaje ofensivo",
-                "Trampas detectadas"
+                Utilities.OptionBadConduct(CultureInfo.CurrentCulture.Name),
+                Utilities.OptionInactivity(CultureInfo.CurrentCulture.Name),
+                Utilities.OptionOffensiveLanguage(CultureInfo.CurrentCulture.Name),
+                Utilities.OptionExploits(CultureInfo.CurrentCulture.Name)
             };
 
 

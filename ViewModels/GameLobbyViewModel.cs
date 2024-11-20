@@ -55,7 +55,7 @@ namespace CatanClient.ViewModels
         ? "Uniendo a juego..."
         : remainingTimeInSeconds > 0
             ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
-            : "Esperando jugadores ...";
+            : "Esperando jugadores...";
 
         public bool IsReady
         {
@@ -68,7 +68,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public string ReadyButtonText => IsReady ? "No Listo" : "Listo";
+        public string ReadyButtonText => IsReady ? Utilities.GlobalNoReady(CultureInfo.CurrentCulture.Name) : Utilities.GlobalReady(CultureInfo.CurrentCulture.Name);
 
         public string NewMessage
         {
@@ -274,18 +274,7 @@ namespace CatanClient.ViewModels
 
         private void ShowGameScreen(object args)
         {
-            App.Current.Dispatcher.InvokeAsync(async () =>
-            {
-                isJoiningGame = true; 
-                OnPropertyChanged(nameof(TimeText)); 
-
-                Random random = new Random();
-                int delay = 3000 + (random.Next(0, 15) * 500);
-
-                await Task.Delay(delay);
-
                 Mediator.Notify(Utilities.SHOW_GAME_SCREEN, game);
-            });
         }
 
 

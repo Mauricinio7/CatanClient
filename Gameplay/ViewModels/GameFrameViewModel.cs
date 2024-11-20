@@ -40,6 +40,7 @@ namespace CatanClient.ViewModels
         public ICommand ShowTradeControlCommand { get; }
         public ICommand SendMessageCommand { get; }
         public ICommand ExitCommand { get; }
+        public ICommand VoteKickCommand { get; }
         public ICollectionView PlayersView { get; set; }
 
 
@@ -120,6 +121,7 @@ namespace CatanClient.ViewModels
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             ExitCommand = new RelayCommand(ExecuteExit);
+            VoteKickCommand = new RelayCommand(ExecuteVoteKickWindow);
 
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
@@ -127,6 +129,7 @@ namespace CatanClient.ViewModels
             InitializePlayerGameplay();
 
             LoadResources(); //TODO quit this
+
             Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
             Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
@@ -332,6 +335,12 @@ namespace CatanClient.ViewModels
 
 
             AccountUtilities.RestartGame();
+        }
+
+        internal void ExecuteVoteKickWindow()
+        {
+            var kickPlayerWindow = new VoteKickPlayerWindow(game);
+            kickPlayerWindow.ShowDialog();
         }
 
 

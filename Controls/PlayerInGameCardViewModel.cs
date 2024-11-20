@@ -4,6 +4,7 @@ using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,7 @@ namespace CatanClient.Controls
             Turn = turn;
             this.serviceManager = serviceManager;
 
-            Points = "Puntos: " + points.ToString(); //TODO quit hardcode and do a real method
+            Points = Utilities.LabelPoints(CultureInfo.CurrentCulture.Name) + ": " + points.ToString(); 
 
             LoadProfileImage();
 

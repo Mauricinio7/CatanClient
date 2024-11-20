@@ -50,7 +50,7 @@
              />
 
             <Button Style ="{StaticResource NeonButtonStyle}"  Content="{x:Static properties:Resources.button_exit}" Margin="26,0,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="50" Width="116" Command="{Binding ExitCommand}"/>
-            <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.global_kick_player}" Margin="22,8,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="60" Width="180" Grid.Row="2"/>
+            <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.global_kick_player}" Margin="22,8,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="60" Width="180" Grid.Row="2" Command="{Binding VoteKickCommand}"/>
 
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="115,0,0,26" Text="{x:Static properties:Resources.label_lunar_stone}"/>
             <ListBox ItemsSource="{Binding OnlinePlayersList}" Margin="175,28,16,425"

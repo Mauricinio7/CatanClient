@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows;
 using CatanClient.ProfileService;
+using System.Globalization;
 
 namespace CatanClient.Controls
 {
@@ -52,11 +53,11 @@ namespace CatanClient.Controls
         {
             if (Profile.isReadyToPlay) 
             {
-                Ready = "Listo";
+                Ready = Utilities.GlobalReady(CultureInfo.CurrentCulture.Name);
             }
             else
             {
-                Ready = "No listo";
+                Ready = Utilities.GlobalNoReady(CultureInfo.CurrentCulture.Name);
             }
         }
 

@@ -92,12 +92,14 @@ namespace CatanClient
             builder.RegisterType<FriendRequestPlayerCardViewModel>();
             builder.RegisterType<InvitePlayerCardViewModel>();
             builder.RegisterType<KickPlayerCardViewModel>();
+            builder.RegisterType<VoteKickPlayerCardViewModel>();
             builder.RegisterType<FriendRequestViewModel>();
             builder.RegisterType<FriendsViewModel>();
             builder.RegisterType<InviteFriendViewModel>();
             builder.RegisterType<PlayerInRoomCardViewModel>();
             builder.RegisterType<PlayerInGameCardViewModel>();
             builder.RegisterType<KickPlayerWindowViewModel>();
+            builder.RegisterType<VoteKickPlayerWindowViewModel>();
             builder.RegisterType<ExpelPlayerWindowViewModel>();
             builder.RegisterType<MainMenuViewModel>().AsSelf();
             builder.RegisterType<NeedHelpViewModel>().AsSelf();
