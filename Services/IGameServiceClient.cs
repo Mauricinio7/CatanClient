@@ -30,6 +30,6 @@ namespace CatanClient.Services
         Task<bool> CancelStartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto, int diceValue);
         void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
-
+        Task<bool> GiveNextTurn(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
     }
 }

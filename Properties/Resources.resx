@@ -615,4 +615,7 @@
   <data name="label_points" xml:space="preserve">
     <value>Points</value>
   </data>
+  <data name="button_vote_kick" xml:space="preserve">
+    <value>Vote for kick</value>
+  </data>
 </root>

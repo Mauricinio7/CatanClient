@@ -166,6 +166,10 @@
       <DependentUpon>PlayerInRoomCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlayerInRoomCardViewModel.cs" />
+    <Compile Include="Controls\VoteKickPlayerCard.xaml.cs">
+      <DependentUpon>VoteKickPlayerCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VoteKickPlayerCardViewModel.cs" />
     <Compile Include="Gameplay\Helpers\Resource.cs" />
     <Compile Include="Gameplay\ViewModels\TradeWindowViewModel.cs" />
     <Compile Include="Gameplay\Views\DiceRollAnimationView.xaml.cs">
@@ -308,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ShowPasswordPlaceholderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VoteKickPlayerCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

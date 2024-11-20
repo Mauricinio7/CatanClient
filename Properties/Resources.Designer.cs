@@ -286,6 +286,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Vote for kick.
+        /// </summary>
+        public static string button_vote_kick {
+            get {
+                return ResourceManager.GetString("button_vote_kick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Show Password.
         /// </summary>
         public static string check_box_show_password {

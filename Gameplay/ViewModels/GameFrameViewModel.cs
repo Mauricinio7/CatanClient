@@ -30,6 +30,7 @@ namespace CatanClient.ViewModels
         private AccountService.ProfileDto profile;
         private int remainingTimeInSeconds;
         private bool turn;
+        private PlayerGameplayDto playerGameplay;
 
         private DispatcherTimer countdownTimer;
         public ICommand ShowTradeWindowCommand { get; }
@@ -122,8 +123,8 @@ namespace CatanClient.ViewModels
 
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
-            
 
+            InitializePlayerGameplay();
 
             LoadResources(); //TODO quit this
             Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
@@ -132,6 +133,16 @@ namespace CatanClient.ViewModels
 
             IsTradeGridVisible = true;
             UpdateTradeWindow();
+        }
+
+        private void InitializePlayerGameplay()
+        {
+            playerGameplay = new PlayerGameplayDto
+            {
+                CurrentSession = profile.CurrentSessionID,
+                isRegistered = profile.IsRegistered,
+                Id = profile.Id.Value
+            };
         }
 
         public void SetCountdownTime(object timeInSeconds)
@@ -201,13 +212,6 @@ namespace CatanClient.ViewModels
 
         public async void ExecuteRollDiceAsync()
         {
-            PlayerGameplayDto playerGameplay = new PlayerGameplayDto
-            {
-                CurrentSession = profile.CurrentSessionID,
-                isRegistered = profile.IsRegistered,
-                Id = profile.Id.Value
-            };
-
             int diceValue = DiceRollNumbers();
 
             Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceValue);
@@ -227,7 +231,17 @@ namespace CatanClient.ViewModels
 
         public void ExecuteNextTurn() 
         {
-            MessageBox.Show("Siguiente turno");
+            bool result;
+
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+               result = await serviceManager.GameServiceClient.GiveNextTurn(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+
+                if(!result)
+                {
+                    Utilities.ShowMessgeServerLost();
+                }
+            });
         }
 
         public void ExecuteHideTradeControl()
@@ -310,12 +324,6 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteExit()
         {
-            PlayerGameplayDto playerGameplay = new PlayerGameplayDto
-            {
-                CurrentSession = profile.CurrentSessionID,
-                isRegistered = profile.IsRegistered,
-                Id = profile.Id.Value
-            };
 
             serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
 

@@ -63,6 +63,11 @@ namespace CatanClient.Callbacks
                 Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceResult);
         }
 
+        public void SendUpdateConnectedPlayers(OperationResultListOfPlayersInGame listOfPlayers)
+        {
+            throw new NotImplementedException();
+        }
+
         public void StartGameForAllPlayers()
         {
             Application.Current.Dispatcher.Invoke(() =>

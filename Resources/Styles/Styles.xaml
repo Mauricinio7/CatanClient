@@ -38,7 +38,7 @@
                                     
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="BorderElement"
                                                                   Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[1].Color">
-                                        <EasingColorKeyFrame KeyTime="0:0:0" Value="Gold"/>c:\users\mauricio\source\repos\catanclient\resources\styles\styles.xaml
+                                        <EasingColorKeyFrame KeyTime="0:0:0" Value="Gold"/>
 
                                         <EasingColorKeyFrame KeyTime="0:0:3" Value="Cyan"/>
                                         <EasingColorKeyFrame KeyTime="0:0:6" Value="Magenta"/>

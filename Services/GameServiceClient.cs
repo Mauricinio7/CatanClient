@@ -250,6 +250,22 @@ namespace CatanClient.Services
             }
            
         }
+
+        public async Task<bool> GiveNextTurn(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
+        {
+            OpenConnection();
+            bool result = false;
+            try
+            {
+                result = await client.NextTurnAyncAsync(playerGameplayDto, gameClientDto);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            return result;
+        }
+
         public void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
         {
             OpenConnection();
