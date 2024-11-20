@@ -39,6 +39,12 @@ namespace CatanClient.Callbacks
         {
         }
 
+        public void EndGameDisconnectedPlayers()
+        {
+            MessageBox.Show("Ya no queda ningun jugador, se ha terminado la partida");
+            AccountUtilities.RestartGame();
+        }
+
         public void NotifyPlayerExpulsion(string message, string reason)
         {
             App.Current.Dispatcher.Invoke(() =>

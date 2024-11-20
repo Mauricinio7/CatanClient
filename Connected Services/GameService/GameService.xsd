@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+  <xs:import schemaLocation="http://localhost:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
   <xs:complexType name="ExpelPlayerDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="IdPlayerToExpel" type="xs:int" />

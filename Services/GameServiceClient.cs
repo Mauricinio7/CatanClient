@@ -277,7 +277,10 @@ namespace CatanClient.Services
             {
                 Log.Error(ex.Message);
             }
-
+            finally
+            {
+                CloseConnection();
+            }
         }
     }
 }

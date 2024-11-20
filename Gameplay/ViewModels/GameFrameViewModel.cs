@@ -330,11 +330,12 @@ namespace CatanClient.ViewModels
 
             serviceManager.ChatServiceClient.LeftChatClient(game, profile.Name);
 
-            serviceManager.GameServiceClient.ExitGame(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
-
-
-
-            AccountUtilities.RestartGame();
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                serviceManager.GameServiceClient.ExitGame(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+                await Task.Delay(5000);
+                AccountUtilities.RestartGame();
+            });
         }
 
         internal void ExecuteVoteKickWindow()

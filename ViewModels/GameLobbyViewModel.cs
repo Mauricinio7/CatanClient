@@ -52,10 +52,10 @@ namespace CatanClient.ViewModels
         public ObservableCollection<ChatMessage> Messages { get; set; }
 
         public string TimeText => isJoiningGame
-        ? "Uniendo a juego..."
+        ? Utilities.LabelJoiningGame(CultureInfo.CurrentCulture.Name)
         : remainingTimeInSeconds > 0
             ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
-            : "Esperando jugadores...";
+            : Utilities.LabelWaitingPlayers(CultureInfo.CurrentCulture.Name);
 
         public bool IsReady
         {
