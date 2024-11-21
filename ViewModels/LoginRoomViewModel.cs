@@ -20,6 +20,10 @@ namespace CatanClient.ViewModels
     internal class LoginRoomViewModel : ViewModelBase
     {
         private string roomCode;
+        private readonly ServiceManager serviceManager;
+        public ICommand LoginRoomCommand { get; }
+        public ICommand ExitLoginRoomCommand { get; }
+        
 
 
         public string RoomCode
@@ -36,9 +40,7 @@ namespace CatanClient.ViewModels
         }
 
 
-        public ICommand LoginRoomCommand { get; }
-        public ICommand ExitLoginRoomCommand { get; }
-        private readonly ServiceManager serviceManager;
+        
 
         public LoginRoomViewModel(ServiceManager serviceManager)
         {

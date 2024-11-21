@@ -37,6 +37,7 @@ namespace CatanClient.Callbacks
 
         public void BroadcastNotifyNewAdmin(int idAdmin)
         {
+            //TODO implement do a Mediator to send the new admin ID
         }
 
         public void EndGameDisconnectedPlayers()
@@ -71,7 +72,7 @@ namespace CatanClient.Callbacks
 
         public void SendUpdateConnectedPlayers(OperationResultListOfPlayersInGame listOfPlayers)
         {
-            throw new NotImplementedException();
+            //TODO implement
         }
 
         public void StartGameForAllPlayers()
@@ -80,8 +81,11 @@ namespace CatanClient.Callbacks
             {
                 Mediator.Notify(Utilities.GET_GAME_FOR_SCREEN, null);
             });
+        }
 
-            
+        public void UpdateListOfPlayersTurns(PlayerTurnStatusDto[] playersTurnStatus)
+        {
+            Mediator.Notify(Utilities.LOAD_GAME_PLAYER_LIST, playersTurnStatus);
         }
 
         public void UpdateTimeToStartGame(int time)
@@ -94,6 +98,10 @@ namespace CatanClient.Callbacks
 
         public void UpdateTimeWhenJoinGame(int time)
         {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Mediator.Notify(Utilities.UPDATE_TIME, time);
+            });
         }
 
         public void UpdateTurnStatus(PlayerTurnStatusDto[] playersTurnStatus)

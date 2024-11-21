@@ -19,15 +19,15 @@ namespace CatanClient.Services
 
         Task<OperationResultGameDto> JoinRoomAsGuestClientAsync(string code, GuestAccountDto profile);
 
-        OperationResultListOfPlayersInGame GetPlayerList(GameDto game);
+        Task<OperationResultListOfPlayersInGame> GetPlayerListAsync(GameDto game);
 
         Task<bool> LeftRoomClientAsync(GameDto game, ProfileDto profile);
 
         Task<bool> ExpelPlayerAsync(ExpelPlayerDto expelPlayer, int idPlayer, GameDto game);
+        Task<bool> VoteExpelPlayerAsync(ExpelPlayerDto expelPlayer, int idPlayer, GameDto game);
 
         Task<bool> LeftRoomGuestClientAsync(GameDto game, GuestAccountDto guest);
         Task<bool> StartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
-        Task<bool> CancelStartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto, int diceValue);
         void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task<bool> GiveNextTurn(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);

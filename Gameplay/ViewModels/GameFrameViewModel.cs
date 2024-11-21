@@ -332,8 +332,10 @@ namespace CatanClient.ViewModels
 
             App.Current.Dispatcher.InvokeAsync(async () =>
             {
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
                 serviceManager.GameServiceClient.ExitGame(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
                 await Task.Delay(5000);
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 AccountUtilities.RestartGame();
             });
         }

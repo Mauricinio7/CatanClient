@@ -6,6 +6,7 @@ using CatanClient.ViewModels;
 using CatanClient.Views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -151,7 +152,25 @@ namespace CatanClient.Controls
 
         private void ExecuteVoteKick(object parameter)
         {
-                MessageBox.Show("Quiere expulsar al pana: " + Profile.Name);
+            GameService.ExpelPlayerDto playerToExpel = new GameService.ExpelPlayerDto
+            {
+                IdPlayerToExpel = Profile.Id.Value,
+            };
+            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                bool result = await serviceManager.GameServiceClient.VoteExpelPlayerAsync(playerToExpel, SenderProfile.Id.Value, Game);
+                if (result)
+                {
+                    MessageBox.Show(Utilities.MessageSuccesKickPlayer(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                    Mediator.Notify(Utilities.CLOSE_EXPEL_PLAYER, null);
+                    Mediator.Notify(Utilities.CLOSE_KICK_PLAYER, null);
+                }
+                else
+                {
+                    Utilities.ShowMessgeServerLost();
+                }
+            });
         }
     }
 }

@@ -39,41 +39,46 @@ namespace CatanClient.ViewModels
         {
             OperationResultListOfPlayersInGame result;
 
-            result = serviceManager.GameServiceClient.GetPlayerList(AccountUtilities.CastChatGameToGameServiceGame(game));
-
-            if (result.IsSuccess)
+            App.Current.Dispatcher.InvokeAsync(async () =>
             {
-                OnlinePlayersList.Clear();
-                OnlinePlayers = result.ProfileDtos.ToList();
-                OnlinePlayersGuest = result.GuestAccountDtos.ToList();
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                result = await serviceManager.GameServiceClient.GetPlayerListAsync(AccountUtilities.CastChatGameToGameServiceGame(game));
 
-                if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
+                if (result.IsSuccess)
                 {
-                    foreach (var profileDto in OnlinePlayers)
+                    OnlinePlayersList.Clear();
+                    OnlinePlayers = result.ProfileDtos.ToList();
+                    OnlinePlayersGuest = result.GuestAccountDtos.ToList();
+
+                    if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
                     {
-                        OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
-                        new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
-                        new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
-                    ));
+                        foreach (var profileDto in OnlinePlayers)
+                        {
+                            OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
+                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
+                            new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
+                        ));
+                        }
+                    }
+
+                    if (OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
+                    {
+                        foreach (var guestProfileDto in OnlinePlayersGuest)
+                        {
+                            GameService.ProfileDto profileDto = AccountUtilities.CastGuestAccountToGameServiceProfile(guestProfileDto);
+                            OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
+                             new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
+                             new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
+                         ));
+                        }
                     }
                 }
-
-                if (OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
+                else
                 {
-                    foreach (var guestProfileDto in OnlinePlayersGuest)
-                    {
-                        GameService.ProfileDto profileDto = AccountUtilities.CastGuestAccountToGameServiceProfile(guestProfileDto);
-                        OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
-                         new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
-                         new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
-                     ));
-                    }
+                    Utilities.ShowMessgeServerLost();
                 }
-            }
-            else
-            {
-                Utilities.ShowMessgeServerLost();
-            }
+
+            });
         }
     }
 }

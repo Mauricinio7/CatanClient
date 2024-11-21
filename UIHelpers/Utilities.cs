@@ -28,11 +28,11 @@ namespace CatanClient.UIHelpers
         public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/repos/CatanClient/logs/errorlog.txt";
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
-        public const string IP_ACCOUNT_SERVICE = "net.tcp://localhost:8181/AccountService";
-        public const string IP_GAME_SERVICE = "net.tcp://localhost:8192/GameService";
-        public const string IP_CHAT_SERVICE = "net.tcp://localhost:8202/ChatService";
-        public const string IP_PROFILE_SERVICE = "net.tcp://localhost:8383/ProfileService";
-        public const string IP_GUEST_ACCOUNT_SERVICE = "net.tcp://localhost:8484/GuestAccountService";
+        public const string IP_ACCOUNT_SERVICE = "net.tcp://10.144.41.3:8181/AccountService";
+        public const string IP_GAME_SERVICE = "net.tcp://10.144.41.3:8192/GameService";
+        public const string IP_CHAT_SERVICE = "net.tcp://10.144.41.3:8202/ChatService";
+        public const string IP_PROFILE_SERVICE = "net.tcp://10.144.41.3:8383/ProfileService";
+        public const string IP_GUEST_ACCOUNT_SERVICE = "net.tcp://10.144.41.3:8484/GuestAccountService";
         public const string FADE_OUT_ANIMATION = "FadeOutAnimation";
         public const string SHOW_MAIN_MENU_BACKGROUND = "ShowMainMenuBackgroundView";
         public const string SHOW_MAIN_MENU = "ShowMainMenuView";
@@ -324,7 +324,7 @@ namespace CatanClient.UIHelpers
         }
         public static string MessageSuccesSendVerificationCode(string language)
         {
-            return Resources.ResourceManager.GetString("dialog_succes_send_code_messagedialog_succes_send_code_message", new CultureInfo(language));
+            return Resources.ResourceManager.GetString("dialog_succes_send_code_message", new CultureInfo(language));
         }
         public static string TitleVerifyAccount(string language)
         {

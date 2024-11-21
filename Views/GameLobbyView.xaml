@@ -94,8 +94,8 @@
                 Margin="25,1018,1621,62"
                 Style="{StaticResource NeonButtonStyle}"
                 FontSize="25"
-                Command="{Binding ToggleReadyCommand}"
-                Content="{Binding ReadyButtonText}"  />
+                Command="{Binding ReadyCommand}"
+                Content="{x:Static properties:Resources.global_ready}"  />
             
             <Button Margin="1516,46,54,1034"
                 Style="{StaticResource NeonButtonStyle}"

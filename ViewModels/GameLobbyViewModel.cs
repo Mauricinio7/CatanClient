@@ -35,21 +35,21 @@ namespace CatanClient.ViewModels
         private int remainingTimeInSeconds;
         private DispatcherTimer countdownTimer;
         private bool isJoiningGame;
-
-
+        private readonly ServiceManager serviceManager;
+        private bool isReady;
         public string RoomName => game.Name;
         public string AccessCode => game.AccessKey;
         public List<ProfileDto> OnlinePlayers { get; set; } = new List<ProfileDto>();
         public List<GuestAccountDto> OnlinePlayersGuest { get; set; } = new List<GuestAccountDto>();
         public ObservableCollection<PlayerInRoomCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInRoomCardViewModel>();
-        public ICommand SendMessageCommand { get; }
-        public ICommand LeftRoomCommand { get; }
-        public ICommand KickPlayerCommand { get; }
-        public ICommand ShowInviteFriendCommand { get; }
-        public ICommand ToggleReadyCommand { get; }
-        private readonly ServiceManager serviceManager;
-        private bool isReady;
         public ObservableCollection<ChatMessage> Messages { get; set; }
+        public ICommand SendMessageCommand { get; set; }
+        public ICommand LeftRoomCommand { get; set; }
+        public ICommand KickPlayerCommand { get; set; }
+        public ICommand ShowInviteFriendCommand { get; set; }
+        public ICommand ReadyCommand { get; set; }
+        
+        
 
         public string TimeText => isJoiningGame
         ? Utilities.LabelJoiningGame(CultureInfo.CurrentCulture.Name)
@@ -64,11 +64,9 @@ namespace CatanClient.ViewModels
             {
                 isReady = value;
                 OnPropertyChanged(nameof(IsReady));
-                OnPropertyChanged(nameof(ReadyButtonText)); 
+                (ReadyCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged(); 
             }
         }
-
-        public string ReadyButtonText => IsReady ? Utilities.GlobalNoReady(CultureInfo.CurrentCulture.Name) : Utilities.GlobalReady(CultureInfo.CurrentCulture.Name);
 
         public string NewMessage
         {
@@ -80,62 +78,91 @@ namespace CatanClient.ViewModels
             }
         }
 
-
-
         public GameLobbyViewModel(ChatService.GameDto gameDto, ServiceManager serviceManager)
         {
             game = gameDto;
             this.serviceManager = serviceManager;
+            profile =  serviceManager.ProfileSingleton.Profile;
+            SendInitMessage();
+            JoinChat();
+            InicializateAsyncCommands();
+            InicializateCommands();
+            MediatorRegister();
+            InicializateCountdownTimer();
+            UpdateCanExecuteCommands();
+        }
 
+        private void InicializateCountdownTimer()
+        {
+            countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            countdownTimer.Tick += CountdownTimer_Tick;
+        }
+
+        private void InicializateCommands()
+        {
+            SendMessageCommand = new RelayCommand(ExecuteSendMessage);
+            KickPlayerCommand = new RelayCommand(_ => ExecuteShowKickPlayer(), _ => CanKickPlayer());
+            ShowInviteFriendCommand = new RelayCommand(_ => ExecuteShowInviteFriend(), _ => CanInviteFriends());
+        }
+
+        private void InicializateAsyncCommands()
+        {
+            LeftRoomCommand = new AsyncRelayCommand(ExecuteLeftRoomAsync);
+            ReadyCommand = new AsyncRelayCommand(_ => Ready(), _ => CanExecuteReady());
+        }
+
+        private void SendInitMessage()
+        {
             Messages = new ObservableCollection<ChatMessage>
             {
                 new ChatMessage { Content = game.Name + " ID: " + game.AccessKey, Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
             };
-
-            profile =  serviceManager.ProfileSingleton.Profile;
-
-            Mediator.Register(Utilities.RECIVE_MESSAGE, OnReceiveMessage);
-            Mediator.Register(Utilities.LOAD_PLAYER_LIST, LoadPlayerList);
-
-            this.serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
-            SendMessageCommand = new RelayCommand(ExecuteSendMessage);
-            LeftRoomCommand = new AsyncRelayCommand(ExecuteLeftRoomAsync);
-            KickPlayerCommand = new RelayCommand(_ => ExecuteShowKickPlayer(), _ => CanKickPlayer());
-            ShowInviteFriendCommand = new RelayCommand(_ => ExecuteShowInviteFriend(), _ => CanInviteFriends());
-            ToggleReadyCommand = new AsyncRelayCommand(ToggleReady);
-
-            countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            countdownTimer.Tick += CountdownTimer_Tick;
-            Mediator.Register(Utilities.UPDATE_TIME, SetCountdownTime);
-            Mediator.Register(Utilities.GET_GAME_FOR_SCREEN, ShowGameScreen);
-
-
-            UpdateCanExecuteCommands();
         }
 
-
-        private async Task ToggleReady()
+        private void JoinChat()
         {
-            IsReady = !IsReady;
-            if (IsReady)
+            try
             {
-                await ExecuteIsReady();
+                serviceManager.ChatServiceClient.JoinChatClient(game, profile.Name);
             }
-            else
+            catch (Exception ex)
             {
-                await ExecuteIsNotReady();
+                Log.Error(ex.Message);
+                Utilities.ShowMessgeServerLost();
+                AccountUtilities.RestartGame();
             }
+            
+        }
+
+        private void MediatorRegister()
+        {
+            Mediator.Register(Utilities.RECIVE_MESSAGE, OnReceiveMessage);
+            Mediator.Register(Utilities.LOAD_PLAYER_LIST, LoadPlayerList);
+            Mediator.Register(Utilities.UPDATE_TIME, SetCountdownTime);
+            Mediator.Register(Utilities.GET_GAME_FOR_SCREEN, ShowGameScreen);
+        }
+
+        private bool CanExecuteReady()
+        {
+            return !IsReady; 
+        }
+        private async Task Ready()
+        {
+            IsReady = true;
+            await ExecuteIsReady();
+            await Task.Delay(2000);
+            LoadPlayerList(null);
         }
 
         private async Task ExecuteIsReady()
         {
             bool result = await serviceManager.GameServiceClient.StartGameAsync(AccountUtilities.CastAccountProfileToPlayerGameplay(profile), AccountUtilities.CastChatGameToGameServiceGame(game));
+            if (!result)
+            {
+                Utilities.ShowMessgeServerLost();
+            }
         }
 
-        private async Task ExecuteIsNotReady()
-        {
-            bool result = await serviceManager.GameServiceClient.CancelStartGameAsync(AccountUtilities.CastAccountProfileToPlayerGameplay(profile), AccountUtilities.CastChatGameToGameServiceGame(game));
-        }
 
         public void SetCountdownTime(object timeInSeconds)
         {
@@ -172,44 +199,48 @@ namespace CatanClient.ViewModels
         {
             OperationResultListOfPlayersInGame result;
 
-            result = serviceManager.GameServiceClient.GetPlayerList(AccountUtilities.CastChatGameToGameServiceGame(game));
-
-            if (result.IsSuccess)
+            App.Current.Dispatcher.InvokeAsync(async () =>
             {
-                OnlinePlayersList.Clear();
-                OnlinePlayers = result.ProfileDtos.ToList();  
-                OnlinePlayersGuest = result.GuestAccountDtos.ToList();
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                result = await serviceManager.GameServiceClient.GetPlayerListAsync(AccountUtilities.CastChatGameToGameServiceGame(game));
 
-                if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
+                if (result.IsSuccess)
                 {
-                    foreach (var profileDto in OnlinePlayers)
-                    {
-                        OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
-                    }
-                }
+                    OnlinePlayersList.Clear();
+                    OnlinePlayers = result.ProfileDtos.ToList();
+                    OnlinePlayersGuest = result.GuestAccountDtos.ToList();
 
-                if(OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
+                    if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
+                    {
+                        foreach (var profileDto in OnlinePlayers)
+                        {
+                            OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                                new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                        }
+                    }
+
+                    if (OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
+                    {
+                        foreach (var guestProfileDto in OnlinePlayersGuest)
+                        {
+                            ProfileDto profileDto = new ProfileDto();
+                            profileDto.Id = guestProfileDto.Id;
+                            profileDto.Name = guestProfileDto.Name;
+                            profileDto.IsRegistered = false;
+                            profileDto.PictureVersion = 0;
+                            profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
+
+                            OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                                new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+                        }
+                    }
+
+                }
+                else
                 {
-                    foreach (var guestProfileDto in OnlinePlayersGuest)
-                    {
-                        ProfileDto profileDto = new ProfileDto();
-                        profileDto.Id = guestProfileDto.Id;
-                        profileDto.Name = guestProfileDto.Name;
-                        profileDto.IsRegistered = false;
-                        profileDto.PictureVersion = 0;
-                        profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
-
-                        OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
-                    }
+                    Utilities.ShowMessgeServerLost();
                 }
-                
-            }
-            else
-            {
-                Utilities.ShowMessgeServerLost();
-            }
+            });
         }
 
         internal void OnReceiveMessage(object message)

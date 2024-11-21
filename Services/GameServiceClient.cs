@@ -94,23 +94,6 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                
-                Log.Error(ex.Message);
-            }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
-            return result;
-        }
-
-        public async Task<bool> CancelStartGameAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
-        {
-            OpenConnection();
-            bool result = false;
-            try
-            {
-                result = await client.VoteCancelGameAsync(playerGameplayDto, gameClientDto);
-            }
-            catch (Exception ex)
-            {
 
                 Log.Error(ex.Message);
             }
@@ -200,13 +183,14 @@ namespace CatanClient.Services
             return result;
         }
 
-        public OperationResultListOfPlayersInGame GetPlayerList(GameDto game)
+        public async Task<OperationResultListOfPlayersInGame> GetPlayerListAsync(GameDto game)
         {
             OpenConnection();
             OperationResultListOfPlayersInGame result;
             try
             {
-                result = client.GetAllPlayersInGame(game, CultureInfo.CurrentCulture.Name);
+                
+                result = await client.GetAllPlayersInGameAsync(game, CultureInfo.CurrentCulture.Name);
             }
             catch (Exception ex)
             {
@@ -217,13 +201,14 @@ namespace CatanClient.Services
                 };
                 Log.Error(ex.Message);
             }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
 
         public async Task<bool> ExpelPlayerAsync(ExpelPlayerDto expelPlayer, int idPlayer, GameDto game)
         {
             OpenConnection();
-            bool result;
+            bool result = false;
             try
             {
                 result = await client.ExpelPlayerAsAdminAsync(expelPlayer, idPlayer, game);
@@ -231,11 +216,27 @@ namespace CatanClient.Services
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                result = false;
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
+
+        public async Task<bool> VoteExpelPlayerAsync(ExpelPlayerDto expelPlayer, int idPlayer, GameDto game)
+        {
+            OpenConnection();
+            bool result = false;
+            try
+            {
+                result = await client.VoteExpelPlayerAsync(expelPlayer, idPlayer, game);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
+
 
         public async Task ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto, int diceValue)
         {

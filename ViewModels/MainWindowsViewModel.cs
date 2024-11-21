@@ -22,6 +22,33 @@ namespace CatanClient.ViewModels
         private UserControl currentView;
         private UserControl backgroundView;
         private UserControl overlayView;
+        public ICommand ShowRegisterViewCommand { get; set; }
+        public ICommand ShowLoginViewCommand { get; set; }
+        public ICommand ShowNeedHelpViewCommand { get; set; }
+        public ICommand ShowChangeForgotPasswordViewCommand { get; set; }
+        public ICommand ShowVerifyAccountViewCommand { get; set; }
+        public ICommand OcultVerifyAccountViewCommand { get; set; }
+        public ICommand ShowMainMenuViewCommand { get; set; }
+        public ICommand ShowGuestMainMenuViewCommand { get; set; }
+        public ICommand ShowMainMenuBackgroundViewCommand { get; set; }
+        public ICommand ShowCreateRoomCommand { get; set; }
+        public ICommand ShowLoginRoomCommand { get; set; }
+        public ICommand BackToMainMenuCommand { get; set; }
+        public ICommand BackToGuestMainMenuCommand { get; set;   }
+        public ICommand ShowGameLobbyCommand { get; set; }
+        public ICommand ShowConfigureProfileCommand { get; set; }
+        public ICommand ShowFriendsViewCommand { get; set; }
+        public ICommand HideFriendsViewCommand { get; set; }
+        public ICommand ShowFriendsRequestsViewCommand { get; set; }
+        public ICommand HideFriendsRequestsViewCommand { get; set; }
+        public ICommand ShowInviteFriendsViewCommand { get; set; }
+        public ICommand HideInviteFriendsViewCommand { get; set; }
+        public ICommand ShowScoreboardViewCommand { get; set; }
+        public ICommand HideScoreboardViewCommand { get; set; }
+        public ICommand ShowLoadingScreenCommand { get; set; }
+        public ICommand HideLoadingScreenCommand {get; set; }
+        public ICommand ShowDiceAnimationCommand { get; set; }
+        public ICommand ShowGameScreenCommand { get; set; }
 
         public UserControl CurrentView
         {
@@ -53,70 +80,22 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public ICommand ShowRegisterViewCommand { get; }
-        public ICommand ShowLoginViewCommand { get; }
-        public ICommand ShowNeedHelpViewCommand { get; }
-        public ICommand ShowChangeForgotPasswordViewCommand { get; }
-        public ICommand ShowVerifyAccountViewCommand { get; }
-        public ICommand OcultVerifyAccountViewCommand { get; }
-        public ICommand ShowMainMenuViewCommand { get; }
-        public ICommand ShowGuestMainMenuViewCommand { get; }
-        public ICommand ShowMainMenuBackgroundViewCommand { get; }
-        public ICommand ShowCreateRoomCommand { get; }
-        public ICommand ShowLoginRoomCommand { get; }
-        public ICommand BackToMainMenuCommand { get; }
-        public ICommand BackToGuestMainMenuCommand { get; }
-        public ICommand ShowGameLobbyCommand { get; }
-        public ICommand ShowConfigureProfileCommand { get; }
-        public ICommand ShowFriendsViewCommand { get; }
-        public ICommand HideFriendsViewCommand { get; }
-        public ICommand ShowFriendsRequestsViewCommand { get; }
-        public ICommand HideFriendsRequestsViewCommand { get; }
-        public ICommand ShowInviteFriendsViewCommand { get; }
-        public ICommand HideInviteFriendsViewCommand { get; }
-        public ICommand ShowScoreboardViewCommand { get; }
-        public ICommand HideScoreboardViewCommand { get; }
-        public ICommand ShowLoadingScreenCommand { get; }
-        public ICommand HideLoadingScreenCommand { get; }
-        public ICommand ShowDiceAnimationCommand { get; }
-
-        public ICommand ShowGameScreenCommand { get; }
-
         public MainWindowsViewModel()
+        {
+            InicializateViews();
+            InicializateCommands();
+            InicializateAsyncCommands();
+            InicializateMediatorRegisters();
+        } 
+
+        private void InicializateViews()
         {
             CurrentView = new Views.LoginView();
             BackgroundView = new Views.StartupBackground();
+        }
 
-            ShowRegisterViewCommand = new RelayCommand(async () => await ShowRegisterView());
-            ShowLoginViewCommand = new RelayCommand(async () => await ShowLoginView());
-            ShowNeedHelpViewCommand = new RelayCommand(async () => await ShowNeedHelpView());
-            ShowChangeForgotPasswordViewCommand = new RelayCommand(async (object email) => await ShowChangeForgotPasswordView(email));
-            ShowVerifyAccountViewCommand = new RelayCommand(async (object accountDto) => await ShowVerifyAccountView(accountDto));
-            OcultVerifyAccountViewCommand = new RelayCommand(async () => await OcultVerifyAccountView());
-            ShowMainMenuViewCommand = new RelayCommand(ShowMainMenuView);
-            ShowGuestMainMenuViewCommand = new RelayCommand(ShowGuestMainMenuView);
-            ShowMainMenuBackgroundViewCommand = new RelayCommand(ShowMainMenuBackgroundView);
-            ShowCreateRoomCommand = new RelayCommand(async () => await ShowCreateRoom());
-            ShowFriendsViewCommand = new RelayCommand(ShowFriendsView);
-            HideFriendsViewCommand = new RelayCommand(async () => await HideFriendsView());
-            ShowFriendsRequestsViewCommand = new RelayCommand(ShowFriendsRequestsView);
-            HideFriendsRequestsViewCommand = new RelayCommand(async () => await HideFriendsRequestsView());
-            ShowInviteFriendsViewCommand = new RelayCommand(accesKey => ShowInviteFriendsView(accesKey));
-            HideInviteFriendsViewCommand = new RelayCommand(async () => await HideInviteFriendsView());
-            ShowScoreboardViewCommand = new RelayCommand(ShowScoreboardView);
-            HideScoreboardViewCommand = new RelayCommand(async () => await HideScoreboardView());
-            ShowDiceAnimationCommand = new RelayCommand(result => ShowDiceAnimation(result));
-
-            ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
-            BackToMainMenuCommand = new RelayCommand(async () => await BackToMainMenu());
-            BackToGuestMainMenuCommand = new RelayCommand(async () => await BackToGuestMainMenu());
-            ShowGameLobbyCommand = new RelayCommand(async (object gameDto) => await ShowGameLobby(gameDto));
-            ShowConfigureProfileCommand = new RelayCommand(async (object accountDto) => await ShowConfigureProfile(accountDto));
-            ShowLoadingScreenCommand = new RelayCommand(ShowLoadingScreen);
-            HideLoadingScreenCommand = new RelayCommand(HideLoadingScreen);
-
-            ShowGameScreenCommand = new RelayCommand(gameDto => ShowGameScreen(gameDto));
-
+        private void InicializateMediatorRegisters()
+        {
             Mediator.Register(Utilities.SHOW_CONFIGURE_PROFILE, args => ShowConfigureProfileCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_CHANGE_FORGOT_PASSWORD, args => ShowChangeForgotPasswordViewCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_VERIFY_ACCOUNT, args => ShowVerifyAccountViewCommand.Execute(args));
@@ -133,7 +112,41 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.HIDE_LOADING_SCREEN, args => HideLoadingScreenCommand.Execute(null));
             Mediator.Register(Utilities.SHOW_GAME_SCREEN, args => ShowGameScreenCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_ROLL_DICE_ANIMATION, args => ShowDiceAnimationCommand.Execute(args));
+        }
 
+        private void InicializateAsyncCommands()
+        {
+            ShowRegisterViewCommand = new RelayCommand(async () => await ShowRegisterView());
+            ShowLoginViewCommand = new RelayCommand(async () => await ShowLoginView());
+            ShowNeedHelpViewCommand = new RelayCommand(async () => await ShowNeedHelpView());
+            ShowChangeForgotPasswordViewCommand = new RelayCommand(async (object email) => await ShowChangeForgotPasswordView(email));
+            ShowVerifyAccountViewCommand = new RelayCommand(async (object accountDto) => await ShowVerifyAccountView(accountDto));
+            OcultVerifyAccountViewCommand = new RelayCommand(async () => await OcultVerifyAccountView());
+            ShowCreateRoomCommand = new RelayCommand(async () => await ShowCreateRoom());
+            HideFriendsViewCommand = new RelayCommand(async () => await HideFriendsView());
+            HideFriendsRequestsViewCommand = new RelayCommand(async () => await HideFriendsRequestsView());
+            HideInviteFriendsViewCommand = new RelayCommand(async () => await HideInviteFriendsView());
+            HideScoreboardViewCommand = new RelayCommand(async () => await HideScoreboardView());
+            ShowLoginRoomCommand = new RelayCommand(async () => await ShowLoginRoom());
+            BackToMainMenuCommand = new RelayCommand(async () => await BackToMainMenu());
+            BackToGuestMainMenuCommand = new RelayCommand(async () => await BackToGuestMainMenu());
+            ShowGameLobbyCommand = new RelayCommand(async (object gameDto) => await ShowGameLobby(gameDto));
+            ShowConfigureProfileCommand = new RelayCommand(async (object accountDto) => await ShowConfigureProfile(accountDto));
+        }
+
+        private void InicializateCommands()
+        {
+            ShowMainMenuViewCommand = new RelayCommand(ShowMainMenuView);
+            ShowGuestMainMenuViewCommand = new RelayCommand(ShowGuestMainMenuView);
+            ShowMainMenuBackgroundViewCommand = new RelayCommand(ShowMainMenuBackgroundView);
+            ShowFriendsViewCommand = new RelayCommand(ShowFriendsView);
+            ShowFriendsRequestsViewCommand = new RelayCommand(ShowFriendsRequestsView);
+            ShowInviteFriendsViewCommand = new RelayCommand(accesKey => ShowInviteFriendsView(accesKey));
+            ShowScoreboardViewCommand = new RelayCommand(ShowScoreboardView);
+            ShowDiceAnimationCommand = new RelayCommand(result => ShowDiceAnimation(result));
+            ShowLoadingScreenCommand = new RelayCommand(ShowLoadingScreen);
+            HideLoadingScreenCommand = new RelayCommand(HideLoadingScreen);
+            ShowGameScreenCommand = new RelayCommand(gameDto => ShowGameScreen(gameDto));
         }
 
         private void ShowDiceAnimation(object result)

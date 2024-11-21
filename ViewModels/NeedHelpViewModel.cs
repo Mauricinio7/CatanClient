@@ -49,7 +49,7 @@ namespace CatanClient.ViewModels
 
             if (status)
             {
-                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name), Utilities.TitleVerifyAccount(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name), Utilities.TitleVerifyAccount(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
                 Mediator.Notify(Utilities.SHOW_CHANGE_FORGOT_PASSWORD, Email);
             }
             else

@@ -10,11 +10,11 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
-      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
-      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -83,12 +83,6 @@
   <wsdl:message name="IGameEndPoint_StartGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:StartGameResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameEndPoint_VoteCancelGame_InputMessage">
-    <wsdl:part name="parameters" element="tns:VoteCancelGame" />
-  </wsdl:message>
-  <wsdl:message name="IGameEndPoint_VoteCancelGame_OutputMessage">
-    <wsdl:part name="parameters" element="tns:VoteCancelGameResponse" />
-  </wsdl:message>
   <wsdl:message name="IGameEndPoint_NextTurnAync_InputMessage">
     <wsdl:part name="parameters" element="tns:NextTurnAync" />
   </wsdl:message>
@@ -140,6 +134,9 @@
   <wsdl:message name="IGameEndPoint_EndGameDisconnectedPlayers_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:EndGameDisconnectedPlayers" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_UpdateListOfPlayersTurns_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateListOfPlayersTurns" />
+  </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGame" message="tns:IGameEndPoint_CreateGame_InputMessage" />
@@ -185,10 +182,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/StartGame" message="tns:IGameEndPoint_StartGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/StartGameResponse" message="tns:IGameEndPoint_StartGame_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="VoteCancelGame">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/VoteCancelGame" message="tns:IGameEndPoint_VoteCancelGame_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/VoteCancelGameResponse" message="tns:IGameEndPoint_VoteCancelGame_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="NextTurnAync">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/NextTurnAync" message="tns:IGameEndPoint_NextTurnAync_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NextTurnAyncResponse" message="tns:IGameEndPoint_NextTurnAync_OutputMessage" />
@@ -233,6 +226,9 @@
     </wsdl:operation>
     <wsdl:operation name="EndGameDisconnectedPlayers">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/EndGameDisconnectedPlayers" message="tns:IGameEndPoint_EndGameDisconnectedPlayers_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateListOfPlayersTurns">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/UpdateListOfPlayersTurns" message="tns:IGameEndPoint_UpdateListOfPlayersTurns_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -337,15 +333,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="VoteCancelGame">
-      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/VoteCancelGame" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="NextTurnAync">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NextTurnAync" style="document" />
       <wsdl:input>
@@ -439,12 +426,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateListOfPlayersTurns">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/UpdateListOfPlayersTurns" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GameServiceEndpoint">
     <wsdl:port name="NetTcpBinding_IGameEndPoint" binding="tns:NetTcpBinding_IGameEndPoint">
-      <soap12:address location="net.tcp://localhost:8192/GameService" />
+      <soap12:address location="net.tcp://10.144.41.3:8192/GameService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8192/GameService</wsa10:Address>
+        <wsa10:Address>net.tcp://10.144.41.3:8192/GameService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

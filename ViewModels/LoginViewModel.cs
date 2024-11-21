@@ -28,8 +28,9 @@ namespace CatanClient.ViewModels
         private string password;
         private string email;
         private string phoneNumber;
-
         private readonly ServiceManager serviceManager;
+        public ICommand LoginCommand { get; }
+        public ICommand JoinGuestCommand { get; }
 
         public string Username
         {
@@ -71,8 +72,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public ICommand LoginCommand { get; }
-        public ICommand JoinGuestCommand { get; }
+        
         
 
         public LoginViewModel(ServiceManager serviceManager)
@@ -156,7 +156,7 @@ namespace CatanClient.ViewModels
 
         internal void ShowMainMenu(object actualWindow, bool isGuest)
         {
-            MessageBoxResult result = MessageBox.Show(Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + ":" + Username, Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + "!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBoxResult result = MessageBox.Show(Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + ": " + serviceManager.ProfileSingleton.Profile.Name, Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + "!", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 if (actualWindow is Window ventanaActual)
                 {

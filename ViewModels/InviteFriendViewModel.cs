@@ -20,7 +20,6 @@ namespace CatanClient.ViewModels
     internal class InviteFriendViewModel : ViewModelBase
     {
         public ObservableCollection<InvitePlayerCardViewModel> Friends { get; set; } = new ObservableCollection<InvitePlayerCardViewModel>();
-
         public List<ProfileDto> FriendsList { get; set; } = new List<ProfileDto>();
         public ICollectionView FriendsView { get; set; }
         private readonly ServiceManager serviceManager;
