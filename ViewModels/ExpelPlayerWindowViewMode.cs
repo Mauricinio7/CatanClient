@@ -13,9 +13,8 @@ namespace CatanClient.ViewModels
     internal class ExpelPlayerWindowViewModel
     {
         public ObservableCollection<string> ExpulsionReasons { get; set; }
-        public string SelectedReason { get; set; }
         public ICommand KickPlayerCommand { get; set; }
-
+        public string SelectedReason { get; set; }
         private readonly ServiceManager serviceManager;
         private readonly ProfileService.ProfileDto ExpelPlayer;
         private readonly ProfileService.ProfileDto Profile;
@@ -27,7 +26,12 @@ namespace CatanClient.ViewModels
             this.Profile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
             this.Game = game;
             this.serviceManager = serviceManager;
+            KickPlayerCommand = new AsyncRelayCommand(ExecuteKickPlayerAsync);
+            InicializateExpulsionReasons();
+        }
 
+        private void InicializateExpulsionReasons()
+        {
             ExpulsionReasons = new ObservableCollection<string>
             {
                 Utilities.OptionBadConduct(CultureInfo.CurrentCulture.Name),
@@ -35,9 +39,6 @@ namespace CatanClient.ViewModels
                 Utilities.OptionOffensiveLanguage(CultureInfo.CurrentCulture.Name),
                 Utilities.OptionExploits(CultureInfo.CurrentCulture.Name)
             };
-
-
-            KickPlayerCommand = new AsyncRelayCommand(ExecuteKickPlayerAsync);
         }
 
         private async Task ExecuteKickPlayerAsync(object parameter)

@@ -82,6 +82,7 @@ namespace CatanClient.UIHelpers
                 PreferredLanguage = CultureInfo.CurrentCulture.Name,
                 IsRegistered = false,
                 IsOnline = true,
+                isReadyToPlay = guestAccount.isReadyToPlay
             };
 
             return profile;

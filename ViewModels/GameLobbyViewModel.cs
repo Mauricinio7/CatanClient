@@ -229,6 +229,7 @@ namespace CatanClient.ViewModels
                             profileDto.IsRegistered = false;
                             profileDto.PictureVersion = 0;
                             profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
+                            profileDto.isReadyToPlay = guestProfileDto.isReadyToPlay;
 
                             OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
                                 new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));

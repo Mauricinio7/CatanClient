@@ -424,6 +424,9 @@ namespace CatanClient.AccountService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool isReadyToPlayField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int votesReceivedField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -547,6 +550,19 @@ namespace CatanClient.AccountService {
                 if ((this.isReadyToPlayField.Equals(value) != true)) {
                     this.isReadyToPlayField = value;
                     this.RaisePropertyChanged("isReadyToPlay");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int votesReceived {
+            get {
+                return this.votesReceivedField;
+            }
+            set {
+                if ((this.votesReceivedField.Equals(value) != true)) {
+                    this.votesReceivedField = value;
+                    this.RaisePropertyChanged("votesReceived");
                 }
             }
         }

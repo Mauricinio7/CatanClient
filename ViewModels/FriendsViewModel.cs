@@ -19,26 +19,27 @@ namespace CatanClient.ViewModels
 {
     internal class FriendsViewModel : ViewModelBase
     {
-        public ICommand AddFriendCommand { get; }
         public ObservableCollection<FriendPlayerCardViewModel> Friends { get; set; } = new ObservableCollection<FriendPlayerCardViewModel>();
-
         public List<ProfileDto> FriendsList { get; set; } = new List<ProfileDto>();
         public ICollectionView FriendsView { get; set; }
+        public ICommand AddFriendCommand { get; }
         private readonly ServiceManager serviceManager;
         private ProfileDto profile;
 
         public FriendsViewModel(ServiceManager serviceManager)
         {
             this.serviceManager = serviceManager;
-
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
-
             AddFriendCommand = new RelayCommand(ExecuteAddFriend);
+            InicializateFriendsList();
+        }
 
+        private void InicializateFriendsList()
+        {
             if (GetAllFriend())
             {
-                LoadFriendRequestList();
+                LoadFriendsList();
             }
             else
             {
@@ -66,7 +67,7 @@ namespace CatanClient.ViewModels
             return result.IsSuccess;
         }
 
-        public void LoadFriendRequestList()
+        public void LoadFriendsList()
         {
             foreach (var profileDto in FriendsList)
             {

@@ -27,11 +27,14 @@ namespace CatanClient.ViewModels
         public FriendRequestViewModel(ServiceManager serviceManager) 
         {
             this.serviceManager = serviceManager;
-
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
+            InicializateFriendRequestsList();
+        }
 
-            if(GetAllFriendRequests())
+        private void InicializateFriendRequestsList()
+        {
+            if (GetAllFriendRequests())
             {
                 LoadFriendRequestList();
             }
@@ -39,7 +42,6 @@ namespace CatanClient.ViewModels
             {
                 Utilities.ShowMessgeServerLost();
             }
-
         }
 
         public bool GetAllFriendRequests()

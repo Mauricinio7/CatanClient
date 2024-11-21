@@ -25,7 +25,6 @@ namespace CatanClient.ViewModels
 
         public MainMenuViewModel(ServiceManager serviceManager)
         {
-
             ShowConfigureProfileCommand = new RelayCommand(OnShowConfigureProfile);
             this.serviceManager = serviceManager;
         }

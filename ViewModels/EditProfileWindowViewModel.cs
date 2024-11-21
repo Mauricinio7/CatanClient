@@ -23,10 +23,9 @@ namespace CatanClient.ViewModels
         private string newValue;
         private ProfileDto profile;
         private readonly ServiceManager serviceManager;
-
+        public ICommand SaveCommand { get; }
         public string Field { get; }
-
-
+        public ProfileDto Profile { get => profile; set => profile = value; }
         public string PromptText => SetPrompt();
         public string NewValue
         {
@@ -38,9 +37,6 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public ProfileDto Profile { get => profile; set => profile = value; }
-
-        public ICommand SaveCommand { get; }
         
 
         public EditProfileWindowViewModel(string field, ServiceManager serviceManager)

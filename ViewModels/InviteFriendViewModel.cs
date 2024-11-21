@@ -35,17 +35,21 @@ namespace CatanClient.ViewModels
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
             CloseCommand = new RelayCommand(ExecuteClose);
+            InicializateInviteFriendList();   
+        }
 
-
+        private void InicializateInviteFriendList()
+        {
             if (GetAllFriend())
             {
-                LoadFriendRequestList();
+                LoadInviteFriendList();
             }
             else
             {
                 Utilities.ShowMessgeServerLost();
             }
         }
+
         internal void ExecuteClose()
         {
             Mediator.Notify(Utilities.HIDE_INVITE_FRIENDS, null);
@@ -64,7 +68,7 @@ namespace CatanClient.ViewModels
             return result.IsSuccess;
         }
 
-        public void LoadFriendRequestList()
+        public void LoadInviteFriendList()
         {
             foreach (var profileDto in FriendsList)
             {

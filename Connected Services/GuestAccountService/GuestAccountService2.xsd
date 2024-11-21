@@ -23,6 +23,7 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PreferredLanguage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="isReadyToPlay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="votesReceived" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GuestAccountDto" nillable="true" type="tns:GuestAccountDto" />

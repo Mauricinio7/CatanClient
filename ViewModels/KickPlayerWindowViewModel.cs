@@ -30,7 +30,6 @@ namespace CatanClient.ViewModels
         {
             game = gameDto;
             this.serviceManager = serviceManager;
-
             profile = serviceManager.ProfileSingleton.Profile;
             LoadPlayerList();
         }
