@@ -21,7 +21,7 @@ namespace CatanClient.Controls
         public string PlayerName { get; set; }
         public ICommand KickCommand { get; }
 
-        private ServiceManager serviceManager;
+        private readonly ServiceManager serviceManager;
         public ProfileDto SenderProfile { get; set; }
         private BitmapImage imageSource;
         private ProfileDto Profile { get; set; }

@@ -12,7 +12,7 @@ namespace CatanClient.Services
     {
         private DuplexChannelFactory<IChatServiceEndpoint> channelFactory;
         private IChatServiceEndpoint client;
-        private InstanceContext callbackInstance;
+        private readonly InstanceContext callbackInstance;
 
         public ChatServiceClient()
         {
@@ -49,7 +49,7 @@ namespace CatanClient.Services
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"Error al cerrar la conexión: {ex.Message}");
+                    Log.Error(ex, ex.Source);
                     ((ICommunicationObject)client).Abort();
                 }
                 finally
@@ -69,7 +69,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error($"Error al unirse al chat: {ex.Message}");
+                Log.Error(ex, ex.Source);
             }
         }
 
@@ -82,7 +82,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error($"Error al salir del chat: {ex.Message}");
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -98,13 +98,8 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error($"Error al enviar mensaje al chat: {ex.Message}");
+                Log.Error(ex, ex.Source);
             }
-        }
-
-        public void Dispose()
-        {
-            CloseConnection();
         }
     }
 }

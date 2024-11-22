@@ -11,7 +11,7 @@ namespace CatanClient.Services
 {
     internal class ProfileServiceClient : IProfileServiceClient
     {
-        private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
+        private static void SafeClose(IClientChannel client, ChannelFactory channelFactory)
         {
             if (client != null)
             {
@@ -51,7 +51,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -79,7 +79,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -107,7 +107,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -130,7 +130,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -158,7 +158,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -186,7 +186,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -209,7 +209,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -232,7 +232,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -255,7 +255,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -278,7 +278,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -306,7 +306,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message,
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {

@@ -23,7 +23,7 @@ namespace CatanClient.Controls
         public ICommand AcceptCommand { get; }
         public ICommand RejectCommand { get; }
 
-        private ServiceManager serviceManager;
+        private readonly ServiceManager serviceManager;
         public ProfileDto ReciverProfile { get; set; }
         private BitmapImage imageSource;
         private ProfileDto Profile { get; set; }

@@ -11,7 +11,7 @@ namespace CatanClient.Services
     internal class GuestAccountServiceClient : IGuestAccountServiceClient
     {
 
-        private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
+        private static void SafeClose(IClientChannel client, ChannelFactory channelFactory)
         {
             if (client != null)
             {
@@ -50,7 +50,7 @@ namespace CatanClient.Services
                     MessageResponse = ex.Message
                 };
 
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {

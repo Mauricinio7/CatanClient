@@ -24,7 +24,7 @@ namespace CatanClient.ViewModels
         public ICollectionView FriendsView { get; set; }
         public ICommand AddFriendCommand { get; }
         private readonly ServiceManager serviceManager;
-        private ProfileDto profile;
+        private readonly ProfileDto profile;
 
         public FriendsViewModel(ServiceManager serviceManager)
         {
@@ -47,7 +47,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void ExecuteAddFriend(object parameter)
+        private static void ExecuteAddFriend(object parameter)
         {
             var addFriendWindow = new AddFriendWindow();
 

@@ -256,46 +256,33 @@ namespace CatanClient.ViewModels
 
         private async Task ShowRegisterView()
         {
-            if (currentView is Views.LoginView loginView)
+            if (currentView is Views.LoginView loginView && loginView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (loginView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDE_OUT_FROM_TOP_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(1000);
-                }
+                Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDE_OUT_FROM_TOP_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(1000);
             }
 
             CurrentView = new Views.RegisterView();
         }
         private async Task ShowLoginView()
         {
-            if (currentView is Views.RegisterView registerView)
+            if (currentView is Views.RegisterView registerView && registerView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (registerView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)registerView.FindResource(Utilities.SLIDE_OUT_FROM_TOP_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(1000);
-                }
-
-
+                Storyboard storyboard = (Storyboard)registerView.FindResource(Utilities.SLIDE_OUT_FROM_TOP_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(1000);
             }
             CurrentView = new Views.LoginView();
         }
 
         private async Task ShowNeedHelpView()
         {
-            if (currentView is Views.LoginView loginView)
+            if (currentView is Views.LoginView loginView && loginView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (loginView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)loginView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(820);
-                }
-
-
+                Storyboard storyboard = (Storyboard)loginView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(820);
             }
             CurrentView = new Views.NeedHelpView();
         }
@@ -303,16 +290,11 @@ namespace CatanClient.ViewModels
 
         private async Task OcultVerifyAccountView()
         {
-            if (currentView is Views.VerifyAccountView verifyAccountView)
+            if (currentView is Views.VerifyAccountView verifyAccountView && verifyAccountView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (verifyAccountView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)verifyAccountView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(820);
-                }
-
-
+                Storyboard storyboard = (Storyboard)verifyAccountView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(820);
             }
             CurrentView = new Views.LoginView();
         }
@@ -359,14 +341,11 @@ namespace CatanClient.ViewModels
                 return;
             }
 
-            if (currentView is Views.NeedHelpView needHelpView)
+            if (currentView is Views.NeedHelpView needHelpView && needHelpView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (needHelpView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDE_OUT_FROM_TOP_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(900);
-                }
+                Storyboard storyboard = (Storyboard)animatedGrid.FindResource(Utilities.SLIDE_OUT_FROM_TOP_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
             }
             ChangeForgotPasswordView changeForgotPasswordView = new Views.ChangeForgotPasswordView(email);
 
@@ -381,14 +360,11 @@ namespace CatanClient.ViewModels
                 return;
             }
 
-            if (currentView is Views.CreateRoomView mainMenuView)
+            if (currentView is Views.CreateRoomView mainMenuView && mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(900);
-                }
+                Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
             }
 
             GameLobbyView lobbyRoomView = new Views.GameLobbyView(gameDto);
@@ -424,28 +400,22 @@ namespace CatanClient.ViewModels
 
         private async Task ShowCreateRoom()
         {
-            if (currentView is Views.MainMenuView mainMenuView)
+            if (currentView is Views.MainMenuView mainMenuView && mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(900);
-                }
+                Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
             }
             CurrentView = new Views.CreateRoomView();
         }
 
         private async Task ShowLoginRoom()
         {
-            if (currentView is Views.MainMenuView mainMenuView)
+            if (currentView is Views.MainMenuView mainMenuView && mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(900);
-                }
+                Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
             }
             CurrentView = new Views.LoginRoomView();
         }
@@ -459,14 +429,11 @@ namespace CatanClient.ViewModels
                 return;
             }
 
-            if (currentView is Views.MainMenuView mainMenuView)
+            if (currentView is Views.MainMenuView mainMenuView && mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (mainMenuView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(900);
-                }
+                Storyboard storyboard = (Storyboard)mainMenuView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
             }
 
             ConfigureProfileView configureProfileView = new Views.ConfigureProfileView(accountDto);
@@ -485,14 +452,11 @@ namespace CatanClient.ViewModels
                     await Task.Delay(900);
                 }
             }
-            else if (currentView is Views.LoginRoomView loginRoomView)
+            else if (currentView is Views.LoginRoomView loginRoomView && loginRoomView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (loginRoomView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)loginRoomView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(900);
-                }
+                Storyboard storyboard = (Storyboard)loginRoomView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
             }
 
             CurrentView = new Views.MainMenuView();
@@ -500,14 +464,11 @@ namespace CatanClient.ViewModels
 
         private async Task BackToGuestMainMenu()
         {
-            if (currentView is Views.LoginRoomView loginRoomView)
+            if (currentView is Views.LoginRoomView loginRoomView && loginRoomView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
             {
-                if (loginRoomView.FindName(Utilities.ANIMATED_GRID) is Grid animatedGrid)
-                {
-                    Storyboard storyboard = (Storyboard)loginRoomView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
-                    storyboard.Begin(animatedGrid);
-                    await Task.Delay(900);
-                }
+                Storyboard storyboard = (Storyboard)loginRoomView.FindResource(Utilities.SLIDE_OUT_FROM_RIGHT_ANIMATION);
+                storyboard.Begin(animatedGrid);
+                await Task.Delay(900);
             }
 
             CurrentView = new Views.GuestMainMenuView();

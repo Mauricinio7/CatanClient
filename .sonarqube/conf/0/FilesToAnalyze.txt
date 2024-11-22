@@ -121,6 +121,9 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameSe
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService2.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService3.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService4.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService5.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService51.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService52.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameServiceEndpoint.wsdl
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\CatanClient.GuestAccountService.OperationResultGuestAccountDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountEndpoint.wsdl

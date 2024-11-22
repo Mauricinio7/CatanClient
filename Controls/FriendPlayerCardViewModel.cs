@@ -24,7 +24,7 @@ namespace CatanClient.Controls
         public bool IsOnline { get; set;}
         public ICommand DeleteCommand { get; }
 
-        private ServiceManager serviceManager;
+        private readonly ServiceManager serviceManager;
         public ProfileDto SenderProfile { get; set; }
         private BitmapImage imageSource;
         private ProfileDto Profile { get; set; }

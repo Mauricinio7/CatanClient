@@ -15,7 +15,7 @@ namespace CatanClient.Services
     {
         private DuplexChannelFactory<IGameEndPoint> channelFactory;
         private IGameEndPoint client;
-        private InstanceContext callbackInstance;
+        private readonly InstanceContext callbackInstance;
 
         public GameServiceClient()
         {
@@ -52,7 +52,7 @@ namespace CatanClient.Services
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"Error al cerrar la conexión: {ex.Message}");
+                    Log.Error(ex, ex.Source);
                     ((ICommunicationObject)client).Abort();
                 }
                 finally
@@ -78,7 +78,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -95,7 +95,7 @@ namespace CatanClient.Services
             catch (Exception ex)
             {
 
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -116,7 +116,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -137,7 +137,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -153,7 +153,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -173,7 +173,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {
@@ -199,7 +199,7 @@ namespace CatanClient.Services
                     IsSuccess = false,
                     MessageResponse = ex.Message
                 };
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -215,7 +215,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -231,7 +231,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
@@ -247,7 +247,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
            
         }
@@ -262,7 +262,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             return result;
         }
@@ -276,7 +276,7 @@ namespace CatanClient.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
             finally
             {

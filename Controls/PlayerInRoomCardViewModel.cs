@@ -22,7 +22,7 @@ namespace CatanClient.Controls
         public string PlayerName { get; set; }
         public string Ready { get; set; }
 
-        private ServiceManager serviceManager;
+        private readonly ServiceManager serviceManager;
 
         private BitmapImage imageSource;
         private ProfileDto Profile { get; set; }

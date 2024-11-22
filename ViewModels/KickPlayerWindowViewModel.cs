@@ -21,14 +21,12 @@ namespace CatanClient.ViewModels
     {
         public ObservableCollection<KickPlayerCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<KickPlayerCardViewModel>();
         private readonly ServiceManager serviceManager;
-        private ChatService.GameDto game;
-        private AccountService.ProfileDto profile;
+        private readonly ChatService.GameDto game;
 
         public KickPlayerWindowViewModel(ChatService.GameDto gameDto, ServiceManager serviceManager)
         {
             game = gameDto;
             this.serviceManager = serviceManager;
-            profile = serviceManager.ProfileSingleton.Profile;
             LoadPlayerList();
         }
 
@@ -49,7 +47,7 @@ namespace CatanClient.ViewModels
                     OnlinePlayers = result.ProfileDtos.ToList();
                     OnlinePlayersGuest = result.GuestAccountDtos.ToList();
 
-                    if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
+                    if (OnlinePlayers.Count > 0)
                     {
                         foreach (var profileDto in OnlinePlayers)
                         {
@@ -60,7 +58,7 @@ namespace CatanClient.ViewModels
                         }
                     }
 
-                    if (OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
+                    if (OnlinePlayersGuest.Count > 0)
                     {
                         foreach (var guestProfileDto in OnlinePlayersGuest)
                         {

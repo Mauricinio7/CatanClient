@@ -21,7 +21,7 @@ namespace CatanClient.Controls
         public string Points { get; set; }
         public bool Turn { get; set; }
 
-        private ServiceManager serviceManager;
+        private readonly ServiceManager serviceManager;
 
         private BitmapImage imageSource;
         private ProfileDto Profile { get; set; }

@@ -29,7 +29,6 @@ namespace CatanClient.ViewModels
         private AccountDto account;
         private string email;
         private string phone;
-        private ProfileDto profile;
         private BitmapImage imageSource;
         private readonly ServiceManager serviceManager;
 
@@ -87,7 +86,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public ProfileDto Profile { get => profile; set => profile = value; }
+        public ProfileDto Profile { get; set; }
 
        
         public ConfigureProfileViewModel(AccountDto account, ServiceManager serviceManager)
@@ -167,7 +166,7 @@ namespace CatanClient.ViewModels
                 Directory.CreateDirectory(appDirectory);
             }
 
-            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
+            string fileName = Utilities.ProfilePhotoPath(Profile.Id.Value);
             string destinationPath = Path.Combine(appDirectory, fileName);
 
             File.Copy(filePath, destinationPath, overwrite: true);
@@ -177,7 +176,7 @@ namespace CatanClient.ViewModels
         {
             string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
-            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
+            string fileName = Utilities.ProfilePhotoPath(Profile.Id.Value);
             string imagePath = Path.Combine(appDirectory, fileName);
 
             if (File.Exists(imagePath))
@@ -228,7 +227,7 @@ namespace CatanClient.ViewModels
                 Directory.CreateDirectory(appDirectory);
             }
 
-            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
+            string fileName = Utilities.ProfilePhotoPath(Profile.Id.Value);
             string destinationPath = Path.Combine(appDirectory, fileName);
 
             File.WriteAllBytes(destinationPath, imageBytes);
@@ -237,7 +236,7 @@ namespace CatanClient.ViewModels
 
 
 
-        private void OnModifyProfile(object parameter)
+        private static void OnModifyProfile(object parameter)
         {
             if (parameter is string field)
             {
@@ -247,7 +246,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void OnModifyPassword(object parameter)
+        private static void OnModifyPassword(object parameter)
         {
                 var editWindow = new EditPasswordWindow();
 

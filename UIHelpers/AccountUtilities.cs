@@ -50,7 +50,7 @@ namespace CatanClient.UIHelpers
         {
             string phoneNumberRegex = Utilities.REGEX_PHONE_NUMBER_VALIDATION;
 
-            return Regex.IsMatch((string)phoneNumber, phoneNumberRegex);
+            return Regex.IsMatch(phoneNumber, phoneNumberRegex);
         }
 
         public static bool IsValidAccountPassword(string password)

@@ -17,7 +17,7 @@ namespace CatanClient.ViewModels
     internal class VerifyAccountChangeWindowViewModel : ViewModelBase
     {
         private string verificationCode;
-        private AccountDto Account;
+        private readonly AccountDto Account;
 
 
         public string VerificationCode

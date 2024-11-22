@@ -30,11 +30,11 @@ namespace CatanClient.ViewModels
     internal class GameLobbyViewModel : ViewModelBase
     {
         private string newMessage;
-        private ChatService.GameDto game;
-        private AccountService.ProfileDto profile;
+        private readonly ChatService.GameDto game;
+        private readonly AccountService.ProfileDto profile;
         private int remainingTimeInSeconds;
         private DispatcherTimer countdownTimer;
-        private bool isJoiningGame;
+        private readonly bool isJoiningGame;
         private readonly ServiceManager serviceManager;
         private bool isReady;
         public string RoomName => game.Name;
@@ -134,12 +134,27 @@ namespace CatanClient.ViewModels
             
         }
 
+        private void UpdateGameAdmin(object idAdmin)
+        {
+            if (!(idAdmin is int IdAdmin))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Se ha cambiado el admin");
+                game.IdAdminGame = IdAdmin;
+                UpdateCanExecuteCommands();
+            }
+        }
+
         private void MediatorRegister()
         {
             Mediator.Register(Utilities.RECIVE_MESSAGE, OnReceiveMessage);
             Mediator.Register(Utilities.LOAD_PLAYER_LIST, LoadPlayerList);
             Mediator.Register(Utilities.UPDATE_TIME, SetCountdownTime);
             Mediator.Register(Utilities.GET_GAME_FOR_SCREEN, ShowGameScreen);
+            Mediator.Register(Utilities.UPDATE_GAME_ADMIN, args => UpdateGameAdmin(args));
         }
 
         private bool CanExecuteReady()
@@ -210,7 +225,7 @@ namespace CatanClient.ViewModels
                     OnlinePlayers = result.ProfileDtos.ToList();
                     OnlinePlayersGuest = result.GuestAccountDtos.ToList();
 
-                    if (OnlinePlayers.Count > 0 && OnlinePlayers != null)
+                    if (OnlinePlayers.Count > 0)
                     {
                         foreach (var profileDto in OnlinePlayers)
                         {
@@ -219,7 +234,7 @@ namespace CatanClient.ViewModels
                         }
                     }
 
-                    if (OnlinePlayersGuest.Count > 0 && OnlinePlayersGuest != null)
+                    if (OnlinePlayersGuest.Count > 0)
                     {
                         foreach (var guestProfileDto in OnlinePlayersGuest)
                         {

@@ -156,7 +156,7 @@ namespace CatanClient.ViewModels
 
         internal void ShowMainMenu(object actualWindow, bool isGuest)
         {
-            MessageBoxResult result = MessageBox.Show(Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + ": " + serviceManager.ProfileSingleton.Profile.Name, Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + "!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + ": " + serviceManager.ProfileSingleton.Profile.Name, Utilities.DialogWelcome(CultureInfo.CurrentCulture.Name) + "!", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 if (actualWindow is Window ventanaActual)
                 {
@@ -194,7 +194,7 @@ namespace CatanClient.ViewModels
                 }
         }
 
-        internal void ShowVerifyAccountView(AccountDto account)
+        internal static void ShowVerifyAccountView(AccountDto account)
         {
             MessageBox.Show(Utilities.MessageUnverifiedUser(CultureInfo.CurrentCulture.Name), Utilities.TittleUnverifiedUser(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             Mediator.Notify(Utilities.SHOW_VERIFY_ACCOUNT, account);

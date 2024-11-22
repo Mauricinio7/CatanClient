@@ -20,7 +20,7 @@ namespace CatanClient.Controls
     internal class InvitePlayerCardViewModel : ViewModelBase
     {
 
-        private ServiceManager serviceManager;
+        private readonly ServiceManager serviceManager;
         private BitmapImage imageSource;
         public string PlayerName { get; set; }
         public string AccesKey { get; set; }

@@ -19,7 +19,7 @@ namespace CatanClient.ViewModels
         public ICommand AddFriendCommand { get; }
         private string playerName;
         private readonly ServiceManager serviceManager;
-        private ProfileDto profile;
+        private readonly ProfileDto profile;
 
         public string PlayerName
         {

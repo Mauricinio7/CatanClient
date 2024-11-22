@@ -19,7 +19,7 @@ namespace CatanClient.Gameplay.ViewModels
         public ObservableCollection<Resource> ResourcesToRequest { get; set; }
 
         public ICommand SendTradeCommand { get; }
-        private readonly ServiceManager serviceManager;
+        private readonly ServiceManager serviceManager; //TOODO implements
 
         public TradeWindowViewModel(ServiceManager serviceManager)
         {

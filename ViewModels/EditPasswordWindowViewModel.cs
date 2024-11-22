@@ -18,10 +18,9 @@ namespace CatanClient.ViewModels
     {
         private string password;
         private string confirmPassword;
-        private ProfileDto profile;
         private readonly ServiceManager serviceManager;
         public ICommand SaveCommand { get; }
-        public ProfileDto Profile { get => profile; set => profile = value; }
+        public ProfileDto Profile { get; set; }
 
         public string Password
         {
@@ -94,7 +93,7 @@ namespace CatanClient.ViewModels
         }
 
 
-        public void ShowVerify(AccountService.AccountDto account)
+        public static void ShowVerify(AccountService.AccountDto account)
         {
             var verifyWindow = new VerifyAccountChangeWindow(account);
 

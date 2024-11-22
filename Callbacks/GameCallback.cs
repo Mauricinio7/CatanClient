@@ -37,7 +37,7 @@ namespace CatanClient.Callbacks
 
         public void BroadcastNotifyNewAdmin(int idAdmin)
         {
-            //TODO implement do a Mediator to send the new admin ID
+            Mediator.Notify(Utilities.UPDATE_GAME_ADMIN, idAdmin);
         }
 
         public void EndGameDisconnectedPlayers()
@@ -60,8 +60,16 @@ namespace CatanClient.Callbacks
 
                 try
                 {
-                    MessageBox.Show(mainWindow, message + reason, Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    if (!string.IsNullOrEmpty(reason))
+                    {
+                        MessageBox.Show(mainWindow, message + reason, Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show(mainWindow, "Se te ha expulsado del juego", Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
+                    
                 finally
                 {
                     mainWindow.IsEnabled = true;

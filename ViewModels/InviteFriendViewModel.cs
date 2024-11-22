@@ -23,8 +23,8 @@ namespace CatanClient.ViewModels
         public List<ProfileDto> FriendsList { get; set; } = new List<ProfileDto>();
         public ICollectionView FriendsView { get; set; }
         private readonly ServiceManager serviceManager;
-        private ProfileDto profile;
-        private string accesKey;
+        private readonly ProfileDto profile;
+        private readonly string accesKey;
         public ICommand CloseCommand { get; }   
 
         public InviteFriendViewModel(string accesKey, ServiceManager serviceManager)
@@ -50,7 +50,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        internal void ExecuteClose()
+        internal static void ExecuteClose()
         {
             Mediator.Notify(Utilities.HIDE_INVITE_FRIENDS, null);
         }

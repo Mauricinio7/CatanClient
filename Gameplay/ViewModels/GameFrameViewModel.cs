@@ -26,13 +26,14 @@ namespace CatanClient.ViewModels
     internal class GameFrameViewModel : ViewModelBase
     {
         private string newMessage;
-        private ChatService.GameDto game;
-        private AccountService.ProfileDto profile;
+        private readonly ChatService.GameDto game;
+        private readonly AccountService.ProfileDto profile;
         private int remainingTimeInSeconds;
         private bool turn;
         private PlayerGameplayDto playerGameplay;
+        private bool hasRolledDice;
 
-        private DispatcherTimer countdownTimer;
+        private readonly DispatcherTimer countdownTimer;
         public ICommand ShowTradeWindowCommand { get; }
         public ICommand RollDiceCommand { get; }
         public ICommand NextTurnCommand { get; }
@@ -70,10 +71,22 @@ namespace CatanClient.ViewModels
                 if (turn != value)
                 {
                     turn = value;
-                    OnPropertyChanged(nameof(Turn)); 
-                    ((RelayCommand)RollDiceCommand).RaiseCanExecuteChanged();
-                    ((RelayCommand)NextTurnCommand).RaiseCanExecuteChanged();
-                    ((RelayCommand)ShowTradeWindowCommand).RaiseCanExecuteChanged();
+                    OnPropertyChanged(nameof(Turn));
+                    UpdateCommandStates();
+                }
+            }
+        }
+
+        public bool HasRolledDice
+        {
+            get => hasRolledDice;
+            set
+            {
+                if (hasRolledDice != value)
+                {
+                    hasRolledDice = value;
+                    OnPropertyChanged(nameof(HasRolledDice));
+                    UpdateCommandStates();
                 }
             }
         }
@@ -115,7 +128,7 @@ namespace CatanClient.ViewModels
 
             
             ShowTradeWindowCommand = new RelayCommand(_ => ExecuteShowTradeWindow(), _ => CanPlayTurn());
-            RollDiceCommand = new RelayCommand(_ => ExecuteRollDiceAsync(), _ => CanPlayTurn()); 
+            RollDiceCommand = new RelayCommand(_ => ExecuteRollDiceAsync(), _ => CanRollDice()); 
             NextTurnCommand = new RelayCommand(_ => ExecuteNextTurn(), _ => CanPlayTurn()); 
             HideTradeControlCommand = new RelayCommand(ExecuteHideTradeControl);
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
@@ -202,12 +215,24 @@ namespace CatanClient.ViewModels
             });
         }
 
-        private bool CanPlayTurn()
+        private bool CanRollDice()
         {
-            return turn == true;
+            return Turn && !hasRolledDice;
         }
 
-        public void ExecuteShowTradeWindow() 
+        private bool CanPlayTurn()
+        {
+            return Turn && hasRolledDice;
+        }
+
+        private void UpdateCommandStates()
+        {
+            ((RelayCommand)RollDiceCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)NextTurnCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)ShowTradeWindowCommand).RaiseCanExecuteChanged();
+        }
+
+        public static void ExecuteShowTradeWindow() 
         {
             TradeWindow tradeWindow = new TradeWindow();
             tradeWindow.ShowDialog();
@@ -220,10 +245,11 @@ namespace CatanClient.ViewModels
             {
                 Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceValue);
                 await serviceManager.GameServiceClient.ThrowDiceAsync(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game), diceValue);
+                HasRolledDice = true;
             });
         }
 
-        public int DiceRollNumbers()
+        public static int DiceRollNumbers()
         {
             Random random = new Random();
             int dice1 = random.Next(1, 7); 

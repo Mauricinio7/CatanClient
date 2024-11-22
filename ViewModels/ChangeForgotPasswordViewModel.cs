@@ -17,7 +17,7 @@ namespace CatanClient.ViewModels
 {
     internal class ChangeForgotPasswordViewModel : ViewModelBase
     {
-        private string Email;
+        private readonly string Email;
         private string password;
         private string confirmPassword;
         private string verificationCode;

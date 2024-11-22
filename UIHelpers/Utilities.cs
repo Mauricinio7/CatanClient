@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace CatanClient.UIHelpers
 {
-    internal class Utilities
+    internal static class Utilities
     {
         public const string DEFAULT_LANGUAGE = "en";
         public const string ALPHABET_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -98,6 +98,7 @@ namespace CatanClient.UIHelpers
         public const string UPDATE_TIME = "UpdateTime";
         public const string UPDATE_TIME_GAME = "UpdateTimeGame";
         public const string TURN = "turn";
+        public const string UPDATE_GAME_ADMIN = "UpdateGameAdmin";
 
 
 

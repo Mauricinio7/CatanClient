@@ -13,7 +13,7 @@ namespace CatanClient.Services
     {
         
 
-        private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
+        private static void SafeClose(IClientChannel client, ChannelFactory channelFactory)
         {
             if (client != null)
             {
