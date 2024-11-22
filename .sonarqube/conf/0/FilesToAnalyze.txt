@@ -1,28 +1,88 @@
 ﻿C:\Users\mauricio\source\repos\CatanClient\Callbacks\ChatCallback.cs
+C:\Users\mauricio\source\repos\CatanClient\Callbacks\GameCallback.cs
+C:\Users\mauricio\source\repos\CatanClient\Commands\AsyncRelayCommand.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\FriendPlayerCard.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\FriendPlayerCardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\FriendRequestPlayerCard.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\FriendRequestPlayerCardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\InvitePlayerCard.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\InvitePlayerCardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\KickPlayerCard.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\KickPlayerCardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\LoadingScreen.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\PlayerInGameCard.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\PlayerInGameCardViewModel.cs
 C:\Users\mauricio\source\repos\CatanClient\Controls\PlayerInRoomCard.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\PlayerInRoomCardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\VoteKickPlayerCard.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Controls\VoteKickPlayerCardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Helpers\Resource.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\ViewModels\TradeWindowViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\DiceRollAnimationView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\GameFrameView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\TradeWindow.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\AccountServiceClient.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\ChatServiceClient.cs
+C:\Users\mauricio\source\repos\CatanClient\UIHelpers\ConnectionUtilities.cs
+C:\Users\mauricio\source\repos\CatanClient\UIHelpers\Converters\BooleanToVisibilityConverter.cs
+C:\Users\mauricio\source\repos\CatanClient\UIHelpers\ImageManager.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\ChangeForgotPasswordViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\ExpelPlayerWindowViewMode.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\GameServiceClient.cs
+C:\Users\mauricio\source\repos\CatanClient\Services\GuestAccountServiceClient.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\IAccountServiceClient.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\IChatServiceClient.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\IGameServiceClient.cs
+C:\Users\mauricio\source\repos\CatanClient\Services\IGuestAccountServiceClient.cs
+C:\Users\mauricio\source\repos\CatanClient\Services\IProfileServiceClient.cs
+C:\Users\mauricio\source\repos\CatanClient\Services\ProfileServiceClient.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\ServiceManager.cs
 C:\Users\mauricio\source\repos\CatanClient\Singleton\IProfileSingleton.cs
 C:\Users\mauricio\source\repos\CatanClient\Singleton\ProfileSingleton.cs
 C:\Users\mauricio\source\repos\CatanClient\UIHelpers\AccountUtilities.cs
 C:\Users\mauricio\source\repos\CatanClient\UIHelpers\ChatMessage.cs
+C:\Users\mauricio\source\repos\CatanClient\UIHelpers\Converters\NullToVisibilityConverter.cs
 C:\Users\mauricio\source\repos\CatanClient\UIHelpers\Mediator.cs
 C:\Users\mauricio\source\repos\CatanClient\UIHelpers\Utilities.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\AddFriendWindowViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\ConfigureProfileViewModel.cs
 C:\Users\mauricio\source\repos\CatanClient\ViewModels\CreateRoomViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\EditPasswordWindowViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\EditProfileWindowViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\FriendRequestViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\FriendsViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\ViewModels\GameFrameViewModel.cs
 C:\Users\mauricio\source\repos\CatanClient\ViewModels\GameLobbyViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\InviteFriendViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\KickPlayerWindowViewModel.cs
 C:\Users\mauricio\source\repos\CatanClient\ViewModels\LoginRoomViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\MainMenuViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\NeedHelpViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\ScoreboardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\VerifyAccountChangeWindowViewModel.cs
 C:\Users\mauricio\source\repos\CatanClient\ViewModels\VerifyAccountViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\ViewModels\VoteKickPlayerWindowViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\AddFriendWindow.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\ChangeForgotPasswordView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\ConfigureProfileView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Views\CreateRoomView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\EditPasswordWindow.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\EditProfileWindow.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\ExpelPlayerWindow.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\FriendRequestView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\FriendsView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Views\GameLobbyView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\GuestMainMenuView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\InviteFriendView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\KickPlayerWindow.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Views\LoginRoomView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Views\MainMenuBackgroundView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Views\MainMenuView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\NeedHelpView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\ScoreboardView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\VerifyAccountChangeWindow.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Views\VerifyAccountView.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Views\VoteKickPlayerWindow.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\App.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Commands\RelayCommand.cs
 C:\Users\mauricio\source\repos\CatanClient\Controls\PlaceholderTextBoxControl.xaml.cs
@@ -43,17 +103,38 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\Acc
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\AccountService2.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\AccountService3.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\AccountServiceEndPoint.wsdl
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\CatanClient.AccountService.OperationResultAccountDto.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\CatanClient.AccountService.OperationResultCreateAccountDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\CatanClient.AccountService.OperationResultDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\CatanClient.AccountService.OperationResultProfileDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\ChatService.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\ChatService1.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\ChatService2.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\ChatServiceEndpoint.wsdl
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\CatanClient.GameService.OperationResultDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\CatanClient.GameService.OperationResultGameDto.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\CatanClient.GameService.OperationResultListOfPlayersInGame.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\CatanClient.GameService.OperationResultListScoreGame.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService1.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService2.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService3.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService4.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameServiceEndpoint.wsdl
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\CatanClient.GuestAccountService.OperationResultGuestAccountDto.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountEndpoint.wsdl
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService1.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService2.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\CatanClient.ProfileService.OperationResultPictureDto.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\CatanClient.ProfileService.OperationResultProfileDto.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\CatanClient.ProfileService.OperationResultProfileListDto.datasource
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService1.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService2.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService3.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileServiceEndpoint.wsdl
 C:\Users\mauricio\source\repos\CatanClient\packages.config
 C:\Users\mauricio\source\repos\CatanClient\Properties\Settings.settings
 C:\Users\mauricio\source\repos\CatanClient\App.config
@@ -61,6 +142,14 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\Acc
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\configuration91.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\configuration.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\Reference.svcmap
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService.disco
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\configuration91.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\configuration.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\Reference.svcmap
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService.disco
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\configuration91.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\configuration.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\Reference.svcmap
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService.disco
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\configuration91.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\configuration.svcinfo

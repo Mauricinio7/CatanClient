@@ -21,6 +21,7 @@ namespace CatanClient.ViewModels
         private string password;
         private string confirmPassword;
         private string verificationCode;
+        public ICommand SaveCommand { get; }
 
         public string VerificationCode
         {
@@ -55,15 +56,10 @@ namespace CatanClient.ViewModels
         }
 
 
-        public ICommand SaveCommand { get; }
-
-
         public ChangeForgotPasswordViewModel(string email, ServiceManager serviceManager)
         {
             this.serviceManager = serviceManager;
-
             Email = email;
-
             SaveCommand = new AsyncRelayCommand(OnSaveAsync);
         }
 
@@ -77,36 +73,18 @@ namespace CatanClient.ViewModels
             }
             else
             {
-                if (!string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(ConfirmPassword))
+                if (AccountUtilities.VerificateChangePassword(Password, ConfirmPassword))
                 {
-                    if (AccountUtilities.IsValidAccountPassword(Password))
+                    bool resutl = await serviceManager.AccountServiceClient.ChangeForotPassword(Email, Password, VerificationCode);
+                    if (resutl)
                     {
-                        if (Password == ConfirmPassword)
-                        { 
-                            bool resutl = await serviceManager.AccountServiceClient.ChangeForotPassword(Email, Password, VerificationCode);
-                            if (resutl)
-                            {
-                                MessageBox.Show(Utilities.MessageSuccesPasswordChange(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-                                Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
-                            }
-                            else
-                            {
-                                Utilities.ShowMessgeServerLost();
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show(Utilities.MessagePasswordNotMacth(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                        }
+                        MessageBox.Show(Utilities.MessageSuccesPasswordChange(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                        Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
                     }
                     else
                     {
-                        MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                        Utilities.ShowMessgeServerLost();
                     }
-                }
-                else
-                {
-                    MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }

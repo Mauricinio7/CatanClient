@@ -46,6 +46,11 @@ namespace CatanClient.Callbacks
             AccountUtilities.RestartGame();
         }
 
+        public void NotifyGameBoardInitialized(GameBoardStateDto gameBoardState)
+        {
+            //TODO implement method
+        }
+
         public void NotifyPlayerExpulsion(string message, string reason)
         {
             App.Current.Dispatcher.Invoke(() =>

@@ -38,7 +38,6 @@ namespace CatanClient.ViewModels
         {
             AddFriendCommand = new RelayCommand(ExecuteAddFriend);
             this.serviceManager = serviceManager;
-
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
         }

@@ -1,4 +1,15 @@
-﻿C:\Users\mauricio\source\repos\CatanClient.Tests\LoginViewModelTests.cs
+﻿C:\Users\mauricio\source\repos\CatanClient.Tests\HelpersTest\AccountUtilitiesTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\HelpersTest\ChatCallbackTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\HelpersTest\ChatMessageTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ServicesTests\AccountServiceClientTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ServicesTests\ChatServiceClientTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ServicesTests\GameServiceClientTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ViewModelTests\CreateRoomViewModelTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ViewModelTests\GameLobbyViewModelTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ViewModelTests\LoginRoomViewModelTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ViewModelTests\LoginViewModelTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ViewModelTests\RegisterViewModelTests.cs
+C:\Users\mauricio\source\repos\CatanClient.Tests\ViewModelTests\VerifyAccountViewModelTests.cs
 C:\Users\mauricio\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\net452\xunit.runner.visualstudio.testadapter.dll
 C:\Users\mauricio\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\net452\xunit.runner.reporters.net452.dll
 C:\Users\mauricio\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\net452\xunit.runner.utility.net452.dll

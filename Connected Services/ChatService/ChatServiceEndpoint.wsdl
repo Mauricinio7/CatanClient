@@ -15,14 +15,14 @@
       <xsd:import schemaLocation="http://10.144.41.3:8203/ChatService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IChatServiceEndpoint_JoinChat_InputMessage">
-    <wsdl:part name="parameters" element="tns:JoinChat" />
+  <wsdl:message name="IChatServiceEndpoint_JoinChatAsync_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinChatAsync" />
   </wsdl:message>
-  <wsdl:message name="IChatServiceEndpoint_SendMessageToChat_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessageToChat" />
+  <wsdl:message name="IChatServiceEndpoint_SendMessageToChatAsync_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageToChatAsync" />
   </wsdl:message>
-  <wsdl:message name="IChatServiceEndpoint_LeaveChat_InputMessage">
-    <wsdl:part name="parameters" element="tns:LeaveChat" />
+  <wsdl:message name="IChatServiceEndpoint_LeaveChatAsync_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveChatAsync" />
   </wsdl:message>
   <wsdl:message name="IChatServiceEndpoint_ReceiveMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveMessage" />
@@ -34,14 +34,14 @@
     <wsdl:part name="parameters" element="tns:ReceiveMessageLeftPlayerToChat" />
   </wsdl:message>
   <wsdl:portType name="IChatServiceEndpoint">
-    <wsdl:operation name="JoinChat">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatServiceEndpoint/JoinChat" message="tns:IChatServiceEndpoint_JoinChat_InputMessage" />
+    <wsdl:operation name="JoinChatAsync">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatServiceEndpoint/JoinChatAsync" message="tns:IChatServiceEndpoint_JoinChatAsync_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SendMessageToChat">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChat" message="tns:IChatServiceEndpoint_SendMessageToChat_InputMessage" />
+    <wsdl:operation name="SendMessageToChatAsync">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChatAsync" message="tns:IChatServiceEndpoint_SendMessageToChatAsync_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="LeaveChat">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatServiceEndpoint/LeaveChat" message="tns:IChatServiceEndpoint_LeaveChat_InputMessage" />
+    <wsdl:operation name="LeaveChatAsync">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatServiceEndpoint/LeaveChatAsync" message="tns:IChatServiceEndpoint_LeaveChatAsync_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatServiceEndpoint/ReceiveMessage" message="tns:IChatServiceEndpoint_ReceiveMessage_OutputCallbackMessage" />
@@ -56,20 +56,20 @@
   <wsdl:binding name="NetTcpBinding_IChatServiceEndpoint" type="tns:IChatServiceEndpoint">
     <wsp:PolicyReference URI="#NetTcpBinding_IChatServiceEndpoint_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="JoinChat">
-      <soap12:operation soapAction="http://tempuri.org/IChatServiceEndpoint/JoinChat" style="document" />
+    <wsdl:operation name="JoinChatAsync">
+      <soap12:operation soapAction="http://tempuri.org/IChatServiceEndpoint/JoinChatAsync" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="SendMessageToChat">
-      <soap12:operation soapAction="http://tempuri.org/IChatServiceEndpoint/SendMessageToChat" style="document" />
+    <wsdl:operation name="SendMessageToChatAsync">
+      <soap12:operation soapAction="http://tempuri.org/IChatServiceEndpoint/SendMessageToChatAsync" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="LeaveChat">
-      <soap12:operation soapAction="http://tempuri.org/IChatServiceEndpoint/LeaveChat" style="document" />
+    <wsdl:operation name="LeaveChatAsync">
+      <soap12:operation soapAction="http://tempuri.org/IChatServiceEndpoint/LeaveChatAsync" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

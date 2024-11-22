@@ -11,20 +11,6 @@ namespace CatanClient.Services
 {
     internal class ProfileServiceClient : IProfileServiceClient
     {
-        private NetTcpBinding GetTcpBinding()
-        {
-            return new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-        }
-
         private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
         {
             if (client != null)
@@ -46,7 +32,7 @@ namespace CatanClient.Services
 
         public OperationResultProfileDto ChangeName(ProfileDto profile, string newName)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -76,7 +62,7 @@ namespace CatanClient.Services
 
         public OperationResultProfileDto UploadImage(ProfileDto profile, byte[] image)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -104,7 +90,7 @@ namespace CatanClient.Services
 
         public OperationResultPictureDto GetImage(ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -132,7 +118,7 @@ namespace CatanClient.Services
 
         public bool SendFriendRequest(string playerName, ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -155,7 +141,7 @@ namespace CatanClient.Services
 
         public OperationResultProfileListDto GetFriendRequestList(ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -183,7 +169,7 @@ namespace CatanClient.Services
 
         public OperationResultProfileListDto GetFriendList(ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -211,7 +197,7 @@ namespace CatanClient.Services
 
         public bool AcceptFriendRequest(string playerName, ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -234,7 +220,7 @@ namespace CatanClient.Services
 
         public bool RejectFriendRequest(string playerName, ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -257,7 +243,7 @@ namespace CatanClient.Services
 
         public bool DeleteFriend(string playerName, ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -280,7 +266,7 @@ namespace CatanClient.Services
 
         public bool InviteFriendToGame(string playerName, ProfileDto profile, string accessKey)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
@@ -303,7 +289,7 @@ namespace CatanClient.Services
 
         public OperationResultPictureDto GetFriendImage(ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();

@@ -11,19 +11,7 @@ namespace CatanClient.Services
 {
     public class AccountServiceClient : IAccountServiceClient
     {
-        private NetTcpBinding GetTcpBinding()
-        {
-            return new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-        }
+        
 
         private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
         {
@@ -46,7 +34,7 @@ namespace CatanClient.Services
 
         public async Task<OperationResultProfileDto> IsValidAuthenticationAsync(AccountDto account)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -78,7 +66,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -106,7 +94,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -137,7 +125,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -168,7 +156,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -199,7 +187,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -230,7 +218,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -259,7 +247,7 @@ namespace CatanClient.Services
 
         public OperationResultAccountDto GetAccount(ProfileDto profile)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -290,7 +278,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -317,7 +305,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
@@ -343,7 +331,7 @@ namespace CatanClient.Services
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();

@@ -23,7 +23,8 @@ namespace CatanClient.ViewModels
     {
         private string selectedOption;
         private string roomName;
-
+        private readonly ServiceManager serviceManager;
+        public ICommand CreateRoomCommand { get; }
         public ObservableCollection<string> OptionsList { get; set; }
 
         public string SelectedOption
@@ -53,11 +54,16 @@ namespace CatanClient.ViewModels
         }
 
 
-        public ICommand CreateRoomCommand { get; }
         
-        private readonly ServiceManager serviceManager;
 
         public CreateRoomViewModel(ServiceManager serviceManager)
+        {
+            InicializateOptionsList();
+            CreateRoomCommand = new AsyncRelayCommand(ExecuteCreateRoomAsync);
+            this.serviceManager = serviceManager;
+        }
+
+        private void InicializateOptionsList()
         {
             OptionsList = new ObservableCollection<string>
             {
@@ -65,9 +71,6 @@ namespace CatanClient.ViewModels
                 "3",
                 "4",
             };
-
-            CreateRoomCommand = new AsyncRelayCommand(ExecuteCreateRoomAsync);
-            this.serviceManager = serviceManager;
         }
 
 

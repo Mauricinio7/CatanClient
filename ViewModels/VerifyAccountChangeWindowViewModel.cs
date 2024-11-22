@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Security.Principal;
 
 namespace CatanClient.ViewModels
 {
@@ -94,18 +95,9 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private async Task ExecuteResendCodeAsync(object parameter)
+        private async Task ExecuteResendCodeAsync()
         {
-            bool result = await serviceManager.AccountServiceClient.ResendCodeAsync(Account);
-
-            if (result)
-            {
-                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                Utilities.ShowMessgeServerLost();
-            }
+            await AccountUtilities.ResendVerificationCodeAsync(serviceManager, Account);
         }
     }
 }

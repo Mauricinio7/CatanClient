@@ -183,7 +183,9 @@
     </Compile>
     <Compile Include="Services\AccountServiceClient.cs" />
     <Compile Include="Services\ChatServiceClient.cs" />
+    <Compile Include="UIHelpers\ConnectionUtilities.cs" />
     <Compile Include="UIHelpers\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="UIHelpers\ImageManager.cs" />
     <Compile Include="ViewModels\ChangeForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\ExpelPlayerWindowViewMode.cs" />
     <Compile Include="Services\GameServiceClient.cs" />
@@ -564,6 +566,15 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService52.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />

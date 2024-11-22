@@ -680,10 +680,10 @@ namespace CatanClient.AccountService {
         System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultChangeRegisterEmailOrPhone> ChangeEmailOrPhoneAsync(CatanClient.AccountService.AccountDto accountClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformation", ReplyAction="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformationResponse")]
-        CatanClient.AccountService.OperationResultAccountDto ConsultAccounProfileInformation(CatanClient.AccountService.ProfileDto accountClientDto);
+        CatanClient.AccountService.OperationResultAccountDto ConsultAccounProfileInformation(CatanClient.AccountService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformation", ReplyAction="http://tempuri.org/IAccountEndPoint/ConsultAccounProfileInformationResponse")]
-        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultAccountDto> ConsultAccounProfileInformationAsync(CatanClient.AccountService.ProfileDto accountClientDto);
+        System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultAccountDto> ConsultAccounProfileInformationAsync(CatanClient.AccountService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePassword", ReplyAction="http://tempuri.org/IAccountEndPoint/SendVerificationCodeToChangePasswordResponse")]
         CatanClient.AccountService.OperationResultDto SendVerificationCodeToChangePassword(CatanClient.AccountService.AccountDto accountClientDto);
@@ -793,12 +793,12 @@ namespace CatanClient.AccountService {
             return base.Channel.ChangeEmailOrPhoneAsync(accountClientDto);
         }
         
-        public CatanClient.AccountService.OperationResultAccountDto ConsultAccounProfileInformation(CatanClient.AccountService.ProfileDto accountClientDto) {
-            return base.Channel.ConsultAccounProfileInformation(accountClientDto);
+        public CatanClient.AccountService.OperationResultAccountDto ConsultAccounProfileInformation(CatanClient.AccountService.ProfileDto profileClientDto) {
+            return base.Channel.ConsultAccounProfileInformation(profileClientDto);
         }
         
-        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultAccountDto> ConsultAccounProfileInformationAsync(CatanClient.AccountService.ProfileDto accountClientDto) {
-            return base.Channel.ConsultAccounProfileInformationAsync(accountClientDto);
+        public System.Threading.Tasks.Task<CatanClient.AccountService.OperationResultAccountDto> ConsultAccounProfileInformationAsync(CatanClient.AccountService.ProfileDto profileClientDto) {
+            return base.Channel.ConsultAccounProfileInformationAsync(profileClientDto);
         }
         
         public CatanClient.AccountService.OperationResultDto SendVerificationCodeToChangePassword(CatanClient.AccountService.AccountDto accountClientDto) {

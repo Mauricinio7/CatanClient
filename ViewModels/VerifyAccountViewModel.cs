@@ -53,40 +53,30 @@ namespace CatanClient.ViewModels
             this.serviceManager = serviceManager;
         }
 
-        private async Task ExecuteVerifyAccountAsync(object parameter)
+        private async Task ExecuteVerifyAccountAsync()
         {
-            if (string.IsNullOrWhiteSpace(VerificationCode))
+            try
             {
-                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+                AccountUtilities.ValidateVerificationCode(VerificationCode);
 
-            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-            bool status = await serviceManager.AccountServiceClient.VerifyUserAccountAsync(Account, VerificationCode);
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-            if (status)
-            {
-                MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-                Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
+                bool result = await AccountUtilities.VerifyAccountAsync(serviceManager, account, VerificationCode);
+
+                if (result)
+                {
+                    Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
+                }
             }
-            else
+            catch (InvalidOperationException ex)
             {
-                MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message, Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        private async Task ExecuteResendCodeAsync(object parameter)
+        private async Task ExecuteResendCodeAsync()
         {
-            bool result = await serviceManager.AccountServiceClient.ResendCodeAsync(Account);
-
-            if (result)
-            {
-                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                Utilities.ShowMessgeServerLost();
-            }
+            await AccountUtilities.ResendVerificationCodeAsync(serviceManager, account);
         }
 
 

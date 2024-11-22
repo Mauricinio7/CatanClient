@@ -10,19 +10,6 @@ namespace CatanClient.Services
 {
     internal class GuestAccountServiceClient : IGuestAccountServiceClient
     {
-        private NetTcpBinding GetTcpBinding()
-        {
-            return new NetTcpBinding
-            {
-                Security = { Mode = SecurityMode.None },
-                MaxBufferSize = 10485760,
-                MaxReceivedMessageSize = 10485760,
-                OpenTimeout = TimeSpan.FromMinutes(1),
-                CloseTimeout = TimeSpan.FromMinutes(1),
-                SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
-            };
-        }
 
         private void SafeClose(IClientChannel client, ChannelFactory channelFactory)
         {
@@ -45,7 +32,7 @@ namespace CatanClient.Services
 
         public async Task<OperationResultGuestAccountDto> LoginAsGuestAsync(string language)
         {
-            NetTcpBinding binding = GetTcpBinding();
+            NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GUEST_ACCOUNT_SERVICE);
             ChannelFactory<IGuestAccountEndpoint> channelFactory = new ChannelFactory<IGuestAccountEndpoint>(binding, endpoint);
             IGuestAccountEndpoint client = channelFactory.CreateChannel();

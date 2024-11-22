@@ -92,23 +92,17 @@ namespace CatanClient.ViewModels
        
         public ConfigureProfileViewModel(AccountDto account, ServiceManager serviceManager)
         {
-
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
-
             Profile = profileDto;
-
             ModifyProfileCommand = new RelayCommand(OnModifyProfile);
             ModifyPasswordCommand = new RelayCommand(OnModifyPassword);
             SelectImageCommand = new RelayCommand(OpenFileDialog);
             this.serviceManager = serviceManager;
-
             Account = account;
-
             Username = Profile.Name;
             Email = account.Email;
             Phone = account.PhoneNumber;
-
             LoadProfileImage();
         }
 

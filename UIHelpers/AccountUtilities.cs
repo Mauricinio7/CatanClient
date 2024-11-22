@@ -1,5 +1,6 @@
 ﻿using CatanClient.AccountService;
 using CatanClient.GameService;
+using CatanClient.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +13,7 @@ using System.Windows;
 
 namespace CatanClient.UIHelpers
 {
-    public static class AccountUtilities
+    internal static class AccountUtilities
     {
         public static bool IsValidAccountName(string name)
         {
@@ -179,6 +180,96 @@ namespace CatanClient.UIHelpers
 
 
             return guestAccountDto;
+        }
+
+        public static async Task<bool> ResendVerificationCodeAsync(ServiceManager serviceManager, AccountDto account)
+        {
+            bool result = await serviceManager.AccountServiceClient.ResendCodeAsync(account);
+
+            if (result)
+            {
+                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name),
+                    Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+
+            return result;
+        }
+
+        public static void ValidateVerificationCode(string verificationCode)
+        {
+            if (string.IsNullOrWhiteSpace(verificationCode))
+            {
+                throw new InvalidOperationException(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name));
+            }
+        }
+
+        public static void ValidatePassword(string password, string confirmPassword)
+        {
+            if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
+            {
+                throw new InvalidOperationException(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name));
+            }
+
+            if (!AccountUtilities.IsValidAccountPassword(password))
+            {
+                throw new InvalidOperationException(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name));
+            }
+
+            if (password != confirmPassword)
+            {
+                throw new InvalidOperationException(Utilities.MessagePasswordNotMacth(CultureInfo.CurrentCulture.Name));
+            }
+        }
+
+        public static async Task<bool> VerifyAccountAsync(ServiceManager serviceManager, AccountDto account, string verificationCode)
+        {
+            bool status = await serviceManager.AccountServiceClient.VerifyUserAccountAsync(account, verificationCode);
+
+            if (status)
+            {
+                MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name),
+                    Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name),
+                    Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            return status;
+        }
+
+        public static bool VerificateChangePassword(string Password, string ConfirmPassword)
+        {
+            bool flag = false;
+
+            if (!string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(ConfirmPassword))
+            {
+                if (AccountUtilities.IsValidAccountPassword(Password))
+                {
+                    if (Password == ConfirmPassword)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show(Utilities.MessagePasswordNotMacth(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            return flag;
         }
     }
 }

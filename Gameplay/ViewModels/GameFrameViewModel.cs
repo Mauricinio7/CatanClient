@@ -213,13 +213,14 @@ namespace CatanClient.ViewModels
             tradeWindow.ShowDialog();
         }
 
-        public async void ExecuteRollDiceAsync()
+        public void ExecuteRollDiceAsync()
         {
             int diceValue = DiceRollNumbers();
-
-            Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceValue);
-
-            await serviceManager.GameServiceClient.ThrowDiceAsync(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game), diceValue);
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceValue);
+                await serviceManager.GameServiceClient.ThrowDiceAsync(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game), diceValue);
+            });
         }
 
         public int DiceRollNumbers()

@@ -19,8 +19,6 @@ namespace CatanClient.ViewModels
 {
     internal class KickPlayerWindowViewModel : ViewModelBase
     {
-        public List<GameService.ProfileDto> OnlinePlayers { get; set; } = new List<GameService.ProfileDto>();
-        public List<GuestAccountDto> OnlinePlayersGuest { get; set; } = new List<GuestAccountDto>();
         public ObservableCollection<KickPlayerCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<KickPlayerCardViewModel>();
         private readonly ServiceManager serviceManager;
         private ChatService.GameDto game;
@@ -36,7 +34,9 @@ namespace CatanClient.ViewModels
 
         internal void LoadPlayerList()
         {
-            OperationResultListOfPlayersInGame result;
+            List<GameService.ProfileDto> OnlinePlayers  = new List<GameService.ProfileDto>();
+            List<GuestAccountDto> OnlinePlayersGuest  = new List<GuestAccountDto>();
+        OperationResultListOfPlayersInGame result;
 
             App.Current.Dispatcher.InvokeAsync(async () =>
             {

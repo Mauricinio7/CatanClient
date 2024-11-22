@@ -17,7 +17,7 @@ namespace CatanClient.Services
         bool AcceptFriendRequest(string playerName, ProfileDto profile);
         bool RejectFriendRequest(string playerName, ProfileDto profile);
         OperationResultProfileListDto GetFriendList(ProfileDto profile);
-        bool InviteFriendToGame(string playerName, ProfileDto profile, string accesKey);
+        bool InviteFriendToGame(string playerName, ProfileDto profile, string accessKey);
         bool DeleteFriend(string playerName, ProfileDto profile);
 
         OperationResultPictureDto GetFriendImage(ProfileDto profile);

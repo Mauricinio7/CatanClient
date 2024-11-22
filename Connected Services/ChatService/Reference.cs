@@ -126,23 +126,23 @@ namespace CatanClient.ChatService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatService.IChatServiceEndpoint", CallbackContract=typeof(CatanClient.ChatService.IChatServiceEndpointCallback))]
     public interface IChatServiceEndpoint {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/JoinChat")]
-        void JoinChat(CatanClient.ChatService.GameDto game, string namePlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/JoinChatAsync")]
+        void JoinChatAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/JoinChat")]
-        System.Threading.Tasks.Task JoinChatAsync(CatanClient.ChatService.GameDto game, string namePlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/JoinChatAsync")]
+        System.Threading.Tasks.Task JoinChatAsyncAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChat")]
-        void SendMessageToChat(CatanClient.ChatService.GameDto gameId, string namePlayer, string message);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChatAsync")]
+        void SendMessageToChatAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer, string message);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChat")]
-        System.Threading.Tasks.Task SendMessageToChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer, string message);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/SendMessageToChatAsync")]
+        System.Threading.Tasks.Task SendMessageToChatAsyncAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer, string message);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/LeaveChat")]
-        void LeaveChat(CatanClient.ChatService.GameDto gameId, string namePlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/LeaveChatAsync")]
+        void LeaveChatAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/LeaveChat")]
-        System.Threading.Tasks.Task LeaveChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServiceEndpoint/LeaveChatAsync")]
+        System.Threading.Tasks.Task LeaveChatAsyncAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -186,28 +186,28 @@ namespace CatanClient.ChatService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void JoinChat(CatanClient.ChatService.GameDto game, string namePlayer) {
-            base.Channel.JoinChat(game, namePlayer);
+        public void JoinChatAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer) {
+            base.Channel.JoinChatAsync(gameClientDto, namePlayer);
         }
         
-        public System.Threading.Tasks.Task JoinChatAsync(CatanClient.ChatService.GameDto game, string namePlayer) {
-            return base.Channel.JoinChatAsync(game, namePlayer);
+        public System.Threading.Tasks.Task JoinChatAsyncAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer) {
+            return base.Channel.JoinChatAsyncAsync(gameClientDto, namePlayer);
         }
         
-        public void SendMessageToChat(CatanClient.ChatService.GameDto gameId, string namePlayer, string message) {
-            base.Channel.SendMessageToChat(gameId, namePlayer, message);
+        public void SendMessageToChatAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer, string message) {
+            base.Channel.SendMessageToChatAsync(gameClientDto, namePlayer, message);
         }
         
-        public System.Threading.Tasks.Task SendMessageToChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer, string message) {
-            return base.Channel.SendMessageToChatAsync(gameId, namePlayer, message);
+        public System.Threading.Tasks.Task SendMessageToChatAsyncAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer, string message) {
+            return base.Channel.SendMessageToChatAsyncAsync(gameClientDto, namePlayer, message);
         }
         
-        public void LeaveChat(CatanClient.ChatService.GameDto gameId, string namePlayer) {
-            base.Channel.LeaveChat(gameId, namePlayer);
+        public void LeaveChatAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer) {
+            base.Channel.LeaveChatAsync(gameClientDto, namePlayer);
         }
         
-        public System.Threading.Tasks.Task LeaveChatAsync(CatanClient.ChatService.GameDto gameId, string namePlayer) {
-            return base.Channel.LeaveChatAsync(gameId, namePlayer);
+        public System.Threading.Tasks.Task LeaveChatAsyncAsync(CatanClient.ChatService.GameDto gameClientDto, string namePlayer) {
+            return base.Channel.LeaveChatAsyncAsync(gameClientDto, namePlayer);
         }
     }
 }

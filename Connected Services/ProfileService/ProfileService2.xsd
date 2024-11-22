@@ -19,7 +19,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileClientDto" nillable="true" type="q3:ProfileDto" />
-        <xs:element minOccurs="0" name="imageInBytes" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="imageBytes" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -48,7 +48,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" minOccurs="0" name="profileFriendDto" nillable="true" type="q7:ProfileDto" />
-        <xs:element minOccurs="0" name="PreferredLanguage" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="preferredLanguage" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

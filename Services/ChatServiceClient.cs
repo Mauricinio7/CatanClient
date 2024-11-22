@@ -65,7 +65,7 @@ namespace CatanClient.Services
             OpenConnection();
             try
             {
-                client.JoinChat(game, namePlayer);
+                client.JoinChatAsync(game, namePlayer);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace CatanClient.Services
             OpenConnection();
             try
             {
-                client.LeaveChat(game, namePlayer);
+                client.LeaveChatAsync(game, namePlayer);
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace CatanClient.Services
         {
             try
             {
-                client.SendMessageToChat(game, namePlayer, message);
+                client.SendMessageToChatAsync(game, namePlayer, message);
             }
             catch (Exception ex)
             {

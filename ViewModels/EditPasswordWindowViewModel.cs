@@ -20,6 +20,8 @@ namespace CatanClient.ViewModels
         private string confirmPassword;
         private ProfileDto profile;
         private readonly ServiceManager serviceManager;
+        public ICommand SaveCommand { get; }
+        public ProfileDto Profile { get => profile; set => profile = value; }
 
         public string Password
         {
@@ -41,9 +43,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public ProfileDto Profile { get => profile; set => profile = value; }
-
-        public ICommand SaveCommand { get; }
+        
 
 
         public EditPasswordWindowViewModel(ServiceManager serviceManager)
@@ -59,31 +59,11 @@ namespace CatanClient.ViewModels
             SaveCommand = new AsyncRelayCommand(OnSaveAsync);
         }
 
-
-
         private async Task OnSaveAsync()
         {
-            if (!string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(ConfirmPassword))
+           if(AccountUtilities.VerificateChangePassword(Password, ConfirmPassword))
             {
-                if (AccountUtilities.IsValidAccountPassword(Password))
-                {
-                    if (Password == ConfirmPassword)
-                    {
-                        await SavePasswordAsync(Password); 
-                    }
-                    else
-                    {
-                        MessageBox.Show(Utilities.MessagePasswordNotMacth(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                await SavePasswordAsync(Password);
             }
         }
 

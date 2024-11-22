@@ -70,72 +70,13 @@ namespace CatanClient.Controls
 
         private void LoadProfileImage()
         {
-            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
-
-            string fileName = Utilities.ProfilePhotoPathWithVersion(Profile.Id.Value, Profile.PictureVersion);
-            string imagePath = Path.Combine(appDirectory, fileName);
-
-            if (File.Exists(imagePath))
+            try
             {
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                bitmap.EndInit();
-
-                ImageSource = bitmap;
+                ImageSource = ImageManager.LoadProfileImage(Profile, serviceManager);
             }
-            else
+            catch (InvalidOperationException)
             {
-                ProfileService.OperationResultPictureDto result;
-                result = serviceManager.ProfileServiceClient.GetFriendImage(Profile);
-
-                if (result.IsSuccess)
-                {
-                    byte[] imageBytes = result.Picture;
-
-                    DeleteOldVersions(Profile.Id.Value);
-                    SaveImageBytesLocally(imageBytes);
-
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    bitmap.EndInit();
-
-                    ImageSource = bitmap;
-                }
-                else
-                {
-                    Utilities.ShowMessageDataBaseUnableToLoad();
-                }
-            }
-        }
-
-        private void SaveImageBytesLocally(byte[] imageBytes)
-        {
-            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
-
-            if (!Directory.Exists(appDirectory))
-            {
-                Directory.CreateDirectory(appDirectory);
-            }
-
-            string fileName = Utilities.ProfilePhotoPathWithVersion(Profile.Id.Value, Profile.PictureVersion);
-            string destinationPath = Path.Combine(appDirectory, fileName);
-
-            File.WriteAllBytes(destinationPath, imageBytes);
-        }
-
-        private void DeleteOldVersions(int playerId)
-        {
-            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
-            string searchPattern =Utilities.ProfilePhotoPathDeleteVersion(playerId);
-            foreach (var file in Directory.GetFiles(appDirectory, searchPattern))
-            {
-                File.Delete(file);
+                Utilities.ShowMessageDataBaseUnableToLoad();
             }
         }
 
