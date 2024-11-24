@@ -4,6 +4,27 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -15,9 +36,10 @@
       <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
       <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
       <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" />
-      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd7" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.PlayersMove" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" />
+      <xsd:import schemaLocation="http://10.144.41.3:8191/GameService?xsd=xsd8" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -104,6 +126,12 @@
   <wsdl:message name="IGameEndPoint_QuitGamePlay_OutputMessage">
     <wsdl:part name="parameters" element="tns:QuitGamePlayResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_PlacePieceOnBoard_InputMessage">
+    <wsdl:part name="parameters" element="tns:PlacePieceOnBoard" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_PlacePieceOnBoard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PlacePieceOnBoardResponse" />
+  </wsdl:message>
   <wsdl:message name="IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerExpulsion" />
   </wsdl:message>
@@ -142,6 +170,9 @@
   </wsdl:message>
   <wsdl:message name="IGameEndPoint_NotifyGameBoardInitialized_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyGameBoardInitialized" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_NotifyPlayerPlacedPiece_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyPlayerPlacedPiece" />
   </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
@@ -200,6 +231,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGamePlay" message="tns:IGameEndPoint_QuitGamePlay_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/QuitGamePlayResponse" message="tns:IGameEndPoint_QuitGamePlay_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="PlacePieceOnBoard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/PlacePieceOnBoard" message="tns:IGameEndPoint_PlacePieceOnBoard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/PlacePieceOnBoardResponse" message="tns:IGameEndPoint_PlacePieceOnBoard_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" message="tns:IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage" />
     </wsdl:operation>
@@ -238,6 +273,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyGameBoardInitialized">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyGameBoardInitialized" message="tns:IGameEndPoint_NotifyGameBoardInitialized_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyPlayerPlacedPiece">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyPlayerPlacedPiece" message="tns:IGameEndPoint_NotifyPlayerPlacedPiece_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -369,6 +407,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="PlacePieceOnBoard">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/PlacePieceOnBoard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" style="document" />
       <wsdl:output>
@@ -447,12 +494,21 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="NotifyPlayerPlacedPiece">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerPlacedPiece" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GameServiceEndpoint">
     <wsdl:port name="NetTcpBinding_IGameEndPoint" binding="tns:NetTcpBinding_IGameEndPoint">
       <soap12:address location="net.tcp://10.144.41.3:8192/GameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://10.144.41.3:8192/GameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>OUTIS\gearh</Upn>
+        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

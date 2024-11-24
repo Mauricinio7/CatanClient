@@ -571,10 +571,13 @@
     <None Include="Connected Services\GameService\GameService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameService\GameService51.xsd">
+    <None Include="Connected Services\GameService\GameService6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameService\GameService52.xsd">
+    <None Include="Connected Services\GameService\GameService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService8.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />
@@ -668,6 +671,32 @@
     <Resource Include="Gameplay\Resources\Images\GameResources\TradeButton.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\PriceTable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\GameBoard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\BiomasaBiomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\FiberBiomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\GRX-81Biomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\LunarStoneBiomec.png" />
+    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\WoodBiomec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Animations\dice_roll_animation_dual.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.CFG.dll" />
+    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.ShimLayer.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
     <WCFMetadataStorage Include="Connected Services\GameService\" />
@@ -685,36 +714,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\AccountService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\ProfileService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProfileService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GuestAccountService\GuestAccountService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GuestAccountService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GuestAccountService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GuestAccountService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -750,30 +749,34 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\PriceTable.png" />
+    <None Include="Connected Services\ProfileService\ProfileService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\GameBoard.png" />
+    <None Include="Connected Services\ProfileService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\BiomasaBiomec.png" />
-    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\FiberBiomec.png" />
-    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\GRX-81Biomec.png" />
-    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\LunarStoneBiomec.png" />
-    <Resource Include="Gameplay\Resources\Images\GameResources\Biomes\WoodBiomec.png" />
+    <None Include="Connected Services\ProfileService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image1.png" />
+    <None Include="Connected Services\ProfileService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Gameplay\Resources\Animations\dice_roll_animation_dual.gif" />
+    <None Include="Connected Services\GuestAccountService\GuestAccountService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\Google.Protobuf.dll" />
-    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.CFG.dll" />
-    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.CSharp.dll" />
-    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.dll" />
-    <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.ShimLayer.dll" />
+    <None Include="Connected Services\GuestAccountService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestAccountService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestAccountService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

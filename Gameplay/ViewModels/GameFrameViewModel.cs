@@ -72,6 +72,11 @@ namespace CatanClient.ViewModels
                 {
                     turn = value;
                     OnPropertyChanged(nameof(Turn));
+
+                    if (turn) 
+                    {
+                        HasRolledDice = false; 
+                    }
                     UpdateCommandStates();
                 }
             }
@@ -246,6 +251,7 @@ namespace CatanClient.ViewModels
                 Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceValue);
                 await serviceManager.GameServiceClient.ThrowDiceAsync(playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game), diceValue);
                 HasRolledDice = true;
+                UpdateCommandStates();
             });
         }
 
@@ -298,29 +304,22 @@ namespace CatanClient.ViewModels
 
                 foreach (PlayerTurnStatusDto player in playersTurnStatus)
                 {
-                    if (player.Profile != null)
+                    if (player.ProfileTurnDto != null)
                     {
-                        if(profile.Id == player.Profile.Id)
+                        if(profile.Id == player.ProfileTurnDto.Id)
                         {
                             Turn = player.IsTurn;
                         }
                         OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
-                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(player.Profile)),
+                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(player.ProfileTurnDto)),
                             new NamedParameter(Utilities.POINTS, player.Points),
                             new NamedParameter(Utilities.TURN, player.IsTurn)
                             ));
                     }
                     else
                     {
-                        ProfileService.ProfileDto profileDto = new ProfileService.ProfileDto
-                        {
-                            Id = player.GuestAccount.Id,
-                            Name = player.GuestAccount.Name,
-                            IsRegistered = false,
-                            PictureVersion = 0,
-                            PreferredLanguage = CultureInfo.CurrentCulture.Name
-                        };
-                        if (profile.Id == profileDto.Id)
+                        ProfileService.ProfileDto profileDto = AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastGuestAccountToGameServiceProfile(player.GuestAccountTurnDto));
+                        if (profile.Id == player.GuestAccountTurnDto.Id)
                         {
                             Turn = player.IsTurn;
                         }

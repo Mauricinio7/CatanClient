@@ -18,45 +18,48 @@ namespace CatanClient.UIHelpers
         public static bool IsValidAccountName(string name)
         {
             string nameRegex = Utilities.REGEX_PROFILE_NAME_VALIDATION;
-
-            return Regex.IsMatch(name, nameRegex);
+            return Regex.IsMatch(name, nameRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000));
         }
 
-        public static bool IsValidAccountEmail(string email) //Refactor to have 1 return
+        public static bool IsValidAccountEmail(string email)
         {
             string emailRegex = Utilities.REGEX_PROFILE_EMAIL_VALIDATION;
 
-            if (!Regex.IsMatch(email, emailRegex)) return false;
+            if (!Regex.IsMatch(email, emailRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000)))
+                return false;
 
             string[] parts = email.Split(Utilities.STRING_CHAR_ARROBA);
 
-            if (parts.Length != 2) return false;
+            if (parts.Length != 2)
+                return false;
 
             string localPart = parts[0];
             string domainPart = parts[1];
 
-            if (Regex.IsMatch(localPart, Utilities.REGEX_DOUBLE_POINTS) || Regex.IsMatch(domainPart, Utilities.REGEX_DOUBLE_POINTS)) return false;
+            if (Regex.IsMatch(localPart, Utilities.REGEX_DOUBLE_POINTS, RegexOptions.None, TimeSpan.FromMilliseconds(1000)) ||
+                Regex.IsMatch(domainPart, Utilities.REGEX_DOUBLE_POINTS, RegexOptions.None, TimeSpan.FromMilliseconds(1000)))
+                return false;
 
-            if (localPart.Contains("..")) return false;
+            if (localPart.Contains(".."))
+                return false;
 
             if (domainPart.StartsWith(Utilities.STRING_CHAR_DASH) || domainPart.EndsWith(Utilities.STRING_CHAR_DASH) ||
-                domainPart.StartsWith(Utilities.STRING_CHAR_POINT) || domainPart.EndsWith(Utilities.STRING_CHAR_POINT)) return false;
+                domainPart.StartsWith(Utilities.STRING_CHAR_POINT) || domainPart.EndsWith(Utilities.STRING_CHAR_POINT))
+                return false;
 
             return true;
         }
 
-
         public static bool IsValidAccountPhoneNumber(string phoneNumber)
         {
             string phoneNumberRegex = Utilities.REGEX_PHONE_NUMBER_VALIDATION;
-
-            return Regex.IsMatch(phoneNumber, phoneNumberRegex);
+            return Regex.IsMatch(phoneNumber, phoneNumberRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000));
         }
 
         public static bool IsValidAccountPassword(string password)
         {
             string passwordRegex = Utilities.REGEX_PASSWORD_ACCOUNT_VALIDATION;
-            return Regex.IsMatch(password, passwordRegex);
+            return Regex.IsMatch(password, passwordRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000));
         }
 
         public static AccountDto CreateAccount(string email, string phoneNumber, string password, string name)

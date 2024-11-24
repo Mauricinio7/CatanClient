@@ -48,7 +48,12 @@ namespace CatanClient.Callbacks
 
         public void NotifyGameBoardInitialized(GameBoardStateDto gameBoardState)
         {
-            //TODO implement method
+            MessageBox.Show("Tablero inicializado");
+            List<HexTileDto> hexes = gameBoardState.HexTiles.ToList();
+            foreach (var hex in hexes)
+            {
+                MessageBox.Show(hex.Id.ToString() + " Recurso: " + hex.Resource + " Dice: " + hex.DiceValue + "Posicion: " + hex.Row + " , " + hex.Column);
+            }
         }
 
         public void NotifyPlayerExpulsion(string message, string reason)
@@ -76,6 +81,11 @@ namespace CatanClient.Callbacks
                     AccountUtilities.RestartGame();
                 }
             });
+        }
+
+        public void NotifyPlayerPlacedPiece(PiecePlacementDto piecePlacement, PlayerGameplayDto playerGameplayDto)
+        {
+            //TODO implement
         }
 
         public void SendDiceResult(int diceResult)
