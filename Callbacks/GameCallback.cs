@@ -48,12 +48,13 @@ namespace CatanClient.Callbacks
 
         public void NotifyGameBoardInitialized(GameBoardStateDto gameBoardState)
         {
-            MessageBox.Show("Tablero inicializado");
-            List<HexTileDto> hexes = gameBoardState.HexTiles.ToList();
-            foreach (var hex in hexes)
+            App.Current.Dispatcher.InvokeAsync(async () =>
             {
-                MessageBox.Show(hex.Id.ToString() + " Recurso: " + hex.Resource + " Dice: " + hex.DiceValue + "Posicion: " + hex.Row + " , " + hex.Column);
-            }
+                List<HexTileDto> hexes = gameBoardState.HexTiles.ToList();
+                await Task.Delay(1000);
+                Mediator.Notify(Utilities.LOAD_GAME_PLAYER_BOARD, hexes);
+            });
+ 
         }
 
         public void NotifyPlayerExpulsion(string message, string reason)

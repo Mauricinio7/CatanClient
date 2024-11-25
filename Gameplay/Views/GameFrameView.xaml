@@ -142,53 +142,55 @@
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="41,198,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Grid.ColumnSpan="2" Grid.Row="2"><Run Text="{x:Static properties:Resources.global_town}" /><Run Language="es-mx" Text=":"/></TextBlock>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="41,339,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Grid.ColumnSpan="2" Grid.Row="2"><Run Text="{x:Static properties:Resources.global_city}" /><Run Language="es-mx" Text=":"/></TextBlock>
 
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="350,110,325,496" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png" Margin="434,110,241,496" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="524,110,151,496" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="308,181,367,425" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="393,182,282,424" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="479,182,196,424" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png" Margin="566,182,109,424" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="351,253,324,353" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="266,251,409,355" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="437,254,238,352" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="523,253,152,353" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="610,253,65,353" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png" Margin="480,325,195,281" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="305,324,370,282" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png" Margin="393,326,282,280" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="568,324,107,282" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png" Margin="349,394,326,212" RenderTransformOrigin="0.296,2.304" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png" Margin="437,396,238,210" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Image Source="/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png" Margin="525,395,150,211" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[0]}" Margin="350,110,325,496" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[1]}" Margin="434,110,241,496" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[2]}" Margin="524,110,151,496" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[3]}" Margin="308,181,367,425" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[4]}" Margin="393,182,282,424" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[5]}" Margin="479,182,196,424" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[6]}" Margin="566,182,109,424" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[7]}" Margin="266,251,409,355" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[8]}" Margin="351,253,324,353" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[9]}" Margin="437,254,238,352" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[10]}" Margin="523,253,152,353" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[11]}" Margin="610,253,65,353" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[12]}" Margin="305,324,370,282" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[13]}" Margin="393,326,282,280" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[14]}" Margin="480,325,195,281" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[15]}" Margin="568,324,107,282" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[16]}" Margin="349,394,326,212" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[17]}" Margin="437,396,238,210" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="{Binding HexTileImages[18]}" Margin="525,395,150,211" Grid.Row="2" Grid.Column="1"/>
 
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="366,138,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="12" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="447,139,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="2" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="537,139,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="7" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="318,213,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="407,211,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="6" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="492,210,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="3" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="579,211,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="9" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="279,280,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="363,282,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="8" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="453,280,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="12" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="536,279,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="623,281,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="10" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="318,351,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="2" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="405,354,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="4" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="493,354,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="7" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="583,352,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="5" TextAlignment="Center"/>
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="364,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="11" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="450,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="9" TextAlignment="Center" />
-            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="540,423,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="5" TextAlignment="Center" />
+
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="366,138,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[0]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="447,139,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[1]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="537,139,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[2]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="318,213,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[3]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="407,211,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[4]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="492,210,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[5]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="579,211,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[6]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="279,280,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[7]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="363,282,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[8]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="453,280,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[9]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="536,279,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[10]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="623,281,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[11]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="318,351,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[12]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="405,354,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[13]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="493,354,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[14]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="583,352,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[15]}" TextAlignment="Center"/>
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="364,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[16]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="450,422,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[17]}" TextAlignment="Center" />
+            <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Column="1" Margin="540,423,0,0" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Azure" Grid.Row="2" Width="72" Height="38" Text="{Binding DiceNumbers[18]}" TextAlignment="Center" />
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="2" Grid.Column="1" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="291,0,0,63"><Run Language="es-mx" Text="x0"/></TextBlock>
+
             <Grid Grid.Column="3" Grid.ColumnSpan="2" Margin="10,1,150,103" Grid.Row="2" Background="{StaticResource PrimaryColor}" Visibility="{Binding IsTradeGridVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
                 <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="10,18,0,0" FontSize="16" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="371" Height="27" >
-        <Run Text="Oferta de intercambio" /><Run Language="es-mx" Text=":"/>
+            <Run Text="Oferta de intercambio" /><Run Language="es-mx" Text=":"/>
                 </TextBlock>
 
                 <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="0,83,0,0" FontSize="16" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center" Width="326" Height="27">
-        <Run Text="Recibes" /><Run Text=":"/>
+            <Run Text="Recibes" /><Run Text=":"/>
                 </TextBlock>
 
                 <ScrollViewer Margin="10,110,10,321" VerticalScrollBarVisibility="Auto">
@@ -230,6 +232,278 @@
                 <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_accept}"  Margin="20,528,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="140"/>
                 <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_decline}"  Margin="215,524,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="140" Command="{Binding HideTradeControlCommand}"/>
             </Grid>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="389,107,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="1,1"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[0]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="474,107,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="2,1"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[1]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="560,107,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="3,1"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[2]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="347,130,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="1,2"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[3]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="432,130,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="1,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[4]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="518,130,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="2,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[5]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="599,130,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="3,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[6]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="347,174,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="1,4"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[7]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="432,174,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="1,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[8]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="519,174,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="2,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[9]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="599,174,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="3,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[10]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="311,197,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="4,2"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[11]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="390,197,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="4,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[12]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="475,195,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="5,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[13]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="562,194,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="6,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[14]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="639,194,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="7,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[15]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="305,243,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="4,4"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[16]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="390,243,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="4,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[17]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="476,243,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="5,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[18]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="559,243,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="6,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[19]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="646,243,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="7,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[20]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="266,265,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="8,2"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[21]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="347,265,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="8,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[22]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="431,262,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="9,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[23]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="518,263,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="10,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[24]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="605,262,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="11,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[25]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="686,263,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="12,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[26]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="266,305,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="8,4"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[27]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="346,311,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="8,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[28]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="433,311,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="9,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[29]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="520,311,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="10,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[30]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="606,311,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="11,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[31]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="687,311,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="12,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[32]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="306,334,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="13,2"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[33]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="390,332,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="13,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[34]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="477,335,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="14,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[35]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="563,335,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="15,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[36]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="646,333,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="16,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[37]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="305,375,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="13,4"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[38]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="389,384,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="13,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[39]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="476,381,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="14,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[40]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="560,383,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="15,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[41]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="646,381,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="16,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[42]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="349,404,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="17,2"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[43]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="432,406,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="17,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[44]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="518,404,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="18,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[45]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="605,404,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="19,3"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[46]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="349,451,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="17,4"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[47]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="432,451,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="17,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[48]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="518,444,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="18,"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[49]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="603,444,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="19,5"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[50]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="390,474,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="17,6"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[51]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="475,474,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="18,6"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[52]}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="17" Margin="560,474,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20"
+        Tag="19,6"
+        Command="{Binding SelectVertexCommand}"
+        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+        IsEnabled="{Binding VertexAvailability[53]}" />
+
+
 
         </Grid>
     </Viewbox>

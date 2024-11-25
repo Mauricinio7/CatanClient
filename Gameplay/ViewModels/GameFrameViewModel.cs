@@ -33,6 +33,8 @@ namespace CatanClient.ViewModels
         private PlayerGameplayDto playerGameplay;
         private bool hasRolledDice;
 
+        public ObservableCollection<string> HexTileImages { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<int> DiceNumbers { get; set; } = new ObservableCollection<int>();
         private readonly DispatcherTimer countdownTimer;
         public ICommand ShowTradeWindowCommand { get; }
         public ICommand RollDiceCommand { get; }
@@ -43,9 +45,11 @@ namespace CatanClient.ViewModels
         public ICommand ExitCommand { get; }
         public ICommand VoteKickCommand { get; }
         public ICollectionView PlayersView { get; set; }
+        public ICommand SelectVertexCommand { get; }
 
 
         private readonly ServiceManager serviceManager;
+        List<HexTileDto> GameHexes = new List<HexTileDto>();
         public ObservableCollection<ChatMessage> Messages { get; set; }
         public ObservableCollection<PlayerInGameCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInGameCardViewModel>();
         public ObservableCollection<Resource> ResourcesToRequest { get; set; }
@@ -140,6 +144,7 @@ namespace CatanClient.ViewModels
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             ExitCommand = new RelayCommand(ExecuteExit);
             VoteKickCommand = new RelayCommand(ExecuteVoteKickWindow);
+            SelectVertexCommand = new RelayCommand(parameter => ExecuteSelectVertex(parameter), parameter => CanExecuteSelectVertex(parameter));
 
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
@@ -151,10 +156,109 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
             Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
+            Mediator.Register(Utilities.LOAD_GAME_PLAYER_BOARD, hexes => LoadGameBoard(hexes));
 
             IsTradeGridVisible = true;
             UpdateTradeWindow();
         }
+
+        public void LoadGameBoard(object parameter)
+        {
+            if (!(parameter is List<HexTileDto> hexes))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
+            GameHexes = hexes;
+            HexTileImages.Clear();
+
+            foreach (var hex in hexes)
+            {
+                
+                string imagePath = GetImagePathByResource(hex.Resource);
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    HexTileImages.Add(imagePath);
+                    DiceNumbers.Add(hex.DiceValue);
+                }
+            }
+
+            ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+            OnPropertyChanged(nameof(HexTileImages));
+        }
+
+        private static string GetImagePathByResource(string resourceName)
+        {
+            switch (resourceName)
+            {
+                case "Lunar Stone":
+                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png";
+                case "Tritonium":
+                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png";
+                case "Alpha Nanofibers":
+                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png";
+                case "Epsilon Biomass":
+                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png";
+                case "GRX-810":
+                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png";
+                default:
+                    return null; 
+            }
+        }
+
+        private void ExecuteSelectVertex(object parameter)
+        {
+            if (parameter is string tag && TryParseTag(tag, out int hexId, out int vertexId))
+            {
+                var hex = GameHexes[hexId - 1];
+                var vertex = hex.Vertices[vertexId - 1];
+
+                vertex.IsOccupied = true;
+                MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
+
+                ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+            }
+        }
+
+        private bool CanExecuteSelectVertex(object parameter)
+        {
+            if(GameHexes.Count == 0)
+                return false;
+
+            if (parameter is string tag && TryParseTag(tag, out int hexId, out int vertexId))
+            {
+                var hex = GameHexes[hexId - 1];
+                if (hex == null)
+                    return false;
+
+                var vertex = hex.Vertices[vertexId - 1];
+                if (vertex == null)
+                    return false;
+
+                return !vertex.IsOccupied;
+            }
+
+            return false;
+        }
+
+        private static bool TryParseTag(string tag, out int hexId, out int vertexId)
+        {
+            hexId = 0;
+            vertexId = 0;
+
+            if (!string.IsNullOrWhiteSpace(tag))
+            {
+                var parts = tag.Split(',');
+                if (parts.Length == 2 && int.TryParse(parts[0], out hexId) && int.TryParse(parts[1], out vertexId))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
 
         private void InitializePlayerGameplay()
         {

@@ -6,7 +6,7 @@
   <SonarScannerWorkingDirectory>C:\Users\mauricio\source\repos\CatanClient</SonarScannerWorkingDirectory>
   <ScanAllAnalysis>true</ScanAllAnalysis>
   <HasBeginStepCommandLineCredentials>true</HasBeginStepCommandLineCredentials>
-  <SonarQubeHostUrl>http://10.144.41.3:9000</SonarQubeHostUrl>
+  <SonarQubeHostUrl>http://localhost:9000</SonarQubeHostUrl>
   <SonarQubeVersion>10.5.1.90531</SonarQubeVersion>
   <SonarProjectKey>CatanClientV10</SonarProjectKey>
   <AdditionalConfig>
@@ -137,7 +137,7 @@
     <Property Name="sonar.core.startTime">21/11/2024 11:24:42 p. m.</Property>
   </ServerSettings>
   <LocalSettings>
-    <Property Name="sonar.host.url">http://10.144.41.3:9000</Property>
+    <Property Name="sonar.host.url">http://localhost:9000</Property>
   </LocalSettings>
   <AnalyzersSettings>
     <AnalyzerSettings>
