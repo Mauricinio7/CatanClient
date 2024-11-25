@@ -24,12 +24,43 @@ namespace CatanClient.Gameplay.Views
     /// </summary>
     public partial class GameFrameView : UserControl
     {
+        private GameFrameViewModel viewModel;
         public GameFrameView(GameDto game)
         {
             InitializeComponent();
-            this.DataContext = App.Container.Resolve<GameFrameViewModel>(
+            viewModel = App.Container.Resolve<GameFrameViewModel>(
                new TypedParameter(typeof(ChatService.GameDto), game)
-           );
+            );
+            this.DataContext = viewModel;
+
+            viewModel.VertexOccupied += OnVertexOccupied;
+        }
+
+        private void OnVertexOccupied(string tag)
+        {
+            var button = FindButtonByTag(tag);
+            if (button != null)
+            {
+                button.Content = new Image
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Town.png")),
+                    Stretch = Stretch.Uniform
+                };
+
+                button.Background = new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
+        private Button FindButtonByTag(string tag)
+        {
+            foreach (var child in MainGrid.Children)
+            {
+                if (child is Button button && button.Tag?.ToString() == tag)
+                {
+                    return button;
+                }
+            }
+            return null; 
         }
 
 

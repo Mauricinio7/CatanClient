@@ -659,7 +659,6 @@
   <ItemGroup>
     <Resource Include="Gameplay\Resources\Images\GameResources\City.png" />
     <Resource Include="Gameplay\Resources\Images\GameResources\Road.png" />
-    <Resource Include="Gameplay\Resources\Images\GameResources\Town.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gameplay\Resources\Images\GameResources\Dice.png" />
@@ -777,6 +776,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\Town.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

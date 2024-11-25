@@ -32,6 +32,7 @@ namespace CatanClient.ViewModels
         private bool turn;
         private PlayerGameplayDto playerGameplay;
         private bool hasRolledDice;
+        public event Action<string> VertexOccupied;
 
         public ObservableCollection<string> HexTileImages { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<int> DiceNumbers { get; set; } = new ObservableCollection<int>();
@@ -54,6 +55,7 @@ namespace CatanClient.ViewModels
         public ObservableCollection<PlayerInGameCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInGameCardViewModel>();
         public ObservableCollection<Resource> ResourcesToRequest { get; set; }
         public ObservableCollection<Resource> ResourcesToOffer { get; set; }
+
         public ObservableCollection<Resource> FilteredResourcesToRequest =>
            new ObservableCollection<Resource>(ResourcesToRequest.Where(r => r.Quantity > 0));
 
@@ -235,6 +237,11 @@ namespace CatanClient.ViewModels
                 var vertex = hex.Vertices[vertexId - 1];
                 if (vertex == null)
                     return false;
+
+                if (vertex.IsOccupied)
+                {
+                    VertexOccupied?.Invoke(tag);
+                }
 
                 return !vertex.IsOccupied;
             }
