@@ -575,13 +575,13 @@
     <None Include="Connected Services\GameService\GameService6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameService\GameService7.xsd">
+    <None Include="Connected Services\GameService\GameService61.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameService\GameService8.xsd">
+    <None Include="Connected Services\GameService\GameService62.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameService\GameService9.xsd">
+    <None Include="Connected Services\GameService\GameService63.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />
@@ -700,6 +700,9 @@
     <Analyzer Include="packages\SonarAnalyzer.CSharp.9.32.0.97167\analyzers\SonarAnalyzer.ShimLayer.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Gameplay\Resources\Images\GameResources\Town.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountService\" />
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
     <WCFMetadataStorage Include="Connected Services\GameService\" />
@@ -780,9 +783,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Gameplay\Resources\Images\GameResources\Town.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

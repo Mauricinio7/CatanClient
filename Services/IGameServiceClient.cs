@@ -31,5 +31,6 @@ namespace CatanClient.Services
         Task ThrowDiceAsync(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto, int diceValue);
         void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task<bool> GiveNextTurn(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
+        Task<OperationResultDto> PlacePiceAsync(PiecePlacementDto placementDto, PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
     }
 }

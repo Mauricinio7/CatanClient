@@ -84,9 +84,11 @@ namespace CatanClient.Callbacks
             });
         }
 
-        public void NotifyPlayerPlacedPiece(PiecePlacementDto piecePlacement, PlayerGameplayDto playerGameplayDto)
+        public void NotifyPlayerPlacedPiece(GameBoardStateDto gameBoardStateDto, PlayerGameplayDto playerGameplayDto)
         {
-            //TODO implement
+            MessageBox.Show("Llamo callback");
+            List<HexTileDto> hexes = gameBoardStateDto.HexTiles.ToList();
+            Mediator.Notify(Utilities.UPDATE_GAME_PLAYER_BOARD, hexes);
         }
 
         public void NotifyResourcesDistributed(PlayerResourcesDto receivedResources)

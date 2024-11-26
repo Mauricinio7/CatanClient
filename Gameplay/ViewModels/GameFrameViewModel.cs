@@ -238,6 +238,7 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_BOARD, hexes => LoadGameBoard(hexes));
+            Mediator.Register(Utilities.UPDATE_GAME_PLAYER_BOARD, hexes => UpdateGameBoard(hexes));
 
             IsBuildingSettlement = false;
             SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
@@ -271,6 +272,22 @@ namespace CatanClient.ViewModels
                     DiceNumbers.Add(hex.DiceValue);
                 }
             }
+
+            ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+            OnPropertyChanged(nameof(HexTileImages));
+        }
+
+        public void UpdateGameBoard(object parameter)
+        {
+            MessageBox.Show("Llama mediator");
+            if (!(parameter is List<HexTileDto> hexes))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            GameHexes = hexes;
 
             ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
             ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
@@ -338,28 +355,80 @@ namespace CatanClient.ViewModels
 
         private void ExecuteSelectVertex(object parameter)
         {
-            if (parameter is string tag && TryParseTag(tag, out int hexId, out int vertexId))
+            if (parameter is string tag && TryParseTag(tag, out int hexIndex, out int vertexIndex))
             {
-                HexTileDto hex = GameHexes[hexId - 1];
-                VertexDto vertex = hex.Vertices[vertexId - 1];
+                HexTileDto hex = GameHexes[hexIndex - 1];
+                VertexDto vertex = hex.Vertices[vertexIndex - 1];
+                int hexId = hex.Id;
+                int vertexId = vertex.Id;
 
-                if (IsBuildingCity)
+                App.Current.Dispatcher.InvokeAsync(async () =>
                 {
-                    vertex.IsCity = true;
-                    MessageBox.Show($"Ciudad construida en Hexágono {hexId}, Vértice {vertexId}.");
-                    IsBuildingCity = false;
-                    CityButtonText = Utilities.GetCityText(CultureInfo.CurrentCulture.Name);
-                }
-                else if (IsBuildingSettlement)
-                {
-                    vertex.IsOccupied = true;
-                    vertex.OwnerPlayerId = playerGameplay.Id;
-                    MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
-                    IsBuildingSettlement = false;
-                    SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
-                }
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                    if (IsBuildingCity)
+                    {
+                        OperationResultDto result;
+                        PiecePlacementDto placement = new PiecePlacementDto();
+                        placement.PieceType = "City";
+                        placement.TargetHexId = hexId;
+                        placement.TargetVertexId = vertexId;
+
+                        try
+                        {
+                            result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+                            
+                            if(result.IsSuccess)
+                            {
+                                vertex.IsCity = true;
+                                MessageBox.Show($"Ciudad construida en Hexágono {hexId}, Vértice {vertexId}.");
+                                IsBuildingCity = false;
+                                CityButtonText = Utilities.GetCityText(CultureInfo.CurrentCulture.Name);
+                            }
+                        else
+                            {
+                                MessageBox.Show("No puedes colocar la construcción aquí.");
+                            }
+                        }
+                        catch (TimeoutException)
+                        {
+                            Utilities.ShowMessgeServerLost();
+                        }
+                        
+                    }
+                    else if (IsBuildingSettlement)
+                    {
+                        OperationResultDto result;
+                        PiecePlacementDto placement = new PiecePlacementDto();
+                        placement.PieceType = "Settlement";
+                        placement.TargetHexId = hexId;
+                        placement.TargetVertexId = vertexId;
+
+                        try
+                        {
+                            result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+
+                            if (result.IsSuccess)
+                            {
+                                vertex.IsOccupied = true;
+                                vertex.OwnerPlayerId = playerGameplay.Id;
+                                MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
+                                IsBuildingSettlement = false;
+                                SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
+                            }
+                            else
+                            {
+                                MessageBox.Show("No puedes colocar la construcción aquí.");
+                            }
+                        }
+                        catch (TimeoutException)
+                        {
+                            Utilities.ShowMessgeServerLost();
+                        }
+                        
+                    }
 
                 ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+                });
             }
         }
 
@@ -368,13 +437,13 @@ namespace CatanClient.ViewModels
             if (GameHexes.Count == 0)
                 return false;
 
-            if (parameter is string tag && TryParseTag(tag, out int hexId, out int vertexId))
+            if (parameter is string tag && TryParseTag(tag, out int hexIndex, out int vertexIndex))
             {
-                var hex = GameHexes[hexId - 1];
+                var hex = GameHexes[hexIndex - 1];
                 if (hex == null)
                     return false;
 
-                var vertex = hex.Vertices[vertexId - 1];
+                var vertex = hex.Vertices[vertexIndex - 1];
                 if (vertex == null)
                     return false;
 
@@ -420,13 +489,41 @@ namespace CatanClient.ViewModels
             {
                 HexTileDto hex = GameHexes[hexIndex - 1];
                 EdgeDto edge = hex.Edges[edgeIndex - 1];
+                int hexId = hex.Id;
+                int edgeId = edge.Id;
 
-                edge.IsOccupied = true;
-                edge.OwnerPlayerId = playerGameplay.Id;
-                MessageBox.Show($"Camino colocado en Hexágono {hexIndex}, Arista: {edgeIndex}.");
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                App.Current.Dispatcher.InvokeAsync(async () =>
+                {
+                    OperationResultDto result;
+                    PiecePlacementDto placement = new PiecePlacementDto();
+                    placement.PieceType = "Settlement";
+                    placement.TargetHexId = hexId;
+                    placement.TargetVertexId = edgeId;
 
-                ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
-                ExecuteToggleRoadMode();
+                    try
+                    {
+                        result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+
+                        if (result.IsSuccess)
+                        {
+                            edge.IsOccupied = true;
+                            edge.OwnerPlayerId = playerGameplay.Id;
+                            MessageBox.Show($"Camino colocado en Hexágono {hexIndex}, Arista: {edgeIndex}.");
+
+                            ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+                            ExecuteToggleRoadMode();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No puedes colocar la construcción aquí.");
+                        }
+                    }
+                    catch (TimeoutException)
+                    {
+                        Utilities.ShowMessgeServerLost();
+                    }
+                });
             }
         }
 
@@ -485,7 +582,6 @@ namespace CatanClient.ViewModels
             }
             return false;
         }
-
 
 
         private void InitializePlayerGameplay()

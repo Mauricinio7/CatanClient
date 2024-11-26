@@ -283,8 +283,12 @@ namespace CatanClient.Services
                     MessageResponse = ex.Message
                 };
                 Log.Error(ex, ex.Source);
+                throw new TimeoutException("Tiempo de espera agotado");
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            finally
+            {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            }
             return result;
         }
 

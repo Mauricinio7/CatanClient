@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="Yn7+AgyQtanJtegmrQbIoYzUzEO3JhZcX9DwNUB82KM=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="iDAwY7/98mWERDxk0zrgvrD0MIo/7hbFcDEiD6F7vYo=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGuestAccountEndpoint">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IGuestAccountEndpoint" contract="GuestAccountService.IGuestAccountEndpoint" bindingType="netTcpBinding" address="net.tcp://localhost:8484/GuestAccountService" bindingConfiguration="NetTcpBinding_IGuestAccountEndpoint">
+    <endpoint name="NetTcpBinding_IGuestAccountEndpoint" contract="GuestAccountService.IGuestAccountEndpoint" bindingType="netTcpBinding" address="net.tcp://192.168.196.207:8484/GuestAccountService" bindingConfiguration="NetTcpBinding_IGuestAccountEndpoint">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:8484/GuestAccountService</serializedValue>
+          <serializedValue>net.tcp://192.168.196.207:8484/GuestAccountService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
