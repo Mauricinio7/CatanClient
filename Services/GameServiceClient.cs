@@ -267,17 +267,17 @@ namespace CatanClient.Services
             return result;
         }
 
-        public async Task<OperationResultGameDto> JoinRoomClientAsync(string code, ProfileDto profile)
+        public async Task<OperationResultDto> PlacePiceAsync(PiecePlacementDto placementDto, PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
         {
             OpenConnection();
-            OperationResultGameDto result;
+            OperationResultDto result;
             try
             {
-                result = await client.JoinGameAsync(code, profile);
+                result = await client.PlacePieceOnBoardAsync(placementDto, playerGameplayDto, gameClientDto);
             }
             catch (Exception ex)
             {
-                result = new OperationResultGameDto
+                result = new OperationResultDto
                 {
                     IsSuccess = false,
                     MessageResponse = ex.Message
