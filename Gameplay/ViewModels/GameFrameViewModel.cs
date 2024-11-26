@@ -33,9 +33,15 @@ namespace CatanClient.ViewModels
         private bool isTradeGridVisible;
         private bool isBuildingSettlement;
         private string settlementButtonText;
+        private bool isBuildingRoad;
+        private string roadButtonText;
+        private bool isBuildingCity;
+        private string cityButtonText;
         private PlayerGameplayDto playerGameplay;
         private bool hasRolledDice;
-        public event Action<string> VertexOccupied;
+        public event Action<string, bool> VertexOccupied;
+        public event Action<string> EdgeOccupied;
+
 
         public ObservableCollection<string> HexTileImages { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<int> DiceNumbers { get; set; } = new ObservableCollection<int>();
@@ -50,7 +56,10 @@ namespace CatanClient.ViewModels
         public ICommand VoteKickCommand { get; }
         public ICollectionView PlayersView { get; set; }
         public ICommand SelectVertexCommand { get; }
+        public ICommand SelectEdgeCommand { get; }
         public ICommand ToggleSettlementBuildingModeCommand { get; }
+        public ICommand ToggleRoadBuildingModeCommand { get; }
+        public ICommand ToggleCityBuildingModeCommand { get; }
 
         public int SettlementsPlaced { get; set; } = 0; //TODO remove this
 
@@ -128,6 +137,53 @@ namespace CatanClient.ViewModels
                 ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
             }
         }
+        public string SettlementButtonText
+        {
+            get => settlementButtonText;
+            set
+            {
+                settlementButtonText = value;
+                OnPropertyChanged(nameof(SettlementButtonText));
+            }
+        }
+        public bool IsBuildingRoad
+        {
+            get => isBuildingRoad;
+            set
+            {
+                isBuildingRoad = value;
+                OnPropertyChanged(nameof(IsBuildingRoad));
+                ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+            }
+        }
+        public string RoadButtonText
+        {
+            get => roadButtonText;
+            set
+            {
+                roadButtonText = value;
+                OnPropertyChanged(nameof(RoadButtonText));
+            }
+        }
+        public bool IsBuildingCity
+        {
+            get => isBuildingCity;
+            set
+            {
+                isBuildingCity = value;
+                OnPropertyChanged(nameof(IsBuildingCity));
+                ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+            }
+        }
+        public string CityButtonText
+        {
+            get => cityButtonText;
+            set
+            {
+                cityButtonText = value;
+                OnPropertyChanged(nameof(CityButtonText));
+            }
+        }
 
         public string NewMessage
         {
@@ -139,15 +195,7 @@ namespace CatanClient.ViewModels
             }
         }
 
-        public string SettlementButtonText
-        {
-            get => settlementButtonText;
-            set
-            {
-                settlementButtonText = value;
-                OnPropertyChanged(nameof(SettlementButtonText));
-            }
-        }
+        
 
 
 
@@ -174,7 +222,10 @@ namespace CatanClient.ViewModels
             ExitCommand = new RelayCommand(ExecuteExit);
             VoteKickCommand = new RelayCommand(ExecuteVoteKickWindow);
             SelectVertexCommand = new RelayCommand(parameter => ExecuteSelectVertex(parameter), parameter => CanExecuteSelectVertex(parameter));
+            SelectEdgeCommand = new RelayCommand(parameter => ExecuteSelectEdge(parameter), parameter => CanExecuteSelectEdge(parameter));
             ToggleSettlementBuildingModeCommand = new RelayCommand(_ => ExecuteToggleSettlementMode(), _ => CanPlayTurn());
+            ToggleRoadBuildingModeCommand = new RelayCommand(_ => ExecuteToggleRoadMode(), _ => CanPlayTurn());
+            ToggleCityBuildingModeCommand = new RelayCommand(_ => ExecuteToggleCityMode(), _ => CanPlayTurn());
 
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
@@ -190,6 +241,10 @@ namespace CatanClient.ViewModels
 
             IsBuildingSettlement = false;
             SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
+            IsBuildingRoad = false;
+            RoadButtonText = Utilities.GetRoadText(CultureInfo.CurrentCulture.Name);
+            CityButtonText = Utilities.GetCityText(CultureInfo.CurrentCulture.Name); 
+            ToggleCityBuildingModeCommand = new RelayCommand(_ => ExecuteToggleCityMode(), _ => CanPlayTurn());
 
             IsTradeGridVisible = true;
             UpdateTradeWindow();
@@ -218,6 +273,7 @@ namespace CatanClient.ViewModels
             }
 
             ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
             OnPropertyChanged(nameof(HexTileImages));
         }
 
@@ -232,6 +288,32 @@ namespace CatanClient.ViewModels
             {
                 IsBuildingSettlement = true;
                 SettlementButtonText = Utilities.GetCancelText(CultureInfo.CurrentCulture.Name);
+            }
+        }
+        private void ExecuteToggleRoadMode()
+        {
+            if (IsBuildingRoad)
+            {
+                IsBuildingRoad = false;
+                RoadButtonText = Utilities.GetRoadText(CultureInfo.CurrentCulture.Name);
+            }
+            else
+            {
+                IsBuildingRoad = true;
+                RoadButtonText = Utilities.GetCancelText(CultureInfo.CurrentCulture.Name);
+            }
+        }
+        private void ExecuteToggleCityMode()
+        {
+            if (IsBuildingCity)
+            {
+                IsBuildingCity = false;
+                CityButtonText = Utilities.GetCityText(CultureInfo.CurrentCulture.Name);
+            }
+            else
+            {
+                IsBuildingCity = true;
+                CityButtonText = Utilities.GetCancelText(CultureInfo.CurrentCulture.Name);
             }
         }
 
@@ -261,26 +343,30 @@ namespace CatanClient.ViewModels
                 HexTileDto hex = GameHexes[hexId - 1];
                 VertexDto vertex = hex.Vertices[vertexId - 1];
 
-                vertex.IsOccupied = true;
-                vertex.OwnerPlayerId = playerGameplay.Id;
-                MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
+                if (IsBuildingCity)
+                {
+                    vertex.IsCity = true;
+                    MessageBox.Show($"Ciudad construida en Hexágono {hexId}, Vértice {vertexId}.");
+                    IsBuildingCity = false;
+                    CityButtonText = Utilities.GetCityText(CultureInfo.CurrentCulture.Name);
+                }
+                else if (IsBuildingSettlement)
+                {
+                    vertex.IsOccupied = true;
+                    vertex.OwnerPlayerId = playerGameplay.Id;
+                    MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
+                    IsBuildingSettlement = false;
+                    SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
+                }
 
                 ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
-                ExecuteToggleSettlementMode();
             }
         }
 
         private bool CanExecuteSelectVertex(object parameter)
         {
-            if (!IsBuildingSettlement) 
-                return false;
-
             if (GameHexes.Count == 0)
                 return false;
-
-            GameBoardStateDto gameBoardState = new GameBoardStateDto();
-                gameBoardState.HexTiles = GameHexes.ToArray();
-            gameBoardState.GameId = game.Id.Value;
 
             if (parameter is string tag && TryParseTag(tag, out int hexId, out int vertexId))
             {
@@ -294,21 +380,23 @@ namespace CatanClient.ViewModels
 
                 if (vertex.IsOccupied)
                 {
-                    VertexOccupied?.Invoke(tag);
-                    return false;
+                    VertexOccupied?.Invoke(tag, vertex.IsCity);
                 }
-                else
+
+                if (IsBuildingCity)
                 {
-                    return true;
+                    return vertex.IsOccupied && vertex.OwnerPlayerId == playerGameplay.Id && !vertex.IsCity;
                 }
-                //else if(GameRules.IsVertexAvailableForSettlement(gameBoardState, vertex.Id, playerGameplay.Id) || SettlementsPlaced < 2)
-                //{
-                    //return true;
-                //}
+                else if (IsBuildingSettlement)
+                {
+                    return !vertex.IsOccupied;
+                }
+
             }
 
             return false;
         }
+        
 
         private static bool TryParseTag(string tag, out int hexId, out int vertexId)
         {
@@ -319,6 +407,78 @@ namespace CatanClient.ViewModels
             {
                 var parts = tag.Split(',');
                 if (parts.Length == 2 && int.TryParse(parts[0], out hexId) && int.TryParse(parts[1], out vertexId))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void ExecuteSelectEdge(object parameter)
+        {
+            if (parameter is string tag && TryParseTagEdge(tag, out int hexIndex, out int edgeIndex))
+            {
+                HexTileDto hex = GameHexes[hexIndex - 1];
+                EdgeDto edge = hex.Edges[edgeIndex - 1];
+
+                edge.IsOccupied = true;
+                edge.OwnerPlayerId = playerGameplay.Id;
+                MessageBox.Show($"Camino colocado en Hexágono {hexIndex}, Arista: {edgeIndex}.");
+
+                ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+                ExecuteToggleRoadMode();
+            }
+        }
+
+        private bool CanExecuteSelectEdge(object parameter)
+        {
+            if (!IsBuildingRoad)
+                return false;
+
+            if (GameHexes.Count == 0)
+                return false;
+
+            GameBoardStateDto gameBoardState = new GameBoardStateDto();
+            gameBoardState.HexTiles = GameHexes.ToArray();
+            gameBoardState.GameId = game.Id.Value;
+
+            if (parameter is string tag && TryParseTagEdge(tag, out int hexIndex, out int edgeIndex))
+            {
+                var hex = GameHexes[hexIndex - 1];
+                if (hex == null)
+                    return false;
+
+                var edge = hex.Edges[edgeIndex - 1];
+                if (edge == null)
+                    return false;
+
+                if (edge.IsOccupied)
+                {
+                    EdgeOccupied?.Invoke(tag);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+                //else if(GameRules.IsVertexAvailableForSettlement(gameBoardState, vertex.Id, playerGameplay.Id) || SettlementsPlaced < 2)
+                //{
+                //return true;
+                //}
+            }
+
+            return false;
+        }
+
+        private static bool TryParseTagEdge(string tag, out int hexIndex, out int edgeIndex)
+        {
+            hexIndex = 0;
+            edgeIndex = 0;
+
+            if (!string.IsNullOrWhiteSpace(tag))
+            {
+                var parts = tag.Split(',');
+                if (parts.Length == 3 && parts[0] == "E" && int.TryParse(parts[1], out hexIndex) && int.TryParse(parts[2], out edgeIndex))
                 {
                     return true;
                 }
@@ -408,6 +568,8 @@ namespace CatanClient.ViewModels
             ((RelayCommand)NextTurnCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ShowTradeWindowCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ToggleSettlementBuildingModeCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)ToggleRoadBuildingModeCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)ToggleCityBuildingModeCommand).RaiseCanExecuteChanged();
         }
 
         public static void ExecuteShowTradeWindow() 

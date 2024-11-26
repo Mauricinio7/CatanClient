@@ -34,16 +34,43 @@ namespace CatanClient.Gameplay.Views
             this.DataContext = viewModel;
 
             viewModel.VertexOccupied += OnVertexOccupied;
+            viewModel.EdgeOccupied += OnEdgeOccupied;
         }
 
-        private void OnVertexOccupied(string tag)
+        private void OnVertexOccupied(string tag, bool haveCity)
+        {
+            var button = FindButtonByTag(tag);
+            if (button != null)
+            {
+                if (haveCity)
+                {
+                    button.Content = new Image
+                    {
+                        Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/City.png")),
+                        Stretch = Stretch.Uniform
+                    };
+                }
+                else
+                {
+                    button.Content = new Image
+                    {
+                        Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Town.png")),
+                        Stretch = Stretch.Uniform
+                    };
+                }
+
+                button.Background = new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
+        private void OnEdgeOccupied(string tag)
         {
             var button = FindButtonByTag(tag);
             if (button != null)
             {
                 button.Content = new Image
                 {
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Town.png")),
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Road.png")),
                     Stretch = Stretch.Uniform
                 };
 

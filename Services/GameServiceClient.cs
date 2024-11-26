@@ -267,6 +267,28 @@ namespace CatanClient.Services
             return result;
         }
 
+        public async Task<OperationResultGameDto> JoinRoomClientAsync(string code, ProfileDto profile)
+        {
+            OpenConnection();
+            OperationResultGameDto result;
+            try
+            {
+                result = await client.JoinGameAsync(code, profile);
+            }
+            catch (Exception ex)
+            {
+                result = new OperationResultGameDto
+                {
+                    IsSuccess = false,
+                    MessageResponse = ex.Message
+                };
+                Log.Error(ex, ex.Source);
+            }
+            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            return result;
+        }
+
+
         public void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
         {
             OpenConnection();
