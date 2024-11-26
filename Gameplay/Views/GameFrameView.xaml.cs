@@ -54,10 +54,13 @@ namespace CatanClient.Gameplay.Views
 
                 if (isOwner)
                 {
-                    //ApplyColorFilter(image, Colors.Gold); 
+                    button.Content = ApplyColorFilter(image, Colors.Gold); 
+                }
+                else
+                {
+                    button.Content = ApplyColorFilter(image, Colors.Red);
                 }
 
-                button.Content = image;
                 button.Background = new SolidColorBrush(Colors.Transparent);
             }
         }
@@ -77,10 +80,13 @@ namespace CatanClient.Gameplay.Views
 
                 if (isOwner)
                 {
-                    //ApplyColorFilter(image, Colors.Gold); 
+                    button.Content = ApplyColorFilter(image, Colors.Green);
+                }
+                else
+                {
+                    button.Content = ApplyColorFilter(image, Colors.Red);
                 }
 
-                button.Content = image;
                 button.Background = new SolidColorBrush(Colors.Transparent);
             }
         }
@@ -97,23 +103,21 @@ namespace CatanClient.Gameplay.Views
             return null; 
         }
 
-        private void ApplyColorFilter(Image image, Color color)
+        private UIElement ApplyColorFilter(Image image, Color color)
         {
-            var brush = new SolidColorBrush(color);
-            var mask = new VisualBrush(image)
+
+            var container = new Grid();
+            container.Children.Add(image); 
+
+            var overlay = new Border
             {
-                Stretch = Stretch.Uniform,
+                Background = new SolidColorBrush(color),
                 Opacity = 0.5 
             };
 
-            var combinedBrush = new DrawingBrush(new GeometryDrawing
-            {
-                Brush = brush,
-                Geometry = new RectangleGeometry(new Rect(0, 0, image.Width, image.Height)),
-                Pen = new Pen(mask, 1)
-            });
+            container.Children.Add(overlay);
 
-            image.OpacityMask = combinedBrush;
+            return container; 
         }
 
 
