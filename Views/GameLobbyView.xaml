@@ -45,17 +45,18 @@
 
 
             <ListBox ItemsSource="{Binding Messages}"
-                     Margin="142,338,565,393"
-                     Background="white"
-                     BorderThickness="0"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto">
-
+                 Margin="142,338,565,393"
+                 Background="white"
+                 BorderThickness="0"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 Loaded="OnListBoxLoaded">   
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10">
-                            <Border Background="LightGray" Padding="10" CornerRadius="10"
-                            >
-                                <TextBlock Text="{Binding Content, Mode=TwoWay}" TextWrapping="Wrap" FontSize="16"/>
+                            <Border Background="LightGray" Padding="10" CornerRadius="10">
+                                <TextBlock Text="{Binding FullMessage}" 
+                               TextWrapping="Wrap" 
+                               FontSize="16"/>
                             </Border>
                         </Grid>
                     </DataTemplate>

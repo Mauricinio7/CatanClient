@@ -11,5 +11,7 @@ namespace CatanClient.UIHelpers
         public string Content { get; set; }
         public string Name { get; set; }
         public bool IsUserMessage { get; set; }
+
+        public string FullMessage => $"{Name}: {Content}";
     }
 }

@@ -4,6 +4,7 @@ using CatanClient.Gameplay.ViewModels;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,6 +119,21 @@ namespace CatanClient.Gameplay.Views
             container.Children.Add(overlay);
 
             return container; 
+        }
+
+        private void OnListBoxLoaded(object sender, RoutedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            if (listBox?.ItemsSource is INotifyCollectionChanged collection)
+            {
+                collection.CollectionChanged += (s, args) =>
+                {
+                    if (args.Action == NotifyCollectionChangedAction.Add)
+                    {
+                        listBox.ScrollIntoView(listBox.Items[listBox.Items.Count - 1]);
+                    }
+                };
+            }
         }
 
 

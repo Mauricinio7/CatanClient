@@ -291,6 +291,7 @@ namespace CatanClient.ViewModels
         internal void ExecuteSendMessage()
         {
             serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
+            NewMessage = string.Empty;
         }
 
         internal async Task ExecuteLeftRoomAsync()

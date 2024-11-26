@@ -4,6 +4,7 @@ using CatanClient.GameService;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Security.Principal;
@@ -43,10 +44,21 @@ namespace CatanClient.Views
                 new TypedParameter(typeof(ChatService.GameDto), game)
             );
         }
+        private void OnListBoxLoaded(object sender, RoutedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            if (listBox?.ItemsSource is INotifyCollectionChanged collection)
+            {
+                collection.CollectionChanged += (s, args) =>
+                {
+                    if (args.Action == NotifyCollectionChangedAction.Add) 
+                    {
+                        listBox.ScrollIntoView(listBox.Items[listBox.Items.Count - 1]); 
+                    }
+                };
+            }
+        }
 
-
-
-        
 
     }
 }

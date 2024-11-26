@@ -496,7 +496,9 @@ namespace CatanClient.ViewModels
                     PiecePlacementDto placement = new PiecePlacementDto();
                     placement.PieceType = "Road";
                     placement.TargetHexId = hexId;
-                    placement.TargetVertexId = edgeId;
+                    placement.TargetEdgeId = edgeId;
+
+                    MessageBox.Show("Id edge: " + edgeId);
 
                     try
                     {
@@ -778,6 +780,7 @@ namespace CatanClient.ViewModels
         internal void ExecuteSendMessage()
         {
             serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
+            NewMessage = String.Empty;
         }
 
         internal void ExecuteExit()

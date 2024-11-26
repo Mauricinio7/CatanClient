@@ -99,18 +99,21 @@
                 Grid.Column="4" Margin="174,344,16,76"
                 Background="white"
                 BorderThickness="0"
-                ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.ColumnSpan="2">
+                ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.ColumnSpan="2"
+                Loaded="OnListBoxLoaded">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10">
-                            <Border Background="LightGray" Padding="10" CornerRadius="10"
-       >
-                                <TextBlock Text="{Binding Content, Mode=TwoWay}" TextWrapping="Wrap" FontSize="10"/>
+                            <Border Background="LightGray" Padding="10" CornerRadius="10">
+                                <TextBlock Text="{Binding FullMessage}" 
+                                   TextWrapping="Wrap" 
+                                   FontSize="16"/>
                             </Border>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            
             <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_send}"  Margin="211,14,0,0" FontSize="7" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="45" Width="140" Grid.Row="3" Grid.Column="4"
                     Command="{Binding SendMessageCommand}"/>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="3" Grid.Column="1" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="257,0,0,26"><Run Text="Tritónium"/></TextBlock>
