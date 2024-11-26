@@ -86,7 +86,6 @@ namespace CatanClient.Callbacks
 
         public void NotifyPlayerPlacedPiece(GameBoardStateDto gameBoardStateDto, PlayerGameplayDto playerGameplayDto)
         {
-            MessageBox.Show("Llamo callback");
             List<HexTileDto> hexes = gameBoardStateDto.HexTiles.ToList();
             Mediator.Notify(Utilities.UPDATE_GAME_PLAYER_BOARD, hexes);
         }

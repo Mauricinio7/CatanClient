@@ -37,43 +37,50 @@ namespace CatanClient.Gameplay.Views
             viewModel.EdgeOccupied += OnEdgeOccupied;
         }
 
-        private void OnVertexOccupied(string tag, bool haveCity)
+        private void OnVertexOccupied(string tag, bool haveCity, bool isOwner)
         {
             var button = FindButtonByTag(tag);
             if (button != null)
             {
-                if (haveCity)
+                var imageSource = haveCity
+                    ? new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/City.png"))
+                    : new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Town.png"));
+
+                var image = new Image
                 {
-                    button.Content = new Image
-                    {
-                        Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/City.png")),
-                        Stretch = Stretch.Uniform
-                    };
-                }
-                else
+                    Source = imageSource,
+                    Stretch = Stretch.Uniform
+                };
+
+                if (isOwner)
                 {
-                    button.Content = new Image
-                    {
-                        Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Town.png")),
-                        Stretch = Stretch.Uniform
-                    };
+                    //ApplyColorFilter(image, Colors.Gold); 
                 }
 
+                button.Content = image;
                 button.Background = new SolidColorBrush(Colors.Transparent);
             }
         }
 
-        private void OnEdgeOccupied(string tag)
+        private void OnEdgeOccupied(string tag, bool isOwner)
         {
             var button = FindButtonByTag(tag);
             if (button != null)
             {
-                button.Content = new Image
+                var imageSource = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Road.png"));
+
+                var image = new Image
                 {
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Road.png")),
+                    Source = imageSource,
                     Stretch = Stretch.Uniform
                 };
 
+                if (isOwner)
+                {
+                    //ApplyColorFilter(image, Colors.Gold); 
+                }
+
+                button.Content = image;
                 button.Background = new SolidColorBrush(Colors.Transparent);
             }
         }
@@ -88,6 +95,25 @@ namespace CatanClient.Gameplay.Views
                 }
             }
             return null; 
+        }
+
+        private void ApplyColorFilter(Image image, Color color)
+        {
+            var brush = new SolidColorBrush(color);
+            var mask = new VisualBrush(image)
+            {
+                Stretch = Stretch.Uniform,
+                Opacity = 0.5 
+            };
+
+            var combinedBrush = new DrawingBrush(new GeometryDrawing
+            {
+                Brush = brush,
+                Geometry = new RectangleGeometry(new Rect(0, 0, image.Width, image.Height)),
+                Pen = new Pen(mask, 1)
+            });
+
+            image.OpacityMask = combinedBrush;
         }
 
 

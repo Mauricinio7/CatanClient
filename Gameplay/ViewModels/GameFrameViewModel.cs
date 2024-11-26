@@ -39,8 +39,8 @@ namespace CatanClient.ViewModels
         private string cityButtonText;
         private PlayerGameplayDto playerGameplay;
         private bool hasRolledDice;
-        public event Action<string, bool> VertexOccupied;
-        public event Action<string> EdgeOccupied;
+        public event Action<string, bool, bool> VertexOccupied;
+        public event Action<string, bool> EdgeOccupied;
 
 
         public ObservableCollection<string> HexTileImages { get; set; } = new ObservableCollection<string>();
@@ -280,7 +280,6 @@ namespace CatanClient.ViewModels
 
         public void UpdateGameBoard(object parameter)
         {
-            MessageBox.Show("Llama mediator");
             if (!(parameter is List<HexTileDto> hexes))
             {
                 MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -378,10 +377,9 @@ namespace CatanClient.ViewModels
                             result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
                             if(result.IsSuccess)
                             {
-                                vertex.IsCity = true;
+                                //vertex.IsCity = true;
                                 MessageBox.Show($"Ciudad construida en Hexágono {hexId}, Vértice {vertexId}.");
-                                IsBuildingCity = false;
-                                CityButtonText = Utilities.GetCityText(CultureInfo.CurrentCulture.Name);
+                                ExecuteToggleCityMode();
                             }
                         else
                             {
@@ -408,11 +406,10 @@ namespace CatanClient.ViewModels
 
                             if (result.IsSuccess)
                             {
-                                vertex.IsOccupied = true;
-                                vertex.OwnerPlayerId = playerGameplay.Id;
+                                //vertex.IsOccupied = true;
+                                //vertex.OwnerPlayerId = playerGameplay.Id;
                                 MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
-                                IsBuildingSettlement = false;
-                                SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
+                                ExecuteToggleSettlementMode();
                             }
                             else
                             {
@@ -448,7 +445,8 @@ namespace CatanClient.ViewModels
 
                 if (vertex.IsOccupied)
                 {
-                    VertexOccupied?.Invoke(tag, vertex.IsCity);
+                    bool isOwner = vertex.OwnerPlayerId == playerGameplay.Id;
+                    VertexOccupied?.Invoke(tag, vertex.IsCity, isOwner);
                 }
 
                 if (IsBuildingCity)
@@ -496,7 +494,7 @@ namespace CatanClient.ViewModels
                 {
                     OperationResultDto result;
                     PiecePlacementDto placement = new PiecePlacementDto();
-                    placement.PieceType = "Settlement";
+                    placement.PieceType = "Road";
                     placement.TargetHexId = hexId;
                     placement.TargetVertexId = edgeId;
 
@@ -506,11 +504,11 @@ namespace CatanClient.ViewModels
 
                         if (result.IsSuccess)
                         {
-                            edge.IsOccupied = true;
-                            edge.OwnerPlayerId = playerGameplay.Id;
+                            //edge.IsOccupied = true;
+                            //edge.OwnerPlayerId = playerGameplay.Id;
                             MessageBox.Show($"Camino colocado en Hexágono {hexIndex}, Arista: {edgeIndex}.");
 
-                            ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+                            //((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
                             ExecuteToggleRoadMode();
                         }
                         else
@@ -550,7 +548,8 @@ namespace CatanClient.ViewModels
 
                 if (edge.IsOccupied)
                 {
-                    EdgeOccupied?.Invoke(tag);
+                    bool isOwner = edge.OwnerPlayerId == playerGameplay.Id;
+                    EdgeOccupied?.Invoke(tag,isOwner);
                     return false;
                 }
                 else
