@@ -170,6 +170,7 @@
       <DependentUpon>VoteKickPlayerCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\VoteKickPlayerCardViewModel.cs" />
+    <Compile Include="Gameplay\Helpers\GameRules.cs" />
     <Compile Include="Gameplay\Helpers\Resource.cs" />
     <Compile Include="Gameplay\ViewModels\TradeWindowViewModel.cs" />
     <Compile Include="Gameplay\Views\DiceRollAnimationView.xaml.cs">
@@ -578,6 +579,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameService8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\GameService9.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameService\GameServiceEndpoint.wsdl" />

@@ -1297,6 +1297,9 @@ namespace CatanClient.GameService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int[] ConnectedEdgesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int[] ConnectedHexesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1315,6 +1318,19 @@ namespace CatanClient.GameService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int[] ConnectedEdges {
+            get {
+                return this.ConnectedEdgesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ConnectedEdgesField, value) != true)) {
+                    this.ConnectedEdgesField = value;
+                    this.RaisePropertyChanged("ConnectedEdges");
+                }
             }
         }
         
@@ -1391,6 +1407,9 @@ namespace CatanClient.GameService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int[] ConnectedEdgesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1409,6 +1428,19 @@ namespace CatanClient.GameService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int[] ConnectedEdges {
+            get {
+                return this.ConnectedEdgesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ConnectedEdgesField, value) != true)) {
+                    this.ConnectedEdgesField = value;
+                    this.RaisePropertyChanged("ConnectedEdges");
+                }
             }
         }
         
@@ -1460,6 +1492,194 @@ namespace CatanClient.GameService {
                 if ((this.OwnerPlayerIdField.Equals(value) != true)) {
                     this.OwnerPlayerIdField = value;
                     this.RaisePropertyChanged("OwnerPlayerId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerResourcesDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayD" +
+        "to.Resources")]
+    [System.SerializableAttribute()]
+    public partial class PlayerResourcesDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.ResourceDto AlphaNanofibersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.ResourceDto EpsilonBiomassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.ResourceDto Grx810Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.ResourceDto LunarStoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlayerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.ResourceDto TritoniumField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.ResourceDto AlphaNanofibers {
+            get {
+                return this.AlphaNanofibersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AlphaNanofibersField, value) != true)) {
+                    this.AlphaNanofibersField = value;
+                    this.RaisePropertyChanged("AlphaNanofibers");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.ResourceDto EpsilonBiomass {
+            get {
+                return this.EpsilonBiomassField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EpsilonBiomassField, value) != true)) {
+                    this.EpsilonBiomassField = value;
+                    this.RaisePropertyChanged("EpsilonBiomass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.ResourceDto Grx810 {
+            get {
+                return this.Grx810Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Grx810Field, value) != true)) {
+                    this.Grx810Field = value;
+                    this.RaisePropertyChanged("Grx810");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.ResourceDto LunarStone {
+            get {
+                return this.LunarStoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LunarStoneField, value) != true)) {
+                    this.LunarStoneField = value;
+                    this.RaisePropertyChanged("LunarStone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlayerId {
+            get {
+                return this.PlayerIdField;
+            }
+            set {
+                if ((this.PlayerIdField.Equals(value) != true)) {
+                    this.PlayerIdField = value;
+                    this.RaisePropertyChanged("PlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.ResourceDto Tritonium {
+            get {
+                return this.TritoniumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TritoniumField, value) != true)) {
+                    this.TritoniumField = value;
+                    this.RaisePropertyChanged("Tritonium");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResourceDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayD" +
+        "to.Resources")]
+    [System.SerializableAttribute()]
+    public partial class ResourceDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ResourceNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ResourceName {
+            get {
+                return this.ResourceNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResourceNameField, value) != true)) {
+                    this.ResourceNameField = value;
+                    this.RaisePropertyChanged("ResourceName");
                 }
             }
         }
@@ -1613,6 +1833,9 @@ namespace CatanClient.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/NotifyPlayerPlacedPiece")]
         void NotifyPlayerPlacedPiece(CatanClient.GameService.PiecePlacementDto piecePlacement, CatanClient.GameService.PlayerGameplayDto playerGameplayDto);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/NotifyResourcesDistributed")]
+        void NotifyResourcesDistributed(CatanClient.GameService.PlayerResourcesDto receivedResources);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

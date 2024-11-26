@@ -27,7 +27,8 @@
   <xs:element name="ArrayOfEdgeDto" nillable="true" type="tns:ArrayOfEdgeDto" />
   <xs:complexType name="EdgeDto">
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ConnectedHexes" nillable="true" type="q1:ArrayOfint" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ConnectedEdges" nillable="true" type="q1:ArrayOfint" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ConnectedHexes" nillable="true" type="q2:ArrayOfint" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IsOccupied" type="xs:boolean" />
       <xs:element minOccurs="0" name="OwnerPlayerId" nillable="true" type="xs:int" />
@@ -42,6 +43,7 @@
   <xs:element name="ArrayOfVertexDto" nillable="true" type="tns:ArrayOfVertexDto" />
   <xs:complexType name="VertexDto">
     <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ConnectedEdges" nillable="true" type="q3:ArrayOfint" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IsCity" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsOccupied" type="xs:boolean" />

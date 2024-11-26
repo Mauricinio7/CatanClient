@@ -30,6 +30,9 @@ namespace CatanClient.ViewModels
         private readonly AccountService.ProfileDto profile;
         private int remainingTimeInSeconds;
         private bool turn;
+        private bool isTradeGridVisible;
+        private bool isBuildingSettlement;
+        private string settlementButtonText;
         private PlayerGameplayDto playerGameplay;
         private bool hasRolledDice;
         public event Action<string> VertexOccupied;
@@ -47,6 +50,9 @@ namespace CatanClient.ViewModels
         public ICommand VoteKickCommand { get; }
         public ICollectionView PlayersView { get; set; }
         public ICommand SelectVertexCommand { get; }
+        public ICommand ToggleSettlementBuildingModeCommand { get; }
+
+        public int SettlementsPlaced { get; set; } = 0; //TODO remove this
 
 
         private readonly ServiceManager serviceManager;
@@ -67,7 +73,7 @@ namespace CatanClient.ViewModels
        : "Asignando turno...";
 
 
-        private bool isTradeGridVisible;
+        
 
         public bool Turn
         {
@@ -79,9 +85,9 @@ namespace CatanClient.ViewModels
                     turn = value;
                     OnPropertyChanged(nameof(Turn));
 
-                    if (turn) 
+                    if (turn)
                     {
-                        HasRolledDice = false; 
+                        HasRolledDice = false;
                     }
                     UpdateCommandStates();
                 }
@@ -112,6 +118,17 @@ namespace CatanClient.ViewModels
             }
         }
 
+        public bool IsBuildingSettlement
+        {
+            get => isBuildingSettlement;
+            set
+            {
+                isBuildingSettlement = value;
+                OnPropertyChanged(nameof(IsBuildingSettlement));
+                ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+            }
+        }
+
         public string NewMessage
         {
             get { return newMessage; }
@@ -119,6 +136,16 @@ namespace CatanClient.ViewModels
             {
                 newMessage = value;
                 OnPropertyChanged(nameof(NewMessage));
+            }
+        }
+
+        public string SettlementButtonText
+        {
+            get => settlementButtonText;
+            set
+            {
+                settlementButtonText = value;
+                OnPropertyChanged(nameof(SettlementButtonText));
             }
         }
 
@@ -137,16 +164,17 @@ namespace CatanClient.ViewModels
 
             profile = serviceManager.ProfileSingleton.Profile;
 
-            
+
             ShowTradeWindowCommand = new RelayCommand(_ => ExecuteShowTradeWindow(), _ => CanPlayTurn());
-            RollDiceCommand = new RelayCommand(_ => ExecuteRollDiceAsync(), _ => CanRollDice()); 
-            NextTurnCommand = new RelayCommand(_ => ExecuteNextTurn(), _ => CanPlayTurn()); 
+            RollDiceCommand = new RelayCommand(_ => ExecuteRollDiceAsync(), _ => CanRollDice());
+            NextTurnCommand = new RelayCommand(_ => ExecuteNextTurn(), _ => CanPlayTurn());
             HideTradeControlCommand = new RelayCommand(ExecuteHideTradeControl);
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             ExitCommand = new RelayCommand(ExecuteExit);
             VoteKickCommand = new RelayCommand(ExecuteVoteKickWindow);
             SelectVertexCommand = new RelayCommand(parameter => ExecuteSelectVertex(parameter), parameter => CanExecuteSelectVertex(parameter));
+            ToggleSettlementBuildingModeCommand = new RelayCommand(_ => ExecuteToggleSettlementMode(), _ => CanPlayTurn());
 
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
@@ -160,6 +188,9 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_BOARD, hexes => LoadGameBoard(hexes));
 
+            IsBuildingSettlement = false;
+            SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
+
             IsTradeGridVisible = true;
             UpdateTradeWindow();
         }
@@ -171,13 +202,13 @@ namespace CatanClient.ViewModels
                 MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            
+
             GameHexes = hexes;
             HexTileImages.Clear();
 
             foreach (var hex in hexes)
             {
-                
+
                 string imagePath = GetImagePathByResource(hex.Resource);
                 if (!string.IsNullOrEmpty(imagePath))
                 {
@@ -188,6 +219,20 @@ namespace CatanClient.ViewModels
 
             ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
             OnPropertyChanged(nameof(HexTileImages));
+        }
+
+        private void ExecuteToggleSettlementMode()
+        {
+            if (IsBuildingSettlement)
+            {
+                IsBuildingSettlement = false;
+                SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
+            }
+            else
+            {
+                IsBuildingSettlement = true;
+                SettlementButtonText = Utilities.GetCancelText(CultureInfo.CurrentCulture.Name);
+            }
         }
 
         private static string GetImagePathByResource(string resourceName)
@@ -205,7 +250,7 @@ namespace CatanClient.ViewModels
                 case "GRX-810":
                     return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png";
                 default:
-                    return null; 
+                    return null;
             }
         }
 
@@ -213,20 +258,29 @@ namespace CatanClient.ViewModels
         {
             if (parameter is string tag && TryParseTag(tag, out int hexId, out int vertexId))
             {
-                var hex = GameHexes[hexId - 1];
-                var vertex = hex.Vertices[vertexId - 1];
+                HexTileDto hex = GameHexes[hexId - 1];
+                VertexDto vertex = hex.Vertices[vertexId - 1];
 
                 vertex.IsOccupied = true;
+                vertex.OwnerPlayerId = playerGameplay.Id;
                 MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
 
                 ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+                ExecuteToggleSettlementMode();
             }
         }
 
         private bool CanExecuteSelectVertex(object parameter)
         {
-            if(GameHexes.Count == 0)
+            if (!IsBuildingSettlement) 
                 return false;
+
+            if (GameHexes.Count == 0)
+                return false;
+
+            GameBoardStateDto gameBoardState = new GameBoardStateDto();
+                gameBoardState.HexTiles = GameHexes.ToArray();
+            gameBoardState.GameId = game.Id.Value;
 
             if (parameter is string tag && TryParseTag(tag, out int hexId, out int vertexId))
             {
@@ -241,9 +295,16 @@ namespace CatanClient.ViewModels
                 if (vertex.IsOccupied)
                 {
                     VertexOccupied?.Invoke(tag);
+                    return false;
                 }
-
-                return !vertex.IsOccupied;
+                else
+                {
+                    return true;
+                }
+                //else if(GameRules.IsVertexAvailableForSettlement(gameBoardState, vertex.Id, playerGameplay.Id) || SettlementsPlaced < 2)
+                //{
+                    //return true;
+                //}
             }
 
             return false;
@@ -346,6 +407,7 @@ namespace CatanClient.ViewModels
             ((RelayCommand)RollDiceCommand).RaiseCanExecuteChanged();
             ((RelayCommand)NextTurnCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ShowTradeWindowCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)ToggleSettlementBuildingModeCommand).RaiseCanExecuteChanged();
         }
 
         public static void ExecuteShowTradeWindow() 

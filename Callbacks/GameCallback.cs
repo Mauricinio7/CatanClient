@@ -89,6 +89,11 @@ namespace CatanClient.Callbacks
             //TODO implement
         }
 
+        public void NotifyResourcesDistributed(PlayerResourcesDto receivedResources)
+        {
+            //TODO implement
+        }
+
         public void SendDiceResult(int diceResult)
         {
                 Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceResult);

@@ -124,7 +124,7 @@
             <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png" Margin="573,642,124,44" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"/>
             <Image Source="pack://application:,,,/Gameplay/Resources/Images/GameResources/GRX-810Stone.png" Margin="700,648,86,44" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Grid.Row="2" Grid.Column="3" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" Margin="88,0,0,67" RenderTransformOrigin="-0.051,0.275" Grid.ColumnSpan="2" Width="221"><Run Text="{x:Static properties:Resources.label_build}" /><Run Language="es-mx" Text=":"/></TextBlock>
-            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="13" Content="{x:Static properties:Resources.global_town}" Margin="40,50,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="123" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <Button Style="{StaticResource PrimaryButtonStyle}" FontSize="13" Content="{Binding SettlementButtonText}" Margin="40,50,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="123" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Command="{Binding ToggleSettlementBuildingModeCommand}"/>
             <Button Style="{StaticResource PrimaryButtonStyle}" Content="{x:Static properties:Resources.global_road}" Margin="95,50,0,0" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="123" Grid.Row="3" Grid.Column="3"/>
             <Button Style="{StaticResource PrimaryButtonStyle}" Content="{x:Static properties:Resources.global_city}" Margin="10,50,0,0" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="123" Grid.Row="3" Grid.Column="4"/>
             <Button Margin="48,577,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" 
@@ -255,201 +255,853 @@
                 <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_decline}"  Margin="215,524,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="140" Command="{Binding HideTradeControlCommand}"/>
             </Grid>
 
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="347,109,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,1,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="401,103,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,1,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="441,109,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,2,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="491,113,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,2,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="531,109,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,3,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="570,108,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,3,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="331,148,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,1,3"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="415,149,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,1,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="505,143,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,2,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="589,144,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,3,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="304,183,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,4,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="358,177,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,4,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="398,183,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,5,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="448,187,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,5,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="488,183,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,6,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="527,182,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,6,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="572,178,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,7,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="611,177,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,7,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="291,216,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,4,3"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="375,217,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,4,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="465,211,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,5,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="549,212,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,6,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="636,207,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,7,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="260,250,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,8,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="314,244,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,8,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="354,250,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,9,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="404,254,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,9,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="444,250,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,10,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="483,249,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,10,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="528,245,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,11,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="567,244,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,11,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="617,240,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,12,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="656,239,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,12,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="251,290,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,8,3"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="335,291,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,8,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="425,285,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,9,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="509,286,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,10,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="596,281,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,11,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="675,281,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,12,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="270,313,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,8,5"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="310,319,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,13,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="354,308,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,13,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="394,314,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,14,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="444,308,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,14,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="484,314,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,15,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="524,308,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,15,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="564,314,0,0" Grid.Row="2" VerticalAlignment="Top" Width="44"
+            Tag="E,16,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="614,308,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,16,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="654,314,0,0" Grid.Row="2" VerticalAlignment="Top" Width="44"
+            Tag="E,12,6"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="291,354,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,13,3"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="375,355,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,13,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="465,349,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,14,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="549,350,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,15,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="636,345,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,16,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="309,382,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,13,5"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="349,388,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,17,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="399,392,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,17,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="439,388,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,18,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="478,387,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,18,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="523,383,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,19,1"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="562,382,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,19,2"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="612,378,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,16,6"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="336,423,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,17,3"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="420,424,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,17,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="510,418,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,18,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-58.443" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="594,419,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,19,4"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-52.228" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="355,449,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,17,5"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="395,455,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,17,6"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="445,459,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,18,5"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="485,455,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,18,6"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="524,454,0,0" Grid.Row="2" VerticalAlignment="Top" Width="46"
+            Tag="E,19,5"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="58.083" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="569,450,0,0" Grid.Row="2" VerticalAlignment="Top" Width="45"
+            Tag="E,19,6"
+            Command="{Binding SelectEdgeCommand}"
+            CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}"
+            Style="{StaticResource PlaceButtonStyle}" BorderThickness="0">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="-34.824" CenterX="22.5" CenterY="15.5" />
+                </Button.RenderTransform>
+            </Button>
+
+
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="27" Margin="382,102,0,0" Grid.Row="2" VerticalAlignment="Top" Width="35"
         Tag="1,1"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[0]}" Style="{StaticResource PlaceButtonStyle}"/>
+       Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="468,100,0,0" Grid.Row="2" VerticalAlignment="Top" Width="36"
         Tag="2,1"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[1]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="555,99,0,0" Grid.Row="2" VerticalAlignment="Top" Width="34"
         Tag="3,1"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[2]}" Style="{StaticResource PlaceButtonStyle}" />
-            <Button Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="347,121,0,0" Grid.Row="2" VerticalAlignment="Top" Width="35"
+        Style="{StaticResource PlaceButtonStyle}" />
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="341,123,0,0" Grid.Row="2" VerticalAlignment="Top" Width="35"
         Tag="1,2"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[3]}" Style="{StaticResource PlaceButtonStyle}" Content=""/>
+        Style="{StaticResource PlaceButtonStyle}" Content=""/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="425,117,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="1,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[4]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="512,117,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="2,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[5]}" Style="{StaticResource PlaceButtonStyle}"/>
-            <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="594,121,0,0" Grid.Row="2" VerticalAlignment="Top" Width="34"
+        Style="{StaticResource PlaceButtonStyle}"/>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="594,123,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="3,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[6]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="339,165,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="1,4"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[7]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="424,166,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="1,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[8]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="508,165,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="2,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[9]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="590,165,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="3,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[10]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="299,194,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="4,2"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[11]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="382,189,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="4,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[12]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="465,183,0,0" Grid.Row="2" VerticalAlignment="Top" Width="39"
         Tag="5,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[13]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="552,185,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="6,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[14]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="632,186,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="7,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[15]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="297,237,0,0" Grid.Row="2" VerticalAlignment="Top" Width="37"
         Tag="4,4"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[16]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="380,233,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="4,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[17]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="466,234,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="5,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[18]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="550,233,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="6,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[19]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="636,232,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="7,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[20]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="258,260,0,0" Grid.Row="2" VerticalAlignment="Top" Width="36"
         Tag="8,2"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[21]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="338,257,0,0" Grid.Row="2" VerticalAlignment="Top" Width="39"
         Tag="8,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[22]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="422,254,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="9,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[23]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="510,257,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="10,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[24]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="595,251,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="11,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[25]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="678,260,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="12,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[26]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="257,301,0,0" Grid.Row="2" VerticalAlignment="Top" Width="36"
         Tag="8,4"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[27]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="338,308,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="8,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[28]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="423,306,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="9,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[29]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="510,304,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="10,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[30]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="597,304,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="11,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[31]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="678,296,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="12,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[32]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="293,328,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="13,2"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[33]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="382,326,0,0" Grid.Row="2" VerticalAlignment="Top" Width="38"
         Tag="13,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[34]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="465,328,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="14,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[35]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="554,325,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="15,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[36]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="640,323,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="16,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[37]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="293,368,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="13,4"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[38]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="380,377,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="13,5"
         Command="{Binding SelectVertexCommand}"
@@ -459,74 +1111,72 @@
         Tag="14,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[40]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="551,374,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="15,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[41]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="632,365,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="16,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[42]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="337,397,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="17,2"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[43]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="422,397,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="17,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[44]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="509,393,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="18,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[45]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="592,395,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="19,3"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[46]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="338,441,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="17,4"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[47]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="422,439,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="17,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[48]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="508,436,0,0" Grid.Row="2" VerticalAlignment="Top" Width="42"
         Tag="18,"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[49]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="593,433,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="19,5"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[50]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="380,463,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="17,6"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[51]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="466,463,0,0" Grid.Row="2" VerticalAlignment="Top" Width="40"
         Tag="18,6"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[52]}" Style="{StaticResource PlaceButtonStyle}"/>
+        Style="{StaticResource PlaceButtonStyle}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="553,460,0,0" Grid.Row="2" VerticalAlignment="Top" Width="41"
         Tag="19,6"
         Command="{Binding SelectVertexCommand}"
         CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
-        IsEnabled="{Binding VertexAvailability[53]}" Style="{StaticResource PlaceButtonStyle}"/>
-
-
+        Style="{StaticResource PlaceButtonStyle}"/>
 
         </Grid>
     </Viewbox>

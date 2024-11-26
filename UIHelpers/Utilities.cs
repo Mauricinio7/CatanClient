@@ -388,6 +388,23 @@ namespace CatanClient.UIHelpers
         {
             return Resources.ResourceManager.GetString("log_info_end", new CultureInfo(language));
         }
+        public static string GetTownText(string language)
+        {
+            return Resources.ResourceManager.GetString("global_town", new CultureInfo(language));
+        }
+        public static string GetCityText(string language)
+        {
+            return Resources.ResourceManager.GetString("global_city", new CultureInfo(language));
+        }
+        public static string GetRoadText(string language)
+        {
+            return Resources.ResourceManager.GetString("global_road", new CultureInfo(language));
+        }
+        public static string GetCancelText(string language)
+        {
+            return Resources.ResourceManager.GetString("button_cancel", new CultureInfo(language));
+        }
+
         public static void ShowMessgeServerLost()
         {
             MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);

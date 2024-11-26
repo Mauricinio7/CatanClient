@@ -19,6 +19,7 @@
       <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
       <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" />
       <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd8" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -153,6 +154,9 @@
   <wsdl:message name="IGameEndPoint_NotifyPlayerPlacedPiece_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerPlacedPiece" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_NotifyResourcesDistributed_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyResourcesDistributed" />
+  </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGame" message="tns:IGameEndPoint_CreateGame_InputMessage" />
@@ -255,6 +259,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerPlacedPiece">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyPlayerPlacedPiece" message="tns:IGameEndPoint_NotifyPlayerPlacedPiece_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyResourcesDistributed">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyResourcesDistributed" message="tns:IGameEndPoint_NotifyResourcesDistributed_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -475,6 +482,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerPlacedPiece">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerPlacedPiece" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyResourcesDistributed">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyResourcesDistributed" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
