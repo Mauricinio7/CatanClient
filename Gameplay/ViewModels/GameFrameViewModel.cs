@@ -362,9 +362,9 @@ namespace CatanClient.ViewModels
                 int hexId = hex.Id;
                 int vertexId = vertex.Id;
 
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
                 App.Current.Dispatcher.InvokeAsync(async () =>
                 {
-                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
                     if (IsBuildingCity)
                     {
                         OperationResultDto result;
@@ -376,7 +376,6 @@ namespace CatanClient.ViewModels
                         try
                         {
                             result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
-                            
                             if(result.IsSuccess)
                             {
                                 vertex.IsCity = true;
