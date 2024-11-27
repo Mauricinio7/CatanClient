@@ -49,6 +49,7 @@
                  Background="white"
                  BorderThickness="0"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Loaded="OnListBoxLoaded">   
                 <ListBox.ItemTemplate>
                     <DataTemplate>

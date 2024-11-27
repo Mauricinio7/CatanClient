@@ -114,6 +114,9 @@ namespace CatanClient.GuestAccountService {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PreferredLanguageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -154,6 +157,19 @@ namespace CatanClient.GuestAccountService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Points {
+            get {
+                return this.PointsField;
+            }
+            set {
+                if ((this.PointsField.Equals(value) != true)) {
+                    this.PointsField = value;
+                    this.RaisePropertyChanged("Points");
                 }
             }
         }

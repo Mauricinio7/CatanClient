@@ -92,7 +92,7 @@ namespace CatanClient.Callbacks
 
         public void NotifyResourcesDistributed(PlayerResourcesDto receivedResources)
         {
-            //TODO implement
+            Mediator.Notify(Utilities.UPDATE_PLAYER_RESOURCES, receivedResources);
         }
 
         public void SendDiceResult(int diceResult)

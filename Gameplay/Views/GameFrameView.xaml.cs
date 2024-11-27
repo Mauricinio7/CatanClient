@@ -81,7 +81,7 @@ namespace CatanClient.Gameplay.Views
 
                 if (isOwner)
                 {
-                    button.Content = ApplyColorFilter(image, Colors.Green);
+                    button.Content = image;
                 }
                 else
                 {

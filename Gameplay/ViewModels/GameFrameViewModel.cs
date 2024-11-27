@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Core;
 using CatanClient.ChatService;
 using CatanClient.Commands;
 using CatanClient.Controls;
@@ -37,7 +38,14 @@ namespace CatanClient.ViewModels
         private string roadButtonText;
         private bool isBuildingCity;
         private string cityButtonText;
+        private string points;
+        private int quantityLunarStone;
+        private int quantityTritonium;
+        private int quantityNanofiber;
+        private int quantityBiomass;
+        private int quantityGRX;
         private PlayerGameplayDto playerGameplay;
+        private PlayerResourcesDto playerResources;
         private bool hasRolledDice;
         public event Action<string, bool, bool> VertexOccupied;
         public event Action<string, bool> EdgeOccupied;
@@ -94,7 +102,7 @@ namespace CatanClient.ViewModels
                     turn = value;
                     OnPropertyChanged(nameof(Turn));
 
-                    if (turn)
+                    if (!turn)
                     {
                         HasRolledDice = false;
                     }
@@ -195,9 +203,63 @@ namespace CatanClient.ViewModels
             }
         }
 
-        
+        public string Points
+        {
+            get => points;
+            set
+            {
+                points = value;
+                OnPropertyChanged(nameof(Points));
+            }
+        }
 
+        public int QuantityLunarStone
+        {
+            get => quantityLunarStone;
+            set
+            {
+                quantityLunarStone = value;
+                OnPropertyChanged(nameof(QuantityLunarStone));
+            }
+        }
+        public int QuantityTritonium
+        {
+            get => quantityTritonium;
+            set
+            {
+                quantityTritonium = value;
+                OnPropertyChanged(nameof(QuantityTritonium));
+            }
+        }
 
+        public int QuantityNanofiber
+        {
+            get => quantityNanofiber;
+            set
+            {
+                quantityNanofiber = value;
+                OnPropertyChanged(nameof(QuantityNanofiber));
+            }
+        }
+        public int QuantityBiomass
+        {
+            get => quantityBiomass;
+            set
+            {
+                quantityBiomass = value;
+                OnPropertyChanged(nameof(QuantityBiomass));
+            }
+        }
+
+        public int QuantityGRX
+        {
+            get => quantityGRX;
+            set
+            {
+                quantityGRX = value;
+                OnPropertyChanged(nameof(QuantityGRX));
+            }
+        }
 
 
         public GameFrameViewModel(ChatService.GameDto gameDto, ServiceManager serviceManager)
@@ -223,9 +285,9 @@ namespace CatanClient.ViewModels
             VoteKickCommand = new RelayCommand(ExecuteVoteKickWindow);
             SelectVertexCommand = new RelayCommand(parameter => ExecuteSelectVertex(parameter), parameter => CanExecuteSelectVertex(parameter));
             SelectEdgeCommand = new RelayCommand(parameter => ExecuteSelectEdge(parameter), parameter => CanExecuteSelectEdge(parameter));
-            ToggleSettlementBuildingModeCommand = new RelayCommand(_ => ExecuteToggleSettlementMode(), _ => CanPlayTurn());
-            ToggleRoadBuildingModeCommand = new RelayCommand(_ => ExecuteToggleRoadMode(), _ => CanPlayTurn());
-            ToggleCityBuildingModeCommand = new RelayCommand(_ => ExecuteToggleCityMode(), _ => CanPlayTurn());
+            ToggleSettlementBuildingModeCommand = new RelayCommand(_ => ExecuteToggleSettlementMode(), _ => CanExecuteToggleSettlementMode());
+            ToggleRoadBuildingModeCommand = new RelayCommand(_ => ExecuteToggleRoadMode(), _ => CanExecuteToggleRoadMode());
+            ToggleCityBuildingModeCommand = new RelayCommand(_ => ExecuteToggleCityMode(), _ => CanExecuteToggleCityMode());
 
             countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             countdownTimer.Tick += CountdownTimer_Tick;
@@ -239,16 +301,33 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_BOARD, hexes => LoadGameBoard(hexes));
             Mediator.Register(Utilities.UPDATE_GAME_PLAYER_BOARD, hexes => UpdateGameBoard(hexes));
+            Mediator.Register(Utilities.UPDATE_PLAYER_RESOURCES, resources => UpdatePlayerResources(resources));
 
             IsBuildingSettlement = false;
             SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
             IsBuildingRoad = false;
             RoadButtonText = Utilities.GetRoadText(CultureInfo.CurrentCulture.Name);
+            isBuildingCity = false;
             CityButtonText = Utilities.GetCityText(CultureInfo.CurrentCulture.Name); 
-            ToggleCityBuildingModeCommand = new RelayCommand(_ => ExecuteToggleCityMode(), _ => CanPlayTurn());
 
             IsTradeGridVisible = true;
             UpdateTradeWindow();
+        }
+
+        public void UpdatePlayerResources(object parameter)
+        {
+            if (!(parameter is PlayerResourcesDto resources))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            this.playerResources = resources;
+            QuantityLunarStone = resources.LunarStone.Quantity;
+            QuantityTritonium = resources.Tritonium.Quantity;
+            QuantityNanofiber = resources.AlphaNanofibers.Quantity;
+            QuantityBiomass = resources.EpsilonBiomass.Quantity;
+            QuantityGRX = resources.Grx810.Quantity;
         }
 
         public void LoadGameBoard(object parameter)
@@ -273,8 +352,8 @@ namespace CatanClient.ViewModels
                 }
             }
 
-            ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
             ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
             OnPropertyChanged(nameof(HexTileImages));
         }
 
@@ -288,9 +367,8 @@ namespace CatanClient.ViewModels
 
             GameHexes = hexes;
 
-            ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
             ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
-            OnPropertyChanged(nameof(HexTileImages));
+            ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
         }
 
         private void ExecuteToggleSettlementMode()
@@ -306,6 +384,12 @@ namespace CatanClient.ViewModels
                 SettlementButtonText = Utilities.GetCancelText(CultureInfo.CurrentCulture.Name);
             }
         }
+
+        private bool CanExecuteToggleSettlementMode()
+        {
+            return !IsBuildingRoad && !IsBuildingCity && CanPlayTurn() && HaveResourcesToBuildSettlement();
+        }
+
         private void ExecuteToggleRoadMode()
         {
             if (IsBuildingRoad)
@@ -319,6 +403,11 @@ namespace CatanClient.ViewModels
                 RoadButtonText = Utilities.GetCancelText(CultureInfo.CurrentCulture.Name);
             }
         }
+
+        private bool CanExecuteToggleRoadMode()
+        {
+            return !IsBuildingSettlement && !IsBuildingCity && CanPlayTurn() && HaveResourcesToBuildRoad();
+        }
         private void ExecuteToggleCityMode()
         {
             if (IsBuildingCity)
@@ -331,6 +420,24 @@ namespace CatanClient.ViewModels
                 IsBuildingCity = true;
                 CityButtonText = Utilities.GetCancelText(CultureInfo.CurrentCulture.Name);
             }
+        }
+
+        private bool CanExecuteToggleCityMode()
+        {
+            return !IsBuildingRoad && !IsBuildingSettlement && CanPlayTurn() && HaveResourcesToBuildCity();
+        }
+
+        internal bool HaveResourcesToBuildSettlement()
+        {
+            return playerResources.Tritonium.Quantity >= 1 && playerResources.AlphaNanofibers.Quantity >= 1 && playerResources.EpsilonBiomass.Quantity >= 1 && playerResources.Grx810.Quantity >= 1;
+        }
+        internal bool HaveResourcesToBuildRoad()
+        {
+            return playerResources.Tritonium.Quantity >= 1 && playerResources.Grx810.Quantity >= 1;
+        }
+        internal bool HaveResourcesToBuildCity()
+        {
+            return playerResources.EpsilonBiomass.Quantity >= 2 && playerResources.LunarStone.Quantity >= 3;
         }
 
         private static string GetImagePathByResource(string resourceName)
@@ -377,7 +484,6 @@ namespace CatanClient.ViewModels
                             result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
                             if(result.IsSuccess)
                             {
-                                //vertex.IsCity = true;
                                 MessageBox.Show($"Ciudad construida en Hexágono {hexId}, Vértice {vertexId}.");
                                 ExecuteToggleCityMode();
                             }
@@ -406,8 +512,6 @@ namespace CatanClient.ViewModels
 
                             if (result.IsSuccess)
                             {
-                                //vertex.IsOccupied = true;
-                                //vertex.OwnerPlayerId = playerGameplay.Id;
                                 MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
                                 ExecuteToggleSettlementMode();
                             }
@@ -462,6 +566,8 @@ namespace CatanClient.ViewModels
 
             return false;
         }
+
+        
         
 
         private static bool TryParseTag(string tag, out int hexId, out int vertexId)
@@ -506,11 +612,8 @@ namespace CatanClient.ViewModels
 
                         if (result.IsSuccess)
                         {
-                            //edge.IsOccupied = true;
-                            //edge.OwnerPlayerId = playerGameplay.Id;
                             MessageBox.Show($"Camino colocado en Hexágono {hexIndex}, Arista: {edgeIndex}.");
 
-                            //((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
                             ExecuteToggleRoadMode();
                         }
                         else
@@ -522,6 +625,7 @@ namespace CatanClient.ViewModels
                     {
                         Utilities.ShowMessgeServerLost();
                     }
+                    ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
                 });
             }
         }
@@ -558,10 +662,6 @@ namespace CatanClient.ViewModels
                 {
                     return true;
                 }
-                //else if(GameRules.IsVertexAvailableForSettlement(gameBoardState, vertex.Id, playerGameplay.Id) || SettlementsPlaced < 2)
-                //{
-                //return true;
-                //}
             }
 
             return false;
@@ -731,6 +831,7 @@ namespace CatanClient.ViewModels
             }
             else
             {
+                
                 OnlinePlayersList.Clear();
 
                 foreach (PlayerTurnStatusDto player in playersTurnStatus)
@@ -740,6 +841,7 @@ namespace CatanClient.ViewModels
                         if(profile.Id == player.ProfileTurnDto.Id)
                         {
                             Turn = player.IsTurn;
+                            Points = player.Points.ToString();
                         }
                         OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
                             new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(player.ProfileTurnDto)),
@@ -753,10 +855,11 @@ namespace CatanClient.ViewModels
                         if (profile.Id == player.GuestAccountTurnDto.Id)
                         {
                             Turn = player.IsTurn;
+                            Points = player.Points.ToString();
                         }
                         OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
                             new NamedParameter(Utilities.PROFILE, profileDto),
-                            new NamedParameter(Utilities.POINTS, player.Points),
+                            new NamedParameter(Utilities.POINTS, player.Points),    
                             new NamedParameter(Utilities.TURN, player.IsTurn)
                             ));
                     }

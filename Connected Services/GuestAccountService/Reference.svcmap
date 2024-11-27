@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8485/GuestAccountService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.144.41.3:8485/GuestAccountService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GuestAccountService2.xsd" MetadataType="Schema" ID="16ee32d9-e3c6-4e5f-be03-20c05c9b6635" SourceId="1" SourceUrl="http://localhost:8485/GuestAccountService?xsd=xsd2" />
-    <MetadataFile FileName="GuestAccountService.xsd" MetadataType="Schema" ID="8330a534-f7f4-490e-a7cf-296fe43ba315" SourceId="1" SourceUrl="http://localhost:8485/GuestAccountService?xsd=xsd1" />
-    <MetadataFile FileName="GuestAccountService1.xsd" MetadataType="Schema" ID="ade0eae4-4874-4e5b-9a55-f26557a448a3" SourceId="1" SourceUrl="http://localhost:8485/GuestAccountService?xsd=xsd0" />
-    <MetadataFile FileName="GuestAccountEndpoint.wsdl" MetadataType="Wsdl" ID="fb5d6c47-5a72-44b1-95e6-f59ee55d5245" SourceId="1" SourceUrl="http://localhost:8485/GuestAccountService?wsdl" />
-    <MetadataFile FileName="GuestAccountService.disco" MetadataType="Disco" ID="39675be2-c17a-402f-bc26-da32382f291a" SourceId="1" SourceUrl="http://localhost:8485/GuestAccountService?disco" />
+    <MetadataFile FileName="GuestAccountService.xsd" MetadataType="Schema" ID="8330a534-f7f4-490e-a7cf-296fe43ba315" SourceId="1" SourceUrl="http://10.144.41.3:8485/GuestAccountService?xsd=xsd1" />
+    <MetadataFile FileName="GuestAccountService1.xsd" MetadataType="Schema" ID="ade0eae4-4874-4e5b-9a55-f26557a448a3" SourceId="1" SourceUrl="http://10.144.41.3:8485/GuestAccountService?xsd=xsd0" />
+    <MetadataFile FileName="GuestAccountService.disco" MetadataType="Disco" ID="39675be2-c17a-402f-bc26-da32382f291a" SourceId="1" SourceUrl="http://10.144.41.3:8485/GuestAccountService?disco" />
+    <MetadataFile FileName="GuestAccountService2.xsd" MetadataType="Schema" ID="16ee32d9-e3c6-4e5f-be03-20c05c9b6635" SourceId="1" SourceUrl="http://10.144.41.3:8485/GuestAccountService?xsd=xsd2" />
+    <MetadataFile FileName="GuestAccountEndpoint.wsdl" MetadataType="Wsdl" ID="fb5d6c47-5a72-44b1-95e6-f59ee55d5245" SourceId="1" SourceUrl="http://10.144.41.3:8485/GuestAccountService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
