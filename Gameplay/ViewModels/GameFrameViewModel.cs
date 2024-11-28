@@ -331,29 +331,35 @@ namespace CatanClient.ViewModels
 
         public void LoadGameBoard(object parameter)
         {
-            if (!(parameter is List<HexTileDto> hexes))
-            {
-                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
 
-            GameHexes = hexes;
-            HexTileImages.Clear();
-
-            foreach (var hex in hexes)
+            App.Current.Dispatcher.InvokeAsync(async () =>
             {
 
-                string imagePath = GetImagePathByResource(hex.Resource);
-                if (!string.IsNullOrEmpty(imagePath))
+                if (!(parameter is List<HexTileDto> hexes))
                 {
-                    HexTileImages.Add(imagePath);
-                    DiceNumbers.Add(hex.DiceValue);
+                    MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
-            }
+
+                GameHexes = hexes;
+                HexTileImages.Clear();
+
+                foreach (var hex in hexes)
+                {
+                    await Task.Delay(2000);
+                    string imagePath = GetImagePathByResource(hex.Resource);
+                    if (!string.IsNullOrEmpty(imagePath))
+                    {
+                        HexTileImages.Add(imagePath);
+                        DiceNumbers.Add(hex.DiceValue);
+                    }
+                }
 
             ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
-            ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
-            OnPropertyChanged(nameof(HexTileImages));
+                ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(HexTileImages));
+            });
+
         }
 
         public void UpdateGameBoard(object parameter)
@@ -502,6 +508,8 @@ namespace CatanClient.ViewModels
             placement.TargetHexId = hexId;
             placement.TargetVertexId = vertexId;
 
+            MessageBox.Show("Se construye en, ID hex : " + hexId + "ID Vertex: " + vertexId);
+
             try
             {
                 result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
@@ -527,6 +535,8 @@ namespace CatanClient.ViewModels
             placement.PieceType = Utilities.SETTLEMENT;
             placement.TargetHexId = hexId;
             placement.TargetVertexId = vertexId;
+
+            MessageBox.Show("Se construye en, ID hex : " + hexId + "ID Vertex: " + vertexId);
 
             try
             {
@@ -625,6 +635,8 @@ namespace CatanClient.ViewModels
             placement.PieceType = Utilities.ROAD;
             placement.TargetHexId = hexId;
             placement.TargetEdgeId = edgeId;
+
+            MessageBox.Show("Se construye en, ID hex : " + hexId + "ID Edge: " + edgeId);
 
             try
             {
