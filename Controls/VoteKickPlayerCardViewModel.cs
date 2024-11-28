@@ -44,7 +44,7 @@ namespace CatanClient.Controls
             PlayerName = profile.Name;
             Game = game;
 
-            VoteKickCommand = new RelayCommand(_ => ExecuteVoteKick(null), _ => CanKickPlayer(null));
+            VoteKickCommand = new RelayCommand(_ => ExecuteVoteKick(), _ => CanKickPlayer());
 
             this.serviceManager = serviceManager;
             SenderProfile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
@@ -65,12 +65,12 @@ namespace CatanClient.Controls
             }
         }
 
-        private bool CanKickPlayer(object parameter)
+        private bool CanKickPlayer()
         {
             return Profile.Id != SenderProfile.Id;
         }
 
-        private void ExecuteVoteKick(object parameter)
+        private void ExecuteVoteKick()
         {
             GameService.ExpelPlayerDto playerToExpel = new GameService.ExpelPlayerDto
             {

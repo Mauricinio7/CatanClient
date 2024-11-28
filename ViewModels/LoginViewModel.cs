@@ -142,7 +142,6 @@ namespace CatanClient.ViewModels
                     ShowMainMenu(window, false);
                     break;
                 case EnumAuthenticationStatus.NotVerified:
-                    //TODO get Account id
                     ShowVerifyAccountView(account);
                     break;
                 case EnumAuthenticationStatus.Incorrect:

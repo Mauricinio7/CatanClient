@@ -43,7 +43,7 @@ namespace CatanClient.Controls
             PlayerName = profile.Name;
             Game = game;
 
-            KickCommand = new RelayCommand(_ => ExecuteKick(null), _ => CanKickPlayer(null));
+            KickCommand = new RelayCommand(_ => ExecuteKick(), _ => CanKickPlayer());
 
             this.serviceManager = serviceManager;
             SenderProfile = AccountUtilities.CastAccountProfileToProfileService(serviceManager.ProfileSingleton.Profile);
@@ -64,12 +64,12 @@ namespace CatanClient.Controls
             }
         }
 
-        private bool CanKickPlayer(object parameter)
+        private bool CanKickPlayer()
         {
             return Profile.Id != SenderProfile.Id;
         }
 
-        private void ExecuteKick(object parameter)
+        private void ExecuteKick()
         {
             var expelWindow = new ExpelPlayerWindow(Profile, Game);
 

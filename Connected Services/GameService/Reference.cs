@@ -1343,6 +1343,9 @@ namespace CatanClient.GameService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> OwnerPlayerIdField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.GameService.VertexDto[] VerticesField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -1414,6 +1417,19 @@ namespace CatanClient.GameService {
                 if ((this.OwnerPlayerIdField.Equals(value) != true)) {
                     this.OwnerPlayerIdField = value;
                     this.RaisePropertyChanged("OwnerPlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.GameService.VertexDto[] Vertices {
+            get {
+                return this.VerticesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VerticesField, value) != true)) {
+                    this.VerticesField = value;
+                    this.RaisePropertyChanged("Vertices");
                 }
             }
         }

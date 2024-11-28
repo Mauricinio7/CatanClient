@@ -1,4 +1,5 @@
-﻿using CatanClient.Properties;
+﻿using CatanClient.Gameplay.Helpers;
+using CatanClient.Properties;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,11 @@ namespace CatanClient.UIHelpers
         public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/repos/CatanClient/logs/errorlog.txt";
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
-        public const string IP_ACCOUNT_SERVICE = "net.tcp://10.144.41.3:8181/AccountService";
-        public const string IP_GAME_SERVICE = "net.tcp://10.144.41.3:8192/GameService";
-        public const string IP_CHAT_SERVICE = "net.tcp://10.144.41.3:8202/ChatService";
-        public const string IP_PROFILE_SERVICE = "net.tcp://10.144.41.3:8383/ProfileService";
-        public const string IP_GUEST_ACCOUNT_SERVICE = "net.tcp://10.144.41.3:8484/GuestAccountService";
+        public const string IP_ACCOUNT_SERVICE = "net.tcp://192.168.196.207:8181/AccountService";
+        public const string IP_GAME_SERVICE = "net.tcp://192.168.196.207:8192/GameService";
+        public const string IP_CHAT_SERVICE = "net.tcp://192.168.196.207:8202/ChatService";
+        public const string IP_PROFILE_SERVICE = "net.tcp://192.168.196.207:8383/ProfileService";
+        public const string IP_GUEST_ACCOUNT_SERVICE = "net.tcp://192.168.196.207:8484/GuestAccountService";
         public const string FADE_OUT_ANIMATION = "FadeOutAnimation";
         public const string SHOW_MAIN_MENU_BACKGROUND = "ShowMainMenuBackgroundView";
         public const string SHOW_MAIN_MENU = "ShowMainMenuView";
@@ -102,6 +103,25 @@ namespace CatanClient.UIHelpers
         public const string UPDATE_TIME_GAME = "UpdateTimeGame";
         public const string TURN = "turn";
         public const string UPDATE_GAME_ADMIN = "UpdateGameAdmin";
+        public const string LUNAR_STONE_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/LunarStone.png";
+        public const string TRITONIUM_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/TritoniumWood.png";
+        public const string ALPHA_NANOFIBERS_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/AlphaNanofibers.png";
+        public const string EPSILON_BIOMASS_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png";
+        public const string GRX_810_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/GRX-810Stone.png";
+        public const string LUNAR_STONE_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png";
+        public const string TRITONIUM_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png";
+        public const string ALPHA_NANOFIBERS_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png";
+        public const string EPSILON_BIOMASS_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png";
+        public const string GRX_810_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png";
+        public const string LUNAR_STONE = "Lunar Stone";
+        public const string TRITONIUM = "Tritonium";
+        public const string ALPHA_NANOFIBERS = "Alpha Nanofibers";
+        public const string EPSILON_BIOMASS = "Epsilon Biomass";
+        public const string GRX_810 = "GRX-810";
+        public const string CITY = "City";
+        public const string SETTLEMENT = "Settlement";
+        public const string ROAD = "Road";
+
 
 
 

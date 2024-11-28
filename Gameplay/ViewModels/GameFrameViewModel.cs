@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -68,8 +69,6 @@ namespace CatanClient.ViewModels
         public ICommand ToggleSettlementBuildingModeCommand { get; }
         public ICommand ToggleRoadBuildingModeCommand { get; }
         public ICommand ToggleCityBuildingModeCommand { get; }
-
-        public int SettlementsPlaced { get; set; } = 0; //TODO remove this
 
 
         private readonly ServiceManager serviceManager;
@@ -442,21 +441,31 @@ namespace CatanClient.ViewModels
 
         private static string GetImagePathByResource(string resourceName)
         {
+            string path;
+
             switch (resourceName)
             {
-                case "Lunar Stone":
-                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/LunarStoneBiomec.png";
-                case "Tritonium":
-                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/WoodBiomec.png";
-                case "Alpha Nanofibers":
-                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png";
-                case "Epsilon Biomass":
-                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png";
-                case "GRX-810":
-                    return "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png";
+                case Utilities.LUNAR_STONE:
+                    path = Utilities.LUNAR_STONE_BIOME_IMAGE_PATH;
+                    break;
+                case Utilities.TRITONIUM:
+                    path = Utilities.TRITONIUM_BIOME_IMAGE_PATH;
+                    break;
+                case Utilities.ALPHA_NANOFIBERS:
+                    path = Utilities.ALPHA_NANOFIBERS_BIOME_IMAGE_PATH;
+                    break;
+                case Utilities.EPSILON_BIOMASS:
+                    path = Utilities.EPSILON_BIOMASS_BIOME_IMAGE_PATH;
+                    break;
+                case Utilities.GRX_810:
+                    path = Utilities.GRX_810_BIOME_IMAGE_PATH;
+                    break;
                 default:
-                    return null;
+                    path = string.Empty;
+                    break;
             }
+
+            return path;
         }
 
         private void ExecuteSelectVertex(object parameter)
@@ -473,58 +482,11 @@ namespace CatanClient.ViewModels
                 {
                     if (IsBuildingCity)
                     {
-                        OperationResultDto result;
-                        PiecePlacementDto placement = new PiecePlacementDto();
-                        placement.PieceType = "City";
-                        placement.TargetHexId = hexId;
-                        placement.TargetVertexId = vertexId;
-
-                        try
-                        {
-                            result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
-                            if(result.IsSuccess)
-                            {
-                                MessageBox.Show($"Ciudad construida en Hexágono {hexId}, Vértice {vertexId}.");
-                                ExecuteToggleCityMode();
-                            }
-                        else
-                            {
-                                MessageBox.Show("No puedes colocar la construcción aquí.");
-                            }
-                        }
-                        catch (TimeoutException)
-                        {
-                            Utilities.ShowMessgeServerLost();
-                        }
-                        
+                        await BuilCityAsync(hexId, vertexId);
                     }
                     else if (IsBuildingSettlement)
                     {
-                        OperationResultDto result;
-                        PiecePlacementDto placement = new PiecePlacementDto();
-                        placement.PieceType = "Settlement";
-                        placement.TargetHexId = hexId;
-                        placement.TargetVertexId = vertexId;
-
-                        try
-                        {
-                            result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
-
-                            if (result.IsSuccess)
-                            {
-                                MessageBox.Show($"Asentamiento colocado en Hexágono {hexId}, Vértice {vertexId}.");
-                                ExecuteToggleSettlementMode();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No puedes colocar la construcción aquí.");
-                            }
-                        }
-                        catch (TimeoutException)
-                        {
-                            Utilities.ShowMessgeServerLost();
-                        }
-                        
+                        await BuilSettlementAsync(hexId, vertexId);
                     }
 
                 ((RelayCommand)SelectVertexCommand).RaiseCanExecuteChanged();
@@ -532,58 +494,111 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private bool CanExecuteSelectVertex(object parameter)
+        internal async Task BuilCityAsync(int hexId, int vertexId)
         {
-            if (GameHexes.Count == 0)
-                return false;
+            OperationResultDto result;
+            PiecePlacementDto placement = new PiecePlacementDto();
+            placement.PieceType = Utilities.CITY;
+            placement.TargetHexId = hexId;
+            placement.TargetVertexId = vertexId;
 
-            if (parameter is string tag && TryParseTag(tag, out int hexIndex, out int vertexIndex))
+            try
             {
-                var hex = GameHexes[hexIndex - 1];
-                if (hex == null)
-                    return false;
-
-                var vertex = hex.Vertices[vertexIndex - 1];
-                if (vertex == null)
-                    return false;
-
-                if (vertex.IsOccupied)
+                result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+                if (result.IsSuccess)
                 {
-                    bool isOwner = vertex.OwnerPlayerId == playerGameplay.Id;
-                    VertexOccupied?.Invoke(tag, vertex.IsCity, isOwner);
+                    MessageBox.Show($"Se ha colocado existosamente la construcción");
+                    ExecuteToggleCityMode();
                 }
-
-                if (IsBuildingCity)
+                else
                 {
-                    return vertex.IsOccupied && vertex.OwnerPlayerId == playerGameplay.Id && !vertex.IsCity;
+                    MessageBox.Show("No puedes colocar la construcción aquí.");
                 }
-                else if (IsBuildingSettlement)
-                {
-                    return !vertex.IsOccupied;
-                }
-
             }
+            catch (TimeoutException)
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+        }
+        internal async Task BuilSettlementAsync(int hexId, int vertexId)
+        {
+            OperationResultDto result;
+            PiecePlacementDto placement = new PiecePlacementDto();
+            placement.PieceType = Utilities.SETTLEMENT;
+            placement.TargetHexId = hexId;
+            placement.TargetVertexId = vertexId;
 
-            return false;
+            try
+            {
+                result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
+
+                if (result.IsSuccess)
+                {
+                    MessageBox.Show($"Se ha colocado existosamente la construcción");
+                    ExecuteToggleSettlementMode();
+                }
+                else
+                {
+                    MessageBox.Show("No puedes colocar la construcción aquí.");
+                }
+            }
+            catch (TimeoutException)
+            {
+                Utilities.ShowMessgeServerLost();
+            }
         }
 
-        
-        
+        private bool CanExecuteSelectVertex(object parameter)
+        {
+            bool canExecute = false;
+
+            if (GameHexes.Count > 0 && parameter is string tag && TryParseTag(tag, out int hexIndex, out int vertexIndex))
+            {
+                HexTileDto hex = GameHexes[hexIndex - 1];
+                if (hex != null)
+                {
+                    VertexDto vertex = hex.Vertices[vertexIndex - 1];
+                    if (vertex != null)
+                    {
+                        if (vertex.IsOccupied)
+                        {
+                            bool isOwner = vertex.OwnerPlayerId == playerGameplay.Id;
+                            VertexOccupied?.Invoke(tag, vertex.IsCity, isOwner);
+                        }
+
+                        if (IsBuildingCity)
+                        {
+                            canExecute = vertex.IsOccupied && vertex.OwnerPlayerId == playerGameplay.Id && !vertex.IsCity;
+                        }
+                        else if (IsBuildingSettlement)
+                        {
+                            canExecute = !vertex.IsOccupied;
+                        }
+                    }
+                }
+            }
+
+            return canExecute;
+        }
+
+
+
 
         private static bool TryParseTag(string tag, out int hexId, out int vertexId)
         {
             hexId = 0;
             vertexId = 0;
+            bool flag = false;
 
             if (!string.IsNullOrWhiteSpace(tag))
             {
-                var parts = tag.Split(',');
+                string[] parts = tag.Split(',');
                 if (parts.Length == 2 && int.TryParse(parts[0], out hexId) && int.TryParse(parts[1], out vertexId))
                 {
-                    return true;
+                    flag = true;
                 }
             }
-            return false;
+            return flag;
         }
 
         private void ExecuteSelectEdge(object parameter)
@@ -598,89 +613,84 @@ namespace CatanClient.ViewModels
                 Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
                 App.Current.Dispatcher.InvokeAsync(async () =>
                 {
-                    OperationResultDto result;
-                    PiecePlacementDto placement = new PiecePlacementDto();
-                    placement.PieceType = "Road";
-                    placement.TargetHexId = hexId;
-                    placement.TargetEdgeId = edgeId;
-
-                    MessageBox.Show("Id edge: " + edgeId);
-
-                    try
-                    {
-                        result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
-
-                        if (result.IsSuccess)
-                        {
-                            MessageBox.Show($"Camino colocado en Hexágono {hexIndex}, Arista: {edgeIndex}.");
-
-                            ExecuteToggleRoadMode();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No puedes colocar la construcción aquí.");
-                        }
-                    }
-                    catch (TimeoutException)
-                    {
-                        Utilities.ShowMessgeServerLost();
-                    }
-                    ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+                    await BuilRoadAsync(hexId, edgeId);
                 });
             }
         }
 
-        private bool CanExecuteSelectEdge(object parameter)
+        internal async Task BuilRoadAsync(int hexId, int edgeId)
         {
-            if (!IsBuildingRoad)
-                return false;
+            OperationResultDto result;
+            PiecePlacementDto placement = new PiecePlacementDto();
+            placement.PieceType = Utilities.ROAD;
+            placement.TargetHexId = hexId;
+            placement.TargetEdgeId = edgeId;
 
-            if (GameHexes.Count == 0)
-                return false;
-
-            GameBoardStateDto gameBoardState = new GameBoardStateDto();
-            gameBoardState.HexTiles = GameHexes.ToArray();
-            gameBoardState.GameId = game.Id.Value;
-
-            if (parameter is string tag && TryParseTagEdge(tag, out int hexIndex, out int edgeIndex))
+            try
             {
-                var hex = GameHexes[hexIndex - 1];
-                if (hex == null)
-                    return false;
+                result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
 
-                var edge = hex.Edges[edgeIndex - 1];
-                if (edge == null)
-                    return false;
-
-                if (edge.IsOccupied)
+                if (result.IsSuccess)
                 {
-                    bool isOwner = edge.OwnerPlayerId == playerGameplay.Id;
-                    EdgeOccupied?.Invoke(tag,isOwner);
-                    return false;
+                    MessageBox.Show($"Se ha colocado existosamente la construcción");
+
+                    ExecuteToggleRoadMode();
                 }
                 else
                 {
-                    return true;
+                    MessageBox.Show("No puedes colocar la construcción aquí.");
+                }
+            }
+            catch (TimeoutException)
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+                    ((RelayCommand)SelectEdgeCommand).RaiseCanExecuteChanged();
+        }
+
+        private bool CanExecuteSelectEdge(object parameter)
+        {
+            bool canExecute = false;
+
+            if (IsBuildingRoad && GameHexes.Count > 0 && parameter is string tag && TryParseTagEdge(tag, out int hexIndex, out int edgeIndex))
+            {
+                HexTileDto hex = GameHexes[hexIndex - 1];
+                if (hex != null)
+                {
+                    EdgeDto edge = hex.Edges[edgeIndex - 1];
+                    if (edge != null)
+                    {
+                        if (edge.IsOccupied)
+                        {
+                            bool isOwner = edge.OwnerPlayerId == playerGameplay.Id;
+                            EdgeOccupied?.Invoke(tag, isOwner);
+                        }
+                        else
+                        {
+                            canExecute = true;
+                        }
+                    }
                 }
             }
 
-            return false;
+            return canExecute;
         }
 
         private static bool TryParseTagEdge(string tag, out int hexIndex, out int edgeIndex)
         {
             hexIndex = 0;
             edgeIndex = 0;
+            bool flag = false;
 
             if (!string.IsNullOrWhiteSpace(tag))
             {
-                var parts = tag.Split(',');
+                string[] parts = tag.Split(',');
                 if (parts.Length == 3 && parts[0] == "E" && int.TryParse(parts[1], out hexIndex) && int.TryParse(parts[2], out edgeIndex))
                 {
-                    return true;
+                    flag = true;
                 }
             }
-            return false;
+            return flag;
         }
 
 
@@ -719,11 +729,11 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void LoadResources()
+        private void LoadResources() //TODO quit this
         {
             ResourcesToRequest = new ObservableCollection<Resource>
             {
-                new Resource { Name = "Lunar Stone", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/LunarStone.png", Quantity = 1 },
+                new Resource { Name = "Lunar Stone", ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH, Quantity = 1 },
                 new Resource { Name = "Tritonium", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/TritoniumWood.png" },
                 new Resource { Name = "Alpha Nanofibers", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/AlphaNanofibers.png", Quantity = 5 },
                 new Resource { Name = "Epsilon Biomass", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png", Quantity = 2 },
@@ -838,30 +848,11 @@ namespace CatanClient.ViewModels
                 {
                     if (player.ProfileTurnDto != null)
                     {
-                        if(profile.Id == player.ProfileTurnDto.Id)
-                        {
-                            Turn = player.IsTurn;
-                            Points = player.Points.ToString();
-                        }
-                        OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
-                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(player.ProfileTurnDto)),
-                            new NamedParameter(Utilities.POINTS, player.Points),
-                            new NamedParameter(Utilities.TURN, player.IsTurn)
-                            ));
+                        LoadPlayerProfile(player);
                     }
                     else
                     {
-                        ProfileService.ProfileDto profileDto = AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastGuestAccountToGameServiceProfile(player.GuestAccountTurnDto));
-                        if (profile.Id == player.GuestAccountTurnDto.Id)
-                        {
-                            Turn = player.IsTurn;
-                            Points = player.Points.ToString();
-                        }
-                        OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
-                            new NamedParameter(Utilities.PROFILE, profileDto),
-                            new NamedParameter(Utilities.POINTS, player.Points),    
-                            new NamedParameter(Utilities.TURN, player.IsTurn)
-                            ));
+                        LoadPlayerGuest(player);
                     }
                 }
 
@@ -869,6 +860,35 @@ namespace CatanClient.ViewModels
                 PlayersView.SortDescriptions.Add(new SortDescription(nameof(PlayerInGameCardViewModel.Turn), ListSortDirection.Descending));
             }
             
+        }
+
+        internal void LoadPlayerProfile(PlayerTurnStatusDto player)
+        {
+            if (profile.Id == player.ProfileTurnDto.Id)
+            {
+                Turn = player.IsTurn;
+                Points = player.Points.ToString();
+            }
+            OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
+                new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(player.ProfileTurnDto)),
+                new NamedParameter(Utilities.POINTS, player.Points),
+                new NamedParameter(Utilities.TURN, player.IsTurn)
+                ));
+        }
+
+        internal void LoadPlayerGuest(PlayerTurnStatusDto player)
+        {
+            ProfileService.ProfileDto profileDto = AccountUtilities.CastGameProfileToProfileService(AccountUtilities.CastGuestAccountToGameServiceProfile(player.GuestAccountTurnDto));
+            if (profile.Id == player.GuestAccountTurnDto.Id)
+            {
+                Turn = player.IsTurn;
+                Points = player.Points.ToString();
+            }
+            OnlinePlayersList.Add(App.Container.Resolve<PlayerInGameCardViewModel>(
+                new NamedParameter(Utilities.PROFILE, profileDto),
+                new NamedParameter(Utilities.POINTS, player.Points),
+                new NamedParameter(Utilities.TURN, player.IsTurn)
+                ));
         }
 
         internal void OnReceiveMessage(object message)
@@ -903,7 +923,7 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteVoteKickWindow()
         {
-            var kickPlayerWindow = new VoteKickPlayerWindow(game);
+            VoteKickPlayerWindow kickPlayerWindow = new VoteKickPlayerWindow(game);
             kickPlayerWindow.ShowDialog();
         }
 

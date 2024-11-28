@@ -82,29 +82,10 @@ namespace CatanClient.ViewModels
 
                     Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 
-                    OperationResultCreateAccountDto result = await serviceManager.AccountServiceClient.CreateAccountInServerAsync(account); 
+                    OperationResultCreateAccountDto result = await serviceManager.AccountServiceClient.CreateAccountInServerAsync(account);
 
-                    switch (result.status)
-                    {
-                        case EnumCreateAccountStatus.SuccessSave:
-                            ProfileDto profie = result.ProfileDto;
-                            string filePath = Utilities.GetDefaultPhotoPath();
-                            SaveImageInServer(filePath, profie);
+                    HandledRegisterUser(result, account);
 
-                            account.Id = profie.Id;
-
-                            Mediator.Notify(Utilities.SHOW_VERIFY_ACCOUNT, account);
-                            break;
-                        case EnumCreateAccountStatus.ExistsAccount:
-                            MessageBox.Show(Utilities.MessageAccountInUse(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                            break;
-                        case EnumCreateAccountStatus.ExistsName:
-                            MessageBox.Show(Utilities.MessageNameInUse(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                            break;
-                        case EnumCreateAccountStatus.ErrorSaving:
-                            Utilities.ShowMessgeServerLost();
-                            break;
-                    }   
                 }
                 else
                 {
@@ -117,6 +98,32 @@ namespace CatanClient.ViewModels
             }
         }
 
+        internal void HandledRegisterUser(OperationResultCreateAccountDto result, AccountDto account)
+        {
+            switch (result.status)
+            {
+                case EnumCreateAccountStatus.SuccessSave:
+                    ProfileDto profie = result.ProfileDto;
+                    string filePath = Utilities.GetDefaultPhotoPath();
+                    SaveImageInServer(filePath, profie);
+
+                    account.Id = profie.Id;
+
+                    Mediator.Notify(Utilities.SHOW_VERIFY_ACCOUNT, account);
+                    break;
+                case EnumCreateAccountStatus.ExistsAccount:
+                    MessageBox.Show(Utilities.MessageAccountInUse(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+                case EnumCreateAccountStatus.ExistsName:
+                    MessageBox.Show(Utilities.MessageNameInUse(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+                case EnumCreateAccountStatus.ErrorSaving:
+                    Utilities.ShowMessgeServerLost();
+                    break;
+            }
+        }
+
+
         private void SaveImageInServer(string filePath, ProfileDto profile)
         {
             byte[] imageBytes = File.ReadAllBytes(filePath);
@@ -124,7 +131,7 @@ namespace CatanClient.ViewModels
             ProfileService.OperationResultProfileDto result;
 
             profile.IsOnline = true;
-
+            
             result = serviceManager.ProfileServiceClient.UploadImage(AccountUtilities.CastAccountProfileToProfileService(profile), imageBytes);
 
             if (result.IsSuccess)
