@@ -121,6 +121,7 @@ namespace CatanClient.UIHelpers
         public const string CITY = "City";
         public const string SETTLEMENT = "Settlement";
         public const string ROAD = "Road";
+        public const string TIME_FORMAT = "mm\\:ss";
 
 
 
@@ -362,6 +363,36 @@ namespace CatanClient.UIHelpers
         {
             return Resources.ResourceManager.GetString("dialog_name_in_use", new CultureInfo(language));
         }
+        public static string MessageSuccessfulBuild(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_successful_build_message", new CultureInfo(language));
+        }
+
+        public static string MessageUnsuccessfulBuild(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_unsuccessful_build_message", new CultureInfo(language));
+        }
+        public static string MessageGameEndNoPlayers(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_game_end_no_players_message", new CultureInfo(language));
+        }
+
+        public static string TitleGameEnd(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_game_end_title", new CultureInfo(language));
+        }
+        public static string MessageGameExpelDialog(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_game_expel_message", new CultureInfo(language));
+        }
+        public static string MessageVoteRegistered(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_vote_registered_message", new CultureInfo(language));
+        }
+        public static string TitleBuild(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_build", new CultureInfo(language));
+        }
         public static string GlobalReady(string language)
         {
             return Resources.ResourceManager.GetString("global_ready", new CultureInfo(language));
@@ -426,6 +457,20 @@ namespace CatanClient.UIHelpers
         {
             return Resources.ResourceManager.GetString("button_cancel", new CultureInfo(language));
         }
+        public static string GetTimeRemainingText(string language, string time)
+        {
+            string template = Resources.ResourceManager.GetString("label_time_remaining", new CultureInfo(language));
+            return string.Format(template, time);
+        }
+
+        public static string GetAssigningTurnText(string language)
+        {
+            return Resources.ResourceManager.GetString("label_assigning_turn", new CultureInfo(language));
+        }
+        public static string GetGameStartedText(string language)
+        {
+            return Resources.ResourceManager.GetString("game_started", new CultureInfo(language));
+        }
 
         public static void ShowMessgeServerLost()
         {
@@ -435,6 +480,25 @@ namespace CatanClient.UIHelpers
         public static void ShowMessageDataBaseUnableToLoad()
         {
             MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        public static void ShowMessageSuccessfulBuild()
+        {
+            MessageBox.Show(
+                Utilities.MessageSuccessfulBuild(CultureInfo.CurrentCulture.Name),
+                Utilities.TitleBuild(CultureInfo.CurrentCulture.Name),
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+        }
+
+        public static void ShowMessageUnsuccessfulBuild()
+        {
+            MessageBox.Show(
+                Utilities.MessageUnsuccessfulBuild(CultureInfo.CurrentCulture.Name),
+                Utilities.TitleBuild(CultureInfo.CurrentCulture.Name),
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
     }
 }

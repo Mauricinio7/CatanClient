@@ -5,11 +5,13 @@ using CatanClient.Services;
 using CatanClient.UIHelpers;
 using CatanClient.Views;
 using Microsoft.Win32;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -107,32 +109,77 @@ namespace CatanClient.ViewModels
 
         private void OpenFileDialog()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            try
             {
-                Filter = Utilities.IMAGE_FILTER,
-                Title = Utilities.TitleImageSelector(CultureInfo.CurrentCulture.Name)
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string selectedFilePath = openFileDialog.FileName;
-
-
-                FileInfo fileInfo = new FileInfo(selectedFilePath);
-                if (fileInfo.Length > 6 * 1024 * 1024) 
+                OpenFileDialog openFileDialog = new OpenFileDialog
                 {
-                    MessageBox.Show(Utilities.MessageTooBigFile(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    Filter = Utilities.IMAGE_FILTER,
+                    Title = Utilities.TitleImageSelector(CultureInfo.CurrentCulture.Name)
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+
+                    try
+                    {
+                        FileInfo fileInfo = new FileInfo(selectedFilePath);
+                        if (fileInfo.Length > 6 * 1024 * 1024)
+                        {
+                            MessageBox.Show(Utilities.MessageTooBigFile(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(selectedFilePath, UriKind.Absolute);
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+
+                        SaveImageInServer(selectedFilePath);
+                        LoadProfileImage();
+                    }
+                    catch (UriFormatException ex)
+                    {
+                        Utilities.ShowMessageDataBaseUnableToLoad();
+                        Log.Error(ex, ex.Source);
+                    }
+                    catch (IOException ex)
+                    {
+                        Utilities.ShowMessageDataBaseUnableToLoad();
+                        Log.Error(ex, ex.Source);
+                    }
+                    catch (NotSupportedException ex)
+                    {
+                        Utilities.ShowMessageDataBaseUnableToLoad();
+                        Log.Error(ex, ex.Source);
+                    }
+                    catch (Exception ex)
+                    {
+                        Utilities.ShowMessageDataBaseUnableToLoad();
+                        Log.Error(ex, ex.Source);
+                    }
                 }
-
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(selectedFilePath, UriKind.Absolute);
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-
-                SaveImageInServer(selectedFilePath);
-                LoadProfileImage();
+            }
+            catch (SecurityException ex)
+            {
+                Utilities.ShowMessageDataBaseUnableToLoad();
+                Log.Error(ex, ex.Source);
+            }
+            catch (ArgumentException ex)
+            {
+                Utilities.ShowMessageDataBaseUnableToLoad();
+                Log.Error(ex, ex.Source);
+            }
+            catch (PathTooLongException ex)
+            {
+                Utilities.ShowMessageDataBaseUnableToLoad();
+                Log.Error(ex, ex.Source);
+            }
+            catch (Exception ex)
+            {
+                Utilities.ShowMessageDataBaseUnableToLoad();
+                Log.Error(ex, ex.Source);
             }
         }
 

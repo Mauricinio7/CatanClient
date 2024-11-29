@@ -82,7 +82,7 @@ namespace CatanClient.Controls
                 bool result = await serviceManager.GameServiceClient.VoteExpelPlayerAsync(playerToExpel, SenderProfile.Id.Value, Game);
                 if (result)
                 {
-                    MessageBox.Show("Se ha registrado su voto para expulsar al jugador", Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(Utilities.MessageVoteRegistered(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
                     Mediator.Notify(Utilities.CLOSE_EXPEL_PLAYER, null);
                     Mediator.Notify(Utilities.CLOSE_KICK_PLAYER, null);
                 }

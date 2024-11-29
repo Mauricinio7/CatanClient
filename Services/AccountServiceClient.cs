@@ -38,20 +38,34 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultProfileDto result;
+            OperationResultProfileDto result = new OperationResultProfileDto
+            {
+                IsSuccess = false,
+                AunthenticationStatus = EnumAuthenticationStatus.ServerNotFound
+            };
 
             try
             {
                 result = await client.LogInAsync(account);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultProfileDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                    AunthenticationStatus = EnumAuthenticationStatus.ServerNotFound
-                };
+                result.MessageResponse = ex.Message;
                 Log.Error(ex.Message);
             }
             finally
@@ -77,6 +91,18 @@ namespace CatanClient.Services
                 account.Token = token;
                 OperationResultDto result = await client.VerifyAccountAsync(account);
                 flag = result.IsSuccess;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex.Message);
             }
             catch (Exception ex)
             {
@@ -104,13 +130,24 @@ namespace CatanClient.Services
             {
                 result = await client.CreateAccountAsync(account);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultCreateAccountDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
                 Log.Error(ex.Message);
             }
             finally
@@ -129,19 +166,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultChangeRegisterEmailOrPhone result;
+            OperationResultChangeRegisterEmailOrPhone result = new OperationResultChangeRegisterEmailOrPhone { IsSuccess = false };
 
             try
             {
                 result = await client.ChangeEmailOrPhoneAsync(account);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultChangeRegisterEmailOrPhone
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result.MessageResponse = ex.Message;
                 Log.Error(ex.Message);
             }
             finally
@@ -160,19 +208,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultDto result;
+            OperationResultDto result = new OperationResultDto { IsSuccess = false };
 
             try
             {
                 result = await client.ChangePasswordAsync(account);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result.MessageResponse = ex.Message;
                 Log.Error(ex.Message);
             }
             finally
@@ -191,19 +250,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultChangeRegisterEmailOrPhone result;
+            OperationResultChangeRegisterEmailOrPhone result = new OperationResultChangeRegisterEmailOrPhone { IsSuccess = false};
 
             try
             {
                 result = await client.SendVerificationCodeToChangeEmailOrPhoneAsync(account);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                        
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultChangeRegisterEmailOrPhone
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result.MessageResponse = ex.Message;
                 Log.Error(ex.Message);
             }
             finally
@@ -222,19 +292,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultDto result;
+            OperationResultDto result = new OperationResultDto { IsSuccess = false };
 
             try
             {
                 result = await client.SendVerificationCodeToChangePasswordAsync(account);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result.MessageResponse = ex.Message;
                 Log.Error(ex.Message);
             }
             finally
@@ -251,26 +332,37 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_ACCOUNT_SERVICE);
             ChannelFactory<IAccountEndPoint> channelFactory = new ChannelFactory<IAccountEndPoint>(binding, endpoint);
             IAccountEndPoint client = channelFactory.CreateChannel();
-            OperationResultAccountDto result;
+            OperationResultAccountDto result = new OperationResultAccountDto { IsSuccess = false };
 
             try
             {
                 result = client.ConsultAccounProfileInformationAsync(profile).Result;
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultAccountDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
-                Log.Information(ex.Message);
-                MessageBox.Show(Utilities.MessageServerLostConnection(CultureInfo.CurrentCulture.Name), Utilities.TittleServerLostConnection(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                result.MessageResponse = ex.Message;
+                Log.Error(ex.Message);
             }
             finally
             {
                 SafeClose((IClientChannel)client, channelFactory);
             }
+
             return result;
         }
 
@@ -286,8 +378,19 @@ namespace CatanClient.Services
 
             try
             {
-
                 flag = await client.ResendVerificationCodeAsync(account.Email);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex.Message);
             }
             catch (Exception ex)
             {
@@ -315,6 +418,18 @@ namespace CatanClient.Services
             {
                 result = await client.NeedHelpProblemWithPasswordAsync(email);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex.Message);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
@@ -340,6 +455,18 @@ namespace CatanClient.Services
             try
             {
                 result = await client.ChangeForgotPasswordAsync(email, newPassword, verificationCode);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex.Message);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex.Message);
             }
             catch (Exception ex)
             {

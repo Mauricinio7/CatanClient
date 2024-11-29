@@ -622,7 +622,7 @@
     <value>Joing Game...</value>
   </data>
   <data name="label_time_remaining" xml:space="preserve">
-    <value>Time remaining: </value>
+    <value>Time remaining: {0}</value>
   </data>
   <data name="option_bad_conduct" xml:space="preserve">
     <value>Bad conduct</value>
@@ -635,5 +635,32 @@
   </data>
   <data name="option_offensive_language" xml:space="preserve">
     <value>Offensive language</value>
+  </data>
+  <data name="dialog_build" xml:space="preserve">
+    <value>Construction</value>
+  </data>
+  <data name="dialog_game_end_no_players_message" xml:space="preserve">
+    <value>No players left, the game has ended</value>
+  </data>
+  <data name="dialog_game_end_title" xml:space="preserve">
+    <value>Game Over</value>
+  </data>
+  <data name="dialog_game_expel_message" xml:space="preserve">
+    <value>You have been expelled from the game</value>
+  </data>
+  <data name="dialog_successful_build_message" xml:space="preserve">
+    <value>The construction was successfully placed.</value>
+  </data>
+  <data name="dialog_unsuccessful_build_message" xml:space="preserve">
+    <value>You cannot place the construction here.</value>
+  </data>
+  <data name="dialog_vote_registered_message" xml:space="preserve">
+    <value>Your vote to expel the player has been registered</value>
+  </data>
+  <data name="label_assingning_turn" xml:space="preserve">
+    <value>Assigning turn…</value>
+  </data>
+  <data name="message_game_started" xml:space="preserve">
+    <value>The game has started</value>
   </data>
 </root>

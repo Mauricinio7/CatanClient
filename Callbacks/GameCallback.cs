@@ -42,7 +42,7 @@ namespace CatanClient.Callbacks
 
         public void EndGameDisconnectedPlayers()
         {
-            MessageBox.Show("Ya no queda ningun jugador, se ha terminado la partida");
+            MessageBox.Show(Utilities.MessageGameEndNoPlayers(CultureInfo.CurrentCulture.Name), Utilities.TitleGameEnd(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK,MessageBoxImage.Information);
             AccountUtilities.RestartGame();
         }
 
@@ -72,7 +72,7 @@ namespace CatanClient.Callbacks
                     }
                     else
                     {
-                        MessageBox.Show(mainWindow, "Se te ha expulsado del juego", Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show(mainWindow, Utilities.MessageGameExpelDialog(CultureInfo.CurrentCulture.Name), Utilities.MessageGameExpel(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                     

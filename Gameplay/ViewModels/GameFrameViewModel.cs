@@ -85,11 +85,10 @@ namespace CatanClient.ViewModels
             new ObservableCollection<Resource>(ResourcesToOffer.Where(r => r.Quantity > 0));
 
         public string TimeText => remainingTimeInSeconds > 0
-       ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
-       : "Asignando turno...";
+    ? Utilities.GetTimeRemainingText(CultureInfo.CurrentCulture.Name, TimeSpan.FromSeconds(remainingTimeInSeconds).ToString(Utilities.TIME_FORMAT))
+    : Utilities.GetAssigningTurnText(CultureInfo.CurrentCulture.Name);
 
 
-        
 
         public bool Turn
         {
@@ -268,7 +267,12 @@ namespace CatanClient.ViewModels
 
             Messages = new ObservableCollection<ChatMessage>
             {
-                new ChatMessage { Content = "El juego ha iniciado", Name = Utilities.SYSTEM_NAME,IsUserMessage = false }
+                new ChatMessage
+                {
+                    Content = Utilities.GetGameStartedText(CultureInfo.CurrentCulture.Name),
+                    Name = Utilities.SYSTEM_NAME,
+                    IsUserMessage = false
+                }
             };
 
             profile = serviceManager.ProfileSingleton.Profile;
@@ -515,12 +519,12 @@ namespace CatanClient.ViewModels
                 result = await serviceManager.GameServiceClient.PlacePiceAsync(placement, playerGameplay, AccountUtilities.CastChatGameToGameServiceGame(game));
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show($"Se ha colocado existosamente la construcción");
+                    Utilities.ShowMessageSuccessfulBuild();
                     ExecuteToggleCityMode();
                 }
                 else
                 {
-                    MessageBox.Show("No puedes colocar la construcción aquí.");
+                    Utilities.ShowMessageUnsuccessfulBuild();
                 }
             }
             catch (TimeoutException)
@@ -544,12 +548,12 @@ namespace CatanClient.ViewModels
 
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show($"Se ha colocado existosamente la construcción");
+                    Utilities.ShowMessageSuccessfulBuild();
                     ExecuteToggleSettlementMode();
                 }
                 else
                 {
-                    MessageBox.Show("No puedes colocar la construcción aquí.");
+                    Utilities.ShowMessageUnsuccessfulBuild();
                 }
             }
             catch (TimeoutException)
@@ -644,13 +648,13 @@ namespace CatanClient.ViewModels
 
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show($"Se ha colocado existosamente la construcción");
+                    Utilities.ShowMessageSuccessfulBuild();
 
                     ExecuteToggleRoadMode();
                 }
                 else
                 {
-                    MessageBox.Show("No puedes colocar la construcción aquí.");
+                    Utilities.ShowMessageUnsuccessfulBuild();
                 }
             }
             catch (TimeoutException)

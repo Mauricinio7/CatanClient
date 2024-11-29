@@ -48,14 +48,27 @@ namespace CatanClient.ViewModels
         public ICommand KickPlayerCommand { get; set; }
         public ICommand ShowInviteFriendCommand { get; set; }
         public ICommand ReadyCommand { get; set; }
-        
-        
 
-        public string TimeText => isJoiningGame
-        ? Utilities.LabelJoiningGame(CultureInfo.CurrentCulture.Name)
-        : remainingTimeInSeconds > 0
-            ? $"Tiempo restante: {TimeSpan.FromSeconds(remainingTimeInSeconds):mm\\:ss}"
-            : Utilities.LabelWaitingPlayers(CultureInfo.CurrentCulture.Name);
+
+
+        public string TimeText
+        {
+            get
+            {
+                if (isJoiningGame)
+                {
+                    return Utilities.LabelJoiningGame(CultureInfo.CurrentCulture.Name);
+                }
+
+                if (remainingTimeInSeconds > 0)
+                {
+                    string formattedTime = TimeSpan.FromSeconds(remainingTimeInSeconds).ToString(Utilities.TIME_FORMAT);
+                    return Utilities.GetTimeRemainingText(CultureInfo.CurrentCulture.Name, formattedTime);
+                }
+
+                return Utilities.LabelWaitingPlayers(CultureInfo.CurrentCulture.Name);
+            }
+        }
 
         public bool IsReady
         {
@@ -142,7 +155,6 @@ namespace CatanClient.ViewModels
             }
             else
             {
-                MessageBox.Show("Se ha cambiado el admin");
                 game.IdAdminGame = IdAdmin;
                 UpdateCanExecuteCommands();
             }

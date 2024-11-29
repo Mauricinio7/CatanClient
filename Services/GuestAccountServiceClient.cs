@@ -36,27 +36,37 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GUEST_ACCOUNT_SERVICE);
             ChannelFactory<IGuestAccountEndpoint> channelFactory = new ChannelFactory<IGuestAccountEndpoint>(binding, endpoint);
             IGuestAccountEndpoint client = channelFactory.CreateChannel();
-            OperationResultGuestAccountDto result;
+            OperationResultGuestAccountDto result = new OperationResultGuestAccountDto { IsSuccess = false };
 
             try
             {
                 result = await client.CreateGuestAccountAsync(language);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultGuestAccountDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
-
                 Log.Error(ex, ex.Source);
             }
             finally
             {
                 SafeClose((IClientChannel)client, channelFactory);
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
     }

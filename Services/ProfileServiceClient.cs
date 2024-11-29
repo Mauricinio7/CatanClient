@@ -36,7 +36,7 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            OperationResultProfileDto result;
+            OperationResultProfileDto result = new OperationResultProfileDto { IsSuccess = false };
 
             profile.Name = newName;
 
@@ -44,13 +44,24 @@ namespace CatanClient.Services
             {
                 result = client.ChangeProfileName(profile);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultProfileDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
                 Log.Error(ex, ex.Source);
             }
             finally
@@ -66,19 +77,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            OperationResultProfileDto result;
+            OperationResultProfileDto result = new OperationResultProfileDto { IsSuccess = false };
 
             try
             {
                 result = client.UploadProfilePicture(profile, image);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultProfileDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
                 Log.Error(ex, ex.Source);
             }
             finally
@@ -94,19 +116,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            OperationResultPictureDto result;
+            OperationResultPictureDto result = new OperationResultPictureDto { IsSuccess = false };
 
             try
             {
                 result = client.GetProfilePicture(profile);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultPictureDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
                 Log.Error(ex, ex.Source);
             }
             finally
@@ -128,6 +161,22 @@ namespace CatanClient.Services
             {
                 result = client.SendFriendRequest(playerName, profile);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -145,19 +194,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            OperationResultProfileListDto result;
+            OperationResultProfileListDto result = new OperationResultProfileListDto { IsSuccess = false };
 
             try
             {
                 result = client.GetPendingFriendRequests(profile);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultProfileListDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
                 Log.Error(ex, ex.Source);
             }
             finally
@@ -173,19 +233,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            OperationResultProfileListDto result;
+            OperationResultProfileListDto result = new OperationResultProfileListDto { IsSuccess = false };
 
             try
             {
                 result = client.GetFriendsList(profile);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultProfileListDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
                 Log.Error(ex, ex.Source);
             }
             finally
@@ -206,6 +277,22 @@ namespace CatanClient.Services
             try
             {
                 result = client.AcceptFriendRequest(playerName, profile);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             catch (Exception ex)
             {
@@ -230,6 +317,22 @@ namespace CatanClient.Services
             {
                 result = client.RejectFriendRequest(playerName, profile);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -252,6 +355,22 @@ namespace CatanClient.Services
             try
             {
                 result = client.DeleteFriendProfile(playerName, profile);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             catch (Exception ex)
             {
@@ -276,6 +395,22 @@ namespace CatanClient.Services
             {
                 result = client.InviteFriendsToGame(playerName, profile, accessKey);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -293,19 +428,30 @@ namespace CatanClient.Services
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            OperationResultPictureDto result;
+            OperationResultPictureDto result = new OperationResultPictureDto { IsSuccess = false };
 
             try
             {
                 result = client.GetFriendsPicture(profile, CultureInfo.CurrentCulture.Name);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultPictureDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message,
-                };
                 Log.Error(ex, ex.Source);
             }
             finally

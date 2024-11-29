@@ -67,6 +67,18 @@ namespace CatanClient.Services
             {
                 client.JoinChatAsync(game, namePlayer);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -79,6 +91,18 @@ namespace CatanClient.Services
             try
             {
                 client.LeaveChatAsync(game, namePlayer);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             catch (Exception ex)
             {
@@ -95,6 +119,18 @@ namespace CatanClient.Services
             try
             {
                 client.SendMessageToChatAsync(game, namePlayer, message);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             catch (Exception ex)
             {

@@ -25,9 +25,6 @@ namespace CatanClient.ViewModels
         private string password;
         private string username;
 
-        private string email;
-        private string phoneNumber;
-
         public string ContactInfo
         {
             get { return contactInfo; }
@@ -70,6 +67,9 @@ namespace CatanClient.ViewModels
 
         private async Task RegisterUserAsync()
         {
+            string email = string.Empty;
+            string phoneNumber = string.Empty;
+
             if (IsNotNullOrEmptyAccound(Username, ContactInfo, Password))
             {
                 if (AccountUtilities.IsValidAccountName(Username) && AccountUtilities.IsValidAccountPassword(Password) &&
@@ -145,7 +145,7 @@ namespace CatanClient.ViewModels
 
         }
 
-        private void SaveImageLocally(string filePath, ProfileDto profile)
+        private static void SaveImageLocally(string filePath, ProfileDto profile)
         {
             string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
@@ -162,7 +162,7 @@ namespace CatanClient.ViewModels
 
 
 
-        public bool IsNotNullOrEmptyAccound(string name, string ContactInfo, string password)
+        public static bool IsNotNullOrEmptyAccound(string name, string ContactInfo, string password)
         {
             return (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(ContactInfo) && !string.IsNullOrEmpty(password));
         }

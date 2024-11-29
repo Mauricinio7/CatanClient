@@ -635,7 +635,7 @@
     <value>Uniendose a juego...</value>
   </data>
   <data name="label_time_remaining" xml:space="preserve">
-    <value>Tiempo restante:</value>
+    <value>Tiempo restante: {0}</value>
   </data>
   <data name="option_bad_conduct" xml:space="preserve">
     <value>Conducta inapropiada</value>
@@ -648,5 +648,32 @@
   </data>
   <data name="option_offensive_language" xml:space="preserve">
     <value>Lenguaje ofensivo</value>
+  </data>
+  <data name="dialog_build" xml:space="preserve">
+    <value>Construcción</value>
+  </data>
+  <data name="dialog_game_end_no_players_message" xml:space="preserve">
+    <value>Ya no queda ningún jugador, se ha terminado la partida</value>
+  </data>
+  <data name="dialog_game_end_title" xml:space="preserve">
+    <value>Fin del juego</value>
+  </data>
+  <data name="dialog_game_expel_message" xml:space="preserve">
+    <value>Se te ha expulsado del juego</value>
+  </data>
+  <data name="dialog_successful_build_message" xml:space="preserve">
+    <value>Se ha colocado exitosamente la construcción</value>
+  </data>
+  <data name="dialog_unsuccessful_build_message" xml:space="preserve">
+    <value>No puedes colocar la construcción aquí.</value>
+  </data>
+  <data name="dialog_vote_registered_message" xml:space="preserve">
+    <value>Se ha registrado su voto para expulsar al jugador</value>
+  </data>
+  <data name="label_assigning_turn" xml:space="preserve">
+    <value>Asignando turno…</value>
+  </data>
+  <data name="message_game_started" xml:space="preserve">
+    <value>El juego ha iniciado</value>
   </data>
 </root>

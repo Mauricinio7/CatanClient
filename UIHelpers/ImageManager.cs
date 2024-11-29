@@ -44,7 +44,7 @@ namespace CatanClient.UIHelpers
                     }
                     else
                     {
-                        throw new InvalidOperationException("No se pudo cargar la imagen del perfil desde el servidor.");
+                        throw new InvalidOperationException();
                     }
                 }
             }

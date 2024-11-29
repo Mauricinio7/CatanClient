@@ -313,6 +313,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Construction.
+        /// </summary>
+        public static string dialog_build {
+            get {
+                return ResourceManager.GetString("dialog_build", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Are you sure you want to cancel the password change?.
         /// </summary>
         public static string dialog_cancel_change_password_message {
@@ -489,6 +498,33 @@ namespace CatanClient.Properties {
         public static string dialog_full_game_message {
             get {
                 return ResourceManager.GetString("dialog_full_game_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No players left, the game has ended.
+        /// </summary>
+        public static string dialog_game_end_no_players_message {
+            get {
+                return ResourceManager.GetString("dialog_game_end_no_players_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Game Over.
+        /// </summary>
+        public static string dialog_game_end_title {
+            get {
+                return ResourceManager.GetString("dialog_game_end_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have been expelled from the game.
+        /// </summary>
+        public static string dialog_game_expel_message {
+            get {
+                return ResourceManager.GetString("dialog_game_expel_message", resourceCulture);
             }
         }
         
@@ -790,6 +826,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The construction was successfully placed..
+        /// </summary>
+        public static string dialog_successful_build_message {
+            get {
+                return ResourceManager.GetString("dialog_successful_build_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The selected file is too large. The maximum size is 6 MB..
         /// </summary>
         public static string dialog_too_big_file_message {
@@ -817,6 +862,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You cannot place the construction here..
+        /// </summary>
+        public static string dialog_unsuccessful_build_message {
+            get {
+                return ResourceManager.GetString("dialog_unsuccessful_build_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Unverified user.
         /// </summary>
         public static string dialog_unverified_user {
@@ -840,6 +894,15 @@ namespace CatanClient.Properties {
         public static string dialog_verify_account {
             get {
                 return ResourceManager.GetString("dialog_verify_account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your vote to expel the player has been registered.
+        /// </summary>
+        public static string dialog_vote_registered_message {
+            get {
+                return ResourceManager.GetString("dialog_vote_registered_message", resourceCulture);
             }
         }
         
@@ -1065,6 +1128,15 @@ namespace CatanClient.Properties {
         public static string label_alpha_nanofibers {
             get {
                 return ResourceManager.GetString("label_alpha_nanofibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Assigning turn….
+        /// </summary>
+        public static string label_assingning_turn {
+            get {
+                return ResourceManager.GetString("label_assingning_turn", resourceCulture);
             }
         }
         
@@ -1393,7 +1465,7 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Time remaining: .
+        ///   Busca una cadena traducida similar a Time remaining: {0}.
         /// </summary>
         public static string label_time_remaining {
             get {
@@ -1479,6 +1551,15 @@ namespace CatanClient.Properties {
         public static string log_info_start {
             get {
                 return ResourceManager.GetString("log_info_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The game has started.
+        /// </summary>
+        public static string message_game_started {
+            get {
+                return ResourceManager.GetString("message_game_started", resourceCulture);
             }
         }
         
