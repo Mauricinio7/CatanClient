@@ -23,10 +23,12 @@ namespace CatanClient.Gameplay.Views
     /// </summary>
     public partial class TradeWindow : Window
     {
-        public TradeWindow()
+        public TradeWindow(GameService.GameDto game)
         {
             InitializeComponent();
-            DataContext = App.Container.Resolve<TradeWindowViewModel>();
+            this.DataContext = App.Container.Resolve<TradeWindowViewModel>(
+                new TypedParameter(typeof(GameService.GameDto), game)
+            );
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

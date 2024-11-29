@@ -32,5 +32,7 @@ namespace CatanClient.Services
         void ExitGame(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task<bool> GiveNextTurn(PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task<OperationResultDto> PlacePiceAsync(PiecePlacementDto placementDto, PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
+        Task<OperationResultDto> SendTradeRequestAsync(PlayerResourcesDto needResources, PlayerResourcesDto offerResources, GameDto game);
+        Task<OperationResultDto> AcceptTradeRequestAsync(PlayerResourcesDto sendResources, PlayerResourcesDto receiveResources, GameDto game);
     }
 }

@@ -10,16 +10,16 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.PlayersMove" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd8" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://192.168.196.207:8191/GameService?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.PlayersMove" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" />
+      <xsd:import schemaLocation="http://localhost:8191/GameService?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -112,6 +112,18 @@
   <wsdl:message name="IGameEndPoint_PlacePieceOnBoard_OutputMessage">
     <wsdl:part name="parameters" element="tns:PlacePieceOnBoardResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_StartTrade_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartTrade" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_StartTrade_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartTradeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_AcceptTrade_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptTrade" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_AcceptTrade_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptTradeResponse" />
+  </wsdl:message>
   <wsdl:message name="IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerExpulsion" />
   </wsdl:message>
@@ -156,6 +168,12 @@
   </wsdl:message>
   <wsdl:message name="IGameEndPoint_NotifyResourcesDistributed_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyResourcesDistributed" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_NotifyTradeRequest_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyTradeRequest" />
+  </wsdl:message>
+  <wsdl:message name="IGameEndPoint_NotifyTradeCompletion_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyTradeCompletion" />
   </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
@@ -218,6 +236,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/PlacePieceOnBoard" message="tns:IGameEndPoint_PlacePieceOnBoard_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/PlacePieceOnBoardResponse" message="tns:IGameEndPoint_PlacePieceOnBoard_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StartTrade">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/StartTrade" message="tns:IGameEndPoint_StartTrade_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/StartTradeResponse" message="tns:IGameEndPoint_StartTrade_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptTrade">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/AcceptTrade" message="tns:IGameEndPoint_AcceptTrade_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/AcceptTradeResponse" message="tns:IGameEndPoint_AcceptTrade_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" message="tns:IGameEndPoint_NotifyPlayerExpulsion_OutputCallbackMessage" />
     </wsdl:operation>
@@ -262,6 +288,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyResourcesDistributed">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyResourcesDistributed" message="tns:IGameEndPoint_NotifyResourcesDistributed_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyTradeRequest">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyTradeRequest" message="tns:IGameEndPoint_NotifyTradeRequest_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyTradeCompletion">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyTradeCompletion" message="tns:IGameEndPoint_NotifyTradeCompletion_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -402,6 +434,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StartTrade">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/StartTrade" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptTrade">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/AcceptTrade" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerExpulsion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyPlayerExpulsion" style="document" />
       <wsdl:output>
@@ -492,12 +542,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="NotifyTradeRequest">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyTradeRequest" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyTradeCompletion">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyTradeCompletion" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GameServiceEndpoint">
     <wsdl:port name="NetTcpBinding_IGameEndPoint" binding="tns:NetTcpBinding_IGameEndPoint">
-      <soap12:address location="net.tcp://192.168.196.207:8192/GameService" />
+      <soap12:address location="net.tcp://localhost:8192/GameService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.196.207:8192/GameService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8192/GameService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

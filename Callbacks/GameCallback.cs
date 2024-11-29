@@ -95,6 +95,17 @@ namespace CatanClient.Callbacks
             Mediator.Notify(Utilities.UPDATE_PLAYER_RESOURCES, receivedResources);
         }
 
+        public void NotifyTradeCompletion()
+        {
+            //TODO Implement this.
+        }
+
+        public void NotifyTradeRequest(PlayerResourcesDto needResources, PlayerResourcesDto offerResources)
+        {
+            List<PlayerResourcesDto> playerResources = new List<PlayerResourcesDto> { needResources, offerResources };
+            Mediator.Notify(Utilities.LOAD_GAME_TRADE, playerResources);
+        }
+
         public void SendDiceResult(int diceResult)
         {
                 Mediator.Notify(Utilities.SHOW_ROLL_DICE_ANIMATION, diceResult);

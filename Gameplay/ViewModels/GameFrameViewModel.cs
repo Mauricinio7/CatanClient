@@ -297,7 +297,7 @@ namespace CatanClient.ViewModels
 
             InitializePlayerGameplay();
 
-            LoadResources(); //TODO quit this
+            //LoadResources(); //TODO quit this
 
             Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
             Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
@@ -305,6 +305,7 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_BOARD, hexes => LoadGameBoard(hexes));
             Mediator.Register(Utilities.UPDATE_GAME_PLAYER_BOARD, hexes => UpdateGameBoard(hexes));
             Mediator.Register(Utilities.UPDATE_PLAYER_RESOURCES, resources => UpdatePlayerResources(resources));
+            Mediator.Register(Utilities.LOAD_GAME_TRADE, resources => LoadResources(resources));
 
             IsBuildingSettlement = false;
             SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
@@ -745,24 +746,31 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void LoadResources() //TODO quit this
+        private void LoadResources(object parameter) 
         {
+            if (!(parameter is List<PlayerResourcesDto> resources))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             ResourcesToRequest = new ObservableCollection<Resource>
             {
-                new Resource { Name = "Lunar Stone", ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH, Quantity = 1 },
-                new Resource { Name = "Tritonium", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/TritoniumWood.png" },
-                new Resource { Name = "Alpha Nanofibers", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/AlphaNanofibers.png", Quantity = 5 },
-                new Resource { Name = "Epsilon Biomass", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png", Quantity = 2 },
-                new Resource { Name = "GRX-810", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/GRX-810Stone.png", Quantity = 4 }
+                new Resource { Name = Utilities.LUNAR_STONE, ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH, Quantity = resources[0].LunarStone.Quantity},
+                new Resource { Name = Utilities.TRITONIUM, ImageSource = Utilities.TRITONIUM_IMAGE_PATH, Quantity = resources[0].Tritonium.Quantity},
+                new Resource { Name = Utilities.ALPHA_NANOFIBERS, ImageSource = Utilities.ALPHA_NANOFIBERS_IMAGE_PATH, Quantity = resources[0].EpsilonBiomass.Quantity },
+                new Resource { Name = Utilities.GRX_810, ImageSource = Utilities.GRX_810_IMAGE_PATH, Quantity = resources[0].Grx810.Quantity}
             };
             ResourcesToOffer = new ObservableCollection<Resource>
             {
-                new Resource { Name = "Lunar Stone", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/LunarStone.png", Quantity = 1 },
-                new Resource { Name = "Tritonium", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/TritoniumWood.png" },
-                new Resource { Name = "Alpha Nanofibers", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/AlphaNanofibers.png", Quantity = 0 },
-                new Resource { Name = "Epsilon Biomass", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/EpsilonGrain.png", Quantity = 2 },
-                new Resource { Name = "GRX-810", ImageSource = "pack://application:,,,/Gameplay/Resources/Images/GameResources/GRX-810Stone.png", Quantity = 0 }
+                new Resource { Name = Utilities.LUNAR_STONE, ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH, Quantity = resources[1].LunarStone.Quantity},
+                new Resource { Name = Utilities.TRITONIUM, ImageSource = Utilities.TRITONIUM_IMAGE_PATH, Quantity = resources[1].Tritonium.Quantity},
+                new Resource { Name = Utilities.ALPHA_NANOFIBERS, ImageSource = Utilities.ALPHA_NANOFIBERS_IMAGE_PATH, Quantity =   resources[1].AlphaNanofibers.Quantity },
+                new Resource { Name = Utilities.EPSILON_BIOMASS, ImageSource =  Utilities.EPSILON_BIOMASS_IMAGE_PATH, Quantity = resources[1].EpsilonBiomass.Quantity },
+                new Resource { Name = Utilities.GRX_810, ImageSource = Utilities.GRX_810_IMAGE_PATH, Quantity = resources[1].Grx810.Quantity}
             };
+
+            IsTradeGridVisible = true;
         }
 
         internal void UpdateTradeWindow()
@@ -794,9 +802,9 @@ namespace CatanClient.ViewModels
             ((RelayCommand)ToggleCityBuildingModeCommand).RaiseCanExecuteChanged();
         }
 
-        public static void ExecuteShowTradeWindow() 
+        public void ExecuteShowTradeWindow() 
         {
-            TradeWindow tradeWindow = new TradeWindow();
+            TradeWindow tradeWindow = new TradeWindow(AccountUtilities.CastChatGameToGameServiceGame(game));
             tradeWindow.ShowDialog();
         }
 
