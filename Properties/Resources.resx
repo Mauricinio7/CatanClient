@@ -657,6 +657,9 @@
   <data name="dialog_vote_registered_message" xml:space="preserve">
     <value>Your vote to expel the player has been registered</value>
   </data>
+  <data name="game_started" xml:space="preserve">
+    <value>The game has started</value>
+  </data>
   <data name="label_assingning_turn" xml:space="preserve">
     <value>Assigning turn…</value>
   </data>

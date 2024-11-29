@@ -277,7 +277,7 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_accept}"  Margin="20,528,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="140"/>
+                <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_accept}"  Margin="20,528,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="140" Command="{Binding AcceptTradeCommand}"/>
                 <Button Style="{StaticResource NeonButtonStyle}" Content="{x:Static properties:Resources.button_decline}"  Margin="215,524,0,0" FontSize="9" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="140" Command="{Binding HideTradeControlCommand}"/>
             </Grid>
 

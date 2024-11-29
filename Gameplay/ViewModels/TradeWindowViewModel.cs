@@ -36,7 +36,7 @@ namespace CatanClient.Gameplay.ViewModels
                 new Resource { Name = Utilities.LUNAR_STONE, ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH},
                 new Resource { Name = Utilities.TRITONIUM, ImageSource = Utilities.TRITONIUM_IMAGE_PATH},
                 new Resource { Name = Utilities.ALPHA_NANOFIBERS, ImageSource = Utilities.ALPHA_NANOFIBERS_IMAGE_PATH},
-                new Resource { Name = Utilities.EPSILON_BIOMASS, ImageSource = Utilities.EPSILON_BIOMASS_BIOME_IMAGE_PATH},
+                new Resource { Name = Utilities.EPSILON_BIOMASS, ImageSource = Utilities.EPSILON_BIOMASS_IMAGE_PATH},
                 new Resource { Name = Utilities.GRX_810, ImageSource = Utilities.GRX_810_IMAGE_PATH}
             };
 
@@ -68,19 +68,24 @@ namespace CatanClient.Gameplay.ViewModels
             {
                 switch (resource.Name)
                 {
-                    case "Lunar Stone":
+                    case Utilities.LUNAR_STONE:
+                        needResources.LunarStone.ResourceName = Utilities.LUNAR_STONE;
                         needResources.LunarStone.Quantity = resource.Quantity;
                         break;
-                    case "Grx810":
+                    case Utilities.GRX_810:
+                        needResources.Grx810.ResourceName = Utilities.GRX_810;
                         needResources.Grx810.Quantity = resource.Quantity;
                         break;
-                    case "Alpha Nanofibers":
+                    case Utilities.ALPHA_NANOFIBERS:
+                        needResources.AlphaNanofibers.ResourceName = Utilities.ALPHA_NANOFIBERS;
                         needResources.AlphaNanofibers.Quantity = resource.Quantity;
                         break;
-                    case "Tritonium":
+                    case Utilities.TRITONIUM:
+                        needResources.Tritonium.ResourceName = Utilities.TRITONIUM;
                         needResources.Tritonium.Quantity = resource.Quantity;
                         break;
-                    case "Epsilon Biomass":
+                    case Utilities.EPSILON_BIOMASS:
+                        needResources.EpsilonBiomass.ResourceName = Utilities.EPSILON_BIOMASS;
                         needResources.EpsilonBiomass.Quantity = resource.Quantity;
                         break;
                 }
@@ -96,19 +101,24 @@ namespace CatanClient.Gameplay.ViewModels
             {
                 switch (resource.Name)
                 {
-                    case "Lunar Stone":
+                    case Utilities.LUNAR_STONE:
+                        offerResources.LunarStone.ResourceName = Utilities.LUNAR_STONE;
                         offerResources.LunarStone.Quantity = resource.Quantity;
                         break;
-                    case "Grx810":
+                    case Utilities.GRX_810:
+                        offerResources.Grx810.ResourceName = Utilities.GRX_810;
                         offerResources.Grx810.Quantity = resource.Quantity;
                         break;
-                    case "Alpha Nanofibers":
+                    case Utilities.ALPHA_NANOFIBERS:
+                        offerResources.AlphaNanofibers.ResourceName = Utilities.ALPHA_NANOFIBERS;
                         offerResources.AlphaNanofibers.Quantity = resource.Quantity;
                         break;
-                    case "Tritonium":
+                    case Utilities.TRITONIUM:
+                        offerResources.Tritonium.ResourceName = Utilities.TRITONIUM;
                         offerResources.Tritonium.Quantity = resource.Quantity;
                         break;
-                    case "Epsilon Biomass":
+                    case Utilities.EPSILON_BIOMASS:
+                        offerResources.EpsilonBiomass.ResourceName = Utilities.EPSILON_BIOMASS;
                         offerResources.EpsilonBiomass.Quantity = resource.Quantity;
                         break;
                 }

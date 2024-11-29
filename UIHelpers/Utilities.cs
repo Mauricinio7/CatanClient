@@ -55,6 +55,7 @@ namespace CatanClient.UIHelpers
         public const string HIDE_LOADING_SCREEN = "HideLoadingScreen";
         public const string SHOW_GAME_SCREEN = "ShowGameScreen";
         public const string SHOW_ROLL_DICE_ANIMATION = "ShowRollDiceAnimation";
+        public const string SHOW_WIN_ANIMATION = "ShowWinAnimation";
         public const string RECIVE_MESSAGE = "ReceiveMessage";
         public const string RECIVE_MESSAGE_GAME = "ReceiveMessageGame";
         public const string LOAD_PLAYER_LIST = "LoadPlayerList";
@@ -90,6 +91,7 @@ namespace CatanClient.UIHelpers
         public const string SYNTH_WAVE_BACKGROUND2_PATH = "pack://application:,,,/Resources/Gifs/SynthWaveAnimatedBackground2.gif";
         public const string SYNTH_WAVE_BACKGROUND1_PATH = "pack://application:,,,/Resources/Gifs/AnimatedBackground1.gif";
         public const string DICE_ROLL_ANIMATION = "pack://application:,,,/Gameplay/Resources/Animations/dice_roll_animation_dual.gif";
+        public const string WIN_ANIMATION = "pack://application:,,,/Gameplay/Resources/Animations/WinAnimation1.gif";
         public const string IMAGE_FILTER = "Image Files (*.jpg;*.png)|*.jpg;*.png";
         public const string PROFILE_IMAGE_DIRECTORY = "ProfilePhotos";
         public const string PROFILE = "profile";
@@ -123,6 +125,7 @@ namespace CatanClient.UIHelpers
         public const string ROAD = "Road";
         public const string TIME_FORMAT = "mm\\:ss";
         public const string LOAD_GAME_TRADE = "LoadGameTrade";
+        public const string HIDE_TRADE_CONTROL = "HideTradeControl";
 
 
 

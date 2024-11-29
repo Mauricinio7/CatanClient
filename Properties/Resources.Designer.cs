@@ -925,6 +925,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The game has started.
+        /// </summary>
+        public static string game_started {
+            get {
+                return ResourceManager.GetString("game_started", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Add friend.
         /// </summary>
         public static string global_add_friend {

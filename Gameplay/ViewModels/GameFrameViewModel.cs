@@ -50,6 +50,7 @@ namespace CatanClient.ViewModels
         private bool hasRolledDice;
         public event Action<string, bool, bool> VertexOccupied;
         public event Action<string, bool> EdgeOccupied;
+        private List<PlayerResourcesDto> tradeResources = new List<PlayerResourcesDto>();
 
 
         public ObservableCollection<string> HexTileImages { get; set; } = new ObservableCollection<string>();
@@ -59,6 +60,7 @@ namespace CatanClient.ViewModels
         public ICommand RollDiceCommand { get; }
         public ICommand NextTurnCommand { get; }
         public ICommand HideTradeControlCommand { get; }
+        public ICommand AcceptTradeCommand { get; }
         public ICommand ShowTradeControlCommand { get; }
         public ICommand SendMessageCommand { get; }
         public ICommand ExitCommand { get; }
@@ -75,9 +77,8 @@ namespace CatanClient.ViewModels
         List<HexTileDto> GameHexes = new List<HexTileDto>();
         public ObservableCollection<ChatMessage> Messages { get; set; }
         public ObservableCollection<PlayerInGameCardViewModel> OnlinePlayersList { get; set; } = new ObservableCollection<PlayerInGameCardViewModel>();
-        public ObservableCollection<Resource> ResourcesToRequest { get; set; }
-        public ObservableCollection<Resource> ResourcesToOffer { get; set; }
-
+        private ObservableCollection<Resource> resourcesToRequest = new ObservableCollection<Resource>();
+        private ObservableCollection<Resource> resourcesToOffer = new ObservableCollection<Resource>();
         public ObservableCollection<Resource> FilteredResourcesToRequest =>
            new ObservableCollection<Resource>(ResourcesToRequest.Where(r => r.Quantity > 0));
 
@@ -89,6 +90,27 @@ namespace CatanClient.ViewModels
     : Utilities.GetAssigningTurnText(CultureInfo.CurrentCulture.Name);
 
 
+        public ObservableCollection<Resource> ResourcesToRequest
+        {
+            get => resourcesToRequest;
+            set
+            {
+                resourcesToRequest = value;
+                OnPropertyChanged(nameof(ResourcesToRequest));
+                OnPropertyChanged(nameof(FilteredResourcesToRequest));
+            }
+        }
+
+        public ObservableCollection<Resource> ResourcesToOffer
+        {
+            get => resourcesToOffer;
+            set
+            {
+                resourcesToOffer = value;
+                OnPropertyChanged(nameof(ResourcesToOffer));
+                OnPropertyChanged(nameof(FilteredResourcesToOffer));
+            }
+        }
 
         public bool Turn
         {
@@ -282,6 +304,7 @@ namespace CatanClient.ViewModels
             RollDiceCommand = new RelayCommand(_ => ExecuteRollDiceAsync(), _ => CanRollDice());
             NextTurnCommand = new RelayCommand(_ => ExecuteNextTurn(), _ => CanPlayTurn());
             HideTradeControlCommand = new RelayCommand(ExecuteHideTradeControl);
+            AcceptTradeCommand = new RelayCommand(ExecuteAcceptTrade);
             ShowTradeControlCommand = new RelayCommand(ExecuteShowTradeControl);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage);
             ExitCommand = new RelayCommand(ExecuteExit);
@@ -297,15 +320,14 @@ namespace CatanClient.ViewModels
 
             InitializePlayerGameplay();
 
-            //LoadResources(); //TODO quit this
-
             Mediator.Register(Utilities.RECIVE_MESSAGE_GAME, OnReceiveMessage);
             Mediator.Register(Utilities.UPDATE_TIME_GAME, SetCountdownTime);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_LIST, LoadPlayerList);
             Mediator.Register(Utilities.LOAD_GAME_PLAYER_BOARD, hexes => LoadGameBoard(hexes));
             Mediator.Register(Utilities.UPDATE_GAME_PLAYER_BOARD, hexes => UpdateGameBoard(hexes));
             Mediator.Register(Utilities.UPDATE_PLAYER_RESOURCES, resources => UpdatePlayerResources(resources));
-            Mediator.Register(Utilities.LOAD_GAME_TRADE, resources => LoadResources(resources));
+            Mediator.Register(Utilities.LOAD_GAME_TRADE, resources => LoadTradeResources(resources));
+            Mediator.Register(Utilities.HIDE_TRADE_CONTROL, ExecuteHideTradeControl);
 
             IsBuildingSettlement = false;
             SettlementButtonText = Utilities.GetTownText(CultureInfo.CurrentCulture.Name);
@@ -351,7 +373,7 @@ namespace CatanClient.ViewModels
 
                 foreach (var hex in hexes)
                 {
-                    await Task.Delay(2000);
+                    await Task.Delay(300);
                     string imagePath = GetImagePathByResource(hex.Resource);
                     if (!string.IsNullOrEmpty(imagePath))
                     {
@@ -746,31 +768,61 @@ namespace CatanClient.ViewModels
             }
         }
 
-        private void LoadResources(object parameter) 
+        private void LoadTradeResources(object parameter) 
         {
             if (!(parameter is List<PlayerResourcesDto> resources))
             {
                 MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            tradeResources = resources;
+            PlayerResourcesDto receiveResources = resources[1];
+            PlayerResourcesDto sendResources = resources[0];
 
             ResourcesToRequest = new ObservableCollection<Resource>
             {
-                new Resource { Name = Utilities.LUNAR_STONE, ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH, Quantity = resources[0].LunarStone.Quantity},
-                new Resource { Name = Utilities.TRITONIUM, ImageSource = Utilities.TRITONIUM_IMAGE_PATH, Quantity = resources[0].Tritonium.Quantity},
-                new Resource { Name = Utilities.ALPHA_NANOFIBERS, ImageSource = Utilities.ALPHA_NANOFIBERS_IMAGE_PATH, Quantity = resources[0].EpsilonBiomass.Quantity },
-                new Resource { Name = Utilities.GRX_810, ImageSource = Utilities.GRX_810_IMAGE_PATH, Quantity = resources[0].Grx810.Quantity}
-            };
-            ResourcesToOffer = new ObservableCollection<Resource>
-            {
                 new Resource { Name = Utilities.LUNAR_STONE, ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH, Quantity = resources[1].LunarStone.Quantity},
                 new Resource { Name = Utilities.TRITONIUM, ImageSource = Utilities.TRITONIUM_IMAGE_PATH, Quantity = resources[1].Tritonium.Quantity},
-                new Resource { Name = Utilities.ALPHA_NANOFIBERS, ImageSource = Utilities.ALPHA_NANOFIBERS_IMAGE_PATH, Quantity =   resources[1].AlphaNanofibers.Quantity },
+                new Resource { Name = Utilities.ALPHA_NANOFIBERS, ImageSource = Utilities.ALPHA_NANOFIBERS_IMAGE_PATH, Quantity = resources[1].AlphaNanofibers.Quantity },
                 new Resource { Name = Utilities.EPSILON_BIOMASS, ImageSource =  Utilities.EPSILON_BIOMASS_IMAGE_PATH, Quantity = resources[1].EpsilonBiomass.Quantity },
                 new Resource { Name = Utilities.GRX_810, ImageSource = Utilities.GRX_810_IMAGE_PATH, Quantity = resources[1].Grx810.Quantity}
             };
 
+            ResourcesToOffer = new ObservableCollection<Resource>
+            {
+                new Resource { Name = Utilities.LUNAR_STONE, ImageSource = Utilities.LUNAR_STONE_IMAGE_PATH, Quantity = resources[0].LunarStone.Quantity},
+                new Resource { Name = Utilities.TRITONIUM, ImageSource = Utilities.TRITONIUM_IMAGE_PATH, Quantity = resources[0].Tritonium.Quantity},
+                new Resource { Name = Utilities.ALPHA_NANOFIBERS, ImageSource = Utilities.ALPHA_NANOFIBERS_IMAGE_PATH, Quantity =   resources[0].AlphaNanofibers.Quantity },
+                new Resource { Name = Utilities.EPSILON_BIOMASS, ImageSource =  Utilities.EPSILON_BIOMASS_IMAGE_PATH, Quantity = resources[0].EpsilonBiomass.Quantity },
+                new Resource { Name = Utilities.GRX_810, ImageSource = Utilities.GRX_810_IMAGE_PATH, Quantity = resources[0].Grx810.Quantity}
+            };
+
             IsTradeGridVisible = true;
+        }
+
+        private void ExecuteAcceptTrade()
+        {
+            if(tradeResources.Count <= 0)
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                App.Current.Dispatcher.InvokeAsync(async () =>
+                {
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                    PlayerResourcesDto sendResources = tradeResources[1];
+                    PlayerResourcesDto receiveResources = tradeResources[0];
+                    receiveResources.PlayerId = profile.Id.Value;
+
+                    OperationResultDto result;
+                    result = await serviceManager.GameServiceClient.AcceptTradeRequestAsync(sendResources, receiveResources, AccountUtilities.CastChatGameToGameServiceGame(game));
+                    if (!result.IsSuccess)
+                    {
+                        MessageBox.Show("No se ha completado el tradeo de forma exitosa");
+                    }
+                });
+            }
         }
 
         internal void UpdateTradeWindow()
@@ -845,7 +897,7 @@ namespace CatanClient.ViewModels
             });
         }
 
-        public void ExecuteHideTradeControl()
+        public void ExecuteHideTradeControl(object parameter)
         {
             IsTradeGridVisible = false;
         }
