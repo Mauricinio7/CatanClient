@@ -679,8 +679,29 @@
   <data name="message_game_started" xml:space="preserve">
     <value>El juego ha iniciado</value>
   </data>
+  <data name="dialog_error_trading_message" xml:space="preserve">
+    <value>No se tiene los recursos suficientes para completar este intercambio</value>
+  </data>
+  <data name="dialog_succes_send_trade_message" xml:space="preserve">
+    <value>Se ha enviado la oferta de intercambio</value>
+  </data>
+  <data name="dialog_succes_trade_message" xml:space="preserve">
+    <value>Se ha realizado el intercambio de forma exitosa</value>
+  </data>
   <data name="email_prompt" xml:space="preserve">
     <value>Ejemplo: usuario@dominio.com</value>
+  </data>
+  <data name="label_give" xml:space="preserve">
+    <value>Das</value>
+  </data>
+  <data name="label_receive" xml:space="preserve">
+    <value>Recibes</value>
+  </data>
+  <data name="label_trade_offer" xml:space="preserve">
+    <value>Oferta de intercambio</value>
+  </data>
+  <data name="label_winner" xml:space="preserve">
+    <value>Ganador</value>
   </data>
   <data name="password_prompt" xml:space="preserve">
     <value>Incluye mayúsc., minúsc., nros, _ (8+)</value>

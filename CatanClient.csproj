@@ -173,6 +173,9 @@
     <Compile Include="Gameplay\Helpers\GameRules.cs" />
     <Compile Include="Gameplay\Helpers\Resource.cs" />
     <Compile Include="Gameplay\ViewModels\TradeWindowViewModel.cs" />
+    <Compile Include="Gameplay\Views\DiceResultAnimationView.xaml.cs">
+      <DependentUpon>DiceResultAnimationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gameplay\Views\DiceRollAnimationView.xaml.cs">
       <DependentUpon>DiceRollAnimationView.xaml</DependentUpon>
     </Compile>
@@ -326,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\VoteKickPlayerCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gameplay\Views\DiceResultAnimationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

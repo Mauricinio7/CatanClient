@@ -234,11 +234,11 @@
 
             <Grid Grid.Column="3" Grid.ColumnSpan="2" Margin="10,1,150,103" Grid.Row="2" Background="{StaticResource PrimaryColor}" Visibility="{Binding IsTradeGridVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
                 <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="10,18,0,0" FontSize="16" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="371" Height="27" >
-            <Run Text="Oferta de intercambio" /><Run Language="es-mx" Text=":"/>
+            <Run Text="{x:Static properties:Resources.label_trade_offer}" /><Run Language="es-mx" Text=":"/>
                 </TextBlock>
 
                 <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="0,83,0,0" FontSize="16" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center" Width="326" Height="27">
-            <Run Text="Recibes" /><Run Text=":"/>
+            <Run Text="{x:Static properties:Resources.label_receive}" /><Run Text=":"/>
                 </TextBlock>
 
                 <ScrollViewer Margin="10,110,10,321" VerticalScrollBarVisibility="Auto">
@@ -258,7 +258,7 @@
                 </ScrollViewer>
 
                 <TextBlock FontFamily="{StaticResource PrimaryFontFamily}" Margin="0,310,0,0" FontSize="16" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center" Width="326" Height="27">
-        <Run Text="Das" /><Run  Text=":"/>
+        <Run Text="{x:Static properties:Resources.label_give}" /><Run  Text=":"/>
                 </TextBlock>
 
                 <ScrollViewer Margin="10,340,10,89" VerticalScrollBarVisibility="Auto">

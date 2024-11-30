@@ -49,6 +49,7 @@ namespace CatanClient.ViewModels
         public ICommand HideLoadingScreenCommand {get; set; }
         public ICommand ShowDiceAnimationCommand { get; set; }
         public ICommand ShowWinAnimationCommand { get; set; }
+        public ICommand ShowDiceResultAnimationCommand { get; set; }
         public ICommand ShowGameScreenCommand { get; set; }
 
         public UserControl CurrentView
@@ -114,6 +115,7 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.SHOW_GAME_SCREEN, args => ShowGameScreenCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_ROLL_DICE_ANIMATION, args => ShowDiceAnimationCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_WIN_ANIMATION, args => ShowWinAnimationCommand.Execute(args));
+            Mediator.Register(Utilities.SHOW_DICE_RESULT_ANIMATION, args => ShowDiceResultAnimationCommand.Execute(args));
         }
 
         private void InicializateAsyncCommands()
@@ -147,6 +149,7 @@ namespace CatanClient.ViewModels
             ShowScoreboardViewCommand = new RelayCommand(ShowScoreboardView);
             ShowDiceAnimationCommand = new RelayCommand(result => ShowDiceAnimation(result));
             ShowWinAnimationCommand= new RelayCommand(winner => ShowWinAnimation(winner));
+            ShowDiceResultAnimationCommand = new RelayCommand(result => ShowDiceResultAnimation(result));
             ShowLoadingScreenCommand = new RelayCommand(ShowLoadingScreen);
             HideLoadingScreenCommand = new RelayCommand(HideLoadingScreen);
             ShowGameScreenCommand = new RelayCommand(gameDto => ShowGameScreen(gameDto));
@@ -177,6 +180,16 @@ namespace CatanClient.ViewModels
         private void DiceAnimationView_AnimationCompleted(object sender, EventArgs e)
         {
             OverlayView = null;
+        }
+
+        private void ShowDiceResultAnimation(object parameter)
+        {
+            if (!(parameter is int result))
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            OverlayView = new DiceResultAnimationView(result);
         }
 
         private void ShowLoadingScreen()

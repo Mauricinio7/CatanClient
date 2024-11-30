@@ -1,5 +1,6 @@
 ﻿using CatanClient.UIHelpers;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +20,7 @@ namespace CatanClient.Gameplay.Views
         {
             InitializeComponent();
 
-            WinnerText.Text = "";
+            WinnerText.Text = string.Empty;
 
             _ = StartAnimationsAsync(winnerName);
         }
@@ -57,7 +58,7 @@ namespace CatanClient.Gameplay.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar el GIF: {ex.Message}", "Error");
+                Utilities.ShowMessageDataBaseUnableToLoad();
             }
         }
 
@@ -76,7 +77,7 @@ namespace CatanClient.Gameplay.Views
 
         private void AnimateText(string winnerName)
         {
-            WinnerText.Text = $"¡Ganador: {winnerName}!";
+            WinnerText.Text = string.Format(Utilities.WinnerText(CultureInfo.CurrentCulture.Name), ": ",winnerName, "!");
             DoubleAnimation fadeInAnimation = new DoubleAnimation
             {
                 From = 0,
@@ -94,11 +95,6 @@ namespace CatanClient.Gameplay.Views
             WinnerText.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
             WinnerText.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnimation);
             WinnerText.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

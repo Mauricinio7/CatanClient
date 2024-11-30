@@ -54,6 +54,7 @@ namespace CatanClient.ViewModels
             }
             else
             {
+                PlayerName = PlayerName.Trim();
                 bool result;
                 result = serviceManager.ProfileServiceClient.SendFriendRequest(PlayerName, profile);
 

@@ -457,6 +457,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The necessary resources are not available to complete this exchange..
+        /// </summary>
+        public static string dialog_error_trading_message {
+            get {
+                return ResourceManager.GetString("dialog_error_trading_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Invalid characters.
         /// </summary>
         public static string dialog_exception_service {
@@ -808,6 +817,24 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The trade offer has been sent.
+        /// </summary>
+        public static string dialog_succes_send_trade_message {
+            get {
+                return ResourceManager.GetString("dialog_succes_send_trade_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The trade has been successfully completed.
+        /// </summary>
+        public static string dialog_succes_trade_message {
+            get {
+                return ResourceManager.GetString("dialog_succes_trade_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a User verified successfully.
         /// </summary>
         public static string dialog_succes_verify_user_message {
@@ -876,6 +903,15 @@ namespace CatanClient.Properties {
         public static string dialog_unverified_user {
             get {
                 return ResourceManager.GetString("dialog_unverified_user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your user is not verified, please verify.
+        /// </summary>
+        public static string dialog_unverified_user_message {
+            get {
+                return ResourceManager.GetString("dialog_unverified_user_message", resourceCulture);
             }
         }
         
@@ -1276,6 +1312,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You give.
+        /// </summary>
+        public static string label_give {
+            get {
+                return ResourceManager.GetString("label_give", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a has been kicked from the room..
         /// </summary>
         public static string label_has_been_kicked {
@@ -1420,6 +1465,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You receive.
+        /// </summary>
+        public static string label_receive {
+            get {
+                return ResourceManager.GetString("label_receive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Recover password.
         /// </summary>
         public static string label_recover_password {
@@ -1501,6 +1555,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Trade offer.
+        /// </summary>
+        public static string label_trade_offer {
+            get {
+                return ResourceManager.GetString("label_trade_offer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Please fill in the required ACCOUNT fields.
         /// </summary>
         public static string label_user_required_fields {
@@ -1542,6 +1605,15 @@ namespace CatanClient.Properties {
         public static string label_weekly {
             get {
                 return ResourceManager.GetString("label_weekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Winner.
+        /// </summary>
+        public static string label_winner {
+            get {
+                return ResourceManager.GetString("label_winner", resourceCulture);
             }
         }
         

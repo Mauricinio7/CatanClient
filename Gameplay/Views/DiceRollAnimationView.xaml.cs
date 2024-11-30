@@ -50,9 +50,14 @@ namespace CatanClient.Gameplay.Views
             });
         }
 
-        private void ShowDiceResult(int result)
+        private static void ShowDiceResult(int result)
         {
-            MessageBox.Show($"El resultado de los dados es: {result}");
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                Mediator.Notify(Utilities.SHOW_DICE_RESULT_ANIMATION, result);
+                await Task.Delay(5000);
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            });
         }
     }
 }

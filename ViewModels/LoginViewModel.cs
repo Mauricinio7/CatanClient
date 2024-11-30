@@ -31,7 +31,6 @@ namespace CatanClient.ViewModels
         private readonly ServiceManager serviceManager;
         public ICommand LoginCommand { get; }
         public ICommand JoinGuestCommand { get; }
-        public ICommand WinAnimationCommand { get; } //TODO quit
 
         public string Username
         {
@@ -81,13 +80,8 @@ namespace CatanClient.ViewModels
             this.serviceManager = serviceManager;
             LoginCommand = new AsyncRelayCommand(ExecuteLoginAsync);
             JoinGuestCommand = new AsyncRelayCommand(ExecuteJoinGuestAsync);
-            WinAnimationCommand = new RelayCommand(ExecuteWinAnimation); //TODO quit
         }
 
-        private void ExecuteWinAnimation() //TODO quit
-        {
-            Mediator.Notify(Utilities.SHOW_WIN_ANIMATION, "Mauricinio7");
-        }
 
         private async Task ExecuteJoinGuestAsync(object window)
         {
@@ -123,6 +117,7 @@ namespace CatanClient.ViewModels
             }
             else
             {
+                Username = Username.Trim();
                 Email = AccountUtilities.IsValidAccountEmail(Username) ? Username : string.Empty;
                 PhoneNumber = AccountUtilities.IsValidAccountPhoneNumber(Username) ? Username : string.Empty;
 

@@ -60,6 +60,7 @@ namespace CatanClient.UIHelpers
         public const string SHOW_GAME_SCREEN = "ShowGameScreen";
         public const string SHOW_ROLL_DICE_ANIMATION = "ShowRollDiceAnimation";
         public const string SHOW_WIN_ANIMATION = "ShowWinAnimation";
+        public const string SHOW_DICE_RESULT_ANIMATION = "ShowDiceResultAnimation";
         public const string RECIVE_MESSAGE = "ReceiveMessage";
         public const string RECIVE_MESSAGE_GAME = "ReceiveMessageGame";
         public const string LOAD_PLAYER_LIST = "LoadPlayerList";
@@ -387,7 +388,18 @@ namespace CatanClient.UIHelpers
         {
             return Resources.ResourceManager.GetString("dialog_game_end_no_players_message", new CultureInfo(language));
         }
-
+        public static string MessageTradingError(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_error_trading_message", new CultureInfo(language));
+        }
+        public static string MessageTradingSucces(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_trade_message", new CultureInfo(language));
+        }
+        public static string MessageSendTradeSucces(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_succes_send_trade_message", new CultureInfo(language));
+        }
         public static string TitleGameEnd(string language)
         {
             return Resources.ResourceManager.GetString("dialog_game_end_title", new CultureInfo(language));
@@ -481,6 +493,10 @@ namespace CatanClient.UIHelpers
         public static string GetGameStartedText(string language)
         {
             return Resources.ResourceManager.GetString("game_started", new CultureInfo(language));
+        }
+        public static string WinnerText(string language)
+        {
+            return Resources.ResourceManager.GetString("label_winner", new CultureInfo(language));
         }
 
         public static void ShowMessgeServerLost()

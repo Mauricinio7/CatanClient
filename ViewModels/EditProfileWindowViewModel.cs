@@ -77,6 +77,7 @@ namespace CatanClient.ViewModels
         {
             if (!string.IsNullOrEmpty(NewValue))
             {
+                NewValue = NewValue.Trim();
                 if (Field == Utilities.USERNAME)
                 {
                     SaveUsername(NewValue);
@@ -99,7 +100,7 @@ namespace CatanClient.ViewModels
                 OperationResultProfileDto result = serviceManager.ProfileServiceClient.ChangeName(Profile, username);
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show(Utilities.MessageChangeUsernameSucces(CultureInfo.CurrentCulture.Name), Utilities.TitleChangeUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(Utilities.MessageChangeUsernameSucces(CultureInfo.CurrentCulture.Name), Utilities.TitleChangeUsername(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
                     serviceManager.ProfileSingleton.SetName(username);
 
                     Mediator.Notify(Utilities.CLOSE_EDIT_PROFILE, null);

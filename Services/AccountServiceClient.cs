@@ -132,22 +132,22 @@ namespace CatanClient.Services
             }
             catch (EndpointNotFoundException ex)
             {
-                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message, status = EnumCreateAccountStatus.ErrorSaving };
                 Log.Error(ex.Message);
             }
             catch (TimeoutException ex)
             {
-                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message, status = EnumCreateAccountStatus.ErrorSaving };
                 Log.Error(ex.Message);
             }
             catch (CommunicationException ex)
             {
-                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message, status = EnumCreateAccountStatus.ErrorSaving };
                 Log.Error(ex.Message);
             }
             catch (Exception ex)
             {
-                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message };
+                result = new OperationResultCreateAccountDto { IsSuccess = false, MessageResponse = ex.Message, status = EnumCreateAccountStatus.ErrorSaving };
                 Log.Error(ex.Message);
             }
             finally

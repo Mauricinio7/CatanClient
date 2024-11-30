@@ -14,7 +14,7 @@
     <Viewbox Stretch="Fill" Margin="0,0,0,0">
         <Grid Background="{StaticResource SecondaryColor}" Width="1576" Height="900" x:Name="animatedGrid">
 
-            <TextBlock Style="{StaticResource PrimaryTextBlockStyle}" Text="Quieres:" Margin="38,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="30"/>
+            <TextBlock Style="{StaticResource PrimaryTextBlockStyle}" Text="{x:Static properties:Resources.label_receive}" Margin="38,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="30"/>
             <Button Content="{x:Static properties:Resources.button_send}" Style="{StaticResource NeonButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="208" Height="92" Margin="1322,38,0,0" FontSize="18" Command="{Binding SendTradeCommand}"/>
             <Button Content="{x:Static properties:Resources.button_exit}" Style="{StaticResource NeonButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1096,38,0,0" FontSize="18" Click="ButtonExit_Click" Height="71" Width="146"/>
 
@@ -88,7 +88,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <TextBlock Style="{StaticResource PrimaryTextBlockStyle}" Margin="71,486,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="30"><Run Language="es-mx" Text="Ofreces:"/></TextBlock>
+            <TextBlock Style="{StaticResource PrimaryTextBlockStyle}" Margin="71,486,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="30"><Run Language="es-mx" Text="{x:Static properties:Resources.label_give}"/></TextBlock>
         </Grid>
     </Viewbox>
 </Window>

@@ -97,7 +97,7 @@ namespace CatanClient.Callbacks
 
         public void NotifyTradeCompletion()
         {
-            MessageBox.Show("Se ha completado el tradeo exitosamente", "Tradeo completado", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Utilities.MessageTradingSucces(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
             Mediator.Notify(Utilities.HIDE_TRADE_CONTROL,null);
         }
 

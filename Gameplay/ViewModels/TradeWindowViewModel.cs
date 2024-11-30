@@ -7,6 +7,7 @@ using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -141,11 +142,11 @@ namespace CatanClient.Gameplay.ViewModels
 
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show("Se ha enviado el tradeo exitosamente");
+                    MessageBox.Show(Utilities.MessageSendTradeSucces(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("No se ha podido enviar el tradeo");
+                    MessageBox.Show(Utilities.MessageTradingError(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             });
             

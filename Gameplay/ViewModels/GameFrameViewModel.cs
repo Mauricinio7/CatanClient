@@ -831,7 +831,7 @@ namespace CatanClient.ViewModels
                     result = await serviceManager.GameServiceClient.AcceptTradeRequestAsync(sendResources, receiveResources, AccountUtilities.CastChatGameToGameServiceGame(game));
                     if (!result.IsSuccess)
                     {
-                        MessageBox.Show("No se ha completado el tradeo de forma exitosa");
+                        MessageBox.Show(Utilities.MessageTradingError(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 });
             }
@@ -990,8 +990,15 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteSendMessage()
         {
-            serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
-            NewMessage = String.Empty;
+            if (string.IsNullOrWhiteSpace(NewMessage))
+            {
+                NewMessage = string.Empty;
+            }
+            else
+            {
+                serviceManager.ChatServiceClient.SendMessageToServer(game, profile.Name, NewMessage);
+                NewMessage = string.Empty;
+            }
         }
 
         internal void ExecuteExit()
