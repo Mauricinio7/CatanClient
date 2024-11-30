@@ -134,6 +134,8 @@ namespace CatanClient.UIHelpers
         public const string TIME_FORMAT = "mm\\:ss";
         public const string LOAD_GAME_TRADE = "LoadGameTrade";
         public const string HIDE_TRADE_CONTROL = "HideTradeControl";
+        public const string FRIENDS = "Friends"; 
+        public const string WORLD = "World";
 
 
 
@@ -415,6 +417,14 @@ namespace CatanClient.UIHelpers
         public static string TitleBuild(string language)
         {
             return Resources.ResourceManager.GetString("dialog_build", new CultureInfo(language));
+        }
+        public static string MessageExistsFriendRequest(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_exists_friend_request_message", new CultureInfo(language));
+        }
+        public static string MessageNotFoundProfile(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_not_found_profile_message", new CultureInfo(language));
         }
         public static string GlobalReady(string language)
         {

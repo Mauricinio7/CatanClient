@@ -80,32 +80,39 @@ namespace CatanClient.ViewModels
                 {
                     OperationResultGameDto result;
 
-                    if (profile.IsRegistered)
+                    try
                     {
-                        Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-                        result = await serviceManager.GameServiceClient.JoinRoomClientAsync(roomCode, AccountUtilities.CastAccountProfileToGameService(profile));
-                    }
-                    else
-                    {
-                        GuestAccountDto guest = new GuestAccountDto
+                        if (profile.IsRegistered)
                         {
-                            Name = profile.Name,
-                            PreferredLanguage = profile.PreferredLanguage,
-                            Id = profile.Id
-                        };
+                            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                            result = await serviceManager.GameServiceClient.JoinRoomClientAsync(roomCode, AccountUtilities.CastAccountProfileToGameService(profile));
+                        }
+                        else
+                        {
+                            GuestAccountDto guest = new GuestAccountDto
+                            {
+                                Name = profile.Name,
+                                PreferredLanguage = profile.PreferredLanguage,
+                                Id = profile.Id
+                            };
 
-                        Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-                        result = await serviceManager.GameServiceClient.JoinRoomAsGuestClientAsync(roomCode, guest);
-                    }
+                            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                            result = await serviceManager.GameServiceClient.JoinRoomAsGuestClientAsync(roomCode, guest);
+                        }
 
-                    if (result.IsSuccess)
-                    {
-                        GameDto game = result.GameDto;
-                        Mediator.Notify(Utilities.SHOW_GAME_LOBBY, game);
+                        if (result.IsSuccess)
+                        {
+                            GameDto game = result.GameDto;
+                            Mediator.Notify(Utilities.SHOW_GAME_LOBBY, game);
+                        }
+                        else
+                        {
+                            MessageBox.Show(Utilities.MessageGameNotFound(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
-                    else
+                    catch (CommunicationException)
                     {
-                        MessageBox.Show(Utilities.MessageGameNotFound(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                        Utilities.ShowMessgeServerLost();
                     }
                 }
             }

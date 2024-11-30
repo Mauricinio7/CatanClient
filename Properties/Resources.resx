@@ -669,6 +669,12 @@
   <data name="dialog_error_trading_message" xml:space="preserve">
     <value>The necessary resources are not available to complete this exchange.</value>
   </data>
+  <data name="dialog_exists_friend_request_message" xml:space="preserve">
+    <value>You have already added this person to your friends list</value>
+  </data>
+  <data name="dialog_not_found_profile_message" xml:space="preserve">
+    <value>No player with the entered name has been found</value>
+  </data>
   <data name="dialog_succes_send_trade_message" xml:space="preserve">
     <value>The trade offer has been sent</value>
   </data>
@@ -695,6 +701,18 @@
   </data>
   <data name="password_prompt" xml:space="preserve">
     <value>Includes upper, lower, nums, _ (8+)</value>
+  </data>
+  <data name="tab_item_games_won" xml:space="preserve">
+    <value>Games won</value>
+  </data>
+  <data name="tab_item_player" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="tab_item_position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="tab_item_total_points" xml:space="preserve">
+    <value>Total points</value>
   </data>
   <data name="username:prompt" xml:space="preserve">
     <value>8-15 characters</value>

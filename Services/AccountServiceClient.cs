@@ -70,9 +70,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 
@@ -95,24 +96,28 @@ namespace CatanClient.Services
             catch (EndpointNotFoundException ex)
             {
                 Log.Error(ex.Message);
+                throw new CommunicationException(ex.Message);
             }
             catch (TimeoutException ex)
             {
                 Log.Error(ex.Message);
+                throw new CommunicationException(ex.Message);
             }
             catch (CommunicationException ex)
             {
                 Log.Error(ex.Message);
+                throw new CommunicationException(ex.Message);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
+                throw new CommunicationException(ex.Message);
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return flag;
         }
 
@@ -152,9 +157,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 
@@ -194,9 +200,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 
@@ -236,9 +243,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 
@@ -278,9 +286,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 
@@ -320,9 +329,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 
@@ -378,7 +388,16 @@ namespace CatanClient.Services
 
             try
             {
-                flag = await client.ResendVerificationCodeAsync(account.Email);
+                string consultValue = null;
+                if(account.Email != null)
+                {
+                    consultValue = account.Email;
+                }
+                else
+                {
+                    consultValue = account.PhoneNumber;
+                }
+                flag = await client.ResendVerificationCodeAsync(consultValue);
             }
             catch (EndpointNotFoundException ex)
             {
@@ -398,9 +417,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return flag;
         }
 
@@ -436,9 +456,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 
@@ -474,9 +495,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 SafeClose((IClientChannel)client, channelFactory);
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 

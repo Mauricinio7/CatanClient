@@ -55,21 +55,31 @@ namespace CatanClient.ViewModels
             else
             {
                 PlayerName = PlayerName.Trim();
-                bool result;
+                OperationResultFriendRequestDto result;
                 result = serviceManager.ProfileServiceClient.SendFriendRequest(PlayerName, profile);
 
-                if (result)
-                {
-                    MessageBox.Show(Utilities.MessageSuccesFriendRequest(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    //TODO Friend not Found
-                    Utilities.ShowMessgeServerLost();
-                }
+                AddFriendHandled(result);
             }
+        }
 
-
+        private static void AddFriendHandled(OperationResultFriendRequestDto result)
+        {
+            switch (result.StatusSendFriendRequest)
+            {
+                case EnumSendFriendRequest.SuccessSave:
+                    MessageBox.Show(Utilities.MessageSuccesFriendRequest(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+                case EnumSendFriendRequest.ExistsFriendRequest:
+                    MessageBox.Show(Utilities.MessageExistsFriendRequest(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                case EnumSendFriendRequest.NotFoundProfile:
+                    MessageBox.Show(Utilities.MessageNotFoundProfile(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                case EnumSendFriendRequest.ErrorSaving:
+                    Utilities.ShowMessgeServerLost();
+                    break;
+                
+            }
         }
 
     }

@@ -27,6 +27,8 @@
     <MetadataFile FileName="ProfileService3.xsd" MetadataType="Schema" ID="380dcf78-b0c0-4b96-8979-c701b2d8933e" SourceId="1" SourceUrl="http://localhost:8384/ProfileService?xsd=xsd3" />
     <MetadataFile FileName="ProfileService.xsd" MetadataType="Schema" ID="883af9c2-84b8-4226-a27c-549de03de3f2" SourceId="1" SourceUrl="http://localhost:8384/ProfileService?xsd=xsd0" />
     <MetadataFile FileName="ProfileService.disco" MetadataType="Disco" ID="938acade-4f29-48f3-ac06-db89c7bc1f2b" SourceId="1" SourceUrl="http://localhost:8384/ProfileService?disco" />
+    <MetadataFile FileName="ProfileService4.xsd" MetadataType="Schema" ID="7abf630f-517b-4cb4-80f1-503cc61b4ddf" SourceId="1" SourceUrl="http://localhost:8384/ProfileService?xsd=xsd4" />
+    <MetadataFile FileName="ProfileService41.xsd" MetadataType="Schema" ID="5c817af4-58e2-4445-9e53-7acb3883cdae" SourceId="1" SourceUrl="http://localhost:8384/ProfileService?xsd=xsd5" />
     <MetadataFile FileName="ProfileServiceEndpoint.wsdl" MetadataType="Wsdl" ID="71dd35ec-ec51-428a-8fc6-014eb6cb7841" SourceId="1" SourceUrl="http://localhost:8384/ProfileService?wsdl" />
   </Metadata>
   <Extensions>

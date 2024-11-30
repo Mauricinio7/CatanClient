@@ -34,7 +34,7 @@ namespace CatanClient.Services
                 OpenTimeout = TimeSpan.FromMinutes(1),
                 CloseTimeout = TimeSpan.FromMinutes(1),
                 SendTimeout = TimeSpan.FromMinutes(2),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
+                ReceiveTimeout = TimeSpan.FromMinutes(1)
             };
 
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
@@ -104,42 +104,42 @@ namespace CatanClient.Services
         public async Task<OperationResultGameDto> JoinRoomClientAsync(string code, ProfileDto profile)
         {
             OpenConnection();
-            OperationResultGameDto result;
+            OperationResultGameDto result = new OperationResultGameDto { IsSuccess = false };
             try
             {
                 result = await client.JoinGameAsync(code, profile);
             }
             catch (Exception ex)
             {
-                result = new OperationResultGameDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
                 Log.Error(ex, ex.Source);
+                throw new CommunicationException();
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            finally
+            {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            }
+            
             return result;
         }
 
         public async Task<OperationResultGameDto> JoinRoomAsGuestClientAsync(string code, GuestAccountDto profile)
         {
             OpenConnection();
-            OperationResultGameDto result;
+            OperationResultGameDto result = new OperationResultGameDto { IsSuccess = false }; ;
             try
             {
                 result = await client.JoinGameAsaGuestAsync(code, profile);
             }
             catch (Exception ex)
-            {
-                result = new OperationResultGameDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+            { 
                 Log.Error(ex, ex.Source);
+                throw new CommunicationException();
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            finally
+            {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            }
+            
             return result;
         }
 
@@ -157,9 +157,9 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 CloseConnection();
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
             return result;
         }
 
@@ -177,9 +177,10 @@ namespace CatanClient.Services
             }
             finally
             {
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
                 CloseConnection();
             }
-            Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            
             return result;
         }
 

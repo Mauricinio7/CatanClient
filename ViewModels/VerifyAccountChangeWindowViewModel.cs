@@ -101,8 +101,29 @@ namespace CatanClient.ViewModels
 
         private async Task ExecuteResendCodeAsync()
         {
-            MessageBox.Show(Account.Email);
-            await AccountUtilities.ResendVerificationCodeAsync(serviceManager, Account);
+            AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
+            profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
+
+            OperationResultAccountDto result;
+
+
+            result = serviceManager.AccountServiceClient.GetAccount(profileDto);
+
+            if (result.IsSuccess)
+            {
+                AccountDto account = result.AccountDto;
+
+                if (account != null)
+                {
+                    await AccountUtilities.ResendVerificationCodeAsync(serviceManager, account);
+                }
+            }
+            else
+            {
+                MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            
         }
     }
 }

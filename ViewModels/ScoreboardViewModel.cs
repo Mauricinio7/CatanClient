@@ -46,7 +46,7 @@ namespace CatanClient.ViewModels
                         {
                             Position = score.Position,
                             PlayerName = score.Name,
-                            //GamesWon = score.GamesWon,
+                            GamesWon = score.GamesWon,
                             TotalPoints = score.Score
                         });
                     }
@@ -74,7 +74,7 @@ namespace CatanClient.ViewModels
                         {
                             Position = score.Position,
                             PlayerName = score.Name,
-                            //GamesWon = score.GamesWon,
+                            GamesWon = score.GamesWon,
                             TotalPoints = score.Score
                         });
                     }
@@ -84,14 +84,6 @@ namespace CatanClient.ViewModels
                     Utilities.ShowMessageDataBaseUnableToLoad();
                 }
             });
-        }
-
-        public void LoadWeeklyScores()
-        {
-            WeeklyScores.Clear();
-            WeeklyScores.Add(new PlayerScore { Position = 1, PlayerName = "WeeklyPlayer1", GamesWon = 2, TotalPoints = 30 });
-            WeeklyScores.Add(new PlayerScore { Position = 2, PlayerName = "WeeklyPlayer2", GamesWon = 1, TotalPoints = 15 });
-            WeeklyScores.Add(new PlayerScore { Position = 3, PlayerName = "WeeklyPlayer3", GamesWon = 1, TotalPoints = 10 });
         }
 
         public class PlayerScore

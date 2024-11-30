@@ -149,13 +149,13 @@ namespace CatanClient.Services
             return result;
         }
 
-        public bool SendFriendRequest(string playerName, ProfileDto profile)
+        public OperationResultFriendRequestDto SendFriendRequest(string playerName, ProfileDto profile)
         {
             NetTcpBinding binding = ConnectionUtilities.GetTcpBinding();
             EndpointAddress endpoint = new EndpointAddress(Utilities.IP_PROFILE_SERVICE);
             ChannelFactory<IProfileServiceEndpoint> channelFactory = new ChannelFactory<IProfileServiceEndpoint>(binding, endpoint);
             IProfileServiceEndpoint client = channelFactory.CreateChannel();
-            bool result = false;
+            OperationResultFriendRequestDto result = new OperationResultFriendRequestDto { IsSuccess = false, StatusSendFriendRequest = EnumSendFriendRequest.ErrorSaving};
 
             try
             {

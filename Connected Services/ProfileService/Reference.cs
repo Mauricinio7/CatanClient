@@ -205,6 +205,7 @@ namespace CatanClient.ProfileService {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultPictureDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultProfileListDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultFriendRequestDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultProfileDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -311,6 +312,30 @@ namespace CatanClient.ProfileService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultFriendRequestDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDto" +
+        "s")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultFriendRequestDto : CatanClient.ProfileService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.ProfileService.EnumSendFriendRequest StatusSendFriendRequestField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.ProfileService.EnumSendFriendRequest StatusSendFriendRequest {
+            get {
+                return this.StatusSendFriendRequestField;
+            }
+            set {
+                if ((this.StatusSendFriendRequestField.Equals(value) != true)) {
+                    this.StatusSendFriendRequestField = value;
+                    this.RaisePropertyChanged("StatusSendFriendRequest");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultProfileDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
     public partial class OperationResultProfileDto : CatanClient.ProfileService.OperationResultDto {
@@ -401,6 +426,23 @@ namespace CatanClient.ProfileService {
         UnableToSaveData = 3,
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EnumSendFriendRequest", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.Enums")]
+    public enum EnumSendFriendRequest : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotFoundProfile = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ExistsFriendRequest = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ErrorSaving = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SuccessSave = 3,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProfileService.IProfileServiceEndpoint")]
     public interface IProfileServiceEndpoint {
@@ -448,10 +490,10 @@ namespace CatanClient.ProfileService {
         System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultProfileListDto> GetPendingFriendRequestsAsync(CatanClient.ProfileService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequestResponse")]
-        bool SendFriendRequest(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
+        CatanClient.ProfileService.OperationResultFriendRequestDto SendFriendRequest(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/SendFriendRequestResponse")]
-        System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
+        System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultFriendRequestDto> SendFriendRequestAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequest", ReplyAction="http://tempuri.org/IProfileServiceEndpoint/AcceptFriendRequestResponse")]
         bool AcceptFriendRequest(string nameFriendToAccept, CatanClient.ProfileService.ProfileDto profileClientDto);
@@ -555,11 +597,11 @@ namespace CatanClient.ProfileService {
             return base.Channel.GetPendingFriendRequestsAsync(profileClientDto);
         }
         
-        public bool SendFriendRequest(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
+        public CatanClient.ProfileService.OperationResultFriendRequestDto SendFriendRequest(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
             return base.Channel.SendFriendRequest(nameFriendToInvite, profileClientDto);
         }
         
-        public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
+        public System.Threading.Tasks.Task<CatanClient.ProfileService.OperationResultFriendRequestDto> SendFriendRequestAsync(string nameFriendToInvite, CatanClient.ProfileService.ProfileDto profileClientDto) {
             return base.Channel.SendFriendRequestAsync(nameFriendToInvite, profileClientDto);
         }
         

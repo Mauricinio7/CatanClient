@@ -682,6 +682,12 @@
   <data name="dialog_error_trading_message" xml:space="preserve">
     <value>No se tiene los recursos suficientes para completar este intercambio</value>
   </data>
+  <data name="dialog_exists_friend_request_message" xml:space="preserve">
+    <value>Ya has agregado a esta persona a tu lista de amigos</value>
+  </data>
+  <data name="dialog_not_found_profile_message" xml:space="preserve">
+    <value>No se ha encontrado a ningun jugador con el nombre ingresado</value>
+  </data>
   <data name="dialog_succes_send_trade_message" xml:space="preserve">
     <value>Se ha enviado la oferta de intercambio</value>
   </data>
@@ -705,6 +711,18 @@
   </data>
   <data name="password_prompt" xml:space="preserve">
     <value>Incluye mayúsc., minúsc., nros, _ (8+)</value>
+  </data>
+  <data name="tab_item_games_won" xml:space="preserve">
+    <value>Juegos ganados</value>
+  </data>
+  <data name="tab_item_player" xml:space="preserve">
+    <value>Jugador</value>
+  </data>
+  <data name="tab_item_position" xml:space="preserve">
+    <value>Posición</value>
+  </data>
+  <data name="tab_item_total_points" xml:space="preserve">
+    <value>Puntos totales</value>
   </data>
   <data name="username_prompt" xml:space="preserve">
     <value>8-15 caracteres</value>

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -39,14 +40,11 @@ namespace CatanClient.Views
             {
                 switch (selectedTab.Tag.ToString())
                 {
-                    case "Friends":
+                    case Utilities.FRIENDS:
                         viewModel.LoadFriendScores();
                         break;
-                    case "World":
+                    case Utilities.WORLD:
                         viewModel.LoadWorldScores();
-                        break;
-                    case "Week":
-                        viewModel.LoadWeeklyScores();
                         break;
                 }
             }

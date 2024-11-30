@@ -475,6 +475,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You have already added this person to your friends list.
+        /// </summary>
+        public static string dialog_exists_friend_request_message {
+            get {
+                return ResourceManager.GetString("dialog_exists_friend_request_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fail.
         /// </summary>
         public static string dialog_fail {
@@ -642,6 +651,15 @@ namespace CatanClient.Properties {
         public static string dialog_name_not_found_message {
             get {
                 return ResourceManager.GetString("dialog_name_not_found_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No player with the entered name has been found.
+        /// </summary>
+        public static string dialog_not_found_profile_message {
+            get {
+                return ResourceManager.GetString("dialog_not_found_profile_message", resourceCulture);
             }
         }
         
@@ -1740,6 +1758,42 @@ namespace CatanClient.Properties {
         public static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Games won.
+        /// </summary>
+        public static string tab_item_games_won {
+            get {
+                return ResourceManager.GetString("tab_item_games_won", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player.
+        /// </summary>
+        public static string tab_item_player {
+            get {
+                return ResourceManager.GetString("tab_item_player", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Position.
+        /// </summary>
+        public static string tab_item_position {
+            get {
+                return ResourceManager.GetString("tab_item_position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total points.
+        /// </summary>
+        public static string tab_item_total_points {
+            get {
+                return ResourceManager.GetString("tab_item_total_points", resourceCulture);
             }
         }
         

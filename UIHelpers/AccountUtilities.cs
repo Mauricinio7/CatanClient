@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -251,20 +252,28 @@ namespace CatanClient.UIHelpers
 
         public static async Task<bool> VerifyAccountAsync(ServiceManager serviceManager, AccountDto account, string verificationCode)
         {
-            bool status = await serviceManager.AccountServiceClient.VerifyUserAccountAsync(account, verificationCode);
-
-            if (status)
+            bool status = false;
+            try
             {
-                MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name),
-                    Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name),
-                    Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+                status = await serviceManager.AccountServiceClient.VerifyUserAccountAsync(account, verificationCode);
 
+                if (status)
+                {
+                    MessageBox.Show(Utilities.MessageSuccessVerifyUser(CultureInfo.CurrentCulture.Name),
+                        Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show(Utilities.MessageFailVerifyUser(CultureInfo.CurrentCulture.Name),
+                        Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch(CommunicationException ex)
+            {
+                Utilities.ShowMessgeServerLost();
+            }
             return status;
+            
         }
 
         public static bool VerificateChangePassword(string Password, string ConfirmPassword)

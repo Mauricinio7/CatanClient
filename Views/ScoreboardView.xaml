@@ -127,10 +127,10 @@
                         </DataGrid.Resources>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Posición" Binding="{Binding Position}" Width="Auto"/>
-                            <DataGridTextColumn Header="Jugador" Binding="{Binding PlayerName}" Width="*"/>
-                            <DataGridTextColumn Header="Partidas ganadas" Binding="{Binding GamesWon}" Width="Auto"/>
-                            <DataGridTextColumn Header="Puntos totales" Binding="{Binding TotalPoints}" Width="Auto"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_position}" Binding="{Binding Position}" Width="Auto"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_player}" Binding="{Binding PlayerName}" Width="*"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_games_won}" Binding="{Binding GamesWon}" Width="Auto"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_total_points}" Binding="{Binding TotalPoints}" Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -157,45 +157,16 @@
                         </DataGrid.Resources>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Posición" Binding="{Binding Position}" Width="Auto"/>
-                            <DataGridTextColumn Header="Jugador" Binding="{Binding PlayerName}" Width="*"/>
-                            <DataGridTextColumn Header="Partidas ganadas" Binding="{Binding GamesWon}" Width="Auto"/>
-                            <DataGridTextColumn Header="Puntos totales" Binding="{Binding TotalPoints}" Width="Auto"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_position}" Binding="{Binding Position}" Width="Auto"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_player}" Binding="{Binding PlayerName}" Width="*"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_games_won}" Binding="{Binding GamesWon}" Width="Auto"/>
+                            <DataGridTextColumn Header="{x:Static properties:Resources.tab_item_total_points}" Binding="{Binding TotalPoints}" Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                 </TabItem>
 
-                <TabItem Header="{x:Static properties:Resources.label_weekly}" Tag="Week">
-
-                    <DataGrid ItemsSource="{Binding WeeklyScores}" AutoGenerateColumns="False" HeadersVisibility="Column"
-                    RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0">
-                        <DataGrid.Resources>
-
-                            <Style TargetType="DataGridRow">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Position}" Value="1">
-                                        <Setter Property="Background" Value="Gold"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Position}" Value="2">
-                                        <Setter Property="Background" Value="Silver"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Position}" Value="3">
-                                        <Setter Property="Background" Value="SaddleBrown"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.Resources>
-
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Posición" Binding="{Binding Position}" Width="Auto"/>
-                            <DataGridTextColumn Header="Jugador" Binding="{Binding PlayerName}" Width="*"/>
-                            <DataGridTextColumn Header="Partidas ganadas" Binding="{Binding GamesWon}" Width="Auto"/>
-                            <DataGridTextColumn Header="Puntos totales" Binding="{Binding TotalPoints}" Width="Auto"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                </TabItem>
+               
             </TabControl>
 
 

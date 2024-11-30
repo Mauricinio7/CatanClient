@@ -612,6 +612,9 @@
     <None Include="Connected Services\GuestAccountService\GuestAccountService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultFriendRequestDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ProfileService\CatanClient.ProfileService.OperationResultPictureDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -631,6 +634,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ProfileService\ProfileService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileService\ProfileService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileService\ProfileService41.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ProfileService\ProfileServiceEndpoint.wsdl" />
