@@ -45,7 +45,11 @@ namespace CatanClient.ViewModels
         {
             if (string.IsNullOrWhiteSpace(VerificationCode))
             {
-                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Utilities.ShowMessageEmptyFields();
+            }
+            else if (!AccountUtilities.IsValidLength(verificationCode))
+            {
+                Utilities.ShowMessageInvalidFileds();
             }
             else
             {
@@ -97,6 +101,7 @@ namespace CatanClient.ViewModels
 
         private async Task ExecuteResendCodeAsync()
         {
+            MessageBox.Show(Account.Email);
             await AccountUtilities.ResendVerificationCodeAsync(serviceManager, Account);
         }
     }

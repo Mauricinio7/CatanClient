@@ -69,7 +69,11 @@ namespace CatanClient.ViewModels
         {
             if (string.IsNullOrEmpty(VerificationCode))
             {
-                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                 Utilities.ShowMessageEmptyFields();
+            }
+            else if (!AccountUtilities.IsValidLength(verificationCode))
+            {
+                Utilities.ShowMessageInvalidFileds();
             }
             else
             {

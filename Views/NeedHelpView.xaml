@@ -42,7 +42,7 @@
  />
 
             <controls:PlaceholderTextBoxControl 
-     PlaceholderText="{x:Static properties:Resources.global_email_phone_number}" 
+     PlaceholderText="{x:Static properties:Resources.email_prompt}" 
      Style="{StaticResource SynthwaveTextBoxStyle}"                          
      HorizontalAlignment="Left" Height="124" 
      VerticalAlignment="Top" Width="1346" Margin="125,410,0,0" 

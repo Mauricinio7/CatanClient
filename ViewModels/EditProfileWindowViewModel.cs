@@ -83,7 +83,6 @@ namespace CatanClient.ViewModels
                 }
                 else
                 {
-                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
                     await SaveEmailOrPhoneAsync(NewValue, Field);
                 }
             }

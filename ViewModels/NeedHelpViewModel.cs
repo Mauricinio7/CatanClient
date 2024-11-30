@@ -40,21 +40,27 @@ namespace CatanClient.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Email))
             {
-                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Utilities.ShowMessageEmptyFields();
                 return;
             }
-
-            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-            bool status = await serviceManager.AccountServiceClient.SendNeedHelpCode(Email);
-
-            if (status)
+            if (!AccountUtilities.IsValidAccountEmail(Email))
             {
-                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name), Utilities.TitleVerifyAccount(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
-                Mediator.Notify(Utilities.SHOW_CHANGE_FORGOT_PASSWORD, Email);
+               Utilities.ShowMessageInvalidFileds();
             }
             else
             {
-                Utilities.ShowMessgeServerLost();
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                bool status = await serviceManager.AccountServiceClient.SendNeedHelpCode(Email);
+
+                if (status)
+                {
+                    MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name), Utilities.TitleVerifyAccount(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                    Mediator.Notify(Utilities.SHOW_CHANGE_FORGOT_PASSWORD, Email);
+                }
+                else
+                {
+                    Utilities.ShowMessgeServerLost();
+                }
             }
         }
 

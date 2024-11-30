@@ -78,26 +78,34 @@ namespace CatanClient.ViewModels
         {
             if (!string.IsNullOrEmpty(RoomName) && !string.IsNullOrEmpty(SelectedOption))
             {
-                GameDto gameDto = new GameDto
+                if (!AccountUtilities.IsValidLength(RoomName))
                 {
-                    MaxNumberPlayers = int.Parse(SelectedOption),
-                    Name = RoomName
-                };
-
-                AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
-
-                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-
-                OperationResultGameDto result = await serviceManager.GameServiceClient.CreateRoomClientAsync(gameDto, AccountUtilities.CastAccountProfileToGameService(profileDto));
-
-                if (result.IsSuccess)
-                {
-                    GameDto game = result.GameDto;
-                    Mediator.Notify(Utilities.SHOW_GAME_LOBBY, game);
+                    Utilities.ShowMessageInvalidFileds();
                 }
                 else
                 {
-                    MessageBox.Show(result.MessageResponse);
+
+                    GameDto gameDto = new GameDto
+                    {
+                        MaxNumberPlayers = int.Parse(SelectedOption),
+                        Name = RoomName
+                    };
+
+                    AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
+
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+
+                    OperationResultGameDto result = await serviceManager.GameServiceClient.CreateRoomClientAsync(gameDto, AccountUtilities.CastAccountProfileToGameService(profileDto));
+
+                    if (result.IsSuccess)
+                    {
+                        GameDto game = result.GameDto;
+                        Mediator.Notify(Utilities.SHOW_GAME_LOBBY, game);
+                    }
+                    else
+                    {
+                        Utilities.ShowMessgeServerLost();
+                    }
                 }
             }
             else

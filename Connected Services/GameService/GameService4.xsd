@@ -84,6 +84,7 @@
   <xs:element name="ArrayOfProfileScoreDto" nillable="true" type="tns:ArrayOfProfileScoreDto" />
   <xs:complexType name="ProfileScoreDto">
     <xs:sequence>
+      <xs:element minOccurs="0" name="GamesWon" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Position" type="xs:int" />
       <xs:element minOccurs="0" name="Score" type="xs:int" />

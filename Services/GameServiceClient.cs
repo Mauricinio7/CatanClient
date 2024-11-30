@@ -411,6 +411,10 @@ namespace CatanClient.Services
             {
                 Log.Error(ex, ex.Source);
             }
+            finally
+            {
+                CloseConnection();
+            }
             return result;
         }
 
@@ -442,6 +446,10 @@ namespace CatanClient.Services
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
+            }
+            finally
+            {
+                CloseConnection();
             }
             return result;
         }

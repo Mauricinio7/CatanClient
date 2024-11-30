@@ -54,7 +54,7 @@
        Style="{StaticResource PrimaryTextBlockStyle}"
        Text="{Binding Source={x:Static properties:Resources.global_email_phone_number}, StringFormat='{}{0}:'}" />
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
-            PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
+            PlaceholderText="{x:Static properties:Resources.email_prompt}"
             Margin="78,196,88,483" 
             Style="{StaticResource SynthwaveTextBoxStyle}"
             Text="{Binding ContactInfo, UpdateSourceTrigger=PropertyChanged}"
@@ -69,7 +69,7 @@
             TextBoxWidth="630"
             TextBoxHeight="55"
             Style="{StaticResource SynthwavePasswordBoxStyle}"
-            PlaceholderText="{x:Static properties:Resources.global_password}"
+            PlaceholderText="{x:Static properties:Resources.password_prompt}"
             CheckBoxMargin="5,110,0,0"
             Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
             />
@@ -80,7 +80,7 @@
                        Style="{StaticResource PrimaryTextBlockStyle}"
             />
             <controls:PlaceholderTextBoxControl x:Name="TextBoxUsername"
-                                                PlaceholderText="{x:Static properties:Resources.global_username}"
+                                                PlaceholderText="{x:Static properties:Resources.username_prompt}"
                                                 Margin="78,512,88,167"
                                                 Style="{StaticResource SynthwaveTextBoxStyle}"
                                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"

@@ -10,14 +10,7 @@
     <Grid Background="{StaticResource SecondaryColor}" Margin="0,0,0,0" Height="180" VerticalAlignment="Center" >
         <Image HorizontalAlignment="Left" Height="148" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="{Binding ImageSource}"/>
         <TextBlock
-            Margin="166,78,14,64"
-            Text="{Binding Ready}"
-            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
-            Foreground="White"
-            FontSize="30"
-            />
-        <TextBlock
-            Margin="10,155,130,7"
+            Margin="10,152,130,10"
             Text="{Binding PlayerName}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"

@@ -17,26 +17,11 @@
         Foreground="White"
         FontSize="13"
     />
-        <TextBlock
-            Margin="214,108,858,41"
-            Text="{Binding Source={x:Static properties:Resources.label_votes}, StringFormat='{}{0}:'}"
-            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
-            Foreground="White"
-            FontSize="15"
-        />
-
-        <TextBlock
-            Margin="306,108,766,41"
-            Text="{Binding VotesText}"
-            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
-            Foreground="White"
-            FontSize="15"
-        />  
 
 
         <Button Content="{x:Static properties:Resources.global_vote_kick}" 
         Style="{StaticResource PrimaryButtonStyle}"
-        Margin="214,26,685,90"
+        Margin="199,54,700,62"
         Command="{Binding VoteKickCommand}"
     />
 

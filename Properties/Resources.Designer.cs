@@ -475,11 +475,11 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a User verification failed.
+        ///   Busca una cadena traducida similar a User verification failed, the verification code is incorrect.
         /// </summary>
-        public static string dialog_fail_verify_user {
+        public static string dialog_fail_verify_user_message {
             get {
-                return ResourceManager.GetString("dialog_fail_verify_user", resourceCulture);
+                return ResourceManager.GetString("dialog_fail_verify_user_message", resourceCulture);
             }
         }
         
@@ -921,6 +921,15 @@ namespace CatanClient.Properties {
         public static string dialog_you_have_been_kicked_message {
             get {
                 return ResourceManager.GetString("dialog_you_have_been_kicked_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Example: user@domain.com.
+        /// </summary>
+        public static string email_prompt {
+            get {
+                return ResourceManager.GetString("email_prompt", resourceCulture);
             }
         }
         
@@ -1645,6 +1654,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Includes upper, lower, nums, _ (8+).
+        /// </summary>
+        public static string password_prompt {
+            get {
+                return ResourceManager.GetString("password_prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Your user is not verified, please verify.
         /// </summary>
         public static string String1 {
@@ -1659,6 +1677,15 @@ namespace CatanClient.Properties {
         public static string tittle_restart {
             get {
                 return ResourceManager.GetString("tittle_restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 8-15 characters.
+        /// </summary>
+        public static string username_prompt {
+            get {
+                return ResourceManager.GetString("username:prompt", resourceCulture);
             }
         }
         

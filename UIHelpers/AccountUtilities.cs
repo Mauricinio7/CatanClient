@@ -18,7 +18,12 @@ namespace CatanClient.UIHelpers
         public static bool IsValidAccountName(string name)
         {
             string nameRegex = Utilities.REGEX_PROFILE_NAME_VALIDATION;
-            return Regex.IsMatch(name, nameRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000));
+            return Regex.IsMatch(name, nameRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000)) && name.Length >= Utilities.USERNAME_MIN_LENGTH && name.Length <= Utilities.USERNAME_MAX_LENGTH;
+        }
+
+        public static bool IsValidLength(string field)
+        {
+            return field.Length <= Utilities.FIEL_MAX_LENGTH;
         }
 
         public static bool IsValidAccountEmail(string email)
@@ -59,7 +64,7 @@ namespace CatanClient.UIHelpers
         public static bool IsValidAccountPassword(string password)
         {
             string passwordRegex = Utilities.REGEX_PASSWORD_ACCOUNT_VALIDATION;
-            return Regex.IsMatch(password, passwordRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000));
+            return Regex.IsMatch(password, passwordRegex, RegexOptions.None, TimeSpan.FromMilliseconds(1000)) && IsValidLength(password);
         }
 
         public static AccountDto CreateAccount(string email, string phoneNumber, string password, string name)
@@ -172,6 +177,22 @@ namespace CatanClient.UIHelpers
             return profile;
         }
 
+        public static AccountService.ProfileDto CastProfileServiceToAccountProfile(ProfileService.ProfileDto profile)
+        {
+            AccountService.ProfileDto accountProfile = new AccountService.ProfileDto
+            {
+                Id = profile.Id,
+                Name = profile.Name,
+                CurrentSessionID = profile.CurrentSessionID,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                IsRegistered = profile.IsRegistered,
+                IsOnline = profile.IsOnline,
+                PictureVersion =profile.PictureVersion
+            };
+
+            return accountProfile;
+        }
+
         public static GameService.GuestAccountDto CastAccountProfileToGuestAccount(AccountService.ProfileDto accountProfile)
         {
             GameService.GuestAccountDto guestAccountDto = new GameService.GuestAccountDto
@@ -191,7 +212,7 @@ namespace CatanClient.UIHelpers
 
             if (result)
             {
-                MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name),
+                    MessageBox.Show(Utilities.MessageSuccesSendVerificationCode(CultureInfo.CurrentCulture.Name),
                     Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -204,7 +225,7 @@ namespace CatanClient.UIHelpers
 
         public static void ValidateVerificationCode(string verificationCode)
         {
-            if (string.IsNullOrWhiteSpace(verificationCode))
+            if (string.IsNullOrWhiteSpace(verificationCode) || !IsValidLength(verificationCode))
             {
                 throw new InvalidOperationException(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name));
             }

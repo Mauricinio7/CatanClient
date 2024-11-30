@@ -17,10 +17,13 @@ namespace CatanClient.UIHelpers
         public const string ALPHABET_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public const int VERIFICATION_CODE_PARTS_LENGTH = 3;
         public const int VERIFICATION_CODE_LENGTH = 9;
-        public const string REGEX_PROFILE_NAME_VALIDATION = "^[a-zA-Z0-9 ]+$";
-        public const string REGEX_PROFILE_EMAIL_VALIDATION = @"^[a-zA-Z0-9._-]+(?<!\.)@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-        public const string REGEX_PHONE_NUMBER_VALIDATION = "^[0-9]+$";
-        public const string REGEX_PASSWORD_ACCOUNT_VALIDATION = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>_])(?=.*[a-zA-Z0-9]).{8,}$";
+        public const string REGEX_PROFILE_NAME_VALIDATION = "^[a-zA-ZñÑ0-9]+( [a-zA-ZñÑ0-9]+)*$";
+        public const string REGEX_PROFILE_EMAIL_VALIDATION = @"^[a-zA-ZñÑ0-9._-]+(?<!\.)@[a-zA-ZñÑ0-9.-]+\.[a-zA-ZñÑ]{2,}$";
+        public const string REGEX_PHONE_NUMBER_VALIDATION = @"^\+[0-9]+$";
+        public const string REGEX_PASSWORD_ACCOUNT_VALIDATION = "^(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>_])(?=.*[a-zA-ZñÑ0-9]).{8,}$";
+        public const int USERNAME_MIN_LENGTH = 8;
+        public const int USERNAME_MAX_LENGTH = 15;
+        public const int FIEL_MAX_LENGTH = 15;
         public const string REGEX_DOUBLE_POINTS = "\\.\\.+";
         public const string STRING_CHAR_SPACE = " ";
         public const char STRING_CHAR_ARROBA = '@';
@@ -507,6 +510,15 @@ namespace CatanClient.UIHelpers
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning
             );
+        }
+
+        public static void ShowMessageInvalidFileds()
+        {
+            MessageBox.Show(Utilities.MessageInvalidCaracters(CultureInfo.CurrentCulture.Name), Utilities.TittleInvalidCaracters(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        public static void ShowMessageEmptyFields()
+        {
+            MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

@@ -43,10 +43,11 @@
            Style="{StaticResource PrimaryTextBlockStyle}"
            Text="{Binding Source={x:Static properties:Resources.global_email_phone_number}, StringFormat='{}{0}:'}" />
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
-                PlaceholderText="{x:Static properties:Resources.global_email_phone_number}"
+                PlaceholderText="{x:Static properties:Resources.email_prompt}"
                 Margin="70,215,33,516" Width="449"  
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12"
                 />
             <TextBlock HorizontalAlignment="Left" 
                 Margin="76,317,0,0" 
@@ -58,8 +59,9 @@
                 TextBoxWidth="449"
                 TextBoxHeight="55"
                 Style="{StaticResource SynthwavePasswordBoxStyle}"
-                PlaceholderText="{x:Static properties:Resources.global_password}"
+                PlaceholderText="{x:Static properties:Resources.password_prompt}"
                 Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12"
                 />
             <Button Content="{x:Static properties:Resources.button_continue}" 
                 HorizontalAlignment="Left" 

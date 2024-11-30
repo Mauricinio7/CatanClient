@@ -501,8 +501,8 @@
   <data name="dialog_fail" xml:space="preserve">
     <value>La acción ha fallado</value>
   </data>
-  <data name="dialog_fail_verify_user" xml:space="preserve">
-    <value>No se ha podido verificar el usuario</value>
+  <data name="dialog_fail_verify_user_message" xml:space="preserve">
+    <value>No se ha podido verificar el usuario, el código de verificación es incorrecto</value>
   </data>
   <data name="dialog_succes" xml:space="preserve">
     <value>Éxito</value>
@@ -678,5 +678,14 @@
   </data>
   <data name="message_game_started" xml:space="preserve">
     <value>El juego ha iniciado</value>
+  </data>
+  <data name="email_prompt" xml:space="preserve">
+    <value>Ejemplo: usuario@dominio.com</value>
+  </data>
+  <data name="password_prompt" xml:space="preserve">
+    <value>Incluye mayúsc., minúsc., nros, _ (8+)</value>
+  </data>
+  <data name="username_prompt" xml:space="preserve">
+    <value>8-15 caracteres</value>
   </data>
 </root>

@@ -44,18 +44,30 @@ namespace CatanClient.ViewModels
 
         internal void ExecuteAddFriend(object parameter)
         {
-            bool result;
-
-            result = serviceManager.ProfileServiceClient.SendFriendRequest(PlayerName, profile);
-
-            if (result)
+            if (string.IsNullOrEmpty(PlayerName))
             {
-                MessageBox.Show(Utilities.MessageSuccesFriendRequest(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                Utilities.ShowMessageEmptyFields();
+            }
+            else if(!AccountUtilities.IsValidLength(PlayerName)) 
+            {
+                Utilities.ShowMessageInvalidFileds();
             }
             else
             {
-                Utilities.ShowMessgeServerLost();
+                bool result;
+                result = serviceManager.ProfileServiceClient.SendFriendRequest(PlayerName, profile);
+
+                if (result)
+                {
+                    MessageBox.Show(Utilities.MessageSuccesFriendRequest(CultureInfo.CurrentCulture.Name), Utilities.TittleSuccess(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    //TODO Friend not Found
+                    Utilities.ShowMessgeServerLost();
+                }
             }
+
 
         }
 

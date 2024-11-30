@@ -70,7 +70,7 @@ namespace CatanClient.ViewModels
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show(ex.Message, Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Log.Error(ex.Message);
             }
         }
 

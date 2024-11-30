@@ -26,8 +26,6 @@ namespace CatanClient
     {
         public App()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
-
         }
 
         public static IContainer Container { get; private set; }
