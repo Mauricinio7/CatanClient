@@ -103,11 +103,11 @@ namespace CatanClient.ViewModels
             switch (result.status)
             {
                 case EnumCreateAccountStatus.SuccessSave:
-                    ProfileDto profie = result.ProfileDto;
-                    string filePath = Utilities.GetDefaultPhotoPath();
-                    SaveImageInServer(filePath, profie);
+                    ProfileDto profile = result.ProfileDto;
+                    string packUri = Utilities.DEFAULT_PHOTO_PATH;
+                    SaveImageInServer(packUri, profile);
 
-                    account.Id = profie.Id;
+                    account.Id = profile.Id;
 
                     Mediator.Notify(Utilities.SHOW_VERIFY_ACCOUNT, account);
                     break;
@@ -124,28 +124,39 @@ namespace CatanClient.ViewModels
         }
 
 
-        private void SaveImageInServer(string filePath, ProfileDto profile)
+        private void SaveImageInServer(string packUri, ProfileDto profile)
         {
-            byte[] imageBytes = File.ReadAllBytes(filePath);
+            byte[] imageBytes = ReadImageFromPackUri(packUri);
 
             ProfileService.OperationResultProfileDto result;
 
             profile.IsOnline = true;
-            
+
             result = serviceManager.ProfileServiceClient.UploadImage(AccountUtilities.CastAccountProfileToProfileService(profile), imageBytes);
 
             if (result.IsSuccess)
             {
-                SaveImageLocally(filePath, profile);
+                SaveImageLocally(packUri, profile);
             }
             else
             {
                 Utilities.ShowMessgeServerLost();
             }
-
         }
 
-        private static void SaveImageLocally(string filePath, ProfileDto profile)
+        private static byte[] ReadImageFromPackUri(string packUri)
+        {
+            Uri uri = new Uri(packUri, UriKind.Absolute);
+
+            using (Stream resourceStream = Application.GetResourceStream(uri).Stream)
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                resourceStream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+
+        private static void SaveImageLocally(string packUri, ProfileDto profile)
         {
             string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
 
@@ -157,7 +168,8 @@ namespace CatanClient.ViewModels
             string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
             string destinationPath = Path.Combine(appDirectory, fileName);
 
-            File.Copy(filePath, destinationPath, overwrite: true);
+            byte[] imageBytes = ReadImageFromPackUri(packUri);
+            File.WriteAllBytes(destinationPath, imageBytes);
         }
 
 

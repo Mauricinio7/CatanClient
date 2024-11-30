@@ -33,8 +33,8 @@ namespace CatanClient.Gameplay.Views
         private void StartDiceAnimation(int result)
         {
             string diceGifPath = Utilities.DICE_ROLL_ANIMATION;
-            var imageUri = new Uri(diceGifPath, UriKind.Absolute);
-            var imageSource = new BitmapImage(imageUri);
+            Uri imageUri = new Uri(diceGifPath, UriKind.Absolute);
+            BitmapImage imageSource = new BitmapImage(imageUri);
 
             RenderOptions.SetBitmapScalingMode(DiceImage, BitmapScalingMode.NearestNeighbor);
 

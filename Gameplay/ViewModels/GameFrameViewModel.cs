@@ -371,7 +371,7 @@ namespace CatanClient.ViewModels
                 GameHexes = hexes;
                 HexTileImages.Clear();
 
-                foreach (var hex in hexes)
+                foreach (HexTileDto hex in hexes)
                 {
                     await Task.Delay(300);
                     string imagePath = GetImagePathByResource(hex.Resource);
@@ -587,35 +587,47 @@ namespace CatanClient.ViewModels
 
         private bool CanExecuteSelectVertex(object parameter)
         {
-            bool canExecute = false;
+            if (GameHexes.Count == 0 || !(parameter is string tag) || !TryParseTag(tag, out int hexIndex, out int vertexIndex))
+                return false;
 
-            if (GameHexes.Count > 0 && parameter is string tag && TryParseTag(tag, out int hexIndex, out int vertexIndex))
-            {
-                HexTileDto hex = GameHexes[hexIndex - 1];
-                if (hex != null)
-                {
-                    VertexDto vertex = hex.Vertices[vertexIndex - 1];
-                    if (vertex != null)
-                    {
-                        if (vertex.IsOccupied)
-                        {
-                            bool isOwner = vertex.OwnerPlayerId == playerGameplay.Id;
-                            VertexOccupied?.Invoke(tag, vertex.IsCity, isOwner);
-                        }
+            HexTileDto hex = GetHexAtIndex(hexIndex - 1);
+            VertexDto vertex = GetVertexAtIndex(hex, vertexIndex - 1);
 
-                        if (IsBuildingCity)
-                        {
-                            canExecute = vertex.IsOccupied && vertex.OwnerPlayerId == playerGameplay.Id && !vertex.IsCity;
-                        }
-                        else if (IsBuildingSettlement)
-                        {
-                            canExecute = !vertex.IsOccupied;
-                        }
-                    }
-                }
-            }
+            if (vertex == null)
+                return false;
 
-            return canExecute;
+            if (vertex.IsOccupied)
+                HandleOccupiedVertex(tag, vertex);
+
+            return IsBuildingCity
+                ? CanBuildCity(vertex)
+                : IsBuildingSettlement && CanBuildSettlement(vertex);
+        }
+
+        private HexTileDto GetHexAtIndex(int index)
+        {
+            return index >= 0 && index < GameHexes.Count ? GameHexes[index] : null;
+        }
+
+        private static VertexDto GetVertexAtIndex(HexTileDto hex, int index)
+        {
+            return hex != null && index >= 0 && index < hex.Vertices.Length ? hex.Vertices[index] : null;
+        }
+
+        private void HandleOccupiedVertex(string tag, VertexDto vertex)
+        {
+            bool isOwner = vertex.OwnerPlayerId == playerGameplay.Id;
+            VertexOccupied?.Invoke(tag, vertex.IsCity, isOwner);
+        }
+
+        private bool CanBuildCity(VertexDto vertex)
+        {
+            return vertex.IsOccupied && vertex.OwnerPlayerId == playerGameplay.Id && !vertex.IsCity;
+        }
+
+        private static bool CanBuildSettlement(VertexDto vertex)
+        {
+            return !vertex.IsOccupied;
         }
 
 
@@ -811,9 +823,9 @@ namespace CatanClient.ViewModels
                 App.Current.Dispatcher.InvokeAsync(async () =>
                 {
                     Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-                    PlayerResourcesDto sendResources = tradeResources[1];
-                    PlayerResourcesDto receiveResources = tradeResources[0];
-                    receiveResources.PlayerId = profile.Id.Value;
+                    PlayerResourcesDto sendResources = tradeResources[0];
+                    PlayerResourcesDto receiveResources = tradeResources[1];
+                    sendResources.PlayerId = profile.Id.Value;
 
                     OperationResultDto result;
                     result = await serviceManager.GameServiceClient.AcceptTradeRequestAsync(sendResources, receiveResources, AccountUtilities.CastChatGameToGameServiceGame(game));

@@ -59,11 +59,11 @@ namespace CatanClient.ViewModels
 
         public void LoadFriendRequestList()
         {
-            var profileList = serviceManager.ProfileServiceClient.GetFriendRequestList(profile).ProfileDtos.ToList();
+            List<ProfileDto> profileList = serviceManager.ProfileServiceClient.GetFriendRequestList(profile).ProfileDtos.ToList();
 
             Friends = new ObservableCollection<FriendRequestPlayerCardViewModel>();
 
-            foreach (var profileDto in profileList)
+            foreach (ProfileDto profileDto in profileList)
             {
                 bool isOnline = profileDto.IsOnline;
 

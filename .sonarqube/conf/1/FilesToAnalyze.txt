@@ -17,11 +17,13 @@ C:\Users\mauricio\source\repos\CatanClient\Controls\PlayerInRoomCard.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Controls\PlayerInRoomCardViewModel.cs
 C:\Users\mauricio\source\repos\CatanClient\Controls\VoteKickPlayerCard.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Controls\VoteKickPlayerCardViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Helpers\GameRules.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Helpers\Resource.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\ViewModels\TradeWindowViewModel.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\DiceRollAnimationView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\GameFrameView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\TradeWindow.xaml.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\WinnerAnimationView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\AccountServiceClient.cs
 C:\Users\mauricio\source\repos\CatanClient\Services\ChatServiceClient.cs
 C:\Users\mauricio\source\repos\CatanClient\UIHelpers\ConnectionUtilities.cs
@@ -123,8 +125,10 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameSe
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService3.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService4.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService5.xsd
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService51.xsd
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService52.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService6.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService61.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService62.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService63.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameServiceEndpoint.wsdl
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\CatanClient.GuestAccountService.OperationResultGuestAccountDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountEndpoint.wsdl
@@ -146,14 +150,6 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\Acc
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\configuration91.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\configuration.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\AccountService\Reference.svcmap
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService.disco
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\configuration91.svcinfo
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\configuration.svcinfo
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\Reference.svcmap
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService.disco
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\configuration91.svcinfo
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\configuration.svcinfo
-C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\Reference.svcmap
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\GameService.disco
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\configuration91.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GameService\configuration.svcinfo
@@ -162,6 +158,14 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\ChatSe
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\configuration91.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\configuration.svcinfo
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ChatService\Reference.svcmap
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService.disco
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\configuration91.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\configuration.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\Reference.svcmap
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService.disco
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\configuration91.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\configuration.svcinfo
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\Reference.svcmap
 C:\Users\mauricio\source\repos\CatanClient\Controls\FriendPlayerCard.xaml
 C:\Users\mauricio\source\repos\CatanClient\Controls\FriendRequestPlayerCard.xaml
 C:\Users\mauricio\source\repos\CatanClient\Controls\InvitePlayerCard.xaml
@@ -175,6 +179,7 @@ C:\Users\mauricio\source\repos\CatanClient\Controls\VoteKickPlayerCard.xaml
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\DiceRollAnimationView.xaml
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\GameFrameView.xaml
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\TradeWindow.xaml
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\WinnerAnimationView.xaml
 C:\Users\mauricio\source\repos\CatanClient\Resources\Styles\Animations.xaml
 C:\Users\mauricio\source\repos\CatanClient\Resources\Styles\Styles.xaml
 C:\Users\mauricio\source\repos\CatanClient\Views\AddFriendWindow.xaml
@@ -215,7 +220,6 @@ C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResourc
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\TritoniumWood.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\City.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\Road.png
-C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\Town.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\Dice.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\ContinueTurn.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\TradeButton.png
@@ -228,3 +232,5 @@ C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResourc
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\Biomes\WoodBiomec.png
 C:\Users\mauricio\source\repos\CatanClient\Image1.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Animations\dice_roll_animation_dual.gif
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\Town.png
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Animations\WinAnimation1.gif

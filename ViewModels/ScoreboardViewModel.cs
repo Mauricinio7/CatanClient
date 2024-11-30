@@ -1,4 +1,6 @@
-﻿using CatanClient.Services;
+﻿using CatanClient.GameService;
+using CatanClient.Services;
+using CatanClient.UIHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +13,7 @@ namespace CatanClient.ViewModels
     internal class ScoreboardViewModel : ViewModelBase
     {
         private readonly ServiceManager serviceManager;
+        private readonly AccountService.ProfileDto profile;
         public ObservableCollection<PlayerScore> FriendScores { get; set; }
         public ObservableCollection<PlayerScore> WorldScores { get; set; }
         public ObservableCollection<PlayerScore> WeeklyScores { get; set; }
@@ -18,7 +21,8 @@ namespace CatanClient.ViewModels
 
         public ScoreboardViewModel(ServiceManager service)
         {
-           this.serviceManager = service;
+            this.serviceManager = service;
+            profile = serviceManager.ProfileSingleton.Profile;
             FriendScores = new ObservableCollection<PlayerScore>();
             WorldScores = new ObservableCollection<PlayerScore>();
             WeeklyScores = new ObservableCollection<PlayerScore>();
@@ -28,19 +32,58 @@ namespace CatanClient.ViewModels
 
         public void LoadFriendScores()
         {
-            FriendScores.Clear();
-            FriendScores.Add(new PlayerScore { Position = 1, PlayerName = "Mauricinio7", GamesWon = 5, TotalPoints = 65 });
-            FriendScores.Add(new PlayerScore { Position = 2, PlayerName = "TonyGamer", GamesWon = 4, TotalPoints = 56 });
-            FriendScores.Add(new PlayerScore { Position = 3, PlayerName = "XxGamerxX", GamesWon = 2, TotalPoints = 87 });
-            FriendScores.Add(new PlayerScore { Position = 4, PlayerName = "Player 93", GamesWon = 0, TotalPoints = 10 });
+
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                OperationResultListScoreGame result = await serviceManager.GameServiceClient.GetScoreboardFriends(AccountUtilities.CastAccountProfileToGameService(profile));
+
+                if (result.IsSuccess)
+                {
+                    FriendScores.Clear();
+                    foreach (var score in result.ListProfileScoreDto)
+                    {
+                        FriendScores.Add(new PlayerScore
+                        {
+                            Position = score.Position,
+                            PlayerName = score.Name,
+                            //GamesWon = score.GamesWon,
+                            TotalPoints = score.Score
+                        });
+                    }
+                }
+                else
+                {
+                    Utilities.ShowMessageDataBaseUnableToLoad();
+                }
+            });
         }
 
         public void LoadWorldScores()
         {
-            WorldScores.Clear();
-            WorldScores.Add(new PlayerScore { Position = 1, PlayerName = "GlobalPlayer1", GamesWon = 10, TotalPoints = 150 });
-            WorldScores.Add(new PlayerScore { Position = 2, PlayerName = "GlobalPlayer2", GamesWon = 8, TotalPoints = 120 });
-            WorldScores.Add(new PlayerScore { Position = 3, PlayerName = "GlobalPlayer3", GamesWon = 6, TotalPoints = 100 });
+
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                OperationResultListScoreGame result = await serviceManager.GameServiceClient.GetScoreboardWorld(AccountUtilities.CastAccountProfileToGameService(profile));
+
+                if (result.IsSuccess)
+                {
+                    WorldScores.Clear();
+                    foreach (var score in result.ListProfileScoreDto)
+                    {
+                        WorldScores.Add(new PlayerScore
+                        {
+                            Position = score.Position,
+                            PlayerName = score.Name,
+                            //GamesWon = score.GamesWon,
+                            TotalPoints = score.Score
+                        });
+                    }
+                }
+                else
+                {
+                    Utilities.ShowMessageDataBaseUnableToLoad();
+                }
+            });
         }
 
         public void LoadWeeklyScores()

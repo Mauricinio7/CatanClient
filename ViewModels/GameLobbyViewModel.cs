@@ -239,7 +239,7 @@ namespace CatanClient.ViewModels
 
                     if (OnlinePlayers.Count > 0)
                     {
-                        foreach (var profileDto in OnlinePlayers)
+                        foreach (ProfileDto profileDto in OnlinePlayers)
                         {
                             OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
                                 new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
@@ -248,7 +248,7 @@ namespace CatanClient.ViewModels
 
                     if (OnlinePlayersGuest.Count > 0)
                     {
-                        foreach (var guestProfileDto in OnlinePlayersGuest)
+                        foreach (GuestAccountDto guestProfileDto in OnlinePlayersGuest)
                         {
                             ProfileDto profileDto = new ProfileDto();
                             profileDto.Id = guestProfileDto.Id;
@@ -291,7 +291,7 @@ namespace CatanClient.ViewModels
         }
         internal void ExecuteShowKickPlayer()
         {
-            var kickPlayerWindow = new KickPlayerWindow(game);
+            KickPlayerWindow kickPlayerWindow = new KickPlayerWindow(game);
             kickPlayerWindow.ShowDialog();
         }
 

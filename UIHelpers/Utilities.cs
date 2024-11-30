@@ -27,6 +27,7 @@ namespace CatanClient.UIHelpers
         public const string STRING_CHAR_DASH = "-";
         public const string STRING_CHAR_POINT = ".";
         public const string LOGGER_FILE_DIRECTORY = "C:/Users/mauricio/source/repos/CatanClient/logs/errorlog.txt";
+        public const string DEFAULT_PHOTO_PATH = "pack://application:,,,/Resources/Images/ShibaTest.png";
         public const string LANGUAGE_ENGLISH_FORMAT_RESX = "en";
         public const string LANGUAGE_ESPANISH_FORMAT_RESX = "es";
         public const string IP_ACCOUNT_SERVICE = "net.tcp://localhost:8181/AccountService";
@@ -115,6 +116,9 @@ namespace CatanClient.UIHelpers
         public const string ALPHA_NANOFIBERS_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/FiberBiomec.png";
         public const string EPSILON_BIOMASS_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/BiomasaBiomec.png";
         public const string GRX_810_BIOME_IMAGE_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Biomes/GRX-81Biomec.png";
+        public const string CITY_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/City.png";
+        public const string TOWN_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Town.png";
+        public const string ROAD_PATH = "pack://application:,,,/Gameplay/Resources/Images/GameResources/Road.png";
         public const string LUNAR_STONE = "Lunar Stone";
         public const string TRITONIUM = "Tritonium";
         public const string ALPHA_NANOFIBERS = "Alpha Nanofibers";

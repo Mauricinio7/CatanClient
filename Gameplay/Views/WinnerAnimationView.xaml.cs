@@ -19,26 +19,19 @@ namespace CatanClient.Gameplay.Views
         {
             InitializeComponent();
 
-            WinnerText.Text = $"¡Ganador: {winnerName}!";
+            WinnerText.Text = "";
 
-            _ = StartAnimationsAsync();
+            _ = StartAnimationsAsync(winnerName);
         }
 
-        private async Task StartAnimationsAsync()
+        private async Task StartAnimationsAsync(string winnerName)
         {
-            // 1. Animar el gradiente
             AnimateGradient();
 
-            // 2. Pausa para que el gradiente termine
-            await Task.Delay(1000);
+            await Task.Delay(1800);
 
-            // 3. Animar el texto
-            AnimateText();
+            AnimateText(winnerName);
 
-            // 4. Pausa antes de mostrar el GIF
-            await Task.Delay(1000);
-
-            // 5. Mostrar el GIF
             PlayWinnerGif();
         }
 
@@ -46,21 +39,18 @@ namespace CatanClient.Gameplay.Views
         {
             try
             {
-                // Usar el Pack URI para cargar el GIF
-                var gifUri = new Uri(Utilities.WIN_ANIMATION, UriKind.Absolute);
-                var gifImage = new BitmapImage(gifUri);
+                Uri gifUri = new Uri(Utilities.WIN_ANIMATION, UriKind.Absolute);
+                BitmapImage gifImage = new BitmapImage(gifUri);
 
-                // Configurar la animación del GIF
                 RenderOptions.SetBitmapScalingMode(WinnerGif, BitmapScalingMode.NearestNeighbor);
                 ImageBehavior.SetAnimatedSource(WinnerGif, gifImage);
-                ImageBehavior.SetRepeatBehavior(WinnerGif, RepeatBehavior.Forever); // Repetir infinitamente
+                ImageBehavior.SetRepeatBehavior(WinnerGif, RepeatBehavior.Forever);
 
-                // Aplicar fade-in al GIF
-                var fadeInAnimation = new DoubleAnimation
+                DoubleAnimation fadeInAnimation = new DoubleAnimation
                 {
-                    From = 0, // Transparente
-                    To = 1,   // Opaco
-                    Duration = TimeSpan.FromSeconds(1) // Duración de 1 segundo
+                    From = 0, 
+                    To = 1,   
+                    Duration = TimeSpan.FromSeconds(1) 
                 };
 
                 WinnerGif.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
@@ -73,7 +63,7 @@ namespace CatanClient.Gameplay.Views
 
         private void AnimateGradient()
         {
-            var gradientAnimation = new DoubleAnimation
+            DoubleAnimation gradientAnimation = new DoubleAnimation
             {
                 From = 0,
                 To = 1,
@@ -84,16 +74,17 @@ namespace CatanClient.Gameplay.Views
             GradientEnd.BeginAnimation(GradientStop.OffsetProperty, gradientAnimation);
         }
 
-        private void AnimateText()
+        private void AnimateText(string winnerName)
         {
-            var fadeInAnimation = new DoubleAnimation
+            WinnerText.Text = $"¡Ganador: {winnerName}!";
+            DoubleAnimation fadeInAnimation = new DoubleAnimation
             {
                 From = 0,
                 To = 1,
                 Duration = TimeSpan.FromSeconds(1)
             };
 
-            var scaleAnimation = new DoubleAnimation
+            DoubleAnimation scaleAnimation = new DoubleAnimation
             {
                 From = 0.5,
                 To = 1.2,

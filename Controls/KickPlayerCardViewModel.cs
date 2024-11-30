@@ -71,7 +71,7 @@ namespace CatanClient.Controls
 
         private void ExecuteKick()
         {
-            var expelWindow = new ExpelPlayerWindow(Profile, Game);
+            ExpelPlayerWindow expelWindow = new ExpelPlayerWindow(Profile, Game);
 
             expelWindow.ShowDialog();
         }

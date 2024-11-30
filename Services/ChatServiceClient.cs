@@ -23,7 +23,7 @@ namespace CatanClient.Services
         {
             if (client != null) return;
 
-            var binding = new NetTcpBinding
+            NetTcpBinding binding = new NetTcpBinding
             {
                 Security = { Mode = SecurityMode.None },
                 MaxBufferSize = 10485760,
@@ -34,7 +34,7 @@ namespace CatanClient.Services
                 ReceiveTimeout = TimeSpan.FromMinutes(10)
             };
 
-            var endpoint = new EndpointAddress(Utilities.IP_CHAT_SERVICE);
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_CHAT_SERVICE);
             channelFactory = new DuplexChannelFactory<IChatServiceEndpoint>(callbackInstance, binding, endpoint);
             client = channelFactory.CreateChannel();
         }

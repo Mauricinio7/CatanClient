@@ -95,7 +95,7 @@ namespace CatanClient.ViewModels
 
         public static void ShowVerify(AccountService.AccountDto account)
         {
-            var verifyWindow = new VerifyAccountChangeWindow(account);
+            VerifyAccountChangeWindow verifyWindow = new VerifyAccountChangeWindow(account);
 
             verifyWindow.ShowDialog();
         }

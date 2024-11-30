@@ -64,7 +64,7 @@ namespace CatanClient.Gameplay.ViewModels
             PlayerResourcesDto needResources = InicializateResources();
             needResources.PlayerId = profile.Id.Value;
 
-            foreach (var resource in ResourcesToRequest)
+            foreach (Resource resource in ResourcesToRequest)
             {
                 switch (resource.Name)
                 {
@@ -97,7 +97,7 @@ namespace CatanClient.Gameplay.ViewModels
         {
             PlayerResourcesDto offerResources = InicializateResources(); 
             offerResources.PlayerId = profile.Id.Value;
-            foreach (var resource in ResourcesToOffer)
+            foreach (Resource resource in ResourcesToOffer)
             {
                 switch (resource.Name)
                 {

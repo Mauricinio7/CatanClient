@@ -66,7 +66,7 @@ namespace CatanClient.ViewModels
         private async Task SendVerifyCodePasswordAsync()
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-            var result = await serviceManager.AccountServiceClient.ConfirmPasswordAsync(Account); 
+            OperationResultDto result = await serviceManager.AccountServiceClient.ConfirmPasswordAsync(Account); 
 
             if (result.IsSuccess)
             {
@@ -82,7 +82,7 @@ namespace CatanClient.ViewModels
         private async Task SendVerifyCodeEmailOrPhoneAsync()
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-            var result = await serviceManager.AccountServiceClient.ConfirmEmailOrPhoneAsync(Account); 
+            OperationResultChangeRegisterEmailOrPhone result = await serviceManager.AccountServiceClient.ConfirmEmailOrPhoneAsync(Account); 
 
             if (result.IsSuccess)
             {

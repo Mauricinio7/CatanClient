@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using CatanClient.ChatService;
 using CatanClient.Gameplay.ViewModels;
+using CatanClient.UIHelpers;
 using CatanClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -40,14 +41,14 @@ namespace CatanClient.Gameplay.Views
 
         private void OnVertexOccupied(string tag, bool haveCity, bool isOwner)
         {
-            var button = FindButtonByTag(tag);
+            Button button = FindButtonByTag(tag);
             if (button != null)
             {
-                var imageSource = haveCity
-                    ? new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/City.png"))
-                    : new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Town.png"));
+                BitmapImage imageSource = haveCity
+                    ? new BitmapImage(new Uri(Utilities.CITY_PATH))
+                    : new BitmapImage(new Uri(Utilities.TOWN_PATH));
 
-                var image = new Image
+                Image image = new Image
                 {
                     Source = imageSource,
                     Stretch = Stretch.Uniform
@@ -68,12 +69,12 @@ namespace CatanClient.Gameplay.Views
 
         private void OnEdgeOccupied(string tag, bool isOwner)
         {
-            var button = FindButtonByTag(tag);
+            Button button = FindButtonByTag(tag);
             if (button != null)
             {
-                var imageSource = new BitmapImage(new Uri("pack://application:,,,/Gameplay/Resources/Images/GameResources/Road.png"));
-
-                var image = new Image
+                BitmapImage imageSource = new BitmapImage(new Uri(Utilities.ROAD_PATH));
+                    
+                Image image = new Image
                 {
                     Source = imageSource,
                     Stretch = Stretch.Uniform
@@ -94,7 +95,7 @@ namespace CatanClient.Gameplay.Views
 
         private Button FindButtonByTag(string tag)
         {
-            foreach (var child in MainGrid.Children)
+            foreach (object child in MainGrid.Children)
             {
                 if (child is Button button && button.Tag?.ToString() == tag)
                 {
@@ -107,10 +108,10 @@ namespace CatanClient.Gameplay.Views
         private UIElement ApplyColorFilter(Image image, Color color)
         {
 
-            var container = new Grid();
-            container.Children.Add(image); 
+            Grid container = new Grid();
+            container.Children.Add(image);
 
-            var overlay = new Border
+            Border overlay = new Border
             {
                 Background = new SolidColorBrush(color),
                 Opacity = 0.5 
@@ -123,7 +124,7 @@ namespace CatanClient.Gameplay.Views
 
         private void OnListBoxLoaded(object sender, RoutedEventArgs e)
         {
-            var listBox = sender as ListBox;
+            ListBox listBox = sender as ListBox;
             if (listBox?.ItemsSource is INotifyCollectionChanged collection)
             {
                 collection.CollectionChanged += (s, args) =>

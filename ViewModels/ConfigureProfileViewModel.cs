@@ -228,7 +228,7 @@ namespace CatanClient.ViewModels
 
             if (File.Exists(imagePath))
             {
-                var bitmap = new BitmapImage();
+                BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
                 bitmap.CacheOption = BitmapCacheOption.OnLoad;
@@ -249,7 +249,7 @@ namespace CatanClient.ViewModels
 
                     SaveImageBytesLocally(imageBytes);
 
-                    var bitmap = new BitmapImage();
+                    BitmapImage bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
                     bitmap.CacheOption = BitmapCacheOption.OnLoad;
@@ -287,7 +287,7 @@ namespace CatanClient.ViewModels
         {
             if (parameter is string field)
             {
-                var editWindow = new EditProfileWindow(field);
+                EditProfileWindow editWindow = new EditProfileWindow(field);
 
                 editWindow.ShowDialog();
             }
@@ -295,7 +295,7 @@ namespace CatanClient.ViewModels
 
         private static void OnModifyPassword(object parameter)
         {
-                var editWindow = new EditPasswordWindow();
+            EditPasswordWindow editWindow = new EditPasswordWindow();
 
                 editWindow.ShowDialog();
         }

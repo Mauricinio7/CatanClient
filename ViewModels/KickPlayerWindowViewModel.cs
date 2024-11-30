@@ -49,7 +49,7 @@ namespace CatanClient.ViewModels
 
                     if (OnlinePlayers.Count > 0)
                     {
-                        foreach (var profileDto in OnlinePlayers)
+                        foreach (GameService.ProfileDto profileDto in OnlinePlayers)
                         {
                             OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
                             new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
@@ -60,7 +60,7 @@ namespace CatanClient.ViewModels
 
                     if (OnlinePlayersGuest.Count > 0)
                     {
-                        foreach (var guestProfileDto in OnlinePlayersGuest)
+                        foreach (GuestAccountDto guestProfileDto in OnlinePlayersGuest)
                         {
                             GameService.ProfileDto profileDto = AccountUtilities.CastGuestAccountToGameServiceProfile(guestProfileDto);
                             OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(

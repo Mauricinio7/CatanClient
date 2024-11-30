@@ -68,7 +68,7 @@ namespace CatanClient.ViewModels
 
         private async Task ExecuteLoginRoomAsync(object parameter)
         {
-            var profile = serviceManager.ProfileSingleton.Profile;
+            AccountService.ProfileDto profile = serviceManager.ProfileSingleton.Profile;
 
             if (!string.IsNullOrWhiteSpace(roomCode))
             {
@@ -81,7 +81,7 @@ namespace CatanClient.ViewModels
                 }
                 else
                 {
-                    var guest = new GuestAccountDto
+                    GuestAccountDto guest = new GuestAccountDto
                     {
                         Name = profile.Name,
                         PreferredLanguage = profile.PreferredLanguage,
@@ -94,7 +94,7 @@ namespace CatanClient.ViewModels
 
                 if (result.IsSuccess)
                 {
-                    var game = result.GameDto;
+                    GameDto game = result.GameDto;
                     Mediator.Notify(Utilities.SHOW_GAME_LOBBY, game);
                 }
                 else

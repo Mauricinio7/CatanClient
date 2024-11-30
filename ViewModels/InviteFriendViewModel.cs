@@ -70,7 +70,7 @@ namespace CatanClient.ViewModels
 
         public void LoadInviteFriendList()
         {
-            foreach (var profileDto in FriendsList)
+            foreach (ProfileDto profileDto in FriendsList)
             {
                 Friends.Add(App.Container.Resolve<InvitePlayerCardViewModel>(
                     new NamedParameter(Utilities.PROFILE, profileDto),

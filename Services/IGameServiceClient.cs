@@ -34,5 +34,7 @@ namespace CatanClient.Services
         Task<OperationResultDto> PlacePiceAsync(PiecePlacementDto placementDto, PlayerGameplayDto playerGameplayDto, GameDto gameClientDto);
         Task<OperationResultDto> SendTradeRequestAsync(PlayerResourcesDto needResources, PlayerResourcesDto offerResources, GameDto game);
         Task<OperationResultDto> AcceptTradeRequestAsync(PlayerResourcesDto sendResources, PlayerResourcesDto receiveResources, GameDto game);
+        Task<OperationResultListScoreGame> GetScoreboardWorld(ProfileDto profile);
+        Task<OperationResultListScoreGame> GetScoreboardFriends(ProfileDto profile);
     }
 }

@@ -92,11 +92,11 @@ namespace CatanClient.ViewModels
         private async Task ExecuteJoinGuestAsync(object window)
         {
             Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-            var result = await serviceManager.GuestAccountServiceClient.LoginAsGuestAsync(CultureInfo.CurrentCulture.Name);
+            OperationResultGuestAccountDto result = await serviceManager.GuestAccountServiceClient.LoginAsGuestAsync(CultureInfo.CurrentCulture.Name);
 
             if (result.IsSuccess)
             {
-                var guestProfile = new ProfileDto
+                ProfileDto guestProfile = new ProfileDto
                 {
                     Id = result.GuestAccount.Id,
                     Name = result.GuestAccount.Name,

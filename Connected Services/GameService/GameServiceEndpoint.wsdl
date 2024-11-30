@@ -175,6 +175,9 @@
   <wsdl:message name="IGameEndPoint_NotifyTradeCompletion_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyTradeCompletion" />
   </wsdl:message>
+  <wsdl:message name="IGameEndPoint_NotifyWinner_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyWinner" />
+  </wsdl:message>
   <wsdl:portType name="IGameEndPoint">
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameEndPoint/CreateGame" message="tns:IGameEndPoint_CreateGame_InputMessage" />
@@ -294,6 +297,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyTradeCompletion">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyTradeCompletion" message="tns:IGameEndPoint_NotifyTradeCompletion_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyWinner">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/NotifyWinner" message="tns:IGameEndPoint_NotifyWinner_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameEndPoint" type="tns:IGameEndPoint">
@@ -550,6 +556,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyTradeCompletion">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyTradeCompletion" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyWinner">
+      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/NotifyWinner" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

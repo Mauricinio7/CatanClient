@@ -87,7 +87,7 @@ namespace CatanClient.UIHelpers
         private static void DeleteOldVersions(int profileId, string appDirectory)
         {
             string searchPattern = Utilities.ProfilePhotoPathDeleteVersion(profileId);
-            foreach (var file in Directory.GetFiles(appDirectory, searchPattern))
+            foreach (string file in Directory.GetFiles(appDirectory, searchPattern))
             {
                 File.Delete(file);
             }
@@ -95,11 +95,11 @@ namespace CatanClient.UIHelpers
 
         private static BitmapImage LoadGuestImage()
         {
-            string filePath = Utilities.GetDefaultPhotoPath();
+            string packUri = Utilities.DEFAULT_PHOTO_PATH;
 
-            var bitmap = new BitmapImage();
+            BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(filePath, UriKind.Absolute);
+            bitmap.UriSource = new Uri(packUri, UriKind.Absolute);
             bitmap.CacheOption = BitmapCacheOption.OnLoad;
             bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             bitmap.EndInit();

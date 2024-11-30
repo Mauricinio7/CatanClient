@@ -46,7 +46,7 @@ namespace CatanClient.Views
         }
         private void OnListBoxLoaded(object sender, RoutedEventArgs e)
         {
-            var listBox = sender as ListBox;
+            ListBox listBox = sender as ListBox;
             if (listBox?.ItemsSource is INotifyCollectionChanged collection)
             {
                 collection.CollectionChanged += (s, args) =>

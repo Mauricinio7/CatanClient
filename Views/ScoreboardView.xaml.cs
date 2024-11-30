@@ -30,10 +30,10 @@ namespace CatanClient.Views
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var viewModel = (ScoreboardViewModel)DataContext;
+            ScoreboardViewModel viewModel = (ScoreboardViewModel)DataContext;
 
-            var tabControl = sender as TabControl;
-            var selectedTab = tabControl.SelectedItem as TabItem;
+            TabControl tabControl = sender as TabControl;
+            TabItem selectedTab = tabControl.SelectedItem as TabItem;
 
             if (selectedTab != null)
             {

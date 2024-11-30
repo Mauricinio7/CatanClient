@@ -84,7 +84,7 @@ namespace CatanClient.ViewModels
                     Name = RoomName
                 };
 
-                var profileDto = serviceManager.ProfileSingleton.Profile;
+                AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
 
                 Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
 

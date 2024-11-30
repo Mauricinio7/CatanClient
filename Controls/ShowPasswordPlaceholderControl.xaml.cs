@@ -14,7 +14,7 @@ namespace CatanClient.Controls
         {
             InitializeComponent();
 
-            var widthBinding = new Binding(Utilities.WIDTH)
+            Binding widthBinding = new Binding(Utilities.WIDTH)
             {
                 Source = PasswordTextBox,
                 Mode = BindingMode.TwoWay,
@@ -22,7 +22,7 @@ namespace CatanClient.Controls
             };
             PasswordBox.SetBinding(WidthProperty, widthBinding);
 
-            var heightBinding = new Binding(Utilities.HEIGHT)
+            Binding heightBinding = new Binding(Utilities.HEIGHT)
             {
                 Source = PasswordTextBox,
                 Mode = BindingMode.TwoWay,

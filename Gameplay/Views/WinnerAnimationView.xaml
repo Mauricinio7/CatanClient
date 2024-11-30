@@ -7,7 +7,6 @@
              mc:Ignorable="d" 
              Width="400" Height="300">
     <Grid>
-        <!-- Gradiente animado -->
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="Transparent" Offset="0" x:Name="GradientStart" />
@@ -15,7 +14,6 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <!-- Trofeo (GIF o imagen) -->
         <Image x:Name="WinnerGif" Width="344" Height="270" HorizontalAlignment="Left" VerticalAlignment="Center" 
                RenderTransformOrigin="0.5,0.5" Opacity="0" Margin="57,0,0,0">
             <Image.RenderTransform>
@@ -23,7 +21,6 @@
             </Image.RenderTransform>
         </Image>
 
-        <!-- Texto del ganador -->
         <TextBlock x:Name="WinnerText" Text="¡Ganador!" FontSize="24" FontWeight="Bold" Foreground="White"
                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" 
                    RenderTransformOrigin="0.5,0.5">
@@ -32,7 +29,6 @@
             </TextBlock.RenderTransform>
         </TextBlock>
 
-        <!-- Botón de salir -->
         <Button Content="Salir" Width="37" Height="19" 
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0"
                 Background="Red" Foreground="White" FontWeight="Bold"

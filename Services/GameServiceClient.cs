@@ -26,7 +26,7 @@ namespace CatanClient.Services
         {
             if (client != null) return;
 
-            var binding = new NetTcpBinding
+            NetTcpBinding binding = new NetTcpBinding
             {
                 Security = { Mode = SecurityMode.None },
                 MaxBufferSize = 485760,
@@ -37,7 +37,7 @@ namespace CatanClient.Services
                 ReceiveTimeout = TimeSpan.FromMinutes(10)
             };
 
-            var endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
+            EndpointAddress endpoint = new EndpointAddress(Utilities.IP_GAME_SERVICE);
             channelFactory = new DuplexChannelFactory<IGameEndPoint>(callbackInstance, binding, endpoint);
             client = channelFactory.CreateChannel();
         }
@@ -378,6 +378,70 @@ namespace CatanClient.Services
             finally
             {
                 Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+            }
+            return result;
+        }
+
+        public async Task<OperationResultListScoreGame> GetScoreboardWorld(ProfileDto profile)
+        {
+            OpenConnection();
+            OperationResultListScoreGame result = new OperationResultListScoreGame { IsSuccess = false };
+
+            try
+            {
+                result = await client.GetScoreGameWorldAsync(profile);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            return result;
+        }
+
+        public async Task<OperationResultListScoreGame> GetScoreboardFriends(ProfileDto profile)
+        {
+            OpenConnection();
+            OperationResultListScoreGame result = new OperationResultListScoreGame { IsSuccess = false };
+
+            try
+            {
+                result = await client.GetScoreGameFriendsAsync(profile);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             return result;
         }

@@ -28,8 +28,8 @@ namespace CatanClient.Views
 
         private void Load_Gif()
         {
-            var imageUri = new Uri(Utilities.SYNTH_WAVE_BACKGROUND2_PATH, UriKind.Absolute);
-            var imageSource = new BitmapImage(imageUri);
+            Uri imageUri = new Uri(Utilities.SYNTH_WAVE_BACKGROUND2_PATH, UriKind.Absolute);
+            BitmapImage imageSource = new BitmapImage(imageUri);
             ImageBehavior.SetAnimatedSource(SynthWaveAnimatedBackground2, imageSource);
         }
     }

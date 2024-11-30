@@ -61,7 +61,7 @@ namespace CatanClient.Callbacks
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-                var mainWindow = Application.Current.MainWindow;
+                Window mainWindow = Application.Current.MainWindow;
                 mainWindow.IsEnabled = false;
 
                 try
@@ -105,6 +105,11 @@ namespace CatanClient.Callbacks
         {
             List<PlayerResourcesDto> playerResources = new List<PlayerResourcesDto> { needResources, offerResources };
             Mediator.Notify(Utilities.LOAD_GAME_TRADE, playerResources);
+        }
+
+        public void NotifyWinner(string name)
+        {
+            Mediator.Notify(Utilities.SHOW_WIN_ANIMATION, name);
         }
 
         public void SendDiceResult(int diceResult)

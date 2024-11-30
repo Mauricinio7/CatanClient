@@ -49,7 +49,7 @@ namespace CatanClient.ViewModels
 
         private static void ExecuteAddFriend(object parameter)
         {
-            var addFriendWindow = new AddFriendWindow();
+            AddFriendWindow addFriendWindow = new AddFriendWindow();
 
             addFriendWindow.ShowDialog();
         }
@@ -69,7 +69,7 @@ namespace CatanClient.ViewModels
 
         public void LoadFriendsList()
         {
-            foreach (var profileDto in FriendsList)
+            foreach (ProfileDto profileDto in FriendsList)
             {
                 Friends.Add(App.Container.Resolve<FriendPlayerCardViewModel>(
                     new NamedParameter(Utilities.PROFILE, profileDto)));

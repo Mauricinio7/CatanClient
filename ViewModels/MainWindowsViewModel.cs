@@ -169,7 +169,7 @@ namespace CatanClient.ViewModels
                 MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            var diceAnimationView = new DiceRollAnimationView(diceResult);
+            DiceRollAnimationView diceAnimationView = new DiceRollAnimationView(diceResult);
             diceAnimationView.AnimationCompleted += DiceAnimationView_AnimationCompleted;
             OverlayView = diceAnimationView;
         }
@@ -181,7 +181,7 @@ namespace CatanClient.ViewModels
 
         private void ShowLoadingScreen()
         {
-            var loadingScreen = new Controls.LoadingScreen();
+            Controls.LoadingScreen loadingScreen = new Controls.LoadingScreen();
             OverlayView = loadingScreen;
         }
 
@@ -192,7 +192,7 @@ namespace CatanClient.ViewModels
 
         private void ShowFriendsView()
         {
-            var friendsView = new Views.FriendsView();
+            FriendsView friendsView = new Views.FriendsView();
             OverlayView = friendsView;
 
         }
@@ -210,7 +210,7 @@ namespace CatanClient.ViewModels
 
         private void ShowFriendsRequestsView()
         {
-            var friendsView = new Views.FriendRequestView();
+            FriendRequestView friendsView = new Views.FriendRequestView();
             OverlayView = friendsView;
 
         }
@@ -233,7 +233,7 @@ namespace CatanClient.ViewModels
                 MessageBox.Show(Utilities.MessageDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), Utilities.TittleDataBaseUnableToLoad(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            var friendsView = new Views.InviteFriendView(accesKeyString);
+            InviteFriendView friendsView = new Views.InviteFriendView(accesKeyString);
             OverlayView = friendsView;
 
         }
@@ -251,7 +251,7 @@ namespace CatanClient.ViewModels
 
         private void ShowScoreboardView()
         {
-            var scoreboardView = new Views.ScoreboardView();
+            ScoreboardView scoreboardView = new Views.ScoreboardView();
             OverlayView = scoreboardView;
 
         }

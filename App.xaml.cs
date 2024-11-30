@@ -46,13 +46,13 @@ namespace CatanClient
 
             base.OnStartup(e);
 
-            var builder = new ContainerBuilder();
+            ContainerBuilder builder = new ContainerBuilder();
 
             ConfigureContainer(builder);
 
             Container = builder.Build();
 
-            var mainWindow = Container.Resolve<MainWindow>();
+            MainWindow mainWindow = Container.Resolve<MainWindow>();
             mainWindow.Show();
         }
 
