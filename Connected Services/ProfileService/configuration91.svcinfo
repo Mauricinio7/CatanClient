@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IProfileServiceEndpoint1" contract="ProfileService.IProfileServiceEndpoint" bindingType="netTcpBinding" address="net.tcp://localhost:8383/ProfileService" bindingConfiguration="NetTcpBinding_IProfileServiceEndpoint1">
+    <endpoint name="NetTcpBinding_IProfileServiceEndpoint1" contract="ProfileService.IProfileServiceEndpoint" bindingType="netTcpBinding" address="net.tcp://192.168.146.207:8383/ProfileService" bindingConfiguration="NetTcpBinding_IProfileServiceEndpoint1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:8383/ProfileService</serializedValue>
+          <serializedValue>net.tcp://192.168.146.207:8383/ProfileService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

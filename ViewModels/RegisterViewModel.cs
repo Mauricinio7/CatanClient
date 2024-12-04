@@ -16,6 +16,8 @@ using CatanClient.Services;
 using System.IO;
 using CatanClient.Properties;
 using System.Linq.Expressions;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace CatanClient.ViewModels
 {
@@ -127,6 +129,16 @@ namespace CatanClient.ViewModels
 
         private void SaveImageInServer(string packUri, ProfileDto profile)
         {
+            string appDirectory = Path.Combine(Environment.CurrentDirectory, Utilities.PROFILE_IMAGE_DIRECTORY);
+
+            string fileName = Utilities.ProfilePhotoPath(profile.Id.Value);
+            string imagePath = Path.Combine(appDirectory, fileName);
+
+            if (File.Exists(imagePath))
+            {
+                ClearCacheDirectory(appDirectory);
+            }
+
             byte[] imageBytes = ReadImageFromPackUri(packUri);
 
             ProfileService.OperationResultProfileDto result;
@@ -180,7 +192,26 @@ namespace CatanClient.ViewModels
             return (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(ContactInfo) && !string.IsNullOrEmpty(password));
         }
 
-       
+        private void ClearCacheDirectory(string directoryPath)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                foreach (string file in Directory.GetFiles(directoryPath))
+                {
+                    try
+                    {
+                        
+                        File.Delete(file);
+                    }
+                    catch (IOException)
+                    {
+                        Utilities.ShowMessageDataBaseUnableToLoad();
+                    }
+                }
+            }
+        }
+
+
 
     }
 }

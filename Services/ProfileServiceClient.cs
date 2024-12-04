@@ -4,8 +4,7 @@ using Serilog;
 using System;
 using System.Globalization;
 using System.ServiceModel;
-using System.Threading.Tasks;
-using System.Windows;
+
 
 namespace CatanClient.Services
 {
