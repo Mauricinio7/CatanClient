@@ -655,7 +655,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
-    <Folder Include="Resources\Sounds\" />
     <Folder Include="Windows\" />
   </ItemGroup>
   <ItemGroup>
@@ -809,6 +808,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Gameplay\Resources\Animations\WinAnimation1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Sounds\LoginMusic.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Sounds\MainMenuMusic.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

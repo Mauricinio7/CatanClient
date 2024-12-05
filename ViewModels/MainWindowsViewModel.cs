@@ -1,13 +1,17 @@
 ﻿using CatanClient.AccountService;
 using CatanClient.Commands;
+using CatanClient.Gameplay.Helpers;
 using CatanClient.Gameplay.Views;
 using CatanClient.GameService;
+using CatanClient.Properties;
 using CatanClient.UIHelpers;
 using CatanClient.Views;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +26,7 @@ namespace CatanClient.ViewModels
         private UserControl currentView;
         private UserControl backgroundView;
         private UserControl overlayView;
+        private SoundPlayer soundPlayer;
         public ICommand ShowRegisterViewCommand { get; set; }
         public ICommand ShowLoginViewCommand { get; set; }
         public ICommand ShowNeedHelpViewCommand { get; set; }
@@ -51,6 +56,8 @@ namespace CatanClient.ViewModels
         public ICommand ShowWinAnimationCommand { get; set; }
         public ICommand ShowDiceResultAnimationCommand { get; set; }
         public ICommand ShowGameScreenCommand { get; set; }
+
+
 
         public UserControl CurrentView
         {
@@ -84,11 +91,65 @@ namespace CatanClient.ViewModels
 
         public MainWindowsViewModel()
         {
+            
             InicializateViews();
             InicializateCommands();
             InicializateAsyncCommands();
             InicializateMediatorRegisters();
-        } 
+            InicializateMusic();
+            PlayLoginMusic();
+
+        }
+
+        private void InicializateMusic()
+        {
+            try
+            {
+                Uri uri = new Uri(Utilities.LOGIN_MUSIC);
+
+                System.IO.Stream resourceStream = Application.GetResourceStream(uri)?.Stream;
+
+                soundPlayer = new SoundPlayer(resourceStream);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+        }
+
+        public void PlayLoginMusic()
+        {
+            try
+            {
+                soundPlayer.PlayLooping();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+        }
+
+        public void ChangeMusic(string newMusicUri)
+        {
+            try
+            {
+                soundPlayer?.Stop();
+
+                Uri uri = new Uri(newMusicUri);
+                System.IO.Stream resourceStream = Application.GetResourceStream(uri)?.Stream;
+
+                if (resourceStream != null)
+                {
+                    soundPlayer = new SoundPlayer(resourceStream);
+                    soundPlayer.PlayLooping();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+        }
+
 
         private void InicializateViews()
         {
@@ -412,6 +473,7 @@ namespace CatanClient.ViewModels
         private void ShowMainMenuView()
         {
             CurrentView = new Views.MainMenuView();
+            
         }
 
         private void ShowGuestMainMenuView()
@@ -422,6 +484,7 @@ namespace CatanClient.ViewModels
         private void ShowMainMenuBackgroundView()
         {
             BackgroundView = new Views.MainMenuBackgroundView();
+            ChangeMusic(Utilities.MAIN_MENU_MUSIC);
         }
 
         private async Task ShowCreateRoom()

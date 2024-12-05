@@ -50,6 +50,21 @@ namespace CatanClient.Services
                 {
                     ((ICommunicationObject)client).Close();
                 }
+                catch (EndpointNotFoundException ex)
+                {
+                    Log.Error(ex, ex.Source);
+                    ((ICommunicationObject)client).Abort();
+                }
+                catch (TimeoutException ex)
+                {
+                    Log.Error(ex, ex.Source);
+                    ((ICommunicationObject)client).Abort();
+                }
+                catch (CommunicationException ex)
+                {
+                    Log.Error(ex, ex.Source);
+                    ((ICommunicationObject)client).Abort();
+                }
                 catch (Exception ex)
                 {
                     Log.Error(ex, ex.Source);
@@ -66,18 +81,29 @@ namespace CatanClient.Services
         public async Task<OperationResultGameDto> CreateRoomClientAsync(GameDto game, ProfileDto profile)
         {
             OpenConnection();
-            OperationResultGameDto result;
+            OperationResultGameDto result = new OperationResultGameDto { IsSuccess = false};
             try
             {
                 result = await client.CreateGameAsync(game, profile);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Message;
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultGameDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result.MessageResponse = ex.Message;
                 Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
@@ -92,9 +118,20 @@ namespace CatanClient.Services
             {
                 result = await client.StartGameAsync(playerGameplayDto, gameClientDto);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-
                 Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
@@ -108,6 +145,21 @@ namespace CatanClient.Services
             try
             {
                 result = await client.JoinGameAsync(code, profile);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+                throw new CommunicationException();
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+                throw new CommunicationException();
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+                throw new CommunicationException();
             }
             catch (Exception ex)
             {
@@ -130,8 +182,23 @@ namespace CatanClient.Services
             {
                 result = await client.JoinGameAsaGuestAsync(code, profile);
             }
-            catch (Exception ex)
+            catch (EndpointNotFoundException ex)
             { 
+                Log.Error(ex, ex.Source);
+                throw new CommunicationException();
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+                throw new CommunicationException();
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+                throw new CommunicationException();
+            }
+            catch (Exception ex)
+            {
                 Log.Error(ex, ex.Source);
                 throw new CommunicationException();
             }
@@ -150,6 +217,18 @@ namespace CatanClient.Services
             try
             {
                 result = (await client.QuitGameAsync(game, profile)).IsSuccess;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             catch (Exception ex)
             {
@@ -171,6 +250,18 @@ namespace CatanClient.Services
             {
                 result = (await client.QuitGameAsaGuestAccountAsync(game, guest)).IsSuccess;
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -187,19 +278,30 @@ namespace CatanClient.Services
         public async Task<OperationResultListOfPlayersInGame> GetPlayerListAsync(GameDto game)
         {
             OpenConnection();
-            OperationResultListOfPlayersInGame result;
+            OperationResultListOfPlayersInGame result = new OperationResultListOfPlayersInGame { IsSuccess = false };
             try
             {
 
                 result = await client.GetAllPlayersInGameAsync(game, CultureInfo.CurrentCulture.Name);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Source;
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Source;
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Source;
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                result = new OperationResultListOfPlayersInGame
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result.MessageResponse = ex.Source;
                 Log.Error(ex, ex.Source);
             }
             Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
@@ -213,6 +315,18 @@ namespace CatanClient.Services
             try
             {
                 result = await client.ExpelPlayerAsAdminAsync(expelPlayer, idPlayer, game);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             catch (Exception ex)
             {
@@ -230,6 +344,18 @@ namespace CatanClient.Services
             {
                 result = await client.VoteExpelPlayerAsync(expelPlayer, idPlayer, game);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -246,6 +372,18 @@ namespace CatanClient.Services
             {
                 await client.ThrowDiceAsync(playerGameplayDto, gameClientDto, diceValue);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -261,6 +399,18 @@ namespace CatanClient.Services
             {
                 result = await client.NextTurnAyncAsync(playerGameplayDto, gameClientDto);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Source);
@@ -271,20 +421,34 @@ namespace CatanClient.Services
         public async Task<OperationResultDto> PlacePiceAsync(PiecePlacementDto placementDto, PlayerGameplayDto playerGameplayDto, GameDto gameClientDto)
         {
             OpenConnection();
-            OperationResultDto result;
+            OperationResultDto result = new OperationResultDto { IsSuccess = false };
             try
             {
                 result = await client.PlacePieceOnBoardAsync(placementDto, playerGameplayDto, gameClientDto);
             }
+            catch (EndpointNotFoundException ex)
+            {
+                result.MessageResponse = ex.Source;
+                Log.Error(ex, ex.Source);
+                throw new TimeoutException();
+            }
+            catch (TimeoutException ex)
+            {
+                result.MessageResponse = ex.Source;
+                Log.Error(ex, ex.Source);
+                throw new TimeoutException();
+            }
+            catch (CommunicationException ex)
+            {
+                result.MessageResponse = ex.Source;
+                Log.Error(ex, ex.Source);
+                throw new TimeoutException();
+            }
             catch (Exception ex)
             {
-                result = new OperationResultDto
-                {
-                    IsSuccess = false,
-                    MessageResponse = ex.Message
-                };
+                result.MessageResponse = ex.Source;
                 Log.Error(ex, ex.Source);
-                throw new TimeoutException("Tiempo de espera agotado");
+                throw new TimeoutException();
             }
             finally
             {
@@ -300,6 +464,18 @@ namespace CatanClient.Services
             try
             {
                 client.QuitGamePlay(playerGameplayDto, gameClientDto);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (TimeoutException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (CommunicationException ex)
+            {
+                Log.Error(ex, ex.Source);
             }
             catch (Exception ex)
             {

@@ -1753,15 +1753,6 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Your user is not verified, please verify.
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Games won.
         /// </summary>
         public static string tab_item_games_won {
@@ -1811,7 +1802,7 @@ namespace CatanClient.Properties {
         /// </summary>
         public static string username_prompt {
             get {
-                return ResourceManager.GetString("username:prompt", resourceCulture);
+                return ResourceManager.GetString("username_prompt", resourceCulture);
             }
         }
         

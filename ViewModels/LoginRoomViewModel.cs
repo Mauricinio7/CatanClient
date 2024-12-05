@@ -70,55 +70,64 @@ namespace CatanClient.ViewModels
         {
             AccountService.ProfileDto profile = serviceManager.ProfileSingleton.Profile;
 
-            if (!string.IsNullOrWhiteSpace(roomCode))
+            if (string.IsNullOrWhiteSpace(roomCode))
             {
-                if (!AccountUtilities.IsValidLength(roomCode))
-                {
-                    Utilities.ShowMessageInvalidFileds();
-                }
-                else
-                {
-                    OperationResultGameDto result;
+                Utilities.ShowMessageEmptyFields();
+                return;
+            }
 
-                    try
-                    {
-                        if (profile.IsRegistered)
-                        {
-                            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-                            result = await serviceManager.GameServiceClient.JoinRoomClientAsync(roomCode, AccountUtilities.CastAccountProfileToGameService(profile));
-                        }
-                        else
-                        {
-                            GuestAccountDto guest = new GuestAccountDto
-                            {
-                                Name = profile.Name,
-                                PreferredLanguage = profile.PreferredLanguage,
-                                Id = profile.Id
-                            };
+            if (!AccountUtilities.IsValidLength(roomCode))
+            {
+                Utilities.ShowMessageInvalidFileds();
+                return;
+            }
 
-                            Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-                            result = await serviceManager.GameServiceClient.JoinRoomAsGuestClientAsync(roomCode, guest);
-                        }
+            try
+            {
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                var result = profile.IsRegistered
+                    ? await JoinRoomAsRegisteredUserAsync(profile)
+                    : await JoinRoomAsGuestUserAsync(profile);
 
-                        if (result.IsSuccess)
-                        {
-                            GameDto game = result.GameDto;
-                            Mediator.Notify(Utilities.SHOW_GAME_LOBBY, game);
-                        }
-                        else
-                        {
-                            MessageBox.Show(Utilities.MessageGameNotFound(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
-                        }
-                    }
-                    catch (CommunicationException)
-                    {
-                        Utilities.ShowMessgeServerLost();
-                    }
-                }
+                HandleJoinRoomResult(result);
+            }
+            catch (CommunicationException)
+            {
+                Utilities.ShowMessgeServerLost();
+            }
+        }
+
+        private async Task<OperationResultGameDto> JoinRoomAsRegisteredUserAsync(AccountService.ProfileDto profile)
+        {
+            return await serviceManager.GameServiceClient.JoinRoomClientAsync(
+                roomCode, AccountUtilities.CastAccountProfileToGameService(profile));
+        }
+
+        private async Task<OperationResultGameDto> JoinRoomAsGuestUserAsync(AccountService.ProfileDto profile)
+        {
+            var guest = new GuestAccountDto
+            {
+                Name = profile.Name,
+                PreferredLanguage = profile.PreferredLanguage,
+                Id = profile.Id
+            };
+
+            return await serviceManager.GameServiceClient.JoinRoomAsGuestClientAsync(roomCode, guest);
+        }
+
+        private static void HandleJoinRoomResult(OperationResultGameDto result)
+        {
+            if (result.IsSuccess)
+            {
+                Mediator.Notify(Utilities.SHOW_GAME_LOBBY, result.GameDto);
             }
             else
             {
-                Utilities.ShowMessageEmptyFields();
+                MessageBox.Show(
+                    Utilities.MessageGameNotFound(CultureInfo.CurrentCulture.Name),
+                    Utilities.TittleFail(CultureInfo.CurrentCulture.Name),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
             }
         }
     }

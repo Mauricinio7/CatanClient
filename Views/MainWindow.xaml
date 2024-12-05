@@ -25,6 +25,7 @@
         <viewModels:MainWindowsViewModel />
     </Window.DataContext>
 
+
     <Grid>
         <ContentControl Content="{Binding BackgroundView}" />
         <ContentControl Content="{Binding CurrentView}" />

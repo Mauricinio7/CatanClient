@@ -77,7 +77,7 @@ namespace CatanClient.Gameplay.Views
 
         private void AnimateText(string winnerName)
         {
-            WinnerText.Text = string.Format(Utilities.WinnerText(CultureInfo.CurrentCulture.Name), ": ",winnerName, "!");
+            WinnerText.Text = $"{Utilities.WinnerText(CultureInfo.CurrentCulture.Name)}: {winnerName}";
             DoubleAnimation fadeInAnimation = new DoubleAnimation
             {
                 From = 0,

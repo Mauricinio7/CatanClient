@@ -108,7 +108,7 @@
                 <TabItem Header="{x:Static properties:Resources.global_friends}" Tag="Friends">
 
                     <DataGrid ItemsSource="{Binding FriendScores}" AutoGenerateColumns="False" HeadersVisibility="Column"
-                  RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" >
+                  RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" IsHitTestVisible="False" >
                         <DataGrid.Resources>
 
                             <Style TargetType="DataGridRow">
@@ -138,7 +138,7 @@
                 <TabItem Header="{x:Static properties:Resources.label_world}" Tag="World">
 
                     <DataGrid ItemsSource="{Binding WorldScores}" AutoGenerateColumns="False" HeadersVisibility="Column"
-                        RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0">
+                        RowHeight="50" ColumnWidth="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" IsHitTestVisible="False" >
                         <DataGrid.Resources>
 
                             <Style TargetType="DataGridRow">

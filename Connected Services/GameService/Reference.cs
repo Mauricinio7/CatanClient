@@ -1895,9 +1895,6 @@ namespace CatanClient.GameService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/SendDiceResult")]
         void SendDiceResult(int diceResult);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/SendUpdateConnectedPlayers")]
-        void SendUpdateConnectedPlayers(CatanClient.GameService.OperationResultListOfPlayersInGame listOfPlayers);
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameEndPoint/EndGameDisconnectedPlayers")]
         void EndGameDisconnectedPlayers();
         

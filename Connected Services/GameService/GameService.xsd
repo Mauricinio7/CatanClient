@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
-  <xs:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
-  <xs:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
-  <xs:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.PlayersMove" />
-  <xs:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" />
-  <xs:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
+  <xs:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+  <xs:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+  <xs:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
+  <xs:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.PlayersMove" />
+  <xs:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" />
+  <xs:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
   <xs:element name="CreateGame">
     <xs:complexType>
       <xs:sequence>
@@ -323,13 +323,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SendUpdateConnectedPlayers">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" minOccurs="0" name="listOfPlayers" nillable="true" type="q46:OperationResultListOfPlayersInGame" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="EndGameDisconnectedPlayers">
     <xs:complexType>
       <xs:sequence />
@@ -338,37 +331,37 @@
   <xs:element name="UpdateListOfPlayersTurns">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playersTurnStatus" nillable="true" type="q47:ArrayOfPlayerTurnStatusDto" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playersTurnStatus" nillable="true" type="q46:ArrayOfPlayerTurnStatusDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyGameBoardInitialized">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" minOccurs="0" name="gameBoardState" nillable="true" type="q48:GameBoardStateDto" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" minOccurs="0" name="gameBoardState" nillable="true" type="q47:GameBoardStateDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyPlayerPlacedPiece">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" minOccurs="0" name="gameBoardStateDto" nillable="true" type="q49:GameBoardStateDto" />
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerGameplayDto" nillable="true" type="q50:PlayerGameplayDto" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" minOccurs="0" name="gameBoardStateDto" nillable="true" type="q48:GameBoardStateDto" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" minOccurs="0" name="playerGameplayDto" nillable="true" type="q49:PlayerGameplayDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyResourcesDistributed">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" minOccurs="0" name="receivedResources" nillable="true" type="q51:PlayerResourcesDto" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" minOccurs="0" name="receivedResources" nillable="true" type="q50:PlayerResourcesDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyTradeRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" minOccurs="0" name="needResources" nillable="true" type="q52:PlayerResourcesDto" />
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" minOccurs="0" name="offerResources" nillable="true" type="q53:PlayerResourcesDto" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" minOccurs="0" name="needResources" nillable="true" type="q51:PlayerResourcesDto" />
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" minOccurs="0" name="offerResources" nillable="true" type="q52:PlayerResourcesDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

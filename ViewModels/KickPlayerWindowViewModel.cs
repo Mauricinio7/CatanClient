@@ -32,9 +32,9 @@ namespace CatanClient.ViewModels
 
         internal void LoadPlayerList()
         {
-            List<GameService.ProfileDto> OnlinePlayers  = new List<GameService.ProfileDto>();
-            List<GuestAccountDto> OnlinePlayersGuest  = new List<GuestAccountDto>();
-        OperationResultListOfPlayersInGame result;
+            List<GameService.ProfileDto> OnlinePlayers = new List<GameService.ProfileDto>();
+            List<GuestAccountDto> OnlinePlayersGuest = new List<GuestAccountDto>();
+            OperationResultListOfPlayersInGame result;
 
             App.Current.Dispatcher.InvokeAsync(async () =>
             {
@@ -47,35 +47,40 @@ namespace CatanClient.ViewModels
                     OnlinePlayers = result.ProfileDtos.ToList();
                     OnlinePlayersGuest = result.GuestAccountDtos.ToList();
 
-                    if (OnlinePlayers.Count > 0)
-                    {
-                        foreach (GameService.ProfileDto profileDto in OnlinePlayers)
-                        {
-                            OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
-                            new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
-                            new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
-                        ));
-                        }
-                    }
-
-                    if (OnlinePlayersGuest.Count > 0)
-                    {
-                        foreach (GuestAccountDto guestProfileDto in OnlinePlayersGuest)
-                        {
-                            GameService.ProfileDto profileDto = AccountUtilities.CastGuestAccountToGameServiceProfile(guestProfileDto);
-                            OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
-                             new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
-                             new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))
-                         ));
-                        }
-                    }
+                    AddPlayersToOnlineList(OnlinePlayers, OnlinePlayersGuest);
                 }
                 else
                 {
                     Utilities.ShowMessgeServerLost();
                 }
-
             });
+        }
+
+        private void AddPlayersToOnlineList(IEnumerable<GameService.ProfileDto> registeredPlayers, IEnumerable<GuestAccountDto> guestPlayers)
+        {
+            AddRegisteredPlayers(registeredPlayers);
+            AddGuestPlayers(guestPlayers);
+        }
+
+        private void AddRegisteredPlayers(IEnumerable<GameService.ProfileDto> registeredPlayers)
+        {
+            foreach (var profileDto in registeredPlayers)
+            {
+                OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
+                    new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
+                    new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))));
+            }
+        }
+
+        private void AddGuestPlayers(IEnumerable<GuestAccountDto> guestPlayers)
+        {
+            foreach (var guestProfileDto in guestPlayers)
+            {
+                var profileDto = AccountUtilities.CastGuestAccountToGameServiceProfile(guestProfileDto);
+                OnlinePlayersList.Add(App.Container.Resolve<KickPlayerCardViewModel>(
+                    new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto)),
+                    new NamedParameter(Utilities.GAME, AccountUtilities.CastChatGameToGameServiceGame(game))));
+            }
         }
     }
 }

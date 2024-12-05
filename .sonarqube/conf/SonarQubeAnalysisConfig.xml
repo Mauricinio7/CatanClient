@@ -6,7 +6,7 @@
   <SonarScannerWorkingDirectory>C:\Users\mauricio\source\repos\CatanClient</SonarScannerWorkingDirectory>
   <ScanAllAnalysis>true</ScanAllAnalysis>
   <HasBeginStepCommandLineCredentials>true</HasBeginStepCommandLineCredentials>
-  <SonarQubeHostUrl>http://192.168.146.207:9000</SonarQubeHostUrl>
+  <SonarQubeHostUrl>http://192.168.79.207:9000</SonarQubeHostUrl>
   <SonarQubeVersion>10.5.1.90531</SonarQubeVersion>
   <SonarProjectKey>CatanClientV10</SonarProjectKey>
   <AdditionalConfig>
@@ -134,10 +134,10 @@
     <Property Name="sonaranalyzer-vbnet.pluginKey">vbnet</Property>
     <Property Name="sonar.updatecenter.url">https://downloads.sonarsource.com/sonarqube/update/update-center.properties</Property>
     <Property Name="sonar.core.id">147B411E-AZI72vDt7XhQan-aKalJ</Property>
-    <Property Name="sonar.core.startTime">29/11/2024 11:42:39 a. m.</Property>
+    <Property Name="sonar.core.startTime">04/12/2024 02:11:37 p. m.</Property>
   </ServerSettings>
   <LocalSettings>
-    <Property Name="sonar.host.url">http://192.168.146.207:9000</Property>
+    <Property Name="sonar.host.url">http://192.168.79.207:9000</Property>
   </LocalSettings>
   <AnalyzersSettings>
     <AnalyzerSettings>

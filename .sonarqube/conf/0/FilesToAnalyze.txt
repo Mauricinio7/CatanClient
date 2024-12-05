@@ -19,6 +19,7 @@ C:\Users\mauricio\source\repos\CatanClient\Controls\VoteKickPlayerCardViewModel.
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Helpers\GameRules.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Helpers\Resource.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\ViewModels\TradeWindowViewModel.cs
+C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\DiceResultAnimationView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\DiceRollAnimationView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\GameFrameView.xaml.cs
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Views\TradeWindow.xaml.cs
@@ -134,6 +135,7 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountServic
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService1.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\GuestAccountService\GuestAccountService2.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\CatanClient.ProfileService.OperationResultFriendRequestDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\CatanClient.ProfileService.OperationResultPictureDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\CatanClient.ProfileService.OperationResultProfileDto.datasource
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\CatanClient.ProfileService.OperationResultProfileListDto.datasource
@@ -141,6 +143,8 @@ C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\Pro
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService1.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService2.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService3.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService4.xsd
+C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileService41.xsd
 C:\Users\mauricio\source\repos\CatanClient\Connected Services\ProfileService\ProfileServiceEndpoint.wsdl
 C:\Users\mauricio\source\repos\CatanClient\packages.config
 C:\Users\mauricio\source\repos\CatanClient\Properties\Settings.settings

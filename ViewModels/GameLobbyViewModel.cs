@@ -233,42 +233,55 @@ namespace CatanClient.ViewModels
 
                 if (result.IsSuccess)
                 {
-                    OnlinePlayersList.Clear();
-                    OnlinePlayers = result.ProfileDtos.ToList();
-                    OnlinePlayersGuest = result.GuestAccountDtos.ToList();
-
-                    if (OnlinePlayers.Count > 0)
-                    {
-                        foreach (ProfileDto profileDto in OnlinePlayers)
-                        {
-                            OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                                new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
-                        }
-                    }
-
-                    if (OnlinePlayersGuest.Count > 0)
-                    {
-                        foreach (GuestAccountDto guestProfileDto in OnlinePlayersGuest)
-                        {
-                            ProfileDto profileDto = new ProfileDto();
-                            profileDto.Id = guestProfileDto.Id;
-                            profileDto.Name = guestProfileDto.Name;
-                            profileDto.IsRegistered = false;
-                            profileDto.PictureVersion = 0;
-                            profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
-                            profileDto.isReadyToPlay = guestProfileDto.isReadyToPlay;
-
-                            OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
-                                new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
-                        }
-                    }
-
+                    UpdateOnlinePlayersLists(result);
                 }
                 else
                 {
                     Utilities.ShowMessgeServerLost();
                 }
             });
+        }
+
+        private void UpdateOnlinePlayersLists(OperationResultListOfPlayersInGame result)
+        {
+            OnlinePlayersList.Clear();
+            OnlinePlayers = result.ProfileDtos.ToList();
+            OnlinePlayersGuest = result.GuestAccountDtos.ToList();
+
+            AddRegisteredPlayersToList(OnlinePlayers);
+            AddGuestPlayersToList(OnlinePlayersGuest);
+        }
+
+        private void AddRegisteredPlayersToList(IEnumerable<ProfileDto> registeredPlayers)
+        {
+            foreach (var profileDto in registeredPlayers)
+            {
+                OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                    new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+            }
+        }
+
+        private void AddGuestPlayersToList(IEnumerable<GuestAccountDto> guestPlayers)
+        {
+            foreach (var guestProfileDto in guestPlayers)
+            {
+                var profileDto = MapGuestToProfile(guestProfileDto);
+                OnlinePlayersList.Add(App.Container.Resolve<PlayerInRoomCardViewModel>(
+                    new NamedParameter(Utilities.PROFILE, AccountUtilities.CastGameProfileToProfileService(profileDto))));
+            }
+        }
+
+        private ProfileDto MapGuestToProfile(GuestAccountDto guestProfileDto)
+        {
+            return new ProfileDto
+            {
+                Id = guestProfileDto.Id,
+                Name = guestProfileDto.Name,
+                IsRegistered = false,
+                PictureVersion = 0,
+                PreferredLanguage = CultureInfo.CurrentCulture.Name,
+                isReadyToPlay = guestProfileDto.isReadyToPlay
+            };
         }
 
         internal void OnReceiveMessage(object message)

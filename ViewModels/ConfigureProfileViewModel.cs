@@ -96,7 +96,7 @@ namespace CatanClient.ViewModels
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profileDto.PreferredLanguage = CultureInfo.CurrentCulture.Name;
             Profile = profileDto;
-            ModifyProfileCommand = new RelayCommand(OnModifyProfile);
+            ModifyProfileCommand = new RelayCommand(parameter => OnModifyProfile(parameter), parameter => CanModifyProfile(parameter));
             ModifyPasswordCommand = new RelayCommand(OnModifyPassword);
             SelectImageCommand = new RelayCommand(OpenFileDialog);
             this.serviceManager = serviceManager;
@@ -106,7 +106,6 @@ namespace CatanClient.ViewModels
             Phone = account.PhoneNumber;
             LoadProfileImage();
         }
-
         private void OpenFileDialog()
         {
             try
@@ -280,6 +279,18 @@ namespace CatanClient.ViewModels
             File.WriteAllBytes(destinationPath, imageBytes);
         }
 
+        private bool CanModifyProfile(object parameter)
+        {
+            if (parameter is string tag)
+            {
+                if (tag == "Email")
+                    return string.IsNullOrEmpty(Phone); 
+                if (tag == "Phone")
+                    return string.IsNullOrEmpty(Email); 
+            }
+
+            return true;
+        }
 
 
 

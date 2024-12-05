@@ -489,9 +489,6 @@
   <data name="dialog_unverified_user" xml:space="preserve">
     <value>Unverified user</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>Your user is not verified, please verify</value>
-  </data>
   <data name="dialog_fail" xml:space="preserve">
     <value>Fail</value>
   </data>
@@ -714,7 +711,7 @@
   <data name="tab_item_total_points" xml:space="preserve">
     <value>Total points</value>
   </data>
-  <data name="username:prompt" xml:space="preserve">
+  <data name="username_prompt" xml:space="preserve">
     <value>8-15 characters</value>
   </data>
 </root>

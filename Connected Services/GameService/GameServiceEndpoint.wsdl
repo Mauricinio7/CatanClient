@@ -10,16 +10,16 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.PlayersMove" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" />
-      <xsd:import schemaLocation="http://192.168.146.207:8191/GameService?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.PlayerDtos" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.PlayersMove" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Resources" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" />
+      <xsd:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameEndPoint_CreateGame_InputMessage">
@@ -151,9 +151,6 @@
   <wsdl:message name="IGameEndPoint_SendDiceResult_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendDiceResult" />
   </wsdl:message>
-  <wsdl:message name="IGameEndPoint_SendUpdateConnectedPlayers_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:SendUpdateConnectedPlayers" />
-  </wsdl:message>
   <wsdl:message name="IGameEndPoint_EndGameDisconnectedPlayers_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:EndGameDisconnectedPlayers" />
   </wsdl:message>
@@ -273,9 +270,6 @@
     </wsdl:operation>
     <wsdl:operation name="SendDiceResult">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/SendDiceResult" message="tns:IGameEndPoint_SendDiceResult_OutputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="SendUpdateConnectedPlayers">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/SendUpdateConnectedPlayers" message="tns:IGameEndPoint_SendUpdateConnectedPlayers_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="EndGameDisconnectedPlayers">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameEndPoint/EndGameDisconnectedPlayers" message="tns:IGameEndPoint_EndGameDisconnectedPlayers_OutputCallbackMessage" />
@@ -512,12 +506,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SendUpdateConnectedPlayers">
-      <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/SendUpdateConnectedPlayers" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="EndGameDisconnectedPlayers">
       <soap12:operation soapAction="http://tempuri.org/IGameEndPoint/EndGameDisconnectedPlayers" style="document" />
       <wsdl:output>
@@ -569,9 +557,9 @@
   </wsdl:binding>
   <wsdl:service name="GameServiceEndpoint">
     <wsdl:port name="NetTcpBinding_IGameEndPoint" binding="tns:NetTcpBinding_IGameEndPoint">
-      <soap12:address location="net.tcp://192.168.146.207:8192/GameService" />
+      <soap12:address location="net.tcp://192.168.79.207:8192/GameService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.146.207:8192/GameService</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.79.207:8192/GameService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
