@@ -80,7 +80,7 @@ namespace CatanClient.ViewModels
             {
                 if (!AccountUtilities.IsValidLength(RoomName))
                 {
-                    Utilities.ShowMessageInvalidFileds();
+                    MessageBox.Show(Utilities.MessageTooLargeInput(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace CatanClient.ViewModels
             }
             else
             {
-                MessageBox.Show(Utilities.MessageEmptyField(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                Utilities.ShowMessageEmptyFields();
             }
         }
     }

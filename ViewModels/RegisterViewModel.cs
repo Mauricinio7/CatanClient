@@ -70,6 +70,7 @@ namespace CatanClient.ViewModels
         private async Task RegisterUserAsync()
         {
             ContactInfo = ContactInfo.Trim();
+            Username = Username.Trim();
             string email = string.Empty;
             string phoneNumber = string.Empty;
 

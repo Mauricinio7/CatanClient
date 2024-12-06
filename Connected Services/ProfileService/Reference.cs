@@ -203,9 +203,9 @@ namespace CatanClient.ProfileService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultFriendRequestDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultPictureDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultProfileListDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultFriendRequestDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CatanClient.ProfileService.OperationResultProfileDto))]
     public partial class OperationResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -266,30 +266,6 @@ namespace CatanClient.ProfileService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultFriendRequestDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDto" +
-        "s")]
-    [System.SerializableAttribute()]
-    public partial class OperationResultFriendRequestDto : CatanClient.ProfileService.OperationResultDto {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CatanClient.ProfileService.EnumSendFriendRequest StatusSendFriendRequestField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CatanClient.ProfileService.EnumSendFriendRequest StatusSendFriendRequest {
-            get {
-                return this.StatusSendFriendRequestField;
-            }
-            set {
-                if ((this.StatusSendFriendRequestField.Equals(value) != true)) {
-                    this.StatusSendFriendRequestField = value;
-                    this.RaisePropertyChanged("StatusSendFriendRequest");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultPictureDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject")]
     [System.SerializableAttribute()]
     public partial class OperationResultPictureDto : CatanClient.ProfileService.OperationResultDto {
@@ -329,6 +305,30 @@ namespace CatanClient.ProfileService {
                 if ((object.ReferenceEquals(this.ProfileDtosField, value) != true)) {
                     this.ProfileDtosField = value;
                     this.RaisePropertyChanged("ProfileDtos");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResultFriendRequestDto", Namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDto" +
+        "s")]
+    [System.SerializableAttribute()]
+    public partial class OperationResultFriendRequestDto : CatanClient.ProfileService.OperationResultDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CatanClient.ProfileService.EnumSendFriendRequest StatusSendFriendRequestField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CatanClient.ProfileService.EnumSendFriendRequest StatusSendFriendRequest {
+            get {
+                return this.StatusSendFriendRequestField;
+            }
+            set {
+                if ((this.StatusSendFriendRequestField.Equals(value) != true)) {
+                    this.StatusSendFriendRequestField = value;
+                    this.RaisePropertyChanged("StatusSendFriendRequest");
                 }
             }
         }
@@ -441,6 +441,9 @@ namespace CatanClient.ProfileService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         SuccessSave = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DeleteFriend = 4,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

@@ -50,7 +50,7 @@ namespace CatanClient.ViewModels
             }
             else if(!AccountUtilities.IsValidLength(PlayerName)) 
             {
-                Utilities.ShowMessageInvalidFileds();
+                MessageBox.Show(Utilities.MessageTooLargeInput(CultureInfo.CurrentUICulture.Name), Utilities.TittleFail(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -71,6 +71,9 @@ namespace CatanClient.ViewModels
                     break;
                 case EnumSendFriendRequest.ExistsFriendRequest:
                     MessageBox.Show(Utilities.MessageExistsFriendRequest(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                case EnumSendFriendRequest.DeleteFriend:
+                    MessageBox.Show(Utilities.MessageCannontAddDeletedFriend(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
                 case EnumSendFriendRequest.NotFoundProfile:
                     MessageBox.Show(Utilities.MessageNotFoundProfile(CultureInfo.CurrentCulture.Name), Utilities.TittleFail(CultureInfo.CurrentCulture.Name), MessageBoxButton.OK, MessageBoxImage.Error);

@@ -140,6 +140,7 @@ namespace CatanClient.UIHelpers
         public const string LOGIN_MUSIC = "pack://application:,,,/Resources/Sounds/LoginMusic.wav";
         public const string MAIN_MENU_MUSIC = "pack://application:,,,/Resources/Sounds/MainMenuMusic.wav";
         public const string SHOW_SCORE_FRAME = "ShowScoreFrame";
+        public const string HIDE_FRIENDS = "HideFriends";
 
 
 
@@ -384,6 +385,20 @@ namespace CatanClient.UIHelpers
         public static string MessageSuccessfulBuild(string language)
         {
             return Resources.ResourceManager.GetString("dialog_successful_build_message", new CultureInfo(language));
+        }
+        public static string MessageCannotHaveOnlyBlankSpace(string language)
+        {
+            return Resources.ResourceManager.GetString("dialog_only_blanck_spaces_message", new CultureInfo(language));
+        }
+        public static string MessageCannontAddDeletedFriend(string language)
+        {
+
+           return Resources.ResourceManager.GetString("dialog_cant_add_deleted_friend_message", new CultureInfo(language));
+        }
+        public static string MessageTooLargeInput(string language)
+        {
+
+            return Resources.ResourceManager.GetString("dialog_exceed_character_limit_message", new CultureInfo(language));
         }
 
         public static string MessageUnsuccessfulBuild(string language)

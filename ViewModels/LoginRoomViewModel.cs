@@ -78,7 +78,7 @@ namespace CatanClient.ViewModels
 
             if (!AccountUtilities.IsValidLength(roomCode))
             {
-                Utilities.ShowMessageInvalidFileds();
+                MessageBox.Show(Utilities.MessageTooLargeInput(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

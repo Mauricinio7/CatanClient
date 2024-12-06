@@ -220,7 +220,7 @@
     <value>Empty fields</value>
   </data>
   <data name="dialog_invalid_characters_message" xml:space="preserve">
-    <value>Invalid characters have been entered</value>
+    <value>The entry does not comply with the rules of the field</value>
   </data>
   <data name="button_delete" xml:space="preserve">
     <value>Delete</value>
@@ -229,7 +229,7 @@
     <value>Add friend</value>
   </data>
   <data name="dialog_empty_fields_message" xml:space="preserve">
-    <value>Required fields have been left empty</value>
+    <value>Required fields have been left empty or are just blank spaces</value>
   </data>
   <data name="button_cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -713,5 +713,14 @@
   </data>
   <data name="username_prompt" xml:space="preserve">
     <value>8-15 characters</value>
+  </data>
+  <data name="dialog_cant_add_deleted_friend_message" xml:space="preserve">
+    <value>You can't add the friend, you rejected a friend request, or you removed the friend from your friends list.</value>
+  </data>
+  <data name="dialog_exceed_character_limit_message" xml:space="preserve">
+    <value>More than 15 characters have been entered.</value>
+  </data>
+  <data name="dialog_only_blanck_spaces_message" xml:space="preserve">
+    <value>You cannot write only spaces.</value>
   </data>
 </root>

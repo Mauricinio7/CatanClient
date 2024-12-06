@@ -57,16 +57,27 @@ namespace CatanClient.ViewModels
         {
             try
             {
-                AccountUtilities.ValidateVerificationCode(VerificationCode);
-
-                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
-
-                bool result = await AccountUtilities.VerifyAccountAsync(serviceManager, account, VerificationCode);
-
-                if (result)
+                if (string.IsNullOrEmpty(VerificationCode))
                 {
-                    Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
+                    Utilities.ShowMessageEmptyFields();
+                    return;
                 }
+                else if (AccountUtilities.IsValidLength(VerificationCode))
+                {
+                    MessageBox.Show(Utilities.MessageTooLargeInput(CultureInfo.CurrentUICulture.Name), Utilities.TittleEmptyField(CultureInfo.CurrentUICulture.Name), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+
+                    bool result = await AccountUtilities.VerifyAccountAsync(serviceManager, account, VerificationCode);
+
+                    if (result)
+                    {
+                        Mediator.Notify(Utilities.OCULT_VERIFY_ACCOUNT, null);
+                    }
+                }
+                  
             }
             catch (InvalidOperationException ex)
             {

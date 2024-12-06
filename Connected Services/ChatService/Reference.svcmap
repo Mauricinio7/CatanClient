@@ -22,11 +22,11 @@
     <MetadataSource Address="http://192.168.58.207:8203/ChatService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="ChatService2.xsd" MetadataType="Schema" ID="e6ef3c11-c0e6-462b-9559-ac2fa4abe324" SourceId="1" SourceUrl="http://192.168.58.207:8203/ChatService?xsd=xsd1" />
     <MetadataFile FileName="ChatService.xsd" MetadataType="Schema" ID="986440d6-c8b8-41b9-876b-9edea2194d2d" SourceId="1" SourceUrl="http://192.168.58.207:8203/ChatService?xsd=xsd2" />
     <MetadataFile FileName="ChatServiceEndpoint.wsdl" MetadataType="Wsdl" ID="3c2aec3d-7e79-49ef-a756-014461440908" SourceId="1" SourceUrl="http://192.168.58.207:8203/ChatService?wsdl" />
-    <MetadataFile FileName="ChatService.disco" MetadataType="Disco" ID="6e2bbd06-5505-45ac-8f93-180efeff6371" SourceId="1" SourceUrl="http://192.168.58.207:8203/ChatService?disco" />
     <MetadataFile FileName="ChatService1.xsd" MetadataType="Schema" ID="ecd09540-59e4-46c4-bbbc-3f3544805f75" SourceId="1" SourceUrl="http://192.168.58.207:8203/ChatService?xsd=xsd0" />
-    <MetadataFile FileName="ChatService2.xsd" MetadataType="Schema" ID="e6ef3c11-c0e6-462b-9559-ac2fa4abe324" SourceId="1" SourceUrl="http://192.168.58.207:8203/ChatService?xsd=xsd1" />
+    <MetadataFile FileName="ChatService.disco" MetadataType="Disco" ID="6e2bbd06-5505-45ac-8f93-180efeff6371" SourceId="1" SourceUrl="http://192.168.58.207:8203/ChatService?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

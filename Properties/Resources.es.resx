@@ -226,7 +226,7 @@
     <value>Campos vacíos</value>
   </data>
   <data name="dialog_invalid_characters_message" xml:space="preserve">
-    <value>Se han introducido caracteres inválidos</value>
+    <value>Lo ingresado no cumple con las reglas del campo</value>
   </data>
   <data name="button_delete" xml:space="preserve">
     <value>Eliminar</value>
@@ -235,7 +235,7 @@
     <value>Añadir amigo</value>
   </data>
   <data name="dialog_empty_fields_message" xml:space="preserve">
-    <value>Los campos obligatorios se han dejado vacíos</value>
+    <value>Los campos obligatorios se han dejado vacíos o son solamente espacios en blanco</value>
   </data>
   <data name="button_cancel" xml:space="preserve">
     <value>Cancelar</value>
@@ -726,5 +726,14 @@
   </data>
   <data name="username_prompt" xml:space="preserve">
     <value>8-15 caracteres</value>
+  </data>
+  <data name="dialog_cant_add_deleted_friend_message" xml:space="preserve">
+    <value>No se puede agregar el amigo, rechazó una solicitud de amistad o lo eliminó de su lista de amigos.</value>
+  </data>
+  <data name="dialog_exceed_character_limit_message" xml:space="preserve">
+    <value>Se han introducido más de 15 caracteres.</value>
+  </data>
+  <data name="dialog_only_blanck_spaces_message" xml:space="preserve">
+    <value>No se pueden dejar únicamente espacios.</value>
   </data>
 </root>

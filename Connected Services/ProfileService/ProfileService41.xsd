@@ -6,6 +6,7 @@
       <xs:enumeration value="ExistsFriendRequest" />
       <xs:enumeration value="ErrorSaving" />
       <xs:enumeration value="SuccessSave" />
+      <xs:enumeration value="DeleteFriend" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EnumSendFriendRequest" nillable="true" type="tns:EnumSendFriendRequest" />

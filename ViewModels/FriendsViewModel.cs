@@ -23,6 +23,7 @@ namespace CatanClient.ViewModels
         public List<ProfileDto> FriendsList { get; set; } = new List<ProfileDto>();
         public ICollectionView FriendsView { get; set; }
         public ICommand AddFriendCommand { get; }
+        public ICommand CloseFriendsCommand { get; }
         private readonly ServiceManager serviceManager;
         private readonly ProfileDto profile;
 
@@ -32,6 +33,7 @@ namespace CatanClient.ViewModels
             AccountService.ProfileDto profileDto = serviceManager.ProfileSingleton.Profile;
             profile = AccountUtilities.CastAccountProfileToProfileService(profileDto);
             AddFriendCommand = new RelayCommand(ExecuteAddFriend);
+            CloseFriendsCommand = new RelayCommand(ExecuteCloseFriends);
             InicializateFriendsList();
         }
 
@@ -52,6 +54,11 @@ namespace CatanClient.ViewModels
             AddFriendWindow addFriendWindow = new AddFriendWindow();
 
             addFriendWindow.ShowDialog();
+        }
+
+        private static void ExecuteCloseFriends()
+        {
+            Mediator.Notify(Utilities.HIDE_FRIENDS, null);
         }
 
         public bool GetAllFriend()

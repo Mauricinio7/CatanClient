@@ -331,6 +331,15 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You can&apos;t add the friend, you rejected a friend request, or you removed the friend from your friends list..
+        /// </summary>
+        public static string dialog_cant_add_deleted_friend_message {
+            get {
+                return ResourceManager.GetString("dialog_cant_add_deleted_friend_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Change username.
         /// </summary>
         public static string dialog_change_username {
@@ -448,7 +457,7 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Required fields have been left empty.
+        ///   Busca una cadena traducida similar a Required fields have been left empty or are just blank spaces.
         /// </summary>
         public static string dialog_empty_fields_message {
             get {
@@ -462,6 +471,15 @@ namespace CatanClient.Properties {
         public static string dialog_error_trading_message {
             get {
                 return ResourceManager.GetString("dialog_error_trading_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a More than 15 characters have been entered..
+        /// </summary>
+        public static string dialog_exceed_character_limit_message {
+            get {
+                return ResourceManager.GetString("dialog_exceed_character_limit_message", resourceCulture);
             }
         }
         
@@ -565,7 +583,7 @@ namespace CatanClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Invalid characters have been entered.
+        ///   Busca una cadena traducida similar a The entry does not comply with the rules of the field.
         /// </summary>
         public static string dialog_invalid_characters_message {
             get {
@@ -669,6 +687,15 @@ namespace CatanClient.Properties {
         public static string dialog_not_friend_request_message {
             get {
                 return ResourceManager.GetString("dialog_not_friend_request_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You cannot write only spaces..
+        /// </summary>
+        public static string dialog_only_blanck_spaces_message {
+            get {
+                return ResourceManager.GetString("dialog_only_blanck_spaces_message", resourceCulture);
             }
         }
         

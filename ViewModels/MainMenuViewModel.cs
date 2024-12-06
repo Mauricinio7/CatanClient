@@ -47,7 +47,7 @@ namespace CatanClient.ViewModels
                 OperationResultListScoreGame result = await serviceManager.GameServiceClient.GetScoreboardFriends(AccountUtilities.CastAccountProfileToGameService(profile));
                 Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
 
-                if (result.IsSuccess)
+                if (result.IsSuccess && result.ListProfileScoreDto != null &&!string.IsNullOrEmpty(result.ListProfileScoreDto[0].Name))
                 {
                     Mediator.Notify(Utilities.SHOW_SCORE_FRAME, null);
                 }
