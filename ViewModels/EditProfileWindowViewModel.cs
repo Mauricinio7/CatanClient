@@ -22,10 +22,11 @@ namespace CatanClient.ViewModels
 
         private string newValue;
         private readonly ServiceManager serviceManager;
+        public string PromptText => SetPrompt();
         public ICommand SaveCommand { get; }
         public string Field { get; }
         public ProfileDto Profile { get; set; }
-        public string PromptText => SetPrompt();
+        
         public string NewValue
         {
             get => newValue;

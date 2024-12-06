@@ -214,6 +214,7 @@ namespace CatanClient.ViewModels
             Mediator.Register(Utilities.SHOW_ROLL_DICE_ANIMATION, args => ShowDiceAnimationCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_WIN_ANIMATION, args => ShowWinAnimationCommand.Execute(args));
             Mediator.Register(Utilities.SHOW_DICE_RESULT_ANIMATION, args => ShowDiceResultAnimationCommand.Execute(args));
+            Mediator.Register(Utilities.SHOW_SCORE_FRAME, args => ShowScoreboardViewCommand.Execute(args));
         }
 
         private void InicializateAsyncCommands()

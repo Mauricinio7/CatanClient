@@ -21,8 +21,7 @@
                 <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="35" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <Ellipse Width="10" Height="10" Fill="White" Canvas.Left="45" Canvas.Top="41" />
             </Canvas>
-
-            <!-- Elipse interior con animación de pulsos -->
+            
             <Ellipse Width="60" Height="60" Stroke="Transparent" Fill="White">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="pulseTransform" ScaleX="1" ScaleY="1" CenterX="30" CenterY="30"/>
@@ -35,14 +34,11 @@
                 </Ellipse.OpacityMask>
             </Ellipse>
 
-            <!-- Texto de "Cargando..." -->
             <TextBlock Text="Cargando..." Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,159,0,0"/>
         </Grid>
     </Viewbox>
 
-    <!-- Animaciones para el giro y el pulso -->
     <UserControl.Triggers>
-        <!-- Animación de giro para el círculo de bolitas -->
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>
                 <Storyboard RepeatBehavior="Forever">
@@ -53,7 +49,6 @@
             </BeginStoryboard>
         </EventTrigger>
 
-        <!-- Animación de pulso para el círculo interior -->
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>
                 <Storyboard RepeatBehavior="Forever">

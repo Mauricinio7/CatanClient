@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IGuestAccountEndpoint1" contract="GuestAccountService.IGuestAccountEndpoint" bindingType="netTcpBinding" address="net.tcp://192.168.0.102:8484/GuestAccountService" bindingConfiguration="NetTcpBinding_IGuestAccountEndpoint1">
+    <endpoint name="NetTcpBinding_IGuestAccountEndpoint1" contract="GuestAccountService.IGuestAccountEndpoint" bindingType="netTcpBinding" address="net.tcp://192.168.58.207:8484/GuestAccountService" bindingConfiguration="NetTcpBinding_IGuestAccountEndpoint1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.0.102:8484/GuestAccountService</serializedValue>
+          <serializedValue>net.tcp://192.168.58.207:8484/GuestAccountService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

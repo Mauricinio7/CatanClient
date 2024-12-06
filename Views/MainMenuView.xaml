@@ -79,7 +79,7 @@
                 Style="{StaticResource NeonButtonStyle}"
                 Content="{x:Static properties:Resources.button_scoreboard}"
                 FontSize="15"
-                Command="{Binding DataContext.ShowScoreboardViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                Command="{Binding ShowScoreBoardCommand}"
             />
 
         </Grid>

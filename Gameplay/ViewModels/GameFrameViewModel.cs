@@ -373,7 +373,7 @@ namespace CatanClient.ViewModels
 
                 foreach (HexTileDto hex in hexes)
                 {
-                    await Task.Delay(300);
+                    await Task.Delay(100);
                     string imagePath = GetImagePathByResource(hex.Resource);
                     if (!string.IsNullOrEmpty(imagePath))
                     {

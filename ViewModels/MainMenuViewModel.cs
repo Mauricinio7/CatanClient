@@ -1,5 +1,6 @@
 ﻿using CatanClient.AccountService;
 using CatanClient.Commands;
+using CatanClient.GameService;
 using CatanClient.Services;
 using CatanClient.UIHelpers;
 using CatanClient.Views;
@@ -14,21 +15,50 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static CatanClient.ViewModels.ScoreboardViewModel;
 
 namespace CatanClient.ViewModels
 {
     internal class MainMenuViewModel : ViewModelBase
     {
         public ICommand ShowConfigureProfileCommand { get; }
+        public ICommand ShowScoreBoardCommand { get; }
         private readonly ServiceManager serviceManager;
+        private AccountService.ProfileDto profile;
        
 
         public MainMenuViewModel(ServiceManager serviceManager)
         {
             ShowConfigureProfileCommand = new RelayCommand(OnShowConfigureProfile);
+            ShowScoreBoardCommand = new RelayCommand(OnShowScoreBoard);
             this.serviceManager = serviceManager;
+
+            profile = serviceManager.ProfileSingleton.Profile;
+
+
         }
 
+        private void OnShowScoreBoard(object parameter)
+        {
+
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                Mediator.Notify(Utilities.SHOW_LOADING_SCREEN, null);
+                OperationResultListScoreGame result = await serviceManager.GameServiceClient.GetScoreboardFriends(AccountUtilities.CastAccountProfileToGameService(profile));
+                Mediator.Notify(Utilities.HIDE_LOADING_SCREEN, null);
+
+                if (result.IsSuccess)
+                {
+                    Mediator.Notify(Utilities.SHOW_SCORE_FRAME, null);
+                }
+                else
+                {
+                    Utilities.ShowMessgeServerLost();
+                }
+            });
+            
+            
+        }
 
         private void OnShowConfigureProfile(object parameter)
         {

@@ -8,7 +8,7 @@
         xmlns:viewModels="clr-namespace:CatanClient.ViewModels"
         xmlns:converter="clr-namespace:CatanClient.UIHelpers.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1700"
+        Title="Catan space" Height="1000" Width="1700"
         WindowStartupLocation="CenterScreen"
         Background="Black">
 
