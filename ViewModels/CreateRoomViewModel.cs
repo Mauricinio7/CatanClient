@@ -76,7 +76,7 @@ namespace CatanClient.ViewModels
 
         private async Task ExecuteCreateRoomAsync(object parameter)
         {
-            if (!string.IsNullOrEmpty(RoomName) && !string.IsNullOrEmpty(SelectedOption))
+            if (!string.IsNullOrWhiteSpace(RoomName) && !string.IsNullOrEmpty(SelectedOption))
             {
                 if (!AccountUtilities.IsValidLength(RoomName))
                 {

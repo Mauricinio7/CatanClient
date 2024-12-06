@@ -16,6 +16,7 @@ using CatanClient.Singleton;
 using CatanClient.ViewModels;
 using CatanClient.Controls;
 using CatanClient.Gameplay.ViewModels;
+using System.IO;
 
 namespace CatanClient
 {
@@ -32,15 +33,21 @@ namespace CatanClient
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            
+            string logDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utilities.LOGGER_FOLDER);
+            string logFilePath = Path.Combine(logDirectory, Utilities.LOGGER_FILE_NAME);
+
+            if (!Directory.Exists(logDirectory))
+            {
+                Directory.CreateDirectory(logDirectory);
+            }
+
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.AppSettings()  
-                .WriteTo.Console()       
-                .WriteTo.File(Utilities.LOGGER_FILE_DIRECTORY, rollingInterval: RollingInterval.Day) 
+                .ReadFrom.AppSettings()
+                .WriteTo.Console()
+                .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
-
-            Log.Information(Utilities.LogInfoStart(CultureInfo.CurrentCulture.Name));  
+            Log.Information(Utilities.LogInfoStart(CultureInfo.CurrentCulture.Name));
 
             base.OnStartup(e);
 

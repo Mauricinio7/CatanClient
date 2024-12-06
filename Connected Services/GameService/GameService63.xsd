@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.GamePlayDto.Board" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.79.207:8191/GameService?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://192.168.0.102:8191/GameService?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="ArrayOfHexTileDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="HexTileDto" nillable="true" type="tns:HexTileDto" />

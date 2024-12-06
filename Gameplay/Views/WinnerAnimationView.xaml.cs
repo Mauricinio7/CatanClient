@@ -1,6 +1,8 @@
 ﻿using CatanClient.UIHelpers;
+using Serilog;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -56,8 +58,29 @@ namespace CatanClient.Gameplay.Views
 
                 WinnerGif.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
             }
+            catch (UriFormatException ex)
+            {
+                Log.Error(ex, ex.Source);
+                Utilities.ShowMessageDataBaseUnableToLoad();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Log.Error(ex, ex.Source);
+                Utilities.ShowMessageDataBaseUnableToLoad();
+            }
+            catch (FileNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+                Utilities.ShowMessageDataBaseUnableToLoad();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+                Utilities.ShowMessageDataBaseUnableToLoad();
+            }
             catch (Exception ex)
             {
+                Log.Error(ex, ex.Source);
                 Utilities.ShowMessageDataBaseUnableToLoad();
             }
         }

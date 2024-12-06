@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.ResultDtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.79.207:8384/ProfileService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.Enums" />
-  <xs:import schemaLocation="http://192.168.79.207:8384/ProfileService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
+  <xs:import schemaLocation="http://192.168.0.102:8384/ProfileService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject.Enums" />
+  <xs:import schemaLocation="http://192.168.0.102:8384/ProfileService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" />
   <xs:complexType name="OperationResultFriendRequestDto">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/CatanService.DataTransferObject" base="q1:OperationResultDto">

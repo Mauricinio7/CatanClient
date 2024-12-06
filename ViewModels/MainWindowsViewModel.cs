@@ -10,6 +10,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -111,9 +112,21 @@ namespace CatanClient.ViewModels
 
                 soundPlayer = new SoundPlayer(resourceStream);
             }
+            catch (UriFormatException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (FileNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
         }
 
@@ -123,9 +136,21 @@ namespace CatanClient.ViewModels
             {
                 soundPlayer.PlayLooping();
             }
+            catch (UriFormatException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (FileNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
         }
 
@@ -144,9 +169,21 @@ namespace CatanClient.ViewModels
                     soundPlayer.PlayLooping();
                 }
             }
+            catch (UriFormatException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (FileNotFoundException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, ex.Source);
+            }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Log.Error(ex, ex.Source);
             }
         }
 

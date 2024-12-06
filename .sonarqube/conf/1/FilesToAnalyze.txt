@@ -239,3 +239,5 @@ C:\Users\mauricio\source\repos\CatanClient\Image1.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Animations\dice_roll_animation_dual.gif
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Images\GameResources\Town.png
 C:\Users\mauricio\source\repos\CatanClient\Gameplay\Resources\Animations\WinAnimation1.gif
+C:\Users\mauricio\source\repos\CatanClient\Resources\Sounds\LoginMusic.wav
+C:\Users\mauricio\source\repos\CatanClient\Resources\Sounds\MainMenuMusic.wav
